@@ -4,9 +4,9 @@ using namespace BGE;
 
 // An array of 3 vectors which represents 3 vertices
 static const GLfloat g_vertex_buffer_data[] = {
-   -1.0f, -1.0f, 0.0f,
-   1.0f, -1.0f, 0.0f,
-   0.0f,  1.0f, 0.0f,
+   -1.0f, -1.0f, -5.0f,
+   1.0f, -1.0f, -5.0f,
+   0.0f,  1.0f, -5.0f,
 };
 
 TriangleTest::TriangleTest(void) {
@@ -40,8 +40,7 @@ bool TriangleTest::Initialise() {
 
 }
 
-void TriangleTest::Draw()
-{
+void TriangleTest::Draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
@@ -61,6 +60,22 @@ void TriangleTest::Draw()
 	glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
  
 	glDisableVertexAttribArray(0);
+
+	glm::mat4 Model = glm::mat4(1.0f);  // Changes for each model !
+	// Our ModelViewProjection : multiplication of our 3 matrices
+	glm::mat4 MVP = Game::Instance()->GetCamera()->GetProjection() 
+		* Game::Instance()->GetCamera()->GetView() 
+		* Model; // Remember, matrix multiplication is the other way around
+
+	// Get a handle for our "MVP" uniform.
+	// Only at initialisation time.
+	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+ 
+	// Send our transformation to the currently bound shader,
+	// in the "MVP" uniform
+	// For each model you render, since the MVP will be different (at least the M part)
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+
 
 	// Dont forget to call the superclass draw so that OpenGL Swap Buffers can be called
 	Game::Draw();

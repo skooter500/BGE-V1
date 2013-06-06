@@ -10,12 +10,7 @@
 
 using namespace BGE;
 
-// An array of 3 vectors which represents 3 vertices
-static const GLfloat g_vertex_buffer_data[] = {
-	   -1.0f, -1.0f, 0.0f,
-	   1.0f, -1.0f, 0.0f,
-	   0.0f,  1.0f, 0.0f,
-	};
+BGE::Game * Game::instance = NULL;
 
 Game::Game(void) {
 	running = false;
@@ -23,9 +18,16 @@ Game::Game(void) {
 	width = 800;
 	height = 600;
 	Surf_Display = NULL;
+	instance = this;
 }
 
 Game::~Game(void) {
+	delete camera;
+}
+
+Camera * Game::GetCamera()
+{
+	return camera;
 }
 
 bool Game::Initialise() {
@@ -45,9 +47,9 @@ bool Game::Initialise() {
 	}
 	
 	if((Surf_Display = SDL_SetVideoMode(width, height, 32, SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL)) == NULL) {
-    return false;
-}
-
+		return false;
+	}
+	keyState = SDL_GetKeyState(NULL);
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
@@ -60,6 +62,9 @@ bool Game::Initialise() {
 	glViewport(0, 0, width, height);
 
     running = true;
+
+	camera = new Camera();
+
 	return true;
 }
 
@@ -85,27 +90,45 @@ bool Game::Run() {
 
 void Game::Update(float timeDelta) {
 
-	SDL_Event Event; 
-	while(SDL_PollEvent(&Event)) {
-            switch(Event.type) {
-				case SDL_KEYDOWN: {
-					Cleanup();
-					exit(0);
-				}
-			}
+	// Check for messages
+	SDL_Event event;
+    if (SDL_PollEvent(&event))
+    {
+        // Check for the quit message
+        if (event.type == SDL_QUIT)
+        {
+        // Quit the program
+        Cleanup();
+		exit(0);
         }
+    }
+
+	if (keyState[SDLK_ESCAPE])
+	{
+		Cleanup();
+		exit(0);
+	}
+	camera->Update(timeDelta);	
 }
 
 void Game::Cleanup () {
 }
 
+Game * Game::Instance() {
+	return instance;
+}
+
+Uint8 * Game::GetKeyState()
+{
+	return keyState;
+}
 
 void Game::Draw()
 {
 	SDL_GL_SwapBuffers();
 }
 
-int Game::LoadShaders(const char * vertex_file_path,const char * fragment_file_path){
+int Game::LoadShaders(const char * vertex_file_path,const char * fragment_file_path) {
  
     // Create the shaders
     GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
