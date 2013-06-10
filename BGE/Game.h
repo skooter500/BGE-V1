@@ -36,6 +36,8 @@ namespace BGE
 		static Game * Instance();
 		Camera * GetCamera();
 		Uint8 * GetKeyState();
+		int GetWidth();
+		int GetHeight();
 		
 		bool Run();
 		int LoadShaders(const char * vertex_file_path, const char * fragment_file_path);

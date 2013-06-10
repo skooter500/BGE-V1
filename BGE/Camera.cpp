@@ -32,6 +32,40 @@ void Camera::Update(float timeDelta) {
 		Walk(speed * timeDelta);
 	}
 
+	if (keyState[SDLK_s])
+	{
+		Walk(-speed * timeDelta);
+	}
+
+	if (keyState[SDLK_a])
+	{
+		Strafe(-speed * timeDelta);
+	}
+
+	if (keyState[SDLK_d])
+	{
+		Strafe(speed * timeDelta);
+	}
+
+	int x, y;
+	int midX, midY;
+    SDL_GetMouseState(&x,&y);
+	midX = Game::Instance()->GetWidth() / 2;
+	midY = Game::Instance()->GetHeight() / 2;
+	float yaw, pitch;
+	yaw = midX - x;
+	pitch = midY - y;
+
+	if (yaw != 0)
+	{
+		Yaw(yaw / 100.0f);
+	}
+	if (pitch != 0)
+	{
+		Pitch(pitch / 100.0f);
+	}
+	SDL_WarpMouse(midX, midY);
+
 	if (moved) {
 		// Camera matrix
 		view = glm::lookAt(

@@ -61,8 +61,9 @@ bool Game::Initialise() {
 	
 	glViewport(0, 0, width, height);
 
-    running = true;
+	SDL_WarpMouse(Game::Instance()->GetWidth() / 2,Game::Instance()->GetHeight() / 2);
 
+    running = true;
 	camera = new Camera();
 
 	return true;
@@ -202,4 +203,15 @@ int Game::LoadShaders(const char * vertex_file_path,const char * fragment_file_p
     glDeleteShader(FragmentShaderID);
  
     return ProgramID;
+}
+
+int Game::GetWidth()
+{
+	return width;
+}
+
+
+int Game::GetHeight()
+{
+	return height;
 }

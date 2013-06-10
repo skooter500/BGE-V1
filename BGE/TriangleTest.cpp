@@ -22,7 +22,7 @@ bool TriangleTest::Initialise() {
 	if (!Game::Initialise()) {
 		return false;
 	}
-	programID = LoadShaders( "Shaders/SimpleVertexShader.vertexshader", "Shaders/SimpleFragmentShader.fragmentshader" );
+	programID = LoadShaders( "Shaders/TriangleVertexShader.vertexshader", "Shaders/TriangleFragmentShader.fragmentshader" );
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);

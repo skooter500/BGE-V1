@@ -6,12 +6,13 @@
 #include<glm.hpp>
 #include "Game.h"
 #include "TriangleTest.h"
+#include "CubeTest.h"
 
 using namespace BGE;
 
 int main(int argc, char *argv[])
 {
-	TriangleTest game;
+	CubeTest game;
 
 	game.Run();
 

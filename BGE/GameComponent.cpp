@@ -1,6 +1,8 @@
 #include "GameComponent.h"
+#include <iostream>
 
 using namespace BGE;
+using namespace std;
 
 GameComponent::GameComponent(void)
 {
@@ -42,32 +44,26 @@ void GameComponent::Fly(float units)
 
 void GameComponent::Pitch(float angle)
 {
-	/*
-	D3DXMATRIX T;
-	D3DXMatrixRotationAxis(&T, &_right,	angle);
-
-	// rotate _up and _look around _right vector
-	D3DXVec3TransformCoord(&_up,&_up, &T);
-	D3DXVec3TransformCoord(&_look,&_look, &T);
-
-	_moved = true;
-	*/
+	glm::mat4 pitch;
+	pitch = glm::rotate(pitch, angle, right);
+	
+	
 	moved = true;
 }
 
 void GameComponent::Yaw(float angle)
 {
-	/*
-	D3DXMATRIX T;
+	glm::mat4 rot;
+	rot = glm::rotate(rot, angle, up); 
 
-	D3DXMatrixRotationY(&T, angle);
+	glm::vec4 tlook = glm::vec4(look, 0);
+	tlook = rot * tlook;
+	look = glm::vec3(tlook);
 
-	// rotate _right and _look around _up or y-axis
-	D3DXVec3TransformCoord(&_right,&_right, &T);
-	D3DXVec3TransformCoord(&_look,&_look, &T);
+	glm::vec4 tright = glm::vec4(right, 0);
+	tright = rot * tright;
+	right = glm::vec3(tright);
 
-	_moved = true;
-	*/
 	moved = true;
 }
 
