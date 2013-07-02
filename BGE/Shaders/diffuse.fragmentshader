@@ -1,6 +1,6 @@
 #version 330                                                                        
                                                                                     
-in vec2 TexCoord0;                                                                  
+in vec3 TexColour0;                                                                  
 in vec3 Normal0;                                                                    
                                                                                     
 out vec4 FragColor;                                                                 
@@ -14,14 +14,13 @@ struct DirectionalLight
 };                                                                                  
                                                                                     
 uniform DirectionalLight gDirectionalLight;                                         
-uniform sampler2D gSampler;                                                         
                                                                                     
 void main()                                                                         
 {                                                                                   
     vec4 AmbientColor = vec4(gDirectionalLight.Color, 1.0f) *                       
                         gDirectionalLight.AmbientIntensity;                         
                                                                                     
-    float DiffuseFactor = dot(normalize(Normal0), -gDirectionalLight.Direction);    
+    float DiffuseFactor = dot(normalize(Normal0), - gDirectionalLight.Direction);    
                                                                                     
     vec4 DiffuseColor;                                                              
                                                                                     
@@ -34,6 +33,6 @@ void main()
         DiffuseColor = vec4(0, 0, 0, 0);                                            
     }                                                                               
                                                                                     
-    FragColor = texture2D(gSampler, TexCoord0.xy) *                                 
+    FragColor = TexColour0 *                                 
                 (AmbientColor + DiffuseColor);                                      
-}"
+}

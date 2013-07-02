@@ -17,7 +17,7 @@ bool ModelTest::Initialise() {
 	if (!Game::Initialise()) {
 		return false;
 	}
-	model = Content::LoadModel("transporter");
+	model = Content::LoadModel("cube");
 	
 	model->Initialise();
 	children.push_back(model);

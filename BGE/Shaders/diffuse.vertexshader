@@ -13,6 +13,6 @@ out vec3 Normal0;
 void main()                                                                         
 {                                                                                   
     gl_Position = gWVP * vec4(Position, 1.0);                                       
-    TexColour0 = TexColour0;                                                           
+    TexColour0 = TexColour;                                                           
     Normal0 = (gWorld * vec4(Normal, 0.0)).xyz;                                     
 }

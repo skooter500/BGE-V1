@@ -34,6 +34,7 @@ namespace BGE {
 
 		std::list<GameComponent *> children;
 		static const glm::vec3 globalUp;
+		static const glm::vec3 basis;
 		bool moved;
 		float speed;
 

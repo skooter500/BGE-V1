@@ -1,10 +1,11 @@
 #include "GameComponent.h"
 #include <iostream>
-
+#include <gtx\constants.hpp>
 using namespace BGE;
 using namespace std;
 
 const glm::vec3 GameComponent::globalUp = glm::vec3(0, 1, 0);
+const glm::vec3 GameComponent::basis = glm::vec3(0, 0, -1);
 
 GameComponent::GameComponent(void)
 {
@@ -62,7 +63,16 @@ void GameComponent::Cleanup()
 
 
 void GameComponent::Update(float timeDelta) {
-	world = glm::translate(glm::mat4(1.0f), position);
+	
+
+	float theta = acos(glm::dot(look, GameComponent::basis));
+	
+	if (look.x < 0.0f)
+	{
+		theta = (glm::pi<float>() * 2.0f) - theta;  
+	}
+
+	world = glm::rotate(glm::mat4(1.0f), glm::degrees(theta), GameComponent::globalUp) * glm::translate(glm::mat4(1.0f), position);
 	moved = false;
 
 	// Update all the children
