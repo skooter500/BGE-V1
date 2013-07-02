@@ -1,4 +1,5 @@
 #include "CubeTest.h"
+#include "Utils.h"
 
 using namespace BGE;
 
@@ -102,9 +103,6 @@ bool CubeTest::Initialise() {
 	programID = LoadShaders( "Shaders/CubeVertexShader.vertexshader", "Shaders/CubeFragmentShader.fragmentshader" );
 
 	
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
 	// Generate 1 buffer, put the resulting identifier in vertexbuffer
 	glGenBuffers(1, &vertexbuffer); 
 	// The following commands will talk about our 'vertexbuffer' buffer
@@ -184,5 +182,4 @@ void CubeTest::Cleanup()
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &colorbuffer);
 	glDeleteProgram(programID);
-	glDeleteVertexArrays(1, &VertexArrayID);
 }

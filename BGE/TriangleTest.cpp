@@ -1,4 +1,5 @@
 #include "TriangleTest.h"
+#include "Utils.h"
 
 using namespace BGE;
 
@@ -24,10 +25,7 @@ bool TriangleTest::Initialise() {
 	}
 	programID = LoadShaders( "Shaders/TriangleVertexShader.vertexshader", "Shaders/TriangleFragmentShader.fragmentshader" );
 
-	GLuint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
+	
 	// Generate 1 buffer, put the resulting identifier in vertexbuffer
 	glGenBuffers(1, &vertexbuffer);
  

@@ -8,6 +8,7 @@ using namespace std;
 Camera::Camera(void):GameComponent()
 {
 	projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);		
+	position = glm::vec3(0.0f, 0.0f, 10.0f);
 }
 
 Camera::~Camera(void)
@@ -22,6 +23,13 @@ glm::mat4 Camera::GetView()
 glm::mat4 Camera::GetProjection()
 {
 	return projection;
+}
+
+bool Camera::Initialise()
+{
+	SDL_WarpMouse(Game::Instance()->GetWidth() / 2,Game::Instance()->GetHeight() / 2);
+	SDL_ShowCursor(SDL_DISABLE); 
+	return GameComponent::Initialise();
 }
 
 void Camera::Update(float timeDelta) {
@@ -56,13 +64,14 @@ void Camera::Update(float timeDelta) {
 	yaw = midX - x;
 	pitch = midY - y;
 
+	float scale = 0.1f;
 	if (yaw != 0)
 	{
-		Yaw(yaw / 100.0f);
+		Yaw(yaw * scale);
 	}
 	if (pitch != 0)
 	{
-		Pitch(pitch / 100.0f);
+		Pitch(pitch * scale);
 	}
 	SDL_WarpMouse(midX, midY);
 
@@ -73,7 +82,7 @@ void Camera::Update(float timeDelta) {
 			, position + look
 			, up
 		);
-		cout << position.x << position.y << position.z << endl;
+		//cout << position.x << position.y << position.z << endl;
 	}
 	
 	GameComponent::Update(timeDelta);

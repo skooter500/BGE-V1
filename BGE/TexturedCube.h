@@ -1,22 +1,25 @@
 #pragma once
 #include "game.h"
 
+
 namespace BGE
 {
-	class CubeTest :
+	class TexturedCube :
 		public Game
 	{
 	public:
-		CubeTest(void);
-		~CubeTest(void);
+		TexturedCube(void);
+		~TexturedCube(void);
 
 		bool Initialise();
 		void Draw();
 		void Cleanup();
 
 	private:
+		GLuint texture;
+		GLuint textureSampler;
 		GLuint vertexbuffer;
-		GLuint colorbuffer;
+		GLuint texelbuffer;
 		GLuint programID;
 	};
 }

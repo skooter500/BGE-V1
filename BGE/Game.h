@@ -14,7 +14,8 @@
 
 namespace BGE
 {
-	class Game
+	class Game:
+		public GameComponent
 	{
 	private:
 		SDL_Surface*    Surf_Display;
@@ -29,10 +30,10 @@ namespace BGE
 		Game(void);
 		~Game(void);
 
-		virtual bool Initialise();
-		virtual void Update(float timeDelta);
-		virtual void Draw();
-		virtual void Cleanup();
+		bool Initialise();
+		void Update(float timeDelta);
+		void Draw();
+		void Cleanup();
 		static Game * Instance();
 		Camera * GetCamera();
 		Uint8 * GetKeyState();
@@ -40,7 +41,6 @@ namespace BGE
 		int GetHeight();
 		
 		bool Run();
-		int LoadShaders(const char * vertex_file_path, const char * fragment_file_path);
 	};
 }
 

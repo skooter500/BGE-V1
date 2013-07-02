@@ -4,6 +4,8 @@
 using namespace BGE;
 using namespace std;
 
+const glm::vec3 GameComponent::globalUp = glm::vec3(0, 1, 0);
+
 GameComponent::GameComponent(void)
 {
 	position = glm::vec3(0, 0, 0); 
@@ -17,11 +19,58 @@ GameComponent::GameComponent(void)
 
 GameComponent::~GameComponent(void)
 {
+	std::list<GameComponent *>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		delete *it;		
+	}
 }
+
+bool GameComponent::Initialise()
+{
+	// Initialise all the children
+	std::list<GameComponent *>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		if (! (*it ++)->Initialise())
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void GameComponent::Draw()
+{
+	// Draw all the children
+	std::list<GameComponent *>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		(*it ++)->Draw();		
+	}
+}
+
+void GameComponent::Cleanup()
+{
+	// Cleanup all the children
+	std::list<GameComponent *>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		(*it ++)->Cleanup();	
+	}
+}
+
 
 void GameComponent::Update(float timeDelta) {
 	world = glm::translate(glm::mat4(1.0f), position);
 	moved = false;
+
+	// Update all the children
+	std::list<GameComponent *>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		(*it ++)->Update(timeDelta);
+	}
 }
 
 void GameComponent::Walk(float units)
@@ -44,24 +93,32 @@ void GameComponent::Fly(float units)
 
 void GameComponent::Pitch(float angle)
 {
+
 	glm::mat4 pitch;
 	pitch = glm::rotate(pitch, angle, right);
-	
+
+	glm::vec4 tlook = glm::vec4(look, 0);
+	tlook = pitch * tlook;
+	look = glm::vec3(tlook);
+
+	glm::vec4 tup = glm::vec4(up, 0);
+	tlook = pitch * tup;
+	up = glm::vec3(tup);
 	
 	moved = true;
 }
 
 void GameComponent::Yaw(float angle)
 {
-	glm::mat4 rot;
-	rot = glm::rotate(rot, angle, up); 
+	glm::mat4 yaw;
+	yaw = glm::rotate(yaw, angle, up); 
 
 	glm::vec4 tlook = glm::vec4(look, 0);
-	tlook = rot * tlook;
+	tlook = yaw * tlook;
 	look = glm::vec3(tlook);
 
 	glm::vec4 tright = glm::vec4(right, 0);
-	tright = rot * tright;
+	tright = yaw * tright;
 	right = glm::vec3(tright);
 
 	moved = true;
@@ -80,4 +137,15 @@ void GameComponent::Roll(float angle)
 	_moved = true;
 	*/
 	moved = true;
+}
+
+void GameComponent::AddChild(GameComponent * child)
+{
+	children.push_back(child);
+}
+
+
+std::list<GameComponent *> * GameComponent::GetChildren()
+{
+	return & children;
 }

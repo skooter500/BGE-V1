@@ -10,6 +10,7 @@ namespace BGE {
 		Camera(void);
 		~Camera(void);
 		void Update(float timeDelta);
+		bool Initialise();
 		
 		glm::mat4 GetView();
 		glm::mat4 GetProjection();

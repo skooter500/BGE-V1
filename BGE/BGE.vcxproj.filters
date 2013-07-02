@@ -16,6 +16,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{ba5b9eb1-e4d3-4b41-b0f6-4614b6bd64f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{33720a02-d1b2-4718-aedc-a17fe65ecbf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games">
+      <UniqueIdentifier>{d1e0438f-dba3-40c0-9647-974459789cb8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,16 +30,31 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TriangleTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="CubeTest.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleTest.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedCube.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelTest.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Content.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,16 +62,31 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TriangleTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="CubeTest.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleTest.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedCube.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelTest.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,6 +101,24 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Shaders\CubeVertexShader.vertexshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\TexturedCubeFragmentShader.fragmentshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\TexturedCubeVertexShader.vertexshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\StandardShading.fragmentshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\StandardShading.vertexshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\diffuse.fragmentshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\diffuse.vertexshader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
