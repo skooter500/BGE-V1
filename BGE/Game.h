@@ -14,25 +14,19 @@
 
 namespace BGE
 {
-	struct DirectionalLight
-	{
-		glm::vec3 Color;
-		float AmbientIntensity;
-		glm::vec3 Direction;
-		float DiffuseIntensity;
-	};
 
 	class Game:
 		public GameComponent
 	{
 	private:
-		SDL_Surface*    Surf_Display;
+		SDL_Window * mainwindow; /* Our window handle */
+		SDL_GLContext maincontext; /* Our opengl context handle */
 		bool running;
 		bool console;
 		int width, height;
 		static Game * instance;
 		Camera * camera;
-		Uint8 * keyState;
+		const Uint8 * keyState;
 		
 	public:
 		Game(void);
@@ -44,7 +38,8 @@ namespace BGE
 		void Cleanup();
 		static Game * Instance();
 		Camera * GetCamera();
-		Uint8 * GetKeyState();
+		const Uint8 * GetKeyState();
+		SDL_Window * GetMainWindow();
 		int GetWidth();
 		int GetHeight();
 		

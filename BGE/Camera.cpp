@@ -27,30 +27,33 @@ glm::mat4 Camera::GetProjection()
 
 bool Camera::Initialise()
 {
-	SDL_WarpMouse(Game::Instance()->GetWidth() / 2,Game::Instance()->GetHeight() / 2);
+	SDL_WarpMouseInWindow(
+		Game::Instance()->GetMainWindow()
+		,Game::Instance()->GetWidth() / 2
+		,Game::Instance()->GetHeight() / 2);
 	SDL_ShowCursor(SDL_DISABLE); 
 	return GameComponent::Initialise();
 }
 
 void Camera::Update(float timeDelta) {
-
-	Uint8 * keyState = Game::Instance()->GetKeyState();
-	if (keyState[SDLK_w])
+	
+	const Uint8 * keyState = Game::Instance()->GetKeyState();
+	if (keyState[SDL_SCANCODE_W])
 	{
 		Walk(speed * timeDelta);
 	}
 
-	if (keyState[SDLK_s])
+	if (keyState[SDL_SCANCODE_S])
 	{
 		Walk(-speed * timeDelta);
 	}
 
-	if (keyState[SDLK_a])
+	if (keyState[SDL_SCANCODE_A])
 	{
 		Strafe(-speed * timeDelta);
 	}
 
-	if (keyState[SDLK_d])
+	if (keyState[SDL_SCANCODE_D])
 	{
 		Strafe(speed * timeDelta);
 	}
@@ -73,8 +76,13 @@ void Camera::Update(float timeDelta) {
 	{
 		Pitch(pitch * scale);
 	}
-	SDL_WarpMouse(midX, midY);
-
+	SDL_WarpMouseInWindow(
+		Game::Instance()->GetMainWindow()
+		,midX
+		,midY
+		);
+	
+	moved = true;
 	if (moved) {
 		// Camera matrix
 		view = glm::lookAt(

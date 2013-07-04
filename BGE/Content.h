@@ -17,5 +17,7 @@ namespace BGE
 			static string prefix;
 		public:
 			static Model * LoadModel(string name);
+			static BGE::Model * BGE::Content::SimpleLoadModel(string name);
+
 	};
 }

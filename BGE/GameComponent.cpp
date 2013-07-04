@@ -1,5 +1,6 @@
 #include "GameComponent.h"
 #include <iostream>
+#include <cmath>
 #include <gtx\constants.hpp>
 using namespace BGE;
 using namespace std;
@@ -64,15 +65,20 @@ void GameComponent::Cleanup()
 
 void GameComponent::Update(float timeDelta) {
 	
-
-	float theta = acos(glm::dot(look, GameComponent::basis));
+	float dot = glm::dot(look, GameComponent::basis);
+	float theta;
+	theta = acos(dot);
 	
+	if (_isnan(theta))
+	{
+		theta = 0.0f;
+	}
 	if (look.x < 0.0f)
 	{
 		theta = (glm::pi<float>() * 2.0f) - theta;  
 	}
 
-	world = glm::rotate(glm::mat4(1.0f), glm::degrees(theta), GameComponent::globalUp) * glm::translate(glm::mat4(1.0f), position);
+	world = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), glm::degrees(theta), GameComponent::globalUp);
 	moved = false;
 
 	// Update all the children

@@ -19,22 +19,12 @@ namespace BGE
 		GLuint colourbuffer;
 		GLuint programID;
 
-		GLuint m_WVPLocation;
-		GLuint m_WorldMatrixLocation;
+		GLuint mID, vID, pID;
+		GLuint m_3x3_inv_transp;
 
-		struct {
-			GLuint Color;
-			GLuint AmbientIntensity;
-			GLuint Direction;
-			GLuint DiffuseIntensity;
-		} m_dirLightLocation;
-
-		DirectionalLight m_directionalLight;
-		
 	public:
 		Model();
 		~Model();
-		void SetDirectionalLight(const DirectionalLight& Light);
 
 		bool Initialise();
 		void Update(float timeDelta);

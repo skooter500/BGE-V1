@@ -17,8 +17,8 @@ bool ModelTest::Initialise() {
 	if (!Game::Initialise()) {
 		return false;
 	}
-	model = Content::LoadModel("cube");
-	
+	model = Content::LoadModel("cobramk3");
+	//model->position = glm::vec3(0, 0, -20);
 	model->Initialise();
 	children.push_back(model);
 	return true;

@@ -121,5 +121,11 @@
     <None Include="Shaders\diffuse.vertexshader">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Shaders\standard.fragmentshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\standard.vertexshader">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
