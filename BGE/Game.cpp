@@ -102,7 +102,9 @@ bool Game::Run() {
 		long now = SDL_GetTicks();
 		float ellapsed = ((float) (now - last)) / 1000.0f;
 		Update(ellapsed);
+		PreDraw();
         Draw();
+		PostDraw();
 		last = now;
     }
  
@@ -133,6 +135,17 @@ void Game::Update(float timeDelta) {
 	GameComponent::Update(timeDelta);
 }
 
+void Game::PreDraw()
+{
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Game::PostDraw()
+{
+	SDL_GL_SwapWindow(mainwindow);
+}
+
 void Game::Cleanup () {
 	GameComponent::Cleanup();
 	
@@ -157,8 +170,7 @@ SDL_Window * Game::GetMainWindow()
 
 void Game::Draw()
 {	
-	GameComponent::Draw();
-	SDL_GL_SwapWindow(mainwindow);
+	GameComponent::Draw();	
 }
 
 

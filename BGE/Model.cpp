@@ -56,8 +56,7 @@ void Model::Update(float timeDelta)
 
 void Model::Draw()
 {
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);	
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	glUseProgram(programID);
 	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetView()[0][0]);

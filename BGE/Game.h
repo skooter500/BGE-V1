@@ -34,7 +34,9 @@ namespace BGE
 
 		bool Initialise();
 		void Update(float timeDelta);
+		void PreDraw();
 		void Draw();
+		void PostDraw();
 		void Cleanup();
 		static Game * Instance();
 		Camera * GetCamera();
