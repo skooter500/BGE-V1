@@ -7,7 +7,7 @@
 #include <fstream>
 #include <algorithm>
 #include <stdlib.h>
-#include "Utils.h"
+#include "Content.h"
 
 using namespace BGE;
 
@@ -84,6 +84,7 @@ bool Game::Initialise() {
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+
 	SDL_GL_SetSwapInterval(1);
     running = true;
 	camera = new Camera();

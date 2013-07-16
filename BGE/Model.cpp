@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "Model.h"
-#include "Utils.h"
+#include "Content.h"
 #include <gtc/matrix_inverse.hpp>
 #include <iostream>
 
@@ -20,7 +20,7 @@ bool Model::Initialise()
 {
 
 	GameComponent::Initialise();
-	programID = LoadShaders( "Shaders/standard.vertexshader", "Shaders/standard.fragmentshader" );
+	programID = Content::LoadShaderPair( "standard");
 	
 	//GLuint VertexArrayID;
 	//glGenVertexArrays(1, &VertexArrayID);

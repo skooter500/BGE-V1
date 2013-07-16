@@ -7,7 +7,7 @@ using namespace std;
 
 Camera::Camera(void):GameComponent()
 {
-	projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);		
+	projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);		
 	position = glm::vec3(0.0f, 0.0f, 10.0f);
 }
 

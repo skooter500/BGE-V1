@@ -1,5 +1,5 @@
 #include "TriangleTest.h"
-#include "Utils.h"
+#include "Content.h"
 
 using namespace BGE;
 
@@ -23,7 +23,7 @@ bool TriangleTest::Initialise() {
 	if (!Game::Initialise()) {
 		return false;
 	}
-	programID = LoadShaders( "Shaders/TriangleVertexShader.vertexshader", "Shaders/TriangleFragmentShader.fragmentshader" );
+	programID = Content::LoadShaderPair("TriangleShader");
 
 	
 	// Generate 1 buffer, put the resulting identifier in vertexbuffer

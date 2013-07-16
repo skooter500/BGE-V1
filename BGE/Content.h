@@ -18,6 +18,8 @@ namespace BGE
 		public:
 			static Model * LoadModel(string name);
 			static BGE::Model * BGE::Content::SimpleLoadModel(string name);
+			static GLuint LoadShaderPair(string name);
+			static GLuint LoadTexture(std::string path);
 
 	};
 }

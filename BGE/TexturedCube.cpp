@@ -1,5 +1,5 @@
 #include "TexturedCube.h"
-#include "Utils.h"
+#include "Content.h"
 #include<iostream>
 
 using namespace BGE;
@@ -95,9 +95,9 @@ bool TexturedCube::Initialise() {
 	if (!Game::Initialise()) {
 		return false;
 	}
-	programID = LoadShaders("Shaders/TexturedCubeVertexShader.vertexshader", "Shaders/TexturedCubeFragmentShader.fragmentshader");
+	programID = Content::LoadShaderPair("TexturedCubeShader");
 
-	texture = LoadTexture("Assets/numberedfaces.bmp");
+	texture = Content::LoadTexture("numberedfaces");
 
 	glGenBuffers(1, &vertexbuffer); 
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

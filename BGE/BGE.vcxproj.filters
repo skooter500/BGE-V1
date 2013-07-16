@@ -13,14 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{ba5b9eb1-e4d3-4b41-b0f6-4614b6bd64f1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{33720a02-d1b2-4718-aedc-a17fe65ecbf7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Games">
       <UniqueIdentifier>{d1e0438f-dba3-40c0-9647-974459789cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Content">
+      <UniqueIdentifier>{e12f2193-834b-49fb-ade0-577ca65121c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,9 +46,6 @@
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModelTest.cpp">
@@ -83,9 +80,6 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="ModelTest.h">
       <Filter>Games</Filter>
     </ClInclude>
@@ -97,41 +91,47 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\TriangleFragmentShader.fragmentshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\CubeShader.fragmentshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\TriangleVertexShader.vertexshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\diffuse.fragmentshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\CubeFragmentShader.fragmentshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\SimpleShader.fragmentshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\CubeVertexShader.vertexshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\standard.fragmentshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\TexturedCubeFragmentShader.fragmentshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\StandardShading.fragmentshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\TexturedCubeVertexShader.vertexshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\TexturedCubeShader.fragmentshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\StandardShading.fragmentshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\TriangleShader.fragmentshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\StandardShading.vertexshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\CubeShader.vertexshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\diffuse.fragmentshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\diffuse.vertexshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\diffuse.vertexshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\SimpleShader.vertexshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\standard.fragmentshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\standard.vertexshader">
+      <Filter>Content</Filter>
     </None>
-    <None Include="Shaders\standard.vertexshader">
-      <Filter>Shaders</Filter>
+    <None Include="Content\StandardShading.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TexturedCubeShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TriangleShader.vertexshader">
+      <Filter>Content</Filter>
     </None>
   </ItemGroup>
 </Project>

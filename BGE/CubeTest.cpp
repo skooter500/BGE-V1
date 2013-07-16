@@ -1,5 +1,5 @@
 #include "CubeTest.h"
-#include "Utils.h"
+#include "Content.h"
 
 using namespace BGE;
 
@@ -100,7 +100,7 @@ bool CubeTest::Initialise() {
 	if (!Game::Initialise()) {
 		return false;
 	}
-	programID = LoadShaders( "Shaders/CubeVertexShader.vertexshader", "Shaders/CubeFragmentShader.fragmentshader" );
+	programID = Content::LoadShaderPair("CubeShader");
 
 	
 	// Generate 1 buffer, put the resulting identifier in vertexbuffer

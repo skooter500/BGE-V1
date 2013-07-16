@@ -1,7 +1,7 @@
 #include "Content.h"
 #include <string>
 
-string BGE::Content::prefix = "Assets/";
+string BGE::Content::prefix = "Content/";
 
 BGE::Model * BGE::Content::SimpleLoadModel(string path)
 {
@@ -214,4 +214,152 @@ BGE::Model * BGE::Content::LoadModel(string name)
 	
 	}
 	return model;
+}
+
+GLuint BGE::Content::LoadTexture(std::string textureName)
+{
+	string path = Content::prefix + textureName + ".bmp";	
+	GLuint texture;
+	// Now the texture...
+	SDL_Surface *surface;	// This surface will tell us the details of the image
+	surface = SDL_LoadBMP(path.c_str());
+	if (surface == NULL) {
+		cout << "Image not loaded" << endl;
+		exit(0);
+	}
+	// Check that the image's width is a power of 2
+	if ( (surface->w & (surface->w - 1)) != 0 ) {
+		cout << "warning: image.bmp's width is not a power of 2" << endl;
+	}
+ 
+	GLint  nOfColors;
+	GLenum texture_format;
+	// Also check if the height is a power of 2
+	if ( (surface->h & (surface->h - 1)) != 0 ) {
+		printf("warning: image.bmp's height is not a power of 2\n");
+	}
+ 
+	// get the number of channels in the SDL surface
+	nOfColors = surface->format->BytesPerPixel;
+	if (nOfColors == 4) {
+		if (surface->format->Rmask == 0x000000ff) {
+			texture_format = GL_RGBA;
+		}
+		else {
+			texture_format = GL_BGRA;
+		}
+	} else if (nOfColors == 3) {
+		if (surface->format->Rmask == 0x000000ff) {
+				texture_format = GL_RGB;
+		}
+		else {
+			texture_format = GL_BGR;
+		}
+	} else {
+		printf("warning: the image is not truecolor..  this will probably break\n");
+	}
+
+	// Create the texture
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+ 	glTexImage2D(GL_TEXTURE_2D, 0,nOfColors, surface->w, surface->h, 0, texture_format, GL_UNSIGNED_BYTE, surface->pixels);
+ 
+
+	// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	GLfloat maxAniso = 0.0f;
+	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAniso);
+	glSamplerParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, maxAniso);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
+
+	
+	// Generate mipmaps, by the way.
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	return texture;
+}
+
+GLuint BGE::Content::LoadShaderPair(string name) {
+
+	string vertexFilePath = Content::prefix + name + ".vertexshader";
+	string fragmentFilePath = Content::prefix + name + ".fragmentshader";
+	
+	// Create the shaders
+	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+ 
+	// Read the Vertex Shader code from the file
+	std::string VertexShaderCode;
+	std::ifstream VertexShaderStream(vertexFilePath, std::ios::in);
+	if(VertexShaderStream.is_open())
+	{
+		std::string Line = "";
+		while(getline(VertexShaderStream, Line))
+			VertexShaderCode += "\n" + Line;
+		VertexShaderStream.close();
+	}
+ 
+	// Read the Fragment Shader code from the file
+	std::string FragmentShaderCode;
+	std::ifstream FragmentShaderStream(fragmentFilePath, std::ios::in);
+	if(FragmentShaderStream.is_open()){
+		std::string Line = "";
+		while(getline(FragmentShaderStream, Line))
+			FragmentShaderCode += "\n" + Line;
+		FragmentShaderStream.close();
+	}
+ 
+	GLint Result = GL_FALSE;
+	int InfoLogLength;
+ 
+	// Compile Vertex Shader
+	cout << "Compiling shader: " << vertexFilePath << endl;
+	char const * VertexSourcePointer = VertexShaderCode.c_str();
+	glShaderSource(VertexShaderID, 1, &VertexSourcePointer , NULL);
+	glCompileShader(VertexShaderID);
+ 
+	// Check Vertex Shader
+	glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
+	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	std::vector<char> VertexShaderErrorMessage(InfoLogLength);
+	glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+	fprintf(stdout, "%s\n", &VertexShaderErrorMessage[0]);
+ 
+	// Compile Fragment Shader
+	cout << "Compiling shader: " << fragmentFilePath << endl;
+	char const * FragmentSourcePointer = FragmentShaderCode.c_str();
+	glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , NULL);
+	glCompileShader(FragmentShaderID);
+ 
+	// Check Fragment Shader
+	glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
+	glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
+	glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
+	fprintf(stdout, "%s\n", &FragmentShaderErrorMessage[0]);
+ 
+	// Link the program
+	fprintf(stdout, "Linking program\n");
+	GLuint ProgramID = glCreateProgram();
+	glAttachShader(ProgramID, VertexShaderID);
+	glAttachShader(ProgramID, FragmentShaderID);
+	glLinkProgram(ProgramID);
+ 
+	// Check the program
+	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
+	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	std::vector<char> ProgramErrorMessage( std::max(InfoLogLength, int(1)) );
+	glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+	fprintf(stdout, "%s\n", &ProgramErrorMessage[0]);
+ 
+	glDeleteShader(VertexShaderID);
+	glDeleteShader(FragmentShaderID);
+ 
+	return ProgramID;
 }
