@@ -12,9 +12,14 @@
 #include <gtc/matrix_transform.hpp>
 #include<list>
 #include <gtc/matrix_transform.hpp>
+#include <gtc/quaternion.hpp>
+#include <gtx/quaternion.hpp>
 
 namespace BGE {
 	class GameComponent {
+	private:
+		GameComponent * parent;
+		void RotateVectors();
 	public:
 
 		GameComponent(void);
@@ -29,12 +34,17 @@ namespace BGE {
 		glm::vec3 look;
 		glm::vec3 up;
 		glm::vec3 right;
+		glm::vec3 scale;
 		glm::vec3 velocity;
 		glm::mat4 world;
+		glm::quat orientation;
+		
+		
 
 		std::list<GameComponent *> children;
-		static const glm::vec3 globalUp;
-		static const glm::vec3 basis;
+		static const glm::vec3 basisUp;
+		static const glm::vec3 basisLook;
+		static const glm::vec3 basisRight;
 		bool moved;
 		float speed;
 

@@ -92,12 +92,13 @@ BGE::Model * BGE::Content::SimpleLoadModel(string path)
 
 BGE::Model * BGE::Content::LoadModel(string name)
 {
-	std::vector<unsigned int> vertexIndices, normalIndices;
+	std::vector<unsigned int> vertexIndices, normalIndices, uvIndices;
 	std::vector<glm::vec3> temp_vertices; 
 	std::vector<glm::vec3> tempColours;
 	std::vector<glm::vec3> temp_normals;
 	
 	map<string, glm::vec3> diffuse;
+	bool hasUVs = false;
 
 	// First load the materials
 	string materialsFileName = Content::prefix + name + ".mtl";
@@ -166,19 +167,49 @@ BGE::Model * BGE::Content::LoadModel(string name)
 			else if (s.find("f ") == 0) {
 				// Its a face in other words 3 vertices 
 				unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-				// Much nicer to do this parse in C
-				int matches = sscanf(s.substr(2).c_str()
-					,"%d//%d %d//%d %d//%d"
-					,&vertexIndex[0]
-					,&normalIndex[0]
-					,&vertexIndex[1]
-					,&normalIndex[1]
-					,&vertexIndex[2]
-					,&normalIndex[2] 
-					);
-				if (matches != 6){
-					cout << "File can't be read by our simple parser :-( Try exporting with other options\n" << endl;
-					return NULL;
+
+				// Are there any texels? IF so parse them
+				if (s.find("//") == string::npos)
+				{
+					hasUVs = true;
+					// Much nicer to do this parse in C
+					int matches = sscanf(s.substr(2).c_str()
+						,"%d/%d/%d %d/%d/%d %d/%d/%d"
+						,&vertexIndex[0]
+						,&uvIndex[0]
+						,&normalIndex[0]
+						,&vertexIndex[1]
+						,&uvIndex[1]
+						,&normalIndex[1]
+						,&vertexIndex[2]
+						,&uvIndex[2]
+						,&normalIndex[2] 
+						);
+					if (matches != 9){
+						cout << "File can't be read by our simple parser :-( Try exporting with other options\n" << endl;
+						return NULL;
+					}
+					uvIndices.push_back(uvIndex[0]);
+					uvIndices.push_back(uvIndex[1]);
+					uvIndices.push_back(uvIndex[2]);				
+				}
+				else
+				{
+					hasUVs = false;
+					// Much nicer to do this parse in C
+					int matches = sscanf(s.substr(2).c_str()
+						,"%d//%d %d//%d %d//%d"
+						,&vertexIndex[0]
+						,&normalIndex[0]
+						,&vertexIndex[1]
+						,&normalIndex[1]
+						,&vertexIndex[2]
+						,&normalIndex[2] 
+						);
+					if (matches != 6){
+						cout << "File can't be read by our simple parser :-( Try exporting with other options\n" << endl;
+						return NULL;
+					}
 				}
 
 				vertexIndices.push_back(vertexIndex[0]);

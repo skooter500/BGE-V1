@@ -22,6 +22,9 @@
     <Filter Include="Content">
       <UniqueIdentifier>{e12f2193-834b-49fb-ade0-577ca65121c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Prefabs">
+      <UniqueIdentifier>{697651d2-0cd7-45c2-b4a6-56fe6f15526c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +60,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -89,6 +95,9 @@
     <ClInclude Include="Ground.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
@@ -98,9 +107,6 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Content\SimpleShader.fragmentshader">
-      <Filter>Content</Filter>
-    </None>
-    <None Include="Content\standard.fragmentshader">
       <Filter>Content</Filter>
     </None>
     <None Include="Content\StandardShading.fragmentshader">
@@ -121,9 +127,6 @@
     <None Include="Content\SimpleShader.vertexshader">
       <Filter>Content</Filter>
     </None>
-    <None Include="Content\standard.vertexshader">
-      <Filter>Content</Filter>
-    </None>
     <None Include="Content\StandardShading.vertexshader">
       <Filter>Content</Filter>
     </None>
@@ -131,6 +134,12 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Content\TriangleShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_materials.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_materials.fragmentshader">
       <Filter>Content</Filter>
     </None>
   </ItemGroup>

@@ -5,8 +5,9 @@
 using namespace BGE;
 using namespace std;
 
-const glm::vec3 GameComponent::globalUp = glm::vec3(0, 1, 0);
-const glm::vec3 GameComponent::basis = glm::vec3(0, 0, -1);
+const glm::vec3 GameComponent::basisUp = glm::vec3(0, 1, 0);
+const glm::vec3 GameComponent::basisLook = glm::vec3(0, 0, -1);
+const glm::vec3 GameComponent::basisRight = glm::vec3(1, 0, 0);
 
 GameComponent::GameComponent(void)
 {
@@ -15,8 +16,12 @@ GameComponent::GameComponent(void)
 	right = glm::vec3(1, 0, 0); 
 	up = glm::vec3(0, 1, 0); 
 	velocity = glm::vec3(0, 0, 0); 
+	world = glm::mat4(1.0f); // Identity
+	orientation = glm::quat(); // Identity
 	moved = true;
 	speed = 10.0f;
+	parent = NULL;
+	scale = glm::vec3(1.0, 1.0, 1.0);
 }
 
 GameComponent::~GameComponent(void)
@@ -27,6 +32,7 @@ GameComponent::~GameComponent(void)
 		delete *it;		
 	}
 }
+
 
 bool GameComponent::Initialise()
 {
@@ -64,21 +70,11 @@ void GameComponent::Cleanup()
 
 
 void GameComponent::Update(float timeDelta) {
-	
-	float dot = glm::dot(look, GameComponent::basis);
-	float theta;
-	theta = acos(dot);
-	
-	if (_isnan(theta))
+	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
+	if (parent != NULL)
 	{
-		theta = 0.0f;
+		 world = world * parent->world;
 	}
-	if (look.x < 0.0f)
-	{
-		theta = (glm::pi<float>() * 2.0f) - theta;  
-	}
-
-	world = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), glm::degrees(theta), GameComponent::globalUp);
 	moved = false;
 
 	// Update all the children
@@ -109,7 +105,14 @@ void GameComponent::Fly(float units)
 
 void GameComponent::Pitch(float angle)
 {
+	// A pitch is a rotation around the right vector
+	glm::quat rot = glm::angleAxis(angle, basisRight);
 
+	orientation = rot * orientation;
+	look = basisLook * orientation;
+	up = basisUp;
+
+	/*
 	glm::mat4 pitch;
 	pitch = glm::rotate(pitch, angle, right);
 
@@ -120,12 +123,21 @@ void GameComponent::Pitch(float angle)
 	glm::vec4 tup = glm::vec4(up, 0);
 	tlook = pitch * tup;
 	up = glm::vec3(tup);
-	
+	*/
 	moved = true;
 }
 
 void GameComponent::Yaw(float angle)
 {
+	// A yaw is a rotation around the global up vector
+	glm::quat rot = glm::angleAxis(angle, basisUp);
+
+	orientation = rot * orientation;
+	look = basisLook * orientation;
+	right = basisRight * orientation;
+
+
+	/*
 	glm::mat4 yaw;
 	yaw = glm::rotate(yaw, angle, up); 
 
@@ -136,27 +148,27 @@ void GameComponent::Yaw(float angle)
 	glm::vec4 tright = glm::vec4(right, 0);
 	tright = yaw * tright;
 	right = glm::vec3(tright);
-
+	*/
 	moved = true;
+}
+
+void GameComponent::RotateVectors()
+{
+	look = orientation * look;
+	right = orientation * right;
+	up = orientation * up;
+
 }
 
 void GameComponent::Roll(float angle)
 {
-	/*
-	D3DXMATRIX T;
-	D3DXMatrixRotationAxis(&T, &_look,	angle);
-
-		// rotate _up and _right around _look vector
-	D3DXVec3TransformCoord(&_right,&_right, &T);
-	D3DXVec3TransformCoord(&_up,&_up, &T);
-
-	_moved = true;
-	*/
+	
 	moved = true;
 }
 
 void GameComponent::AddChild(GameComponent * child)
 {
+	child->parent = this;
 	children.push_back(child);
 }
 

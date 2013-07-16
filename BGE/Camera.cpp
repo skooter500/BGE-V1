@@ -38,24 +38,33 @@ bool Camera::Initialise()
 void Camera::Update(float timeDelta) {
 	
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
+
+	float moveSpeed = speed;
+
+	if (keyState[SDL_SCANCODE_LSHIFT])
+	{
+		moveSpeed *= 3.0f;
+	}
+	
+
 	if (keyState[SDL_SCANCODE_W])
 	{
-		Walk(speed * timeDelta);
+		Walk(moveSpeed * timeDelta);
 	}
 
 	if (keyState[SDL_SCANCODE_S])
 	{
-		Walk(-speed * timeDelta);
+		Walk(-moveSpeed * timeDelta);
 	}
 
 	if (keyState[SDL_SCANCODE_A])
 	{
-		Strafe(-speed * timeDelta);
+		Strafe(-moveSpeed * timeDelta);
 	}
 
 	if (keyState[SDL_SCANCODE_D])
 	{
-		Strafe(speed * timeDelta);
+		Strafe(moveSpeed * timeDelta);
 	}
 
 	int x, y;
@@ -64,8 +73,8 @@ void Camera::Update(float timeDelta) {
 	midX = Game::Instance()->GetWidth() / 2;
 	midY = Game::Instance()->GetHeight() / 2;
 	float yaw, pitch;
-	yaw = midX - x;
-	pitch = midY - y;
+	yaw = x - midX;
+	pitch = y - midY;
 
 	float scale = 0.1f;
 	if (yaw != 0)
@@ -88,7 +97,7 @@ void Camera::Update(float timeDelta) {
 		view = glm::lookAt(
 			position
 			, position + look
-			, up
+			, basisUp
 		);
 		//cout << position.x << position.y << position.z << endl;
 	}
