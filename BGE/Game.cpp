@@ -54,6 +54,9 @@ bool Game::Initialise() {
      * You may need to change this to 16 or 32 for your system */
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  4);
  
     /* Create our window centered at 512x512 resolution */
     mainwindow = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -83,7 +86,7 @@ bool Game::Initialise() {
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	SDL_GL_SetSwapInterval(1);
     running = true;
@@ -138,7 +141,7 @@ void Game::Update(float timeDelta) {
 
 void Game::PreDraw()
 {
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);	
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

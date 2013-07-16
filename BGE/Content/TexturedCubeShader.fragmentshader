@@ -38,8 +38,8 @@ float getFogFactor(FogParameters params, float fFogCoord)
 void main(){
 
 	fogParams.fDensity = 0.04f; 
-    fogParams.fStart = 10.0f; 
-    fogParams.fEnd = 75.0f; 
+    fogParams.fStart = 100.0f; 
+    fogParams.fEnd = 150.0f; 
     fogParams.vFogColor = vec4(0.0f, 0.0f, 0.0f, 1.0f); 
     fogParams.iEquation = 0; 
 

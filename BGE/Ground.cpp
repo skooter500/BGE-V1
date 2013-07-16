@@ -16,8 +16,8 @@ Ground::~Ground(void)
 
 bool Ground::Initialise()
 {
-	const float twidth = 50;
-    const float theight = 50;
+	const float twidth = 40;
+    const float theight = 40;
 
 	if (!GameComponent::Initialise()) {
 		return false;

@@ -19,7 +19,7 @@ struct lightSource
 const int numberOfLights = 2;
 lightSource lights[numberOfLights];
 lightSource light0 = lightSource(
-  vec4(0.0,  1.0,  2.0, 1.0),
+  vec4(0.0,  1.0,  2.0, 0.0),
   vec4(1.0,  1.0,  1.0, 1.0),
   vec4(1.0,  1.0,  1.0, 1.0),
   0.0, 1.0, 0.0,
@@ -27,7 +27,7 @@ lightSource light0 = lightSource(
   vec3(0.0, 0.0, 0.0)
 );
 lightSource light1 = lightSource(
-    vec4(0.0, -2.0,  0.0, 1.0),
+    vec4(0.0, -2.0,  0.0, 0.0),
     vec4(1.0,  1.0,  1.0, 1.0),
     vec4(0.1,  0.1,  0.1, 1.0),
     0.0, 1.0, 0.0,
@@ -47,7 +47,7 @@ material frontMaterial = material(
   vec4(0.2, 0.2, 0.2, 1.0),
   vec4(model_diffuse, 1.0),
   vec4(1.0, 1.0, 1.0, 1.0),
-  5.0
+  50.0
 );
  
 void main()

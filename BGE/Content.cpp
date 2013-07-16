@@ -264,7 +264,8 @@ GLuint BGE::Content::LoadTexture(std::string textureName)
 	glBindTexture(GL_TEXTURE_2D, texture);
  	glTexImage2D(GL_TEXTURE_2D, 0,nOfColors, surface->w, surface->h, 0, texture_format, GL_UNSIGNED_BYTE, surface->pixels);
  
-
+	// Generate mipmaps, by the way.
+	glGenerateMipmap(GL_TEXTURE_2D);
 	// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
@@ -279,8 +280,7 @@ GLuint BGE::Content::LoadTexture(std::string textureName)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
 
 	
-	// Generate mipmaps, by the way.
-	glGenerateMipmap(GL_TEXTURE_2D);
+	
 
 	return texture;
 }

@@ -13,12 +13,14 @@ ModelTest::~ModelTest(void) {
 }
 
 bool ModelTest::Initialise() {
+	
+	Ground * ground = new Ground();
+	children.push_back(ground);
 	model = Content::LoadModel("cobramk3");
-	model->position = glm::vec3(0, 0, -20);
+	model->position = glm::vec3(0, 5, -20);
 	children.push_back(model);
-	//Ground * ground = new Ground();
-	//children.push_back(ground);	
-	// Initialise OpenGL, GLEW and SDL
+	
+	//Initialise OpenGL, GLEW and SDL
 	if (!Game::Initialise()) {
 		return false;
 	}
