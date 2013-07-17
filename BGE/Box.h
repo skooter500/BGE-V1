@@ -7,7 +7,7 @@ namespace BGE
 		public GameComponent
 	{
 	public:
-		Box(void);
+		Box(float width, float height, float depth);
 		~Box(void);
 		bool Initialize();
 		void Update(float timeDelta);

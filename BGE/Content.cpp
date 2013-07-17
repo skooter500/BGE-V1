@@ -1,97 +1,22 @@
 #include "Content.h"
 #include <string>
 
-string BGE::Content::prefix = "Content/";
+using namespace BGE;
 
-BGE::Model * BGE::Content::SimpleLoadModel(string path)
-{
-	Model * model = new Model();
-	cout << path << endl;
+string Content::prefix = "Content/";
+map<string, Model *> Content::models = map<string, Model *>();
+map<string, GLuint> Content::textures = map<string, GLuint>();
+map<string, GLuint> Content::shaders = map<string, GLuint>();	
 
-	std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
-	std::vector<glm::vec3> temp_vertices; 
-	std::vector<glm::vec2> temp_uvs;
-	std::vector<glm::vec3> temp_normals;
+Model * Content::LoadModel(string name) {
 
-
-	FILE * file = fopen(path.c_str(), "r");
-	if( file == NULL ){
-		printf("Impossible to open the file ! Are you in the right path ? See Tutorial 1 for details\n");
-		return false;
+	// First check to see if it's already loaded and if so, just return it
+	map<string, Model *>::iterator mit = Content::models.find(name);
+	if (mit != Content::models.end())
+	{
+		return mit->second;
 	}
 
-	while( 1 ){
-
-		char lineHeader[128];
-		// read the first word of the line
-		int res = fscanf(file, "%s", lineHeader);
-		if (res == EOF)
-			break; // EOF = End Of File. Quit the loop.
-
-		// else : parse lineHeader
-		
-		if ( strcmp( lineHeader, "v" ) == 0 ){
-			glm::vec3 vertex;
-			fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z );
-			temp_vertices.push_back(vertex);
-		}else if ( strcmp( lineHeader, "vt" ) == 0 ){
-			glm::vec2 uv;
-			fscanf(file, "%f %f\n", &uv.x, &uv.y );
-			uv.y = -uv.y; // Invert V coordinate since we will only use DDS texture, which are inverted. Remove if you want to use TGA or BMP loaders.
-			temp_uvs.push_back(uv);
-		}else if ( strcmp( lineHeader, "vn" ) == 0 ){
-			glm::vec3 normal;
-			fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z );
-			temp_normals.push_back(normal);
-		}else if ( strcmp( lineHeader, "f" ) == 0 ){
-			std::string vertex1, vertex2, vertex3;
-			unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-			int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2] );
-			if (matches != 9){
-				printf("File can't be read by our simple parser :-( Try exporting with other options\n");
-				return false;
-			}
-			vertexIndices.push_back(vertexIndex[0]);
-			vertexIndices.push_back(vertexIndex[1]);
-			vertexIndices.push_back(vertexIndex[2]);
-			uvIndices    .push_back(uvIndex[0]);
-			uvIndices    .push_back(uvIndex[1]);
-			uvIndices    .push_back(uvIndex[2]);
-			normalIndices.push_back(normalIndex[0]);
-			normalIndices.push_back(normalIndex[1]);
-			normalIndices.push_back(normalIndex[2]);
-		}else{
-			// Probably a comment, eat up the rest of the line
-			char stupidBuffer[1000];
-			fgets(stupidBuffer, 1000, file);
-		}
-
-	}
-
-	// For each vertex of each triangle
-	for( unsigned int i=0; i<vertexIndices.size(); i++ ){
-
-		// Get the indices of its attributes
-		unsigned int vertexIndex = vertexIndices[i];
-		unsigned int uvIndex = uvIndices[i];
-		unsigned int normalIndex = normalIndices[i];
-		
-		// Get the attributes thanks to the index
-		glm::vec3 vertex = temp_vertices[ vertexIndex-1 ];
-		glm::vec2 uv = temp_uvs[ uvIndex-1 ];
-		glm::vec3 normal = temp_normals[ normalIndex-1 ];
-		
-		// Put the attributes in buffers
-		model->vertices.push_back(vertex);
-		//out_uvs     .push_back(uv);
-		model->normals.push_back(normal);
-	
-	}
-	return model;
-}
-
-BGE::Model * BGE::Content::LoadModel(string name)
-{
 	std::vector<unsigned int> vertexIndices, normalIndices, uvIndices;
 	std::vector<glm::vec3> temp_vertices; 
 	std::vector<glm::vec3> tempColours;
@@ -244,11 +169,20 @@ BGE::Model * BGE::Content::LoadModel(string name)
 		model->colours.push_back(tempColours[i]);
 	
 	}
+	Content::models[name] = model;
 	return model;
 }
 
-GLuint BGE::Content::LoadTexture(std::string textureName)
+GLuint Content::LoadTexture(std::string textureName)
 {
+
+	// First check to see if it's already loaded and if so, just return it
+	map<string, GLuint>::iterator it = Content::textures.find(textureName);
+	if (it != Content::textures.end())
+	{
+		return it->second;
+	}
+
 	string path = Content::prefix + textureName + ".bmp";	
 	GLuint texture;
 	// Now the texture...
@@ -310,14 +244,19 @@ GLuint BGE::Content::LoadTexture(std::string textureName)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
 
-	
-	
+	textures[textureName] = texture;
 
 	return texture;
 }
 
-GLuint BGE::Content::LoadShaderPair(string name) {
+GLuint Content::LoadShaderPair(string name) {
 
+	// First check to see if it's already loaded and if so, just return it
+	map<string, GLuint>::iterator it = Content::shaders.find(name);
+	if (it != Content::shaders.end())
+	{
+		return it->second;
+	}
 	string vertexFilePath = Content::prefix + name + ".vertexshader";
 	string fragmentFilePath = Content::prefix + name + ".fragmentshader";
 	
@@ -392,5 +331,6 @@ GLuint BGE::Content::LoadShaderPair(string name) {
 	glDeleteShader(VertexShaderID);
 	glDeleteShader(FragmentShaderID);
  
+	shaders[name] = ProgramID;
 	return ProgramID;
 }

@@ -15,11 +15,16 @@
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
 
-namespace BGE {
+namespace BGE 
+{
+	float RandomFloat();
+
 	class GameComponent {
-	private:
-		GameComponent * parent;
+	private:		
 		void RotateVectors();
+	protected:
+		bool initialised;
+		
 	public:
 
 		GameComponent(void);
@@ -30,6 +35,7 @@ namespace BGE {
 		virtual void Draw();
 		virtual void Cleanup();
 
+		GameComponent * parent;
 		glm::vec3 position;
 		glm::vec3 look;
 		glm::vec3 up;
@@ -38,9 +44,15 @@ namespace BGE {
 		glm::vec3 velocity;
 		glm::mat4 world;
 		glm::quat orientation;
-		
-		
 
+		glm::vec3 ambient;
+		glm::vec3 specular;
+		glm::vec3 diffuse; // Will use either this of the array of colours depending on the drawMode setting
+
+		enum draw_modes {materials, textured, single_material};
+
+		draw_modes drawMode;
+		
 		std::list<GameComponent *> children;
 		static const glm::vec3 basisUp;
 		static const glm::vec3 basisLook;

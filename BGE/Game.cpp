@@ -7,6 +7,7 @@
 #include <fstream>
 #include <algorithm>
 #include <stdlib.h>
+#include <ctime>
 #include "Content.h"
 
 using namespace BGE;
@@ -21,6 +22,7 @@ Game::Game(void) {
 	mainwindow = NULL;
 	instance = this;
 	camera = NULL;
+	srand(time(0));
 }
 
 Game::~Game(void) {
@@ -45,6 +47,8 @@ bool Game::Initialise() {
 		*stdout = *fp; 
 		setvbuf( stdout, NULL, _IONBF, 0 );
 	}
+
+	
 
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return false;

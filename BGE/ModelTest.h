@@ -14,7 +14,6 @@ namespace BGE
 		~ModelTest(void);
 
 		bool Initialise();		
-		void Cleanup();		
 	};
 }
 

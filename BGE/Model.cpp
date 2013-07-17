@@ -21,13 +21,13 @@ Model::~Model()
 
 bool Model::Initialise()
 {
-
 	GameComponent::Initialise();
+	if (initialised)
+	{
+		return true;
+	}
+
 	programID = Content::LoadShaderPair( "standard_materials");
-	
-	//GLuint VertexArrayID;
-	//glGenVertexArrays(1, &VertexArrayID);
-	//glBindVertexArray(VertexArrayID);
 	
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -47,38 +47,38 @@ bool Model::Initialise()
 	specularID = glGetUniformLocation(programID,"specular");
 	diffuseID = glGetUniformLocation(programID,"diffuse");
 	diffusePerVertexID = glGetUniformLocation(programID,"diffusePerVertex");
-	if (drawMode == draw_modes::materials)
+	if (parent->drawMode == draw_modes::materials)
 	{
 		
 		glGenBuffers(1, &colourbuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, colourbuffer);
 		glBufferData(GL_ARRAY_BUFFER, colours.size() * sizeof(glm::vec3), &colours[0], GL_STATIC_DRAW);
 	}
-
 	return true;
 }
 
 void Model::Draw()
 {
 	glUseProgram(programID);
-	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
+	// Models are singletons, so they share a world transform, so use my parent's world transform instead
+	glUniformMatrix4fv(mID, 1, GL_FALSE, & parent->world[0][0]);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetView()[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetProjection()[0][0]);
 
-	if (drawMode == draw_modes::materials)
+	if (parent->drawMode == draw_modes::materials)
 	{
-		glUniform3f(diffuseID, ambient.r, ambient.g, ambient.b); 
+		glUniform3f(diffuseID, parent->ambient.r, parent->ambient.g, parent->ambient.b); 
 		glUniform1i(diffusePerVertexID, false);
 	}
 	else
 	{
 		glUniform1i(diffusePerVertexID, true);
 	}
-	glUniform3f(specularID, specular.r, specular.g, specular.b);
-	glUniform3f(diffuseID, diffuse.r, diffuse.g, diffuse.b);
+	glUniform3f(specularID, parent->specular.r, parent->specular.g, parent->specular.b);
+	glUniform3f(diffuseID, parent->diffuse.r, parent->diffuse.g, parent->diffuse.b);
 
 
-	glm::mat4 MV = Game::Instance()->GetCamera()->GetView() * world;
+	glm::mat4 MV = Game::Instance()->GetCamera()->GetView() * parent->world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));
 	glUniformMatrix3fv(nID, 1, GL_FALSE, & gl_NormalMatrix[0][0]);
 	
@@ -121,7 +121,7 @@ void Model::Draw()
 	);
 	
 	// Draw the triangles !
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size() );
+	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

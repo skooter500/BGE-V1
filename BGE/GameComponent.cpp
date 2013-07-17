@@ -1,13 +1,21 @@
 #include "GameComponent.h"
+#include "Model.h"
 #include <iostream>
 #include <cmath>
 #include <gtx\constants.hpp>
+#include <ctime>
+
 using namespace BGE;
 using namespace std;
 
 const glm::vec3 GameComponent::basisUp = glm::vec3(0, 1, 0);
 const glm::vec3 GameComponent::basisLook = glm::vec3(0, 0, -1);
 const glm::vec3 GameComponent::basisRight = glm::vec3(1, 0, 0);
+
+float BGE::RandomFloat()
+{	
+	return (float)rand()/(float)RAND_MAX;
+}
 
 GameComponent::GameComponent(void)
 {
@@ -21,6 +29,7 @@ GameComponent::GameComponent(void)
 	moved = true;
 	speed = 10.0f;
 	parent = NULL;
+	initialised = false;
 	scale = glm::vec3(1.0, 1.0, 1.0);
 }
 
@@ -40,10 +49,7 @@ bool GameComponent::Initialise()
 	std::list<GameComponent *>::iterator it = children.begin();
 	while (it != children.end())
 	{
-		if (! (*it ++)->Initialise())
-		{
-			return false;
-		}
+		(*it ++)->initialised = (*it)->Initialise();	
 	}
 	return true;
 }
@@ -54,6 +60,7 @@ void GameComponent::Draw()
 	std::list<GameComponent *>::iterator it = children.begin();
 	while (it != children.end())
 	{
+		(*it)->parent = this;
 		(*it ++)->Draw();		
 	}
 }
@@ -64,7 +71,7 @@ void GameComponent::Cleanup()
 	std::list<GameComponent *>::iterator it = children.begin();
 	while (it != children.end())
 	{
-		(*it ++)->Cleanup();	
+		(*it ++)->Cleanup();	    	
 	}
 }
 
@@ -73,14 +80,14 @@ void GameComponent::Update(float timeDelta) {
 	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
 	if (parent != NULL)
 	{
-		 world = world * parent->world;
+		 world = parent->world * world;
 	}
 	moved = false;
 
 	// Update all the children
 	std::list<GameComponent *>::iterator it = children.begin();
 	while (it != children.end())
-	{
+	{	
 		(*it ++)->Update(timeDelta);
 	}
 }
