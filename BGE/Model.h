@@ -8,6 +8,11 @@ using namespace std;
 
 namespace BGE
 {
+	struct BoundingBox
+	{
+		glm::vec3 min;
+		glm::vec3 max;
+	};
 
 	class Model :
 		public GameComponent
@@ -24,7 +29,7 @@ namespace BGE
 		GLuint programID;
 		GLuint diffusePerVertexID;
 		GLuint mID, vID, pID, nID;
-
+		void CalculateBounds();
 	public:
 		Model();
 		~Model();
@@ -36,8 +41,7 @@ namespace BGE
 		std::vector<glm::vec3> normals;
 		std::vector<glm::vec3> uvs;
 		std::vector<glm::vec3> colours;
-
-		
+		BoundingBox boundingBox;
 
 	};
 }

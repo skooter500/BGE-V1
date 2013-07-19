@@ -8,12 +8,20 @@
 #include <gl/glu.h>
 #include<glm.hpp>
 #include <gtc/matrix_transform.hpp>
-
+#include<vector>
 #include "Camera.h"
-
 
 namespace BGE
 {
+	struct LightSource
+	{
+		glm::vec4 position;
+		glm::vec4 diffuse;
+		glm::vec4 specular;
+		float constantAttenuation, linearAttenuation, quadraticAttenuation;
+		float spotCutoff, spotExponent;
+		glm::vec3 spotDirection;
+	};
 
 	class Game:
 		public GameComponent
@@ -43,9 +51,10 @@ namespace BGE
 		const Uint8 * GetKeyState();
 		SDL_Window * GetMainWindow();
 		int GetWidth();
-		int GetHeight();
-		
+		int GetHeight();		
 		bool Run();
+
+		std::vector<LightSource> lights;
 	};
 }
 

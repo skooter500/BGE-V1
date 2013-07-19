@@ -4,6 +4,7 @@
 #include "Ground.h"
 #include "Box.h"
 #include "Sphere.h"
+#include "Ship.h"
 #include "Cylinder.h"
 
 using namespace BGE;
@@ -20,7 +21,7 @@ bool ModelTest::Initialise() {
 	Ground * ground = new Ground();
 	children.push_back(ground);	
 	
-	Box * box = new Box(1, 1, 1);
+	/*Box * box = new Box(1, 1, 1);
 	box->position = glm::vec3(0, 5, -20);
 	AddChild(box);
 
@@ -35,6 +36,10 @@ bool ModelTest::Initialise() {
 	Cylinder * cyl = new Cylinder(2, 1);
 	cyl->position = glm::vec3(15, 5, -20);
 	children.push_back(cyl);
+	*/
+	Ship * ship = new Ship();
+	ship->position = glm::vec3(0, 5, -20);
+	children.push_back(ship);
 
 	//Initialise OpenGL, GLEW and SDL and then initialize all my children!
 	if (!Game::Initialise()) {

@@ -3,6 +3,7 @@
 #include "Content.h"
 #include <gtc/matrix_inverse.hpp>
 #include <iostream>
+#include <limits>
 
 using namespace BGE;
 using namespace std;
@@ -10,7 +11,7 @@ using namespace std;
 Model::Model():GameComponent()
 {
 	drawMode = draw_modes::materials;
-	ambient = glm::vec3(0.2f, 0.2f, 0.2f);
+	ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	specular = glm::vec3(1.2f, 1.2f, 1.2f);
 }
 
@@ -47,38 +48,81 @@ bool Model::Initialise()
 	specularID = glGetUniformLocation(programID,"specular");
 	diffuseID = glGetUniformLocation(programID,"diffuse");
 	diffusePerVertexID = glGetUniformLocation(programID,"diffusePerVertex");
-	if (parent->drawMode == draw_modes::materials)
+	if (drawMode == draw_modes::materials)
 	{
 		
 		glGenBuffers(1, &colourbuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, colourbuffer);
 		glBufferData(GL_ARRAY_BUFFER, colours.size() * sizeof(glm::vec3), &colours[0], GL_STATIC_DRAW);
 	}
+	CalculateBounds();
 	return true;
+}
+
+void Model::CalculateBounds()
+{
+	boundingBox.min.x = numeric_limits<float>::max();
+	boundingBox.min.y = numeric_limits<float>::max();
+	boundingBox.min.z = numeric_limits<float>::max();
+
+	boundingBox.max.x = numeric_limits<float>::min();
+	boundingBox.max.y = numeric_limits<float>::min();
+	boundingBox.max.z = numeric_limits<float>::min();
+
+	std::vector<glm::vec3>::iterator it = vertices.begin();
+	while (it != vertices.end())
+	{
+		if (boundingBox.min.x < it->x)
+		{
+			boundingBox.min.x = it->x;
+		}
+		if (boundingBox.min.y < it->y)
+		{
+			boundingBox.min.y = it->y;
+		}
+		if (boundingBox.min.z < it->z)
+		{
+			boundingBox.min.z = it->z;
+		}
+
+		if (boundingBox.max.x > it->x)
+		{
+			boundingBox.max.x = it->x;
+		}
+		if (boundingBox.max.y > it->y)
+		{
+			boundingBox.max.y = it->y;
+		}
+		if (boundingBox.max.z > it->z)
+		{
+			boundingBox.max.z = it->z;
+		}
+		it ++;
+	}
 }
 
 void Model::Draw()
 {
 	glUseProgram(programID);
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
-	glUniformMatrix4fv(mID, 1, GL_FALSE, & parent->world[0][0]);
+	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetView()[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetProjection()[0][0]);
 
-	if (parent->drawMode == draw_modes::materials)
+	if (drawMode == draw_modes::single_material)
 	{
-		glUniform3f(diffuseID, parent->ambient.r, parent->ambient.g, parent->ambient.b); 
+		glUniform3f(diffuseID, diffuse.r, diffuse.g, diffuse.b); 
 		glUniform1i(diffusePerVertexID, false);
 	}
 	else
 	{
 		glUniform1i(diffusePerVertexID, true);
 	}
-	glUniform3f(specularID, parent->specular.r, parent->specular.g, parent->specular.b);
-	glUniform3f(diffuseID, parent->diffuse.r, parent->diffuse.g, parent->diffuse.b);
+	glUniform3f(specularID, specular.r, specular.g, specular.b);
+	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
 
 
-	glm::mat4 MV = Game::Instance()->GetCamera()->GetView() * parent->world;
+	glm::mat4 MV = Game::Instance()->GetCamera()->GetView() * world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));
 	glUniformMatrix3fv(nID, 1, GL_FALSE, & gl_NormalMatrix[0][0]);
 	

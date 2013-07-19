@@ -97,6 +97,47 @@ bool Game::Initialise() {
 	camera = new Camera();
 	AddChild(camera);
 
+	// Add three lights!
+	/*
+	LightSource light0;
+	light0.position = glm::vec4(0.52, 0.57, 0.62, 0.0);
+	light0.diffuse = glm::vec4(1, 0.96, 0.81, 1.0);
+	light0.specular = glm::vec4(1, 0.96, 0.81, 1.0);
+	light0.constantAttenuation = 0.0f;
+	light0.linearAttenuation = 1.0;
+	light0.quadraticAttenuation = 0.0;
+	light0.spotCutoff = 180.0;
+	light0.spotExponent = 0.0;
+	light0.spotDirection = glm::vec3(0.0, 0.0, 0.0);
+
+	lights.push_back(light0);
+
+	LightSource light1;
+	light1.position = glm::vec4(-0.71, -0.34, -0.60, 0.0);
+	light1.diffuse = glm::vec4(0.96, 0.76, 0.40, 1.0);
+	light1.specular = glm::vec4(0, 0, 0, 1.0);
+	light1.constantAttenuation = 0.0f;
+	light1.linearAttenuation = 1.0;
+	light1.quadraticAttenuation = 0.0;
+	light1.spotCutoff = 180.0;
+	light1.spotExponent = 10.0;
+	light1.spotDirection = glm::vec3(0.0, 1.0, 0.0);
+
+	lights.push_back(light1);
+			
+	LightSource light2;
+	light1.position = glm::vec4(-0.45, 0.76, -0.45, 0.0);
+	light1.diffuse = glm::vec4(0.32, 0.36, 0.39, 1.0);
+	light1.specular = glm::vec4(0.32, 0.36, 0.39, 1.0);
+	light1.constantAttenuation = 0.0f;
+	light1.linearAttenuation = 1.0;
+	light1.quadraticAttenuation = 0.0;
+	light1.spotCutoff = 180.0;
+	light1.spotExponent = 10.0;
+	light1.spotDirection = glm::vec3(0.0, 1.0, 0.0);
+	lights.push_back(light2);
+	*/
+
 	return GameComponent::Initialise();
 }
 

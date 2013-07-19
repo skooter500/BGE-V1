@@ -65,6 +65,9 @@
     <ClCompile Include="Cylinder.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -106,6 +109,7 @@
     <ClInclude Include="Cylinder.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="Ship.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
@@ -148,6 +152,12 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Content\standard_materials.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_texture.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_texture.vertexshader">
       <Filter>Content</Filter>
     </None>
   </ItemGroup>

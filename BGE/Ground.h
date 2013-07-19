@@ -19,18 +19,23 @@ namespace BGE
 
 		std::vector<glm::vec3> vertices; 	
 		std::vector<glm::vec2> texels;
+		std::vector<glm::vec3> normals;
 		float width, height;
 
 	private:
 		GLuint vertexbuffer;
 		GLuint texelbuffer;
 		GLuint programID;
+		
+		GLuint normalbuffer;
+		GLuint colourbuffer;
+		GLuint ambientID;
+		GLuint specularID;
+		GLuint diffusePerVertexID;
+		GLuint mID, vID, pID, nID;
+
 		GLuint textureID;
 		GLuint textureSampler;
-		GLuint MVPID;
-		GLuint ModelViewID;
-
-		GLuint mID, vID, pID;
 		GLuint m_3x3_inv_transp;
 	};
 }
