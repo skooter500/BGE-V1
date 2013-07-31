@@ -14,6 +14,14 @@ using namespace BGE;
 
 BGE::Game * Game::instance = NULL;
 
+glm::vec3 BGE::RotateVector(glm::vec3 v, glm::quat q)
+{
+	glm::quat qinv = glm::inverse(q);
+	glm::quat w = glm::quat(0, v.x, v.y, v.z);
+	w = q * w * qinv;
+	return glm::vec3(w.x, w.y, w.z);
+}
+
 Game::Game(void) {
 	running = false;
 	console = true;
@@ -22,7 +30,14 @@ Game::Game(void) {
 	mainwindow = NULL;
 	instance = this;
 	camera = NULL;
+	ground = NULL;
 	srand(time(0));
+
+	glm::vec3 v = glm::vec3(0, 0, -1);
+	glm::quat q;
+
+	camera = new Camera();
+	AddChild(camera);
 }
 
 Game::~Game(void) {
@@ -35,6 +50,11 @@ Game::~Game(void) {
 Camera * Game::GetCamera()
 {
 	return camera;
+}
+
+Ground * Game::GetGround()
+{
+	return ground;
 }
 
 bool Game::Initialise() {
@@ -94,8 +114,7 @@ bool Game::Initialise() {
 
 	SDL_GL_SetSwapInterval(1);
     running = true;
-	camera = new Camera();
-	AddChild(camera);
+	
 
 	// Add three lights!
 	/*
@@ -162,6 +181,28 @@ bool Game::Run() {
     return 0;
 }
 
+void Game::SetGround(Ground * ground)
+{
+	if (this->ground != NULL)
+	{
+		children.remove(this->ground);
+		SafeDelete(this->ground);
+	}
+	this->ground = ground;
+	AddChild(ground);
+}
+
+void Game::SetCamera(Camera * camera)
+{
+	if (this->camera != NULL)
+	{
+		children.remove(this->camera);
+		SafeDelete(this->camera);
+	}
+	this->camera = camera;
+	AddChild(camera);
+}
+
 void Game::Update(float timeDelta) {
 	// Check for messages
 	SDL_Event event;
@@ -186,7 +227,7 @@ void Game::Update(float timeDelta) {
 
 void Game::PreDraw()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	
+	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

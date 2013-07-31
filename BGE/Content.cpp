@@ -184,8 +184,8 @@ GLuint Content::LoadTexture(std::string textureName)
 	}
 
 	string path = Content::prefix + textureName + ".bmp";	
-	GLuint texture;
 	// Now the texture...
+	GLuint texture;
 	SDL_Surface *surface;	// This surface will tell us the details of the image
 	surface = SDL_LoadBMP(path.c_str());
 	if (surface == NULL) {

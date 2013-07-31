@@ -1,5 +1,6 @@
 #include "GameComponent.h"
 #include "Model.h"
+#include "Game.h"
 #include <iostream>
 #include <cmath>
 #include <gtx\constants.hpp>
@@ -31,6 +32,7 @@ GameComponent::GameComponent(void)
 	parent = NULL;
 	initialised = false;
 	scale = glm::vec3(1.0, 1.0, 1.0);
+	attachedToParent = true;
 }
 
 GameComponent::~GameComponent(void)
@@ -65,6 +67,15 @@ void GameComponent::Draw()
 	}
 }
 
+void GameComponent::SafeDelete(void * p)
+{
+	if (p != NULL)
+	{
+		delete p;
+		p = NULL;
+	}
+}
+
 void GameComponent::Cleanup()
 {
 	// Cleanup all the children
@@ -78,7 +89,7 @@ void GameComponent::Cleanup()
 
 void GameComponent::Update(float timeDelta) {
 	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
-	if (parent != NULL)
+	if (parent != NULL && attachedToParent)
 	{
 		 world = parent->world * world;
 	}
@@ -113,11 +124,12 @@ void GameComponent::Fly(float units)
 void GameComponent::Pitch(float angle)
 {
 	// A pitch is a rotation around the right vector
-	glm::quat rot = glm::angleAxis(angle, basisRight);
+	glm::quat rot = glm::angleAxis(angle, right);
 
 	orientation = rot * orientation;
-	look = basisLook * orientation;
-	up = basisUp;
+	
+	look = RotateVector(basisLook, orientation);
+	up = RotateVector(basisUp, orientation);
 
 	/*
 	glm::mat4 pitch;
@@ -140,8 +152,12 @@ void GameComponent::Yaw(float angle)
 	glm::quat rot = glm::angleAxis(angle, basisUp);
 
 	orientation = rot * orientation;
-	look = basisLook * orientation;
-	right = basisRight * orientation;
+
+	look = RotateVector(basisLook, orientation);
+	right = RotateVector(basisRight, orientation);
+
+	//look = basisLook * orientation;
+	//right = basisRight * orientation;
 
 
 	/*

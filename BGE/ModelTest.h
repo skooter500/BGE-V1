@@ -4,10 +4,9 @@
 
 namespace BGE
 {
-	class ModelTest :
-		public Game
+	class ModelTest :public Game
 	{
-	private:
+		private:
 		BGE::Model * model;
 	public:
 		ModelTest(void);

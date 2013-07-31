@@ -29,7 +29,10 @@ namespace BGE
 		GLuint programID;
 		GLuint diffusePerVertexID;
 		GLuint mID, vID, pID, nID;
+		GLuint mvpID;
+
 		void CalculateBounds();
+		void UpdateFromParent();
 	public:
 		Model();
 		~Model();

@@ -9,8 +9,8 @@
 #include <gl/gl.h>
 #include <gl/glu.h>
 #include<glm.hpp>
-#include <gtc/matrix_transform.hpp>
 #include<list>
+#include<string>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
@@ -23,10 +23,8 @@ namespace BGE
 	private:		
 		void RotateVectors();
 	protected:
-		bool initialised;
-		
+		bool initialised;	
 	public:
-
 		GameComponent(void);
 		~GameComponent(void);
 
@@ -44,10 +42,12 @@ namespace BGE
 		glm::vec3 velocity;
 		glm::mat4 world;
 		glm::quat orientation;
-
+		bool attachedToParent;
 		glm::vec3 ambient;
 		glm::vec3 specular;
 		glm::vec3 diffuse; // Will use either this of the array of colours depending on the drawMode setting
+
+		std::string id;
 
 		enum draw_modes {materials, textured, single_material};
 
@@ -69,5 +69,7 @@ namespace BGE
 		void Roll(float angle);  // rotate on look vector
 		void AddChild(GameComponent * child);
 		std::list<GameComponent *> * GetChildren();
+
+		void SafeDelete(void * p);
 	};
 }

@@ -4,6 +4,8 @@
 
 using namespace BGE;
 using namespace std;
+#include <SDL.h>
+//#include <SDL_ttf.h>
 
 Camera::Camera(void):GameComponent()
 {
@@ -33,6 +35,12 @@ bool Camera::Initialise()
 		,Game::Instance()->GetHeight() / 2);
 	SDL_ShowCursor(SDL_DISABLE); 
 	return GameComponent::Initialise();
+}
+
+void Camera::Draw()
+{
+	//sdl_prin
+	GameComponent::Draw();
 }
 
 void Camera::Update(float timeDelta) {
@@ -73,8 +81,8 @@ void Camera::Update(float timeDelta) {
 	midX = Game::Instance()->GetWidth() / 2;
 	midY = Game::Instance()->GetHeight() / 2;
 	float yaw, pitch;
-	yaw = x - midX;
-	pitch = y - midY;
+	yaw = midX - x;
+	pitch = midY - y;
 
 	float scale = 0.1f;
 	if (yaw != 0)

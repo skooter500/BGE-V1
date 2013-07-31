@@ -8,8 +8,9 @@ Ground::Ground(void):GameComponent()
 {
 	width = 500;
 	height = 500;
-	ambient = glm::vec3(0.2f, 0.2f, 0.2f);
-	specular = glm::vec3(0.0f, 0.0f, 0.0f);
+	// Diffuse will come from the texture
+	ambient = glm::vec3(0.2f, 0.2, 0.2f);
+	specular = glm::vec3(0,0,0);
 }
 
 
@@ -87,6 +88,7 @@ void Ground::Draw()
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetView()[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetProjection()[0][0]);
 	glUniform3f(specularID, specular.r, specular.g, specular.b);
+	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
 
 
 	glm::mat4 MV = Game::Instance()->GetCamera()->GetView() * world;
@@ -135,10 +137,10 @@ void Ground::Draw()
 	);
 
 	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, 6); // 12*3 indices starting at 0 -> 12 triangles
-
+	glDrawArrays(GL_TRIANGLES, 0, 6); 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 	
 	// Dont forget to call the superclass draw so that OpenGL Swap Buffers can be called
 	GameComponent::Draw();

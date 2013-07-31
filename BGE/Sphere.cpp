@@ -7,9 +7,10 @@ using namespace BGE;
 Sphere::Sphere(float radius)
 {
 	Model * model = Content::LoadModel("sphere");
-	drawMode = Model::draw_modes::single_material;
+	model->drawMode = drawMode = Model::draw_modes::single_material;
+	
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
-	specular = glm::vec3(1,1,1);
+	specular = glm::vec3(0.2f, 0.2f, 0.2f);
 	AddChild(model);
 	scale = glm::vec3(radius, radius, radius);
 }

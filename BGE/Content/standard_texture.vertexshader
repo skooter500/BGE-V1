@@ -9,8 +9,6 @@ out vec3 varyingNormalDirection;  // surface normal vector in world space
 
 uniform vec3 ambient;
 uniform vec3 specular;
-uniform vec3 diffuse;
-uniform bool diffusePerVertex;
 
 uniform mat4 m, v, p;
 uniform mat3 n;

@@ -10,6 +10,7 @@
 #include <gtc/matrix_transform.hpp>
 #include<vector>
 #include "Camera.h"
+#include "Ground.h"
 
 namespace BGE
 {
@@ -23,6 +24,8 @@ namespace BGE
 		glm::vec3 spotDirection;
 	};
 
+	glm::vec3 RotateVector(glm::vec3, glm::quat);
+
 	class Game:
 		public GameComponent
 	{
@@ -34,6 +37,7 @@ namespace BGE
 		int width, height;
 		static Game * instance;
 		Camera * camera;
+		Ground * ground;
 		const Uint8 * keyState;
 		
 	public:
@@ -48,6 +52,9 @@ namespace BGE
 		void Cleanup();
 		static Game * Instance();
 		Camera * GetCamera();
+		void SetCamera(Camera * ground);
+		Ground * GetGround();
+		void SetGround(Ground * ground);
 		const Uint8 * GetKeyState();
 		SDL_Window * GetMainWindow();
 		int GetWidth();

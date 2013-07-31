@@ -8,9 +8,9 @@ Box::Box(float width, float height, float depth):GameComponent()
 {
 	
 	Model * model = Content::LoadModel("cube");
-	drawMode = Model::draw_modes::single_material;
+	model->drawMode = drawMode = Model::draw_modes::single_material;
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
-	specular = glm::vec3(1,1,1);
+	specular = glm::vec3(0,0,0);
 	ambient = glm::vec3(0.2f,0.2f,0.2f);
 	AddChild(model);
 	scale = glm::vec3(width, height, depth);
@@ -18,7 +18,7 @@ Box::Box(float width, float height, float depth):GameComponent()
 
 void Box::Update(float timeDelta)
 {
-	Yaw(timeDelta * 100.0f);
+	//Yaw(timeDelta * 100.0f);
 	GameComponent::Update(timeDelta);
 }
 

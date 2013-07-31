@@ -44,6 +44,8 @@ bool Model::Initialise()
 	vID = glGetUniformLocation(programID,"v");
 	pID = glGetUniformLocation(programID,"p");
 	nID = glGetUniformLocation(programID,"n");
+	//mvpID = glGetUniformLocation(programID,"MVP");
+
 	ambientID = glGetUniformLocation(programID,"ambient");
 	specularID = glGetUniformLocation(programID,"specular");
 	diffuseID = glGetUniformLocation(programID,"diffuse");
@@ -72,28 +74,28 @@ void Model::CalculateBounds()
 	std::vector<glm::vec3>::iterator it = vertices.begin();
 	while (it != vertices.end())
 	{
-		if (boundingBox.min.x < it->x)
+		if (it->x < boundingBox.min.x)
 		{
 			boundingBox.min.x = it->x;
 		}
-		if (boundingBox.min.y < it->y)
+		if (it->y < boundingBox.min.y)
 		{
 			boundingBox.min.y = it->y;
 		}
-		if (boundingBox.min.z < it->z)
+		if (it->z < boundingBox.min.z)
 		{
 			boundingBox.min.z = it->z;
 		}
 
-		if (boundingBox.max.x > it->x)
+		if (it->x > boundingBox.max.x)
 		{
 			boundingBox.max.x = it->x;
 		}
-		if (boundingBox.max.y > it->y)
+		if (it->y > boundingBox.max.y)
 		{
 			boundingBox.max.y = it->y;
 		}
-		if (boundingBox.max.z > it->z)
+		if (it->z > boundingBox.max.z)
 		{
 			boundingBox.max.z = it->z;
 		}
@@ -101,8 +103,18 @@ void Model::CalculateBounds()
 	}
 }
 
+void Model::UpdateFromParent()
+{
+	world = parent->world;
+	diffuse = parent->diffuse;
+	specular = parent->specular;
+	ambient = parent->ambient;
+	drawMode = parent->drawMode;
+}
+
 void Model::Draw()
 {
+	UpdateFromParent(); // Necessary beuase models are reusable
 	glUseProgram(programID);
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
 	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
@@ -120,7 +132,6 @@ void Model::Draw()
 	}
 	glUniform3f(specularID, specular.r, specular.g, specular.b);
 	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
-
 
 	glm::mat4 MV = Game::Instance()->GetCamera()->GetView() * world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));

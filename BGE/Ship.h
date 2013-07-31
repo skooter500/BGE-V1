@@ -16,6 +16,7 @@ namespace BGE
 
 		bool Initialise();
 		void Update(float timeDelta);
+		void Draw();
 
 		float mass;
 		glm::vec3 velocity, force, acceleration;
