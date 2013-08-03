@@ -14,6 +14,7 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
+#include "BGEException.h"
 
 namespace BGE 
 {

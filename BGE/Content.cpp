@@ -9,7 +9,6 @@ map<string, GLuint> Content::textures = map<string, GLuint>();
 map<string, GLuint> Content::shaders = map<string, GLuint>();	
 
 Model * Content::LoadModel(string name) {
-
 	// First check to see if it's already loaded and if so, just return it
 	map<string, Model *>::iterator mit = Content::models.find(name);
 	if (mit != Content::models.end())
@@ -25,7 +24,7 @@ Model * Content::LoadModel(string name) {
 	map<string, glm::vec3> diffuse;
 	bool hasUVs = false;
 
-	// First load the materials
+	// First load the materialss
 	string materialsFileName = Content::prefix + name + ".mtl";
 	cout << "Loading materials file: " << materialsFileName << endl;
 	std::ifstream is;
@@ -229,12 +228,13 @@ GLuint Content::LoadTexture(std::string textureName)
 	glBindTexture(GL_TEXTURE_2D, texture);
  	glTexImage2D(GL_TEXTURE_2D, 0,nOfColors, surface->w, surface->h, 0, texture_format, GL_UNSIGNED_BYTE, surface->pixels);
  
-	// Generate mipmaps, by the way.
-	glGenerateMipmap(GL_TEXTURE_2D);
+	
 	// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	// Generate mipmaps, by the way.
+	glGenerateMipmap(GL_TEXTURE_2D);
 
 	//GLfloat maxAniso = 0.0f;
 	//glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAniso);

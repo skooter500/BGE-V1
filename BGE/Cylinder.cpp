@@ -4,7 +4,7 @@
 
 using namespace BGE;
 
-Cylinder::Cylinder(float height, float radius)
+Cylinder::Cylinder(float radius, float height)
 {
 	Model * model = Content::LoadModel("cyl");
 	drawMode = Model::draw_modes::single_material;

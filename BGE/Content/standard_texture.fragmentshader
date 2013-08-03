@@ -3,7 +3,7 @@
 in vec4 position;  // position of the vertex (and fragment) in world space
 in vec3 varyingNormalDirection;  // surface normal vector in world space
 uniform mat4 m, v, p;
-uniform mat4 v_inv;
+mat4 v_inv;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D myTextureSampler;
@@ -107,6 +107,7 @@ void main()
 	fogParams.vFogColor = vec4(0.0, 0.0, 0.0, 1.0); 
 	fogParams.iEquation = 0; 
  
+ v_inv = inverse(v);
   vec3 normalDirection = normalize(varyingNormalDirection);
   vec3 viewDirection = normalize(vec3(v_inv * vec4(0.0, 0.0, 0.0, 1.0) - position));
   vec3 lightDirection;

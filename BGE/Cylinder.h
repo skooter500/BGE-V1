@@ -8,7 +8,7 @@ namespace BGE
 		public GameComponent
 	{
 	public:
-		Cylinder(float height, float radius);
+		Cylinder(float radius, float height);
 		~Cylinder(void);
 	};
 }

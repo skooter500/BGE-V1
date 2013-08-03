@@ -10,7 +10,7 @@ Sphere::Sphere(float radius)
 	model->drawMode = drawMode = Model::draw_modes::single_material;
 	
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
-	specular = glm::vec3(0.2f, 0.2f, 0.2f);
+	specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	AddChild(model);
 	scale = glm::vec3(radius, radius, radius);
 }

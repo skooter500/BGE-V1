@@ -83,6 +83,7 @@ void GameComponent::Cleanup()
 	while (it != children.end())
 	{
 		(*it ++)->Cleanup();	    	
+		SafeDelete(* it);
 	}
 }
 

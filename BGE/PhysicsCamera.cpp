@@ -3,10 +3,11 @@
 #include "PhysicsGame1.h"
 #include "Box.h"
 #include <iostream>
+#include <sstream>
 
 using namespace BGE;
 
-PhysicsCamera::PhysicsCamera():PhysicsComponent(NULL, NULL)
+PhysicsCamera::PhysicsCamera():PhysicsComponent()
 {
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
@@ -43,36 +44,19 @@ void PhysicsCamera::Update(float timeDelta)
 	if ((keyState[SDL_SCANCODE_SPACE]) && (elapsed > timeToPass))
 	{
 		glm::vec3 pos = parent->position + (parent->look * 5.0f);
-		Box * box = new Box(1,1,1);
-		btCollisionShape * boxShape = new btBoxShape(btVector3(1, 1, 1) * 0.5);
-		btScalar mass = 1;
-		btVector3 fallInertia(0,0,0);
-		boxShape->calculateLocalInertia(mass,fallInertia);
-
-		box->position = pos;
-		btQuaternion q = btQuaternion(RandomFloat(), RandomFloat(), RandomFloat());
-		q.normalize();
-		btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(q,btVector3(pos.x,pos.y,pos.z)));
-			
-		btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass,boxMotionState, boxShape, fallInertia);
-		btRigidBody * boxBody = new btRigidBody(fallRigidBodyCI);
-		float force = 5000.0f;
-		boxBody->applyCentralForce(GLToBtVector(parent->look) * force);
-		PhysicsGame1 * game = (PhysicsGame1 * ) Game::Instance();
-		game->dynamicsWorld->addRigidBody(boxBody);
-
-		BGE::PhysicsComponent * boxComponent = new PhysicsComponent(boxShape, boxBody);
-		boxComponent->scale = box->scale;
-		box->AddChild(boxComponent);
-		game->AddChild(box);
-		boxBody->setUserPointer(box);
+		glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
+		glm::normalize(q);
+		PhysicsComponent * physicsComponent = game->CreateBox(1,1,1, pos, q);
+		
+		float force = 1000.0f;
+		physicsComponent->rigidBody->applyCentralForce(GLToBtVector(parent->look) * force);
 		elapsed = 0.0f;
 	}
 	else
 	{
 		elapsed += timeDelta;
 	}
-
+	string what = "Nothing";
 	// Handle the gravity gun
 	if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
 	{
@@ -97,9 +81,8 @@ void PhysicsCamera::Update(float timeDelta)
 		}
 		if (pickedUp != NULL)
 		{
-			printf("Picked something up!!\n");
-            float powerfactor = 6.0f; // Higher values causes the targets moving faster to the holding point.
-            float maxVel = 5.0f;      // Lower values prevent objects flying through walls.
+			float powerfactor = 4.0f; // Higher values causes the targets moving faster to the holding point.
+            float maxVel = 3.0f;      // Lower values prevent objects flying through walls.
 
             // Calculate the hold point in front of the camera
 			glm::vec3 holdPos = parent->position + (parent->look * dist);
@@ -115,13 +98,15 @@ void PhysicsCamera::Update(float timeDelta)
             }
 			pickedUp->rigidBody->setLinearVelocity(GLToBtVector(v));    
 			pickedUp->rigidBody->activate();		
+			what = pickedUp->id;	
 		}
 	}
 	else
-	{
-		printf("Picked nothing up!!\n");
-            
+	{    
 		pickedUp = NULL;
 	}
+	stringstream ss;
+	ss << "Picked up: " << what;
+	game->PrintText(ss.str());
 }
 

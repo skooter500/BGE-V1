@@ -9,6 +9,7 @@
 #include<glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include<vector>
+#include <SDL_ttf.h>
 #include "Camera.h"
 #include "Ground.h"
 
@@ -24,13 +25,20 @@ namespace BGE
 		glm::vec3 spotDirection;
 	};
 
+	struct PrintMessage
+	{
+		PrintMessage(string m, glm::vec2 p):message(m), position(p) {}
+		string message;
+		glm::vec2 position;
+	};
+
 	glm::vec3 RotateVector(glm::vec3, glm::quat);
+	void Log(string message);
 
 	class Game:
 		public GameComponent
 	{
-	private:
-		SDL_Window * mainwindow; /* Our window handle */
+	private:	
 		SDL_GLContext maincontext; /* Our opengl context handle */
 		bool running;
 		bool console;
@@ -39,7 +47,12 @@ namespace BGE
 		Camera * camera;
 		Ground * ground;
 		const Uint8 * keyState;
-		
+		TTF_Font *font; // Declare a SDL_ttf font 
+
+		std::vector<PrintMessage> messages;
+		glm::vec2 lastPrintPosition;
+		float fontSize;
+		void Print(string message, glm::vec2);
 	public:
 		Game(void);
 		~Game(void);
@@ -61,7 +74,12 @@ namespace BGE
 		int GetHeight();		
 		bool Run();
 
+		void PrintText(string message, glm::vec2 position);
+		void PrintText(string message);
+
 		std::vector<LightSource> lights;
+
+		SDL_Window * mainwindow; /* Our window handle */
 	};
 }
 

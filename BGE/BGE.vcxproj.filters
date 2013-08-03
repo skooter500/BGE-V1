@@ -74,11 +74,14 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MotionState.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BGEException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsCamera.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,8 +133,11 @@
     <ClInclude Include="PhysicsComponent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsCamera.h" />
     <ClInclude Include="MotionState.h" />
+    <ClInclude Include="BGEException.h" />
+    <ClInclude Include="PhysicsCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
@@ -180,6 +186,12 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Content\standard_texture.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TextShader.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TextShader.vertexshader">
       <Filter>Content</Filter>
     </None>
   </ItemGroup>

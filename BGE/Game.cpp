@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <ctime>
+#include <SDL_ttf.h>
 #include "Content.h"
 
 using namespace BGE;
@@ -19,7 +20,13 @@ glm::vec3 BGE::RotateVector(glm::vec3 v, glm::quat q)
 	glm::quat qinv = glm::inverse(q);
 	glm::quat w = glm::quat(0, v.x, v.y, v.z);
 	w = q * w * qinv;
+
 	return glm::vec3(w.x, w.y, w.z);
+}
+
+void BGE::Log(string message)
+{
+	printf("%s\n", message.c_str());
 }
 
 Game::Game(void) {
@@ -33,9 +40,8 @@ Game::Game(void) {
 	ground = NULL;
 	srand(time(0));
 
-	glm::vec3 v = glm::vec3(0, 0, -1);
-	glm::quat q;
-
+	lastPrintPosition = glm::vec2(0,0);
+	fontSize = 14;
 	camera = new Camera();
 	AddChild(camera);
 }
@@ -68,8 +74,6 @@ bool Game::Initialise() {
 		setvbuf( stdout, NULL, _IONBF, 0 );
 	}
 
-	
-
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return false;
 	}
@@ -86,8 +90,7 @@ bool Game::Initialise() {
     mainwindow = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	maincontext = SDL_GL_CreateContext(mainwindow);
- 
- 
+	
     /* This makes our buffer swap syncronized with the monitor's vertical refresh */
     SDL_GL_SetSwapInterval(1);
 
@@ -113,51 +116,27 @@ bool Game::Initialise() {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	SDL_GL_SetSwapInterval(1);
+
+	if (TTF_Init() < 0)
+	{
+		throw BGEException("Could not init TTF");
+	}// Initilize SDL_ttf
+	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
+
     running = true;
 	
-
-	// Add three lights!
-	/*
-	LightSource light0;
-	light0.position = glm::vec4(0.52, 0.57, 0.62, 0.0);
-	light0.diffuse = glm::vec4(1, 0.96, 0.81, 1.0);
-	light0.specular = glm::vec4(1, 0.96, 0.81, 1.0);
-	light0.constantAttenuation = 0.0f;
-	light0.linearAttenuation = 1.0;
-	light0.quadraticAttenuation = 0.0;
-	light0.spotCutoff = 180.0;
-	light0.spotExponent = 0.0;
-	light0.spotDirection = glm::vec3(0.0, 0.0, 0.0);
-
-	lights.push_back(light0);
-
-	LightSource light1;
-	light1.position = glm::vec4(-0.71, -0.34, -0.60, 0.0);
-	light1.diffuse = glm::vec4(0.96, 0.76, 0.40, 1.0);
-	light1.specular = glm::vec4(0, 0, 0, 1.0);
-	light1.constantAttenuation = 0.0f;
-	light1.linearAttenuation = 1.0;
-	light1.quadraticAttenuation = 0.0;
-	light1.spotCutoff = 180.0;
-	light1.spotExponent = 10.0;
-	light1.spotDirection = glm::vec3(0.0, 1.0, 0.0);
-
-	lights.push_back(light1);
-			
-	LightSource light2;
-	light1.position = glm::vec4(-0.45, 0.76, -0.45, 0.0);
-	light1.diffuse = glm::vec4(0.32, 0.36, 0.39, 1.0);
-	light1.specular = glm::vec4(0.32, 0.36, 0.39, 1.0);
-	light1.constantAttenuation = 0.0f;
-	light1.linearAttenuation = 1.0;
-	light1.quadraticAttenuation = 0.0;
-	light1.spotCutoff = 180.0;
-	light1.spotExponent = 10.0;
-	light1.spotDirection = glm::vec3(0.0, 1.0, 0.0);
-	lights.push_back(light2);
-	*/
-
 	return GameComponent::Initialise();
+}
+
+void Game::PrintText(string message, glm::vec2 position)
+{
+	messages.push_back(PrintMessage(message, position));
+}
+
+void Game::PrintText(string message)
+{
+	messages.push_back(PrintMessage(message, lastPrintPosition));
+	lastPrintPosition.y += 20;
 }
 
 bool Game::Run() {
@@ -232,8 +211,17 @@ void Game::PreDraw()
 }
 
 void Game::PostDraw()
-{
-	SDL_GL_SwapWindow(mainwindow);
+{	
+	// Printing has to be done last, so we batch up the print messages
+	vector<PrintMessage>::iterator it = messages.begin();
+	while (it != messages.end())
+	{
+		Print(it->message, it->position);
+		it ++;
+	}
+	messages.clear();
+	lastPrintPosition.y = 0;
+	SDL_GL_SwapWindow(mainwindow);	
 }
 
 void Game::Cleanup () {
@@ -273,4 +261,129 @@ int Game::GetWidth()
 int Game::GetHeight()
 {
 	return height;
+}
+
+void Game::Print(string message, glm::vec2 position)
+{
+	std::vector<glm::vec2> vertices;
+	std::vector<glm::vec2> uvs;
+
+	
+	SDL_Color foregroundColor = { 255, 255, 255 }; 
+	SDL_Color backgroundColor = { 0, 0, 0 }; 
+	SDL_Rect TextLocation;
+	GLuint texture;
+	GLint  colors;
+	GLenum texture_format;
+	SDL_Surface * surface = TTF_RenderText_Blended(font, message.c_str(), foregroundColor);
+	colors = surface->format->BytesPerPixel;
+	if (colors == 4) {
+		if (surface->format->Rmask == 0x000000ff) {
+			texture_format = GL_RGBA;
+		}
+		else {
+			texture_format = GL_BGRA;
+		}
+	} else if (colors == 3) {
+		if (surface->format->Rmask == 0x000000ff) {
+				texture_format = GL_RGB;
+		}
+		else {
+			texture_format = GL_BGR;
+		}
+	} else {
+		printf("warning: the image is not truecolor..  this will probably break\n");
+	}
+
+	float x, y;
+	float width = surface->w;
+	float height = surface->h;
+
+	x = position.x;
+	y = (this->height - height) - position.y;
+	
+	
+	vertices.push_back(glm::vec2(x + width,y));
+	vertices.push_back(glm::vec2(x,y + height));
+	vertices.push_back(glm::vec2(x,y));
+	
+	vertices.push_back(glm::vec2(x + width,y + height));
+	vertices.push_back(glm::vec2(x,y + height));
+	vertices.push_back(glm::vec2(x + width,y));
+	
+	
+	uvs.push_back(glm::vec2(1, 1));
+	uvs.push_back(glm::vec2(0, 0));
+	uvs.push_back(glm::vec2(0, 1));
+
+	uvs.push_back(glm::vec2(1, 0));	
+	uvs.push_back(glm::vec2(0, 0));
+	uvs.push_back(glm::vec2(1, 1));
+	
+	
+	GLuint programID = Content::LoadShaderPair("TextShader");
+	glUseProgram(programID);
+	// Set our "myTextureSampler" sampler to user Texture Unit 0
+	GLuint textureSampler  = glGetUniformLocation(programID, "myTextureSampler");
+
+	//
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture); 
+	glTexImage2D(GL_TEXTURE_2D, 0, colors, surface->w, surface->h, 0, texture_format, GL_UNSIGNED_BYTE, surface->pixels);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
+	// Bind our texture in Texture Unit 0
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// Set our "myTextureSampler" sampler to user Texture Unit 0
+	glUniform1i(textureSampler, 0);
+	
+	GLuint vertexbuffer;
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);	
+		
+	GLuint uvbuffer;
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glVertexAttribPointer(
+		0,                  // attribute
+		2,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+
+	// 1st attribute buffer : normals
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glVertexAttribPointer(
+		1,                                // attribute
+		2,                                // size
+		GL_FLOAT,                         // type
+		GL_TRUE,                         // normalized?
+		0,                                // stride
+		(void*)0                          // array buffer offset
+	);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	// Draw call
+	glDrawArrays(GL_TRIANGLES, 0, vertices.size() );
+
+	glDisable(GL_BLEND);
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+
+	glDeleteTextures(1, &texture);
+	glDeleteBuffers(1, &vertexbuffer);
+	glDeleteBuffers(1, &uvbuffer);
+	SDL_FreeSurface(surface);
 }

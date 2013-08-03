@@ -1,16 +1,22 @@
 #include "Camera.h"
 #include "Game.h"
+
 #include <iostream>
+#include <string>
+#include <sstream>
 
 using namespace BGE;
 using namespace std;
 #include <SDL.h>
-//#include <SDL_ttf.h>
+
+
 
 Camera::Camera(void):GameComponent()
 {
 	projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);		
 	position = glm::vec3(0.0f, 10.0f, 10.0f);
+
+	
 }
 
 Camera::~Camera(void)
@@ -37,21 +43,26 @@ bool Camera::Initialise()
 	return GameComponent::Initialise();
 }
 
+float fps = 0;;
+
 void Camera::Draw()
 {
-	//sdl_prin
+	stringstream msg;
+	msg << "FPS: " << (int) fps;
+	Game::Instance()->PrintText(msg.str());
 	GameComponent::Draw();
 }
 
 void Camera::Update(float timeDelta) {
 	
+	fps = 1.0f / timeDelta;
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
 
 	float moveSpeed = speed;
 
 	if (keyState[SDL_SCANCODE_LSHIFT])
 	{
-		moveSpeed *= 3.0f;
+		moveSpeed *= 10.0f;
 	}
 	
 

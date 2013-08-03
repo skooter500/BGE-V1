@@ -2,7 +2,14 @@
 
 using namespace BGE;
 
-PhysicsComponent::PhysicsComponent(btCollisionShape * shape, btRigidBody * rigidBody)
+PhysicsComponent::PhysicsComponent()
+{
+	shape = NULL;
+	rigidBody = NULL;
+	motionState = NULL;
+}
+
+PhysicsComponent::PhysicsComponent(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
 {
 	this->shape = shape;
 	this->rigidBody = rigidBody;
@@ -10,17 +17,17 @@ PhysicsComponent::PhysicsComponent(btCollisionShape * shape, btRigidBody * rigid
 	{
 		this->rigidBody->setUserPointer(this);
 	}
+	this->motionState = motionState;
 	attachedToParent = false;
 }
 
-void PhysicsComponent::SetPhysicsStuff(btCollisionShape * shape, btRigidBody * rigidBody)
+void PhysicsComponent::SetPhysicsStuff(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
 {
 	this->shape = shape;
 	this->rigidBody = rigidBody;
 	this->rigidBody->setUserPointer(this);
+	this->motionState = motionState;
 }
-
-
 PhysicsComponent::~PhysicsComponent(void)
 {
 }
@@ -60,4 +67,13 @@ void PhysicsComponent::Update(float timeDelta)
 	parent->position = position;
 	parent->orientation = orientation;
 	parent->world = world;
+}
+
+void PhysicsComponent::Cleanup()
+{
+	SafeDelete(rigidBody);
+	SafeDelete(shape);
+	SafeDelete(motionState);
+	GameComponent::Cleanup();
+
 }
