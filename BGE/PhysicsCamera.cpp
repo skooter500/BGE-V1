@@ -48,7 +48,7 @@ void PhysicsCamera::Update(float timeDelta)
 		glm::normalize(q);
 		PhysicsComponent * physicsComponent = game->CreateBox(1,1,1, pos, q);
 		
-		float force = 1000.0f;
+		float force = 5000.0f;
 		physicsComponent->rigidBody->applyCentralForce(GLToBtVector(parent->look) * force);
 		elapsed = 0.0f;
 	}

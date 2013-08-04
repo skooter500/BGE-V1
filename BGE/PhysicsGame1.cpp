@@ -6,6 +6,7 @@
 #include "Cylinder.h"
 #include "Ship.h"
 #include "Ground.h"
+#include "Person.h"
 #include <btBulletDynamicsCommon.h>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
@@ -161,7 +162,7 @@ PhysicsComponent * PhysicsGame1::CreateVehicle(glm::vec3 position)
     PhysicsComponent * chassis = CreateBox(width, height, length, position, glm::quat());
             
     PhysicsComponent * wheel;
-	glm::quat q =  glm::angleAxis(glm::degrees(glm::half_pi<float>()), glm::vec3(1, 0, 0));
+	glm::quat q =  glm::angleAxis(glm::half_pi<float>(), glm::vec3(1, 0, 0));
 
 	glm::vec3 offset;
 	btHingeConstraint * hinge;
@@ -226,10 +227,14 @@ bool PhysicsGame1::Initialise()
     dynamicsWorld->setGravity(btVector3(0,-9.8,0));
 
 	CreateGroundPhysics();
-	CreateWall();
 	CreateCameraPhysics();
+	Person * person = new Person();
+	AddChild(person);
 
-	glm::quat q =  glm::angleAxis(glm::degrees(glm::half_pi<float>()), glm::vec3(1, 0, 0)); 
+
+	/*
+	CreateWall();
+	glm::quat q =  glm::angleAxis(glm::half_pi<float>(), glm::vec3(1, 0, 0)); 
 	//CreateCylinder(5, 1, glm::vec3(5,15,5), q);
 
 	// Now some constraints
@@ -248,6 +253,7 @@ bool PhysicsGame1::Initialise()
 	Ship * ship = new Ship();
 	ship->position = glm::vec3(5, 20, 5);
 	AddChild(ship);
+	*/
 	
 	if (!Game::Initialise()) {
 		return false;

@@ -1,4 +1,5 @@
 #pragma once
+
 #include<glm.hpp>
 #include<glm.hpp>
 #include<sdl.h>
@@ -15,6 +16,8 @@
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
 #include "BGEException.h"
+
+
 
 namespace BGE 
 {
