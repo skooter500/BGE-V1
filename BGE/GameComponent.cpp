@@ -29,26 +29,17 @@ GameComponent::GameComponent(void)
 	orientation = glm::quat(); // Identity
 	moved = true;
 	speed = 10.0f;
-	parent = NULL;
 	initialised = false;
 	scale = glm::vec3(1.0, 1.0, 1.0);
 	attachedToParent = true;
-}
-
-GameComponent::~GameComponent(void)
-{
-	std::list<GameComponent *>::iterator it = children.begin();
-	while (it != children.end())
-	{
-		delete *it;		
-	}
+	id = "Nothing";
 }
 
 
 bool GameComponent::Initialise()
 {
 	// Initialise all the children
-	std::list<GameComponent *>::iterator it = children.begin();
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{
 		(*it ++)->initialised = (*it)->Initialise();	
@@ -59,7 +50,7 @@ bool GameComponent::Initialise()
 void GameComponent::Draw()
 {
 	// Draw all the children
-	std::list<GameComponent *>::iterator it = children.begin();
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{
 		(*it)->parent = this;
@@ -67,23 +58,14 @@ void GameComponent::Draw()
 	}
 }
 
-void GameComponent::SafeDelete(void * p)
-{
-	if (p != NULL)
-	{
-		delete p;
-		p = NULL;
-	}
-}
 
 void GameComponent::Cleanup()
 {
 	// Cleanup all the children
-	std::list<GameComponent *>::iterator it = children.begin();
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{
 		(*it ++)->Cleanup();	    	
-		SafeDelete(* it);
 	}
 }
 
@@ -97,7 +79,7 @@ void GameComponent::Update(float timeDelta) {
 	moved = false;
 
 	// Update all the children
-	std::list<GameComponent *>::iterator it = children.begin();
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{	
 		(*it ++)->Update(timeDelta);
@@ -186,18 +168,17 @@ void GameComponent::RotateVectors()
 
 void GameComponent::Roll(float angle)
 {
-	
 	moved = true;
 }
 
-void GameComponent::AddChild(GameComponent * child)
+void GameComponent::AddChild(shared_ptr<GameComponent> child)
 {
 	child->parent = this;
 	children.push_back(child);
 }
 
 
-std::list<GameComponent *> * GameComponent::GetChildren()
+std::list<std::shared_ptr<GameComponent>> * GameComponent::GetChildren()
 {
 	return & children;
 }

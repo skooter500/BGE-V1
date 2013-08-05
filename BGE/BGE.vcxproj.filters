@@ -77,13 +77,19 @@
     <ClCompile Include="MotionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BGEException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicMotionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,12 +142,22 @@
     <ClInclude Include="PhysicsComponent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="MotionState.h" />
-    <ClInclude Include="BGEException.h" />
     <ClInclude Include="PhysicsCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h" />
+    <ClInclude Include="Person.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsFactory.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicMotionState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">

@@ -44,8 +44,8 @@ namespace BGE
 		bool console;
 		int width, height;
 		static Game * instance;
-		Camera * camera;
-		Ground * ground;
+		shared_ptr<Camera> camera;
+		shared_ptr<Ground> ground;
 		const Uint8 * keyState;
 		TTF_Font *font; // Declare a SDL_ttf font 
 
@@ -64,10 +64,10 @@ namespace BGE
 		void PostDraw();
 		void Cleanup();
 		static Game * Instance();
-		Camera * GetCamera();
-		void SetCamera(Camera * ground);
-		Ground * GetGround();
-		void SetGround(Ground * ground);
+		shared_ptr<Camera> GetCamera();
+		void SetCamera(shared_ptr<Camera> ground);
+		shared_ptr<Ground> GetGround();
+		void SetGround(shared_ptr<Ground> ground);
 		const Uint8 * GetKeyState();
 		SDL_Window * GetMainWindow();
 		int GetWidth();
@@ -76,8 +76,6 @@ namespace BGE
 
 		void PrintText(string message, glm::vec2 position);
 		void PrintText(string message);
-
-		std::vector<LightSource> lights;
 
 		SDL_Window * mainwindow; /* Our window handle */
 	};

@@ -4,13 +4,13 @@
 using namespace BGE;
 
 string Content::prefix = "Content/";
-map<string, Model *> Content::models = map<string, Model *>();
+map<string, shared_ptr<Model>> Content::models = map<string, shared_ptr<Model>>();
 map<string, GLuint> Content::textures = map<string, GLuint>();
 map<string, GLuint> Content::shaders = map<string, GLuint>();	
 
-Model * Content::LoadModel(string name) {
+shared_ptr<Model> Content::LoadModel(string name) {
 	// First check to see if it's already loaded and if so, just return it
-	map<string, Model *>::iterator mit = Content::models.find(name);
+	map<string, shared_ptr<Model>>::iterator mit = Content::models.find(name);
 	if (mit != Content::models.end())
 	{
 		return mit->second;
@@ -110,8 +110,8 @@ Model * Content::LoadModel(string name) {
 						,&normalIndex[2] 
 						);
 					if (matches != 9){
-						cout << "File can't be read by our simple parser :-( Try exporting with other options\n" << endl;
-						return NULL;
+						throw Exception("Model file could not be loaded");
+						
 					}
 					uvIndices.push_back(uvIndex[0]);
 					uvIndices.push_back(uvIndex[1]);
@@ -131,8 +131,8 @@ Model * Content::LoadModel(string name) {
 						,&normalIndex[2] 
 						);
 					if (matches != 6){
-						cout << "File can't be read by our simple parser :-( Try exporting with other options\n" << endl;
-						return NULL;
+						cout << "" << endl;
+						throw BGE::Exception("Model file could not be loaded");
 					}
 				}
 
@@ -151,7 +151,7 @@ Model * Content::LoadModel(string name) {
 		}
 		is.close();
 	}
-	Model * model = new Model();
+	shared_ptr<Model> model (new Model());
 	// For each vertex of each triangle
 	for( unsigned int i=0; i<vertexIndices.size(); i++ ){
 		// Get the indices of its attributes

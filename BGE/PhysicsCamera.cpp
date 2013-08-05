@@ -12,6 +12,7 @@ PhysicsCamera::PhysicsCamera():PhysicsComponent()
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
 	pickedUp = NULL;
+	id = "Physics Camera";
 }
 
 
@@ -46,7 +47,7 @@ void PhysicsCamera::Update(float timeDelta)
 		glm::vec3 pos = parent->position + (parent->look * 5.0f);
 		glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
 		glm::normalize(q);
-		PhysicsComponent * physicsComponent = game->CreateBox(1,1,1, pos, q);
+		shared_ptr<PhysicsComponent> physicsComponent = game->physicsFactory->CreateBox(1,1,1, pos, q);
 		
 		float force = 5000.0f;
 		physicsComponent->rigidBody->applyCentralForce(GLToBtVector(parent->look) * force);
@@ -71,9 +72,8 @@ void PhysicsCamera::Update(float timeDelta)
 			
 			if (rayCallback.hasHit())
 			{
-				pickedUp = reinterpret_cast<PhysicsComponent *>(rayCallback.m_collisionObject->getUserPointer());
-				PhysicsComponent * groundComponent = (PhysicsComponent *) (* Game::Instance()->GetGround()->GetChildren()->begin());
-				if (pickedUp == groundComponent)
+				pickedUp = reinterpret_cast<PhysicsComponent*>(rayCallback.m_collisionObject->getUserPointer());
+				if (pickedUp->parent == game->GetGround().get())
 				{
 					pickedUp = NULL;
 				}

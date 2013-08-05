@@ -2,6 +2,7 @@
 #include "GameComponent.h"
 #include "Model.h"
 
+using namespace std;
 namespace BGE
 {
 	class Ship :
@@ -9,7 +10,7 @@ namespace BGE
 	{
 	private:
 		void Ship::CalculateInertiaTensor();
-		Model * model;
+		shared_ptr<Model> model;
 	public:
 		Ship(void);
 		~Ship(void);

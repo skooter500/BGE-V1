@@ -30,6 +30,8 @@ Ship::~Ship(void)
 bool Ship::Initialise()
 {
 	model = Content::LoadModel("cobramk3");
+	children.push_back(model);
+
 	AddChild(model);	
 	GameComponent::Initialise();
 	CalculateInertiaTensor();

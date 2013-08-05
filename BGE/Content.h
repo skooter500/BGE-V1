@@ -15,12 +15,11 @@ namespace BGE
 	{
 		private:
 			static string prefix;
-			static map<string, Model *> models;
+			static map<string, shared_ptr<Model>> models;
 			static map<string, GLuint> textures;
 			static map<string, GLuint> shaders;			
 		public:
-			static Model * LoadModel(string name);
-			static BGE::Model * BGE::Content::SimpleLoadModel(string name);
+			static shared_ptr<Model> LoadModel(string name);
 			static GLuint LoadShaderPair(string name);
 			static GLuint LoadTexture(std::string path);
 

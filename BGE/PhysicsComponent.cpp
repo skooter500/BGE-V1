@@ -17,6 +17,7 @@ PhysicsComponent::PhysicsComponent(btCollisionShape * shape, btRigidBody * rigid
 	{
 		this->rigidBody->setUserPointer(this);
 	}
+	this->id = "Physics Component";
 	this->motionState = motionState;
 	attachedToParent = false;
 }
@@ -71,9 +72,6 @@ void PhysicsComponent::Update(float timeDelta)
 
 void PhysicsComponent::Cleanup()
 {
-	SafeDelete(rigidBody);
-	SafeDelete(shape);
-	SafeDelete(motionState);
 	GameComponent::Cleanup();
 
 }

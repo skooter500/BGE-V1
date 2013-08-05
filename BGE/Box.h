@@ -1,5 +1,5 @@
 #pragma once
-#include "gamecomponent.h"
+#include "GameComponent.h"
 
 namespace BGE
 {
@@ -8,6 +8,7 @@ namespace BGE
 	{
 	public:
 		Box(float width, float height, float depth);
+		Box();
 		~Box(void);
 		bool Initialize();
 		void Update(float timeDelta);

@@ -3,6 +3,10 @@
 #include <sstream>
 #include "Box.h"
 #include "Cylinder.h"
+#include "PhysicsComponent.h"
+#include "KinematicMotionState.h"
+#include "PhysicsGame1.h"
+#include <btBulletDynamicsCommon.h>
 
 using namespace BGE;
 using namespace std;
@@ -22,6 +26,7 @@ void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, co
 Person::Person(void):GameComponent()
 {
 	connected = false;
+	m_pNuiSensor = NULL;
 }
 
 
@@ -38,7 +43,7 @@ bool Person::Initialise()
 
 HRESULT BGE::Person::CreateFirstConnected()
 {
-	INuiSensor * pNuiSensor;
+	INuiSensor * pNuiSensor = NULL;
 
 	int iSensorCount = 0;
 	HRESULT hr = NuiGetSensorCount(&iSensorCount);
@@ -143,12 +148,13 @@ void Person::UpdateBone(
 
 	glm::vec3 start = NUIToGLVector(skeleton.SkeletonPositions[jointFrom]);
 	glm::vec3 end = NUIToGLVector(skeleton.SkeletonPositions[jointTo]);
+	start.y -= footHeight;
+	end.y -= footHeight;
 
-	float scale = 30.0f;
+	float scale = 20.0f;
 	start *= scale;
 	end *= scale;
-	start.y += 10;
-	end.y += 10;
+	
 	start.z *= -1;
 	end.z *= -1;
 
@@ -165,22 +171,24 @@ void Person::UpdateBone(
 	ss << jointFrom << "," << jointTo;
 	string boneKey = ss.str();
 
-	map<string, GameComponent *>::iterator it = boneComponents.find(boneKey);
-	GameComponent * cyl = NULL;
+	map<string, shared_ptr<PhysicsComponent>>::iterator it = boneComponents.find(boneKey);
+	shared_ptr<PhysicsComponent> cyl;
+	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
 	if (it == boneComponents.end())
 	{
-		cyl = new Cylinder(0.5f, boneLength);
-		cyl->Initialise();
+		cyl = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, orientation);
+		cyl->rigidBody->setCollisionFlags(cyl->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		cyl->rigidBody->setMotionState(new KinematicMotionState(cyl->parent));
+		
 		boneComponents[boneKey] = cyl;
 		cyl->attachedToParent = false;
-		AddChild(cyl);
 	}
 	else
 	{
 		cyl = it->second;
 	}
-	cyl->position = centrePos;
-	cyl->orientation = q;
+	cyl->parent->position = centrePos;
+	cyl->parent->orientation = q;
 }
 
 void Person::SkeletonFrameReady( NUI_SKELETON_FRAME* pSkeletonFrame )
@@ -202,7 +210,7 @@ void Person::Update(float timeDelta)
 {
 	if (connected)
 	{
-		SetStatusMessage("Kinect is tracking");
+		SetStatusMessage("Kinect is connected");
 		// Wait for 0ms, just quickly test if it is time to process a skeleton
 		if ( WAIT_OBJECT_0 == WaitForSingleObject(m_hNextSkeletonEvent, 0) )
 		{
@@ -211,14 +219,16 @@ void Person::Update(float timeDelta)
 			// Get the skeleton frame that is ready
 			if (SUCCEEDED(m_pNuiSensor->NuiSkeletonGetNextFrame(0, &skeletonFrame)))
 			{
+				m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, &verySmoothParams);
 				// Process the skeleton frame
+				
 				SkeletonFrameReady(&skeletonFrame);
 			}
 		}
 	}
 	else
 	{
-		SetStatusMessage("Kinect is not tracking");
+		SetStatusMessage("Kinect is not connected");
 	}
 
 	GameComponent::Update(timeDelta);

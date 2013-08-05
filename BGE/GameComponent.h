@@ -15,9 +15,7 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
-#include "BGEException.h"
-
-
+#include "Exception.h"
 
 namespace BGE 
 {
@@ -30,7 +28,6 @@ namespace BGE
 		bool initialised;	
 	public:
 		GameComponent(void);
-		~GameComponent(void);
 
 		virtual bool Initialise();
 		virtual void Update(float timeDelta);
@@ -57,7 +54,7 @@ namespace BGE
 
 		draw_modes drawMode;
 		
-		std::list<GameComponent *> children;
+		std::list<std::shared_ptr<GameComponent>> children;
 		static const glm::vec3 basisUp;
 		static const glm::vec3 basisLook;
 		static const glm::vec3 basisRight;
@@ -71,9 +68,8 @@ namespace BGE
 		void Pitch(float angle); // rotate on right vector
 		void Yaw(float angle);   // rotate on up vector
 		void Roll(float angle);  // rotate on look vector
-		void AddChild(GameComponent * child);
-		std::list<GameComponent *> * GetChildren();
+		void AddChild(std::shared_ptr<GameComponent> child);
+		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 
-		void SafeDelete(void * p);
 	};
 }

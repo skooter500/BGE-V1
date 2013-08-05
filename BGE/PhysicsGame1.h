@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include "PhysicsComponent.h"
+#include "PhysicsFactory.h"
 #include <btBulletDynamicsCommon.h>
 
 namespace BGE
@@ -17,7 +18,7 @@ namespace BGE
  
 		// The actual physics solver
 		btSequentialImpulseConstraintSolver * solver;
- 
+
 	public:
 		PhysicsGame1(void);
 		~PhysicsGame1(void);
@@ -25,14 +26,9 @@ namespace BGE
 		void Update(float timeDelta);
 		void Cleanup();
 		void CreateWall();
-		PhysicsComponent * CreateBox(float width, float height, float depth, glm::vec3 pos, glm::quat quat);
-		PhysicsComponent * CreateSphere(float radius, glm::vec3 pos, glm::quat quat);
-		PhysicsComponent * CreateCylinder(float radius, float height, glm::vec3 pos, glm::quat quat);
-		PhysicsComponent * CreateVehicle(glm::vec3 pos);
-		PhysicsComponent * CreateCameraPhysics();
-		PhysicsComponent * CreateGroundPhysics();
-
+		
 		// The world.
+		PhysicsFactory * physicsFactory;
 		btDiscreteDynamicsWorld * dynamicsWorld;
 	};
 }

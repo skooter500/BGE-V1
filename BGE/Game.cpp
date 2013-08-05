@@ -36,29 +36,23 @@ Game::Game(void) {
 	height = 600;
 	mainwindow = NULL;
 	instance = this;
-	camera = NULL;
-	ground = NULL;
 	srand(time(0));
 
 	lastPrintPosition = glm::vec2(0,0);
 	fontSize = 14;
-	camera = new Camera();
-	AddChild(camera);
+
+	SetCamera(shared_ptr<Camera>(new Camera()));
 }
 
 Game::~Game(void) {
-	if (camera != NULL)
-	{
-		delete camera;
-	}
 }
 
-Camera * Game::GetCamera()
+shared_ptr<Camera> Game::GetCamera()
 {
 	return camera;
 }
 
-Ground * Game::GetGround()
+shared_ptr<Ground> Game::GetGround()
 {
 	return ground;
 }
@@ -119,7 +113,7 @@ bool Game::Initialise() {
 
 	if (TTF_Init() < 0)
 	{
-		throw BGEException("Could not init TTF");
+		throw BGE::Exception("Could not init TTF");
 	}// Initilize SDL_ttf
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 
@@ -160,24 +154,16 @@ bool Game::Run() {
     return 0;
 }
 
-void Game::SetGround(Ground * ground)
+void Game::SetGround(shared_ptr<Ground> ground)
 {
-	if (this->ground != NULL)
-	{
-		children.remove(this->ground);
-		SafeDelete(this->ground);
-	}
+	children.remove(this->ground);
 	this->ground = ground;
 	AddChild(ground);
 }
 
-void Game::SetCamera(Camera * camera)
+void Game::SetCamera(shared_ptr<Camera> camera)
 {
-	if (this->camera != NULL)
-	{
-		children.remove(this->camera);
-		SafeDelete(this->camera);
-	}
+	children.remove(this->camera);
 	this->camera = camera;
 	AddChild(camera);
 }

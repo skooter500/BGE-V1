@@ -18,26 +18,26 @@ ModelTest::~ModelTest(void) {
 
 bool ModelTest::Initialise() {
 	
-	Ground * ground = new Ground();
+	std::shared_ptr<GameComponent> ground(new Ground());
 	children.push_back(ground);	
 
-	Box * box = new Box(1, 1, 1);
+	std::shared_ptr<GameComponent> box (new Box(1, 1, 1));
 	box->position = glm::vec3(0, 5, -20);
 	AddChild(box);
 
-	Box * box1 = new Box(1, 2, 1);
+	std::shared_ptr<GameComponent> box1 (new Box(1, 2, 1));
 	box1->position = glm::vec3(5, 2, 0);
 	box->AddChild(box1);
 
-	Sphere * sphere = new Sphere(1);
+	std::shared_ptr<GameComponent> sphere (new Sphere(1));
 	sphere->position = glm::vec3(10, 5, -20);
 	children.push_back(sphere);
 	
-	Cylinder * cyl = new Cylinder(2, 1);
+	std::shared_ptr<GameComponent> cyl (new Cylinder(2, 1));
 	cyl->position = glm::vec3(15, 5, -20);
 	children.push_back(cyl);
 	
-	Ship * ship = new Ship();
+	std::shared_ptr<GameComponent> ship (new Ship());
 	ship->position = glm::vec3(20, 5, -20);
 	children.push_back(ship);
 

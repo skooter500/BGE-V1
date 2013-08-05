@@ -2,12 +2,12 @@
 
 namespace BGE
 {
-	class BGEException
+	class Exception
 	{
 	public:
 		char * what;
-		BGEException(char * what);
-		~BGEException(void);
+		Exception(char * what);
+		~Exception(void);
 		const char * What();
 
 	};
