@@ -11,11 +11,11 @@
 using namespace BGE;
 using namespace std;
 
-glm::vec3 NUIToGLVector( Vector4 v, bool flipxz)
+glm::vec3 NUIToGLVector( Vector4 v, bool flip)
 {
-	if (flipxz)
+	if (flip)
 	{
-		return glm::vec3(-v.x, v.y, -v.z);
+		return glm::vec3(v.x, v.y, -v.z);
 	}
 	else
 	{
@@ -38,7 +38,7 @@ void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, co
 Person::Person(void):GameComponent()
 {
 	connected = false;
-	headCamera = true;
+	headCamera = false;
 	m_pNuiSensor = NULL;
 	scale = 20.0f;
 }
@@ -112,8 +112,24 @@ HRESULT BGE::Person::CreateFirstConnected()
 	return hr;
 }
 
+
 void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 {
+	const Uint8 * keyState = Game::Instance()->GetKeyState();
+	static bool lastPressed = false;
+	if (keyState[SDL_SCANCODE_H])
+	{
+		if (! lastPressed)
+		{
+			headCamera = ! headCamera;
+		}
+		lastPressed = true;
+	}
+	else
+	{
+		lastPressed = false;
+	}
+
 	footHeight = glm::min<float>(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_RIGHT].y, skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_LEFT].y);
 
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_HEAD, NUI_SKELETON_POSITION_SHOULDER_CENTER);
@@ -143,7 +159,6 @@ void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	UpdateBox(skeleton, NUI_SKELETON_POSITION_HAND_RIGHT, false);
 	UpdateBox(skeleton, NUI_SKELETON_POSITION_HAND_LEFT, false);
 	UpdateBox(skeleton, NUI_SKELETON_POSITION_HEAD, true);
-	position = NUIToGLVector(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_HEAD], headCamera);
 }
 
 
@@ -162,17 +177,14 @@ void Person::UpdateBone(
 		return; // nothing to draw, one of the joints is not tracked
 	}
 
-	glm::vec3 start = NUIToGLVector(skeleton.SkeletonPositions[jointFrom], headCamera);
-	glm::vec3 end = NUIToGLVector(skeleton.SkeletonPositions[jointTo], headCamera);
+	glm::vec3 start = NUIToGLVector(skeleton.SkeletonPositions[jointFrom], !headCamera);
+	glm::vec3 end = NUIToGLVector(skeleton.SkeletonPositions[jointTo], !headCamera);
 	start.y -= footHeight;
 	end.y -= footHeight;
 
 	start *= scale;
 	end *= scale;
 	
-	start.z *= -1;
-	end.z *= -1;
-
 	glm::vec3 boneVector = end - start;
 	float boneLength = glm::length(boneVector);
 	glm::vec3 centrePos = start + ((boneVector) / 2.0f);
@@ -218,12 +230,10 @@ void Person::UpdateBox(
 		return; // nothing to draw, one of the joints is not tracked
 	}
 
-	glm::vec3 boneVector = NUIToGLVector(skeleton.SkeletonPositions[joint], headCamera);
+	glm::vec3 boneVector = NUIToGLVector(skeleton.SkeletonPositions[joint], !headCamera);
 	boneVector.y -= footHeight;
 	
 	boneVector *= scale;
-	
-	boneVector.z *= -1;
 	
 	glm::quat q = glm::angleAxis(glm::degrees(glm::pi<float>()), glm::vec3(1,0,0));
 
@@ -251,7 +261,7 @@ void Person::UpdateBox(
 
 	if (headCamera && isFace)
 	{
-		game->GetCamera()->position = boneVector + glm::vec3(0, scale, 0);
+		game->GetCamera()->position = boneVector + glm::vec3(0, scale * 0.1f, 0);
 		box->parent->position = glm::vec3(100, -100, 100);
 	}
 	else

@@ -20,6 +20,8 @@ namespace BGE
 		std::vector<glm::vec3> vertices; 	
 		std::vector<glm::vec2> texels;
 		std::vector<glm::vec3> normals;
+
+		bool Ground::rayIntersectsWorldPlane(glm::vec3 origin, glm::vec3 look, glm::vec3 & point);
 		float width, height;
 
 	private:

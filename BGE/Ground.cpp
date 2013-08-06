@@ -13,6 +13,23 @@ Ground::Ground(void):GameComponent()
 	specular = glm::vec3(0,0,0);
 }
 
+bool Ground::rayIntersectsWorldPlane(glm::vec3 origin, glm::vec3 look, glm::vec3 & point)
+{
+	// Calculate t
+	float t;
+	glm::vec3 planeNormal = GameComponent::basisUp;
+	float d = 0.0f;
+
+
+	t = - d - glm::dot(planeNormal, origin) / (glm::dot(planeNormal, look));
+	if (t > 0)
+	{
+		point = origin + (look * t);
+		return true;
+	}
+	return false;
+}
+
 
 Ground::~Ground(void)
 {

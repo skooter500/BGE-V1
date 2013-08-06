@@ -70,11 +70,6 @@ bool PhysicsGame1::Initialise()
 	shared_ptr<Person> person = make_shared<Person>();
 	AddChild(person);
 
-	
-
-
-
-
 	CreateWall();
 	glm::quat q =  glm::angleAxis(glm::half_pi<float>(), glm::vec3(1, 0, 0)); 
 	//CreateCylinder(5, 1, glm::vec3(5,15,5), q);
