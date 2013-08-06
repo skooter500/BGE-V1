@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{4F287475-5B28-41F0-928A-FE0ECD6C7C2F}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/Glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/Glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/Glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/Glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" "-HC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613" "-BC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS" --check-stamp-file "C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeVS10FindMake.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystem.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompilerABI.c;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLU.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLUT.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" "-HC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613" "-BC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS" --check-stamp-file "C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeVS10FindMake.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystem.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompilerABI.c;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLU.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLUT.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" "-HC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613" "-BC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS" --check-stamp-file "C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeVS10FindMake.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystem.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompilerABI.c;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLU.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLUT.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" "-HC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613" "-BC:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS" --check-stamp-file "C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/CMakeLists.txt;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeVS10FindMake.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystem.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeClDeps.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompilerABI.c;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompiler.cmake.in;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\2.8.11.1\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLU.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindGLUT.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeParseArguments.cmake;C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="CMakeFiles\01c8323d38c156e57d53f986aa5ed759\ALL_BUILD.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Build all projects</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/CMakeFiles/01c8323d38c156e57d53f986aa5ed759/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\ALL_BUILD</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Build all projects</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/CMakeFiles/01c8323d38c156e57d53f986aa5ed759/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\ALL_BUILD</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Build all projects</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/CMakeFiles/01c8323d38c156e57d53f986aa5ed759/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\ALL_BUILD</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Build all projects</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/CMakeFiles/01c8323d38c156e57d53f986aa5ed759/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Bryan\Documents\Courses\Game Engines\2013\bullet-2.81-rev2613\VS\CMakeFiles\ALL_BUILD</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CMakeFiles\ALL_BUILD" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/AllBulletDemos/AppAllBulletDemos.vcxproj">
+      <Project>922D55D3-1230-4453-A72D-D6856A346F71</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/BasicDemo/AppBasicDemo.vcxproj">
+      <Project>2769655F-E4CD-41A3-82F0-E23E49E847CA</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/Benchmarks/AppBenchmarks.vcxproj">
+      <Project>7F3FFFD1-481F-46C7-90C5-C76FABAA4F9F</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/Box2dDemo/AppBox2dDemo.vcxproj">
+      <Project>5AACF054-0492-441D-B6D2-D6B364F41ABE</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/BspDemo/AppBspPhysicsDemo.vcxproj">
+      <Project>639525A1-6925-49E8-8E29-5B784661B198</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/BulletXmlImportDemo/AppBulletXmlImportDemo.vcxproj">
+      <Project>469F7DED-6CFF-4971-BF9E-50D45A752675</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/CcdPhysicsDemo/AppCcdPhysicsDemo.vcxproj">
+      <Project>68049078-911D-4EF3-97E6-D7F0763E8D10</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/CharacterDemo/AppCharacterDemo.vcxproj">
+      <Project>9E20D405-476B-4DA3-8436-63713CEDDFCB</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/CollisionDemo/AppCollisionDemo.vcxproj">
+      <Project>CF2C5567-0087-485B-82F8-100874C733C2</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/CollisionInterfaceDemo/AppCollisionInterfaceDemo.vcxproj">
+      <Project>285A54A9-C347-4854-8B2C-781D863548D7</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ConcaveConvexcastDemo/AppConcaveConvexCastDemo.vcxproj">
+      <Project>B27597DC-7287-4F9F-871A-C4DA4FF74779</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ConcaveDemo/AppConcaveDemo.vcxproj">
+      <Project>2E0E95EC-3BEB-4E56-8634-CF1206A53D29</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ConcaveRaycastDemo/AppConcaveRayCastDemo.vcxproj">
+      <Project>15D41967-6C7B-4A1B-8C17-888305BBBC97</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ConstraintDemo/AppConstraintDemo.vcxproj">
+      <Project>55FCE97D-96FA-4D92-86E8-5032EB903440</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ContinuousConvexCollision/AppContinuousConvexCollisionDemo.vcxproj">
+      <Project>4E52DEDC-64CF-4FDD-8D50-5961F5E5C953</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ConvexDecompositionDemo/AppConvexDecompositionDemo.vcxproj">
+      <Project>C9931EF5-CE14-400E-829F-9AFF73D5C23D</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ConvexHullDistance/AppConvexHullDistanceDemo.vcxproj">
+      <Project>66241234-4522-49CA-A81F-2389172A1A6B</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/DoublePrecisionDemo/AppDoublePrecisionDemo.vcxproj">
+      <Project>EE626309-9458-44C2-8DCC-0E394226C46A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ForkLiftDemo/AppForkLiftDemo.vcxproj">
+      <Project>65A0B804-27CB-472E-B667-639BB35B0D21</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/FractureDemo/AppFractureDemo.vcxproj">
+      <Project>33D3F53C-3962-4853-BE0C-70D7E4E87C82</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/GenericJointDemo/AppGenericJointDemo.vcxproj">
+      <Project>5D473AF7-71FF-4B81-9063-A6B868985B96</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/GyroscopicDemo/AppGyroscopicDemo.vcxproj">
+      <Project>4F9890AC-C36F-4288-ABD0-8F391DAE45A5</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/HelloWorld/AppHelloWorld.vcxproj">
+      <Project>C4DFE063-624C-42E0-A610-95A7CCED061C</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/InternalEdgeDemo/AppInternalEdgeDemo.vcxproj">
+      <Project>3EFE8066-F2B5-4A6F-ABD8-932278A0942F</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/GjkConvexCastDemo/AppLinearConvexCastDemo.vcxproj">
+      <Project>7878F339-BC22-4471-8753-84F382F6AEAC</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/DynamicControlDemo/AppMotorDemo.vcxproj">
+      <Project>53B832AE-F9A7-4EE2-86CE-08F8A753D30F</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/MovingConcaveDemo/AppMovingConcaveDemo.vcxproj">
+      <Project>82190C1B-62FE-4759-8051-EAD9315BF89F</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/MultiMaterialDemo/AppMultiMaterialDemo.vcxproj">
+      <Project>CD25DE26-FA6B-4691-BACD-107F6A8AA1C8</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/MultiThreadedDemo/AppMultiThreadedDemo.vcxproj">
+      <Project>15CF4BE7-6AFC-4695-B36D-FA686D87BE47</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/OpenCLClothDemo/MiniCL/AppOpenCLClothDemo_Mini.vcxproj">
+      <Project>7F90D533-2D43-4998-9B81-34D094F2AC46</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ParticlesOpenCL/MiniCL/AppParticlesOCL_Mini.vcxproj">
+      <Project>9481CBFF-812F-4182-B2D3-4AE047A9445E</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/RagdollDemo/AppRagdollDemo.vcxproj">
+      <Project>D6C86D60-3065-4250-AA52-E2F87785F334</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/RaytestDemo/AppRaytestDemo.vcxproj">
+      <Project>2F391AC3-AB53-4145-B0DB-F5734CD76DDA</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/Raytracer/AppRaytracer.vcxproj">
+      <Project>51E085E8-DD92-41E6-BE24-4248115679C6</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/RollingFrictionDemo/AppRollingFrictionDemo.vcxproj">
+      <Project>BE3CAD70-8F65-4B0C-A45C-6CD217C63C8A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/SerializeDemo/AppSerializeDemo.vcxproj">
+      <Project>EB48414C-7471-47FF-8D16-C2DC9135C125</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/SimplexDemo/AppSimplexDemo.vcxproj">
+      <Project>C959E868-68F7-4376-B241-32F8DA1F4B58</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/SliderConstraintDemo/AppSliderConstraintDemo.vcxproj">
+      <Project>B9F970B7-38A2-4CFC-A99C-515DC5B4F8E0</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/SoftDemo/AppSoftBodyDemo.vcxproj">
+      <Project>1F573067-5056-43B0-86BF-C1E091745F5D</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/ThreadingDemo/AppThreadingDemo.vcxproj">
+      <Project>2B5222F2-6C0A-44AB-80EB-5E0721AEE560</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/UserCollisionAlgorithm/AppUserCollisionAlgorithm.vcxproj">
+      <Project>3818D880-F651-4019-824A-A59098402716</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/VectorAdd_OpenCL/MiniCL/AppVectorAdd_Mini.vcxproj">
+      <Project>CFD1DFCD-9378-47D1-AD9E-5F9A34D32845</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/VehicleDemo/AppVehicleDemo.vcxproj">
+      <Project>40855126-2D5B-4757-9A82-5DDED678699A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/VoronoiFractureDemo/AppVoronoiFractureDemo.vcxproj">
+      <Project>857A4D57-384A-4509-B800-25564DA32B65</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/src/BulletCollision/BulletCollision.vcxproj">
+      <Project>624BF754-C10F-4B04-99C4-7C251DD67A1C</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/src/BulletDynamics/BulletDynamics.vcxproj">
+      <Project>E601E3D9-0E4F-4BA5-BD56-E19814699D61</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Extras/Serialize/BulletFileLoader/BulletFileLoader.vcxproj">
+      <Project>A3BED7D3-97A1-416E-A88C-507C89E6C0C5</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/src/BulletMultiThreaded/BulletMultiThreaded.vcxproj">
+      <Project>244BE0A0-2228-4B61-A87D-064B38C78534</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/src/BulletSoftBody/BulletSoftBody.vcxproj">
+      <Project>55AE1F4D-E594-4774-A9E6-F359C35937A5</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/src/BulletMultiThreaded/GpuSoftBodySolvers/OpenCL/MiniCL/BulletSoftBodySolvers_OpenCL_Mini.vcxproj">
+      <Project>A14C5B0F-7A5F-4D2A-8983-212387AB45A7</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Extras/Serialize/BulletWorldImporter/BulletWorldImporter.vcxproj">
+      <Project>E559E615-6807-441A-9B80-8DB35FC4E2AA</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Extras/Serialize/BulletXmlWorldImporter/BulletXmlWorldImporter.vcxproj">
+      <Project>46B235D0-776A-47C3-934D-9152A68C3D06</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Extras/ConvexDecomposition/ConvexDecomposition.vcxproj">
+      <Project>B0226700-F33D-4C7C-9F58-268BBAC208F1</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Extras/GIMPACTUtils/GIMPACTUtils.vcxproj">
+      <Project>337F9294-F385-447A-81BB-A7FDE517FD3D</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Extras/glui/GLUI.vcxproj">
+      <Project>0026769B-3293-4EF9-A9C7-132D582D9A7D</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Extras/HACD/HACD.vcxproj">
+      <Project>CF66184C-97D9-4B57-B05C-256148FBA39C</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/src/LinearMath/LinearMath.vcxproj">
+      <Project>3DF0B844-BE68-4BDA-A21C-9B1BBD868C51</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/src/MiniCL/MiniCL.vcxproj">
+      <Project>4527CF83-2F1C-4764-AFD9-3BCFC0ADAD73</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/Demos/OpenGL/OpenGLSupport.vcxproj">
+      <Project>5D90A487-E23F-46D1-93F6-D05CE1FEE3BA</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Bryan/Documents/Courses/Game Engines/2013/bullet-2.81-rev2613/VS/ZERO_CHECK.vcxproj">
+      <Project>601006DE-FDC9-4BB6-A595-42A184CF77CC</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
