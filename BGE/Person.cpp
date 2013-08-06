@@ -11,6 +11,18 @@
 using namespace BGE;
 using namespace std;
 
+glm::vec3 NUIToGLVector( Vector4 v, bool flipxz)
+{
+	if (flipxz)
+	{
+		return glm::vec3(-v.x, v.y, -v.z);
+	}
+	else
+	{
+		return glm::vec3(v.x, v.y, v.z);
+	}
+}
+
 void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, const OLECHAR* uniqueDeviceName, void * pUserData)
 {      
 	Person * person = (Person *) pUserData;
@@ -26,7 +38,9 @@ void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, co
 Person::Person(void):GameComponent()
 {
 	connected = false;
+	headCamera = true;
 	m_pNuiSensor = NULL;
+	scale = 20.0f;
 }
 
 
@@ -125,12 +139,14 @@ void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_HIP_RIGHT, NUI_SKELETON_POSITION_KNEE_RIGHT);
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_KNEE_RIGHT, NUI_SKELETON_POSITION_ANKLE_RIGHT);
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_ANKLE_RIGHT, NUI_SKELETON_POSITION_FOOT_RIGHT);
+
+	UpdateBox(skeleton, NUI_SKELETON_POSITION_HAND_RIGHT, false);
+	UpdateBox(skeleton, NUI_SKELETON_POSITION_HAND_LEFT, false);
+	UpdateBox(skeleton, NUI_SKELETON_POSITION_HEAD, true);
+	position = NUIToGLVector(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_HEAD], headCamera);
 }
 
-glm::vec3 NUIToGLVector( Vector4 v )
-{
-	return glm::vec3(v.x, v.y, v.z);
-}
+
 
 void Person::UpdateBone(
 	const NUI_SKELETON_DATA & skeleton,
@@ -146,12 +162,11 @@ void Person::UpdateBone(
 		return; // nothing to draw, one of the joints is not tracked
 	}
 
-	glm::vec3 start = NUIToGLVector(skeleton.SkeletonPositions[jointFrom]);
-	glm::vec3 end = NUIToGLVector(skeleton.SkeletonPositions[jointTo]);
+	glm::vec3 start = NUIToGLVector(skeleton.SkeletonPositions[jointFrom], headCamera);
+	glm::vec3 end = NUIToGLVector(skeleton.SkeletonPositions[jointTo], headCamera);
 	start.y -= footHeight;
 	end.y -= footHeight;
 
-	float scale = 20.0f;
 	start *= scale;
 	end *= scale;
 	
@@ -179,7 +194,6 @@ void Person::UpdateBone(
 		cyl = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, orientation);
 		cyl->rigidBody->setCollisionFlags(cyl->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cyl->rigidBody->setMotionState(new KinematicMotionState(cyl->parent));
-		
 		boneComponents[boneKey] = cyl;
 		cyl->attachedToParent = false;
 	}
@@ -187,8 +201,65 @@ void Person::UpdateBone(
 	{
 		cyl = it->second;
 	}
+
+
 	cyl->parent->position = centrePos;
 	cyl->parent->orientation = q;
+}
+
+void Person::UpdateBox(
+	const NUI_SKELETON_DATA & skeleton,
+	NUI_SKELETON_POSITION_INDEX joint, bool isFace)
+{
+	NUI_SKELETON_POSITION_TRACKING_STATE jointFromState = skeleton.eSkeletonPositionTrackingState[joint];
+
+	if (jointFromState == NUI_SKELETON_POSITION_NOT_TRACKED)
+	{
+		return; // nothing to draw, one of the joints is not tracked
+	}
+
+	glm::vec3 boneVector = NUIToGLVector(skeleton.SkeletonPositions[joint], headCamera);
+	boneVector.y -= footHeight;
+	
+	boneVector *= scale;
+	
+	boneVector.z *= -1;
+	
+	glm::quat q = glm::angleAxis(glm::degrees(glm::pi<float>()), glm::vec3(1,0,0));
+
+	stringstream ss;
+	ss << joint;
+	string boneKey = ss.str();
+
+	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
+
+	map<string, shared_ptr<PhysicsComponent>>::iterator it = boneComponents.find(boneKey);
+	shared_ptr<PhysicsComponent> box;
+	if (it == boneComponents.end())
+	{
+		box = game->physicsFactory->CreateBox(6.0f, 6.0f, 0.5f, boneVector, orientation);
+		box->rigidBody->setCollisionFlags(box->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		box->rigidBody->setMotionState(new KinematicMotionState(box->parent));
+
+		boneComponents[boneKey] = box;
+		box->attachedToParent = false;
+	}
+	else
+	{
+		box = it->second;
+	}
+
+	if (headCamera && isFace)
+	{
+		game->GetCamera()->position = boneVector + glm::vec3(0, scale, 0);
+		box->parent->position = glm::vec3(100, -100, 100);
+	}
+	else
+	{
+		box->parent->position = boneVector;
+	}
+	box->parent->orientation = q;
+	
 }
 
 void Person::SkeletonFrameReady( NUI_SKELETON_FRAME* pSkeletonFrame )

@@ -41,7 +41,7 @@ namespace BGE
 	private:	
 		SDL_GLContext maincontext; /* Our opengl context handle */
 		bool running;
-		bool console;
+		
 		int width, height;
 		static Game * instance;
 		shared_ptr<Camera> camera;
@@ -78,6 +78,8 @@ namespace BGE
 		void PrintText(string message);
 
 		SDL_Window * mainwindow; /* Our window handle */
+		bool fullscreen;
+		bool console;
 	};
 }
 

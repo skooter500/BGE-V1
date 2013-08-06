@@ -32,6 +32,7 @@ GameComponent::GameComponent(void)
 	initialised = false;
 	scale = glm::vec3(1.0, 1.0, 1.0);
 	attachedToParent = true;
+	parent = NULL;
 	id = "Nothing";
 }
 
@@ -74,7 +75,7 @@ void GameComponent::Update(float timeDelta) {
 	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
 	if (parent != NULL && attachedToParent)
 	{
-		 //world = parent->world * world;
+		 world = parent->world * world;
 	}
 	moved = false;
 

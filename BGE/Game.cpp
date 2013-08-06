@@ -32,8 +32,9 @@ void BGE::Log(string message)
 Game::Game(void) {
 	running = false;
 	console = true;
-	width = 800;
-	height = 600;
+	fullscreen = false;
+	width = 1024;
+	height = 768;
 	mainwindow = NULL;
 	instance = this;
 	srand(time(0));
@@ -80,9 +81,10 @@ bool Game::Initialise() {
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  4);
  
+	Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
     /* Create our window centered at 512x512 resolution */
     mainwindow = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+        width, height, flags);
 	maincontext = SDL_GL_CreateContext(mainwindow);
 	
     /* This makes our buffer swap syncronized with the monitor's vertical refresh */
@@ -309,6 +311,7 @@ void Game::Print(string message, glm::vec2 position)
 	
 	GLuint programID = Content::LoadShaderPair("TextShader");
 	glUseProgram(programID);
+
 	// Set our "myTextureSampler" sampler to user Texture Unit 0
 	GLuint textureSampler  = glGetUniformLocation(programID, "myTextureSampler");
 
@@ -318,6 +321,9 @@ void Game::Print(string message, glm::vec2 position)
 	glTexImage2D(GL_TEXTURE_2D, 0, colors, surface->w, surface->h, 0, texture_format, GL_UNSIGNED_BYTE, surface->pixels);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	GLuint sizeID = glGetUniformLocation(programID, "screen_size");
+	glUniform2f(sizeID, this->width, this->height);
 	
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);

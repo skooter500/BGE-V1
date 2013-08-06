@@ -43,9 +43,11 @@ namespace BGE
 		void UpdateSkeleton(const NUI_SKELETON_DATA & skeleton);
 		void SkeletonFrameReady( NUI_SKELETON_FRAME* skeletonFrame );
 		void UpdateBone( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX jointFrom, NUI_SKELETON_POSITION_INDEX jointTo);
+		void UpdateBox( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX joint, bool isFace);
 		map<string, std::shared_ptr<PhysicsComponent>> boneComponents;
 		bool connected;
 		float footHeight;
+		float scale;
 	public:
 		Person(void);
 		~Person(void);
@@ -53,7 +55,7 @@ namespace BGE
 		void Update(float timeDelta);
 		bool Initialise();
 		HRESULT CreateFirstConnected();
-
+		bool headCamera;
 		friend void CALLBACK StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, const OLECHAR* uniqueDeviceName, void* pUserData);
 
 	};
