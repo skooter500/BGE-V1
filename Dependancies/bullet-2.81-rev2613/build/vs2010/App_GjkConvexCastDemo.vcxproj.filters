@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Demos">
+      <UniqueIdentifier>{FCAEEFE2-E0F0-8141-8B1D-AA6C3C4B4FAF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\GjkConvexCastDemo">
+      <UniqueIdentifier>{5583E09D-A478-674A-AC92-A8B0F0FEB815}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Demos\GjkConvexCastDemo\LinearConvexCastDemo.h">
+      <Filter>Demos\GjkConvexCastDemo</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Demos\GjkConvexCastDemo\LinearConvexCastDemo.cpp">
+      <Filter>Demos\GjkConvexCastDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Demos\GjkConvexCastDemo\main.cpp">
+      <Filter>Demos\GjkConvexCastDemo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\bullet.rc" />
+  </ItemGroup>
+</Project>

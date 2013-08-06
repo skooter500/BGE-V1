@@ -1,0 +1,9 @@
+Kinect for Windows Software Development Kit (SDK) Redistributable Code
+--------------------------------------------------------------------------------
+
+Redistributable Code is identified as the file in the Redist subdirectory of the SDK install directory:
+
+   Redist\KinectRuntime-v1.6-Setup.exe
+
+
+That file is a setup executable file which will includes all needed components including Kinect for Windows 1.6 Runtime and Driver, Microsoft Speech runtime components, C++ runtime components, and also includes the .NET4 install executable which will download and install .NET4 if it is not already present on the computer.  Developers should include the Redistributable Code with their applications as part of a chain install with their own application setup.

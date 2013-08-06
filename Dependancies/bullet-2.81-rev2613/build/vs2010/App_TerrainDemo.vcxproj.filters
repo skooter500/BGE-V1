@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Demos">
+      <UniqueIdentifier>{AE4622A1-5BB3-604E-84BF-25541AA8D175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\TerrainDemo">
+      <UniqueIdentifier>{F2121905-F42D-2842-BD20-B2F7539E126A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Demos\TerrainDemo\TerrainDemo.h">
+      <Filter>Demos\TerrainDemo</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Demos\TerrainDemo\main.cpp">
+      <Filter>Demos\TerrainDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Demos\TerrainDemo\TerrainDemo.cpp">
+      <Filter>Demos\TerrainDemo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\bullet.rc" />
+  </ItemGroup>
+</Project>

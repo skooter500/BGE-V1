@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\btSoftBodySolver_OpenCL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\btSoftBodySolver_OpenCL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\Shared\btSoftBodySolverData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\btSoftBodySolverVertexData_OpenCL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\btSoftBodySolverTriangleData_OpenCL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\btSoftBodySolverLinkData_OpenCL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\btSoftBodySolverBuffer_OpenCL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\MiniCL\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\UpdateNormals.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\Integrate.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\UpdatePositions.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\UpdateNodes.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\SolvePositions.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\UpdatePositionsFromVelocities.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\ApplyForces.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\PrepareLinks.cl" />
+    <None Include="..\..\..\..\..\..\src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\OpenCLC10\VSolveLinks.cl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{59C1D4C1-C812-4D0D-BB57-2AC355F4B989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{495AD901-E100-4CE5-AE65-F067E90F4D78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Demos">
+      <UniqueIdentifier>{FC694AC5-B7FB-7A4E-A773-9B60B3052F4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\SoftDemo">
+      <UniqueIdentifier>{044FB70F-10EA-2343-8B5A-A22F09D4BAF5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Demos\SoftDemo\SoftDemo.h">
+      <Filter>Demos\SoftDemo</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Demos\SoftDemo\main.cpp">
+      <Filter>Demos\SoftDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Demos\SoftDemo\SoftDemo.cpp">
+      <Filter>Demos\SoftDemo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\bullet.rc" />
+  </ItemGroup>
+</Project>

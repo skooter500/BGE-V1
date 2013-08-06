@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Demos">
+      <UniqueIdentifier>{19B60AD7-F096-A740-ABE7-4D16D40A7191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\BspDemo">
+      <UniqueIdentifier>{DCA5836A-2995-3E49-A83E-B73938F2FCBE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Demos\BspDemo\BspConverter.h">
+      <Filter>Demos\BspDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Demos\BspDemo\BspDemo.h">
+      <Filter>Demos\BspDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Demos\BspDemo\BspLoader.h">
+      <Filter>Demos\BspDemo</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Demos\BspDemo\BspConverter.cpp">
+      <Filter>Demos\BspDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Demos\BspDemo\BspDemo.cpp">
+      <Filter>Demos\BspDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Demos\BspDemo\BspLoader.cpp">
+      <Filter>Demos\BspDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Demos\BspDemo\main.cpp">
+      <Filter>Demos\BspDemo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\bullet.rc" />
+  </ItemGroup>
+</Project>
