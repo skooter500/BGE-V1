@@ -56,7 +56,7 @@ shared_ptr<Model> Content::LoadModel(string name) {
 		is.close();
 	}
 
-	string objFileName = Content::prefix + name + ".obj";	
+	string objFileName = Content::prefix + name + ".objm";	
 	cout << "Loading OBJ file: " << name << endl;
 
 	is.open(objFileName, ios::in);
