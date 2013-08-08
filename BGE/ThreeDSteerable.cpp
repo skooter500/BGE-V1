@@ -1,13 +1,16 @@
-#include "Ship.h"
+#include "ThreeDSteerable.h"
 #include "Content.h"
 #include "Model.h"
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
 #include <gtc/matrix_transform.hpp>
+#include <sstream>
+#include <string>
 
 using namespace BGE;
+using namespace std;
 
-Ship::Ship(void):GameComponent()
+ThreeDSteerable::ThreeDSteerable(shared_ptr<Model> model):GameComponent()
 {
 	mass = 10.0f;
 	velocity = glm::vec3(0);
@@ -16,29 +19,22 @@ Ship::Ship(void):GameComponent()
 	angularAcceleration = glm::vec3(0);
 	angularVelocity = glm::vec3(0);
 	torque = glm::vec3(0);
-
-	drawMode = draw_modes::materials;
-	ambient = glm::vec3(0.2f, 0.2, 0.2f);
-	specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	this->model = model;
 }
 
 
-Ship::~Ship(void)
+ThreeDSteerable::~ThreeDSteerable(void)
 {
 }
 
-bool Ship::Initialise()
+bool ThreeDSteerable::Initialise()
 {
-	model = Content::LoadModel("cobramk3");
-	children.push_back(model);
-
-	AddChild(model);	
-	GameComponent::Initialise();
 	CalculateInertiaTensor();
+	GameComponent::Initialise();
 	return true;
 }
 
-void Ship::CalculateInertiaTensor() { 
+void ThreeDSteerable::CalculateInertiaTensor() { 
 	float width = model->boundingBox.max.x - model->boundingBox.min.x;
 	float height = model->boundingBox.max.y - model->boundingBox.min.y;
 	float depth = model->boundingBox.max.z - model->boundingBox.min.z;
@@ -48,17 +44,17 @@ void Ship::CalculateInertiaTensor() {
     inertialTensor[2][2] = (float) (mass * (pow(width, 2) + pow(height, 2))) / 12.0f;
 }
 
-void Ship::AddForce(glm::vec3 force)
+void ThreeDSteerable::AddForce(glm::vec3 force)
 {
     this->force += force;
 }
 
-void Ship::AddTorque(glm::vec3 torque)
+void ThreeDSteerable::AddTorque(glm::vec3 torque)
 {
     this->torque += torque;
 }
 
-void Ship::AddForceAtPoint(glm::vec3 force, glm::vec3 point)
+void ThreeDSteerable::AddForceAtPoint(glm::vec3 force, glm::vec3 point)
 {
 	glm::vec3 to = glm::cross(force, point);
     torque += to;
@@ -66,17 +62,22 @@ void Ship::AddForceAtPoint(glm::vec3 force, glm::vec3 point)
     force += force;
 }
 
-void Ship::Draw()
+void ThreeDSteerable::Draw()
 {
-	glm::mat4 yaw;
-	// Necessary because the model points the wrong way!
-	yaw = glm::rotate(yaw, 180.0f, basisUp);
-	world = world * yaw;
 	GameComponent::Draw();
 }
 
 
-void Ship::Update(float timeDelta)
+void ThreeDSteerable::UpdateParent()
+{
+	parent->position = position;
+	parent->up = up;
+	parent->look = look;
+	parent->right = right;
+	parent->orientation = orientation;
+}
+
+void ThreeDSteerable::Update(float timeDelta)
 {
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
 
@@ -145,6 +146,8 @@ void Ship::Update(float timeDelta)
 	look = RotateVector(basisLook, orientation);
 	up = RotateVector(basisUp, orientation);
 	right = RotateVector(basisRight, orientation);
+
+	UpdateParent();
 
 	GameComponent::Update(timeDelta);
 }

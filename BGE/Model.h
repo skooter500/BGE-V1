@@ -45,6 +45,7 @@ namespace BGE
 		std::vector<glm::vec3> uvs;
 		std::vector<glm::vec3> colours;
 		BoundingBox boundingBox;
+		glm::mat4 localTransform;
 
 	};
 }
