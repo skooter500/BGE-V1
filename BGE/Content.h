@@ -19,7 +19,7 @@ namespace BGE
 			static map<string, GLuint> textures;
 			static map<string, GLuint> shaders;			
 		public:
-			static shared_ptr<Model> LoadModel(string name);
+			static shared_ptr<Model> LoadModel(string name, glm::mat4 localTransform = glm::mat4(1));
 			static GLuint LoadShaderPair(string name);
 			static GLuint LoadTexture(std::string path);
 

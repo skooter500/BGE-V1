@@ -4,9 +4,10 @@
 #include "PhysicsCamera.h"
 #include "Box.h"
 #include "Cylinder.h"
-#include "Ship.h"
+#include "ThreeDSteerable.h"
 #include "Ground.h"
 #include "Person.h"
+#include "Content.h"
 #include <btBulletDynamicsCommon.h>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
@@ -67,25 +68,35 @@ bool PhysicsGame1::Initialise()
 
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
-	shared_ptr<Person> person = make_shared<Person>();
-	AddChild(person);
+	//shared_ptr<Person> person = make_shared<Person>();
+	//AddChild(person);
 
-	CreateWall();
-	glm::quat q =  glm::angleAxis(glm::half_pi<float>(), glm::vec3(1, 0, 0)); 
-	//CreateCylinder(5, 1, glm::vec3(5,15,5), q);
+	//CreateWall();
+	//glm::quat q =  glm::angleAxis(glm::half_pi<float>(), glm::vec3(1, 0, 0)); 
+	////CreateCylinder(5, 1, glm::vec3(5,15,5), q);
 
-	// Now some constraints
-	shared_ptr<PhysicsComponent> box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 0), glm::quat()); 
-	shared_ptr<PhysicsComponent> box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 5), glm::quat()); 
+	//// Now some constraints
+	//shared_ptr<PhysicsComponent> box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 0), glm::quat()); 
+	//shared_ptr<PhysicsComponent> box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 5), glm::quat()); 
 
-	// A hinge
-	btHingeConstraint * hinge = new btHingeConstraint(*box1->rigidBody, *box2->rigidBody, btVector3(0,0,2.5f),btVector3(0,0,-2.5f), btVector3(0,1,0), btVector3(0,1,0), true);
-	dynamicsWorld->addConstraint(hinge);
+	//// A hinge
+	//btHingeConstraint * hinge = new btHingeConstraint(*box1->rigidBody, *box2->rigidBody, btVector3(0,0,2.5f),btVector3(0,0,-2.5f), btVector3(0,1,0), btVector3(0,1,0), true);
+	//dynamicsWorld->addConstraint(hinge);
 
-	box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 0), glm::quat()); 
-	box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 5), glm::quat()); 
+	//box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 0), glm::quat()); 
+	//box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 5), glm::quat());
 
-	physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
+	std::shared_ptr<GameComponent> ship = make_shared<GameComponent>();
+	ship->ambient = glm::vec3(0.2f, 0.2, 0.2f);
+	ship->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	std::shared_ptr<Model> model = Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp));	
+	std::shared_ptr<GameComponent> steerable = make_shared<ThreeDSteerable>(model);
+	steerable->position = glm::vec3(20, 5, -20);
+	ship->AddChild(model);
+	ship->AddChild(steerable);
+	AddChild(ship);
+
+	//physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
 	fullscreen = false;
 	console = true;
 	if (!Game::Initialise()) {

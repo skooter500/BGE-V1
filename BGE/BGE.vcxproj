@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -99,7 +99,7 @@
     <ClCompile Include="PhysicsFactory.cpp" />
     <ClCompile Include="PhysicsGame1.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
-    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="ThreeDSteerable.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
@@ -123,7 +123,7 @@
     <ClInclude Include="PhysicsFactory.h" />
     <ClInclude Include="PhysicsGame1.h" />
     <ClInclude Include="PhysicsComponent.h" />
-    <ClInclude Include="Ship.h" />
+    <ClInclude Include="ThreeDSteerable.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TriangleTest.h" />

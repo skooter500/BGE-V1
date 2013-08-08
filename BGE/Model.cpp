@@ -13,6 +13,7 @@ Model::Model():GameComponent()
 	drawMode = draw_modes::materials;
 	ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	localTransform = glm::mat4(1);
 }
 
 Model::~Model()
@@ -105,7 +106,7 @@ void Model::CalculateBounds()
 
 void Model::UpdateFromParent()
 {
-	world = parent->world;
+	world = parent->world * localTransform;
 	diffuse = parent->diffuse;
 	specular = parent->specular;
 	ambient = parent->ambient;

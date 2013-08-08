@@ -8,7 +8,7 @@ map<string, shared_ptr<Model>> Content::models = map<string, shared_ptr<Model>>(
 map<string, GLuint> Content::textures = map<string, GLuint>();
 map<string, GLuint> Content::shaders = map<string, GLuint>();	
 
-shared_ptr<Model> Content::LoadModel(string name) {
+shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	// First check to see if it's already loaded and if so, just return it
 	map<string, shared_ptr<Model>>::iterator mit = Content::models.find(name);
 	if (mit != Content::models.end())
@@ -151,7 +151,8 @@ shared_ptr<Model> Content::LoadModel(string name) {
 		}
 		is.close();
 	}
-	shared_ptr<Model> model (new Model());
+	shared_ptr<Model> model = make_shared<Model>();
+	model->localTransform = localTransform;
 	// For each vertex of each triangle
 	for( unsigned int i=0; i<vertexIndices.size(); i++ ){
 		// Get the indices of its attributes
@@ -188,19 +189,18 @@ GLuint Content::LoadTexture(std::string textureName)
 	SDL_Surface *surface;	// This surface will tell us the details of the image
 	surface = SDL_LoadBMP(path.c_str());
 	if (surface == NULL) {
-		cout << "Image not loaded" << endl;
-		exit(0);
+		throw BGE::Exception("Image could not be loaded");
 	}
 	// Check that the image's width is a power of 2
 	if ( (surface->w & (surface->w - 1)) != 0 ) {
-		cout << "warning: image.bmp's width is not a power of 2" << endl;
+		throw BGE::Exception("Image width not a power of 2");
 	}
  
 	GLint  nOfColors;
 	GLenum texture_format;
 	// Also check if the height is a power of 2
 	if ( (surface->h & (surface->h - 1)) != 0 ) {
-		printf("warning: image.bmp's height is not a power of 2\n");
+		throw BGE::Exception("Image height not a power of 2");
 	}
  
 	// get the number of channels in the SDL surface
@@ -220,7 +220,7 @@ GLuint Content::LoadTexture(std::string textureName)
 			texture_format = GL_BGR;
 		}
 	} else {
-		printf("warning: the image is not truecolor..  this will probably break\n");
+		throw BGE::Exception("Image is not truecolour");
 	}
 
 	// Create the texture
@@ -274,6 +274,10 @@ GLuint Content::LoadShaderPair(string name) {
 			VertexShaderCode += "\n" + Line;
 		VertexShaderStream.close();
 	}
+	else
+	{
+		throw BGE::Exception("Could not load vertex sharer");
+	}
  
 	// Read the Fragment Shader code from the file
 	std::string FragmentShaderCode;
@@ -284,6 +288,11 @@ GLuint Content::LoadShaderPair(string name) {
 			FragmentShaderCode += "\n" + Line;
 		FragmentShaderStream.close();
 	}
+	else
+	{
+		throw BGE::Exception("Could not load fragment sharer");
+	}
+
  
 	GLint Result = GL_FALSE;
 	int InfoLogLength;
