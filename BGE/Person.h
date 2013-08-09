@@ -1,6 +1,6 @@
 #pragma once
 #include "GameComponent.h"
-#include "PhysicsComponent.h"
+#include "PhysicsController.h"
 #include "NuiApi.h"
 #include <string>
 #include <map>
@@ -44,7 +44,7 @@ namespace BGE
 		void SkeletonFrameReady( NUI_SKELETON_FRAME* skeletonFrame );
 		void UpdateBone( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX jointFrom, NUI_SKELETON_POSITION_INDEX jointTo);
 		void UpdateBox( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX joint, bool isFace);
-		map<string, std::shared_ptr<PhysicsComponent>> boneComponents;
+		map<string, std::shared_ptr<PhysicsController>> boneComponents;
 		bool connected;
 		float footHeight;
 		float scale;

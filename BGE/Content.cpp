@@ -169,7 +169,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 		model->colours.push_back(tempColours[i]);
 	
 	}
-	Content::models[name] = model;
+	Content::models[name] = model;	
 	return model;
 }
 

@@ -3,7 +3,7 @@
 #include <sstream>
 #include "Box.h"
 #include "Cylinder.h"
-#include "PhysicsComponent.h"
+#include "PhysicsController.h"
 #include "KinematicMotionState.h"
 #include "PhysicsGame1.h"
 #include <btBulletDynamicsCommon.h>
@@ -41,6 +41,7 @@ Person::Person(void):GameComponent()
 	headCamera = false;
 	m_pNuiSensor = NULL;
 	scale = 20.0f;
+	footHeight = 0.0f;
 }
 
 
@@ -128,9 +129,12 @@ void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	else
 	{
 		lastPressed = false;
-	}
+	}	
 
-	footHeight = glm::min<float>(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_RIGHT].y, skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_LEFT].y);
+	if (footHeight == 0.0f)
+	{
+		footHeight = glm::min<float>(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_RIGHT].y, skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_LEFT].y);
+	}	
 
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_HEAD, NUI_SKELETON_POSITION_SHOULDER_CENTER);
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_SHOULDER_CENTER, NUI_SKELETON_POSITION_SHOULDER_LEFT);
@@ -198,8 +202,8 @@ void Person::UpdateBone(
 	ss << jointFrom << "," << jointTo;
 	string boneKey = ss.str();
 
-	map<string, shared_ptr<PhysicsComponent>>::iterator it = boneComponents.find(boneKey);
-	shared_ptr<PhysicsComponent> cyl;
+	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
+	shared_ptr<PhysicsController> cyl;
 	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
 	if (it == boneComponents.end())
 	{
@@ -207,7 +211,6 @@ void Person::UpdateBone(
 		cyl->rigidBody->setCollisionFlags(cyl->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cyl->rigidBody->setMotionState(new KinematicMotionState(cyl->parent));
 		boneComponents[boneKey] = cyl;
-		cyl->attachedToParent = false;
 	}
 	else
 	{
@@ -243,8 +246,8 @@ void Person::UpdateBox(
 
 	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
 
-	map<string, shared_ptr<PhysicsComponent>>::iterator it = boneComponents.find(boneKey);
-	shared_ptr<PhysicsComponent> box;
+	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
+	shared_ptr<PhysicsController> box;
 	if (it == boneComponents.end())
 	{
 		box = game->physicsFactory->CreateBox(6.0f, 6.0f, 0.5f, boneVector, orientation);
@@ -252,7 +255,6 @@ void Person::UpdateBox(
 		box->rigidBody->setMotionState(new KinematicMotionState(box->parent));
 
 		boneComponents[boneKey] = box;
-		box->attachedToParent = false;
 	}
 	else
 	{
@@ -261,7 +263,7 @@ void Person::UpdateBox(
 
 	if (headCamera && isFace)
 	{
-		game->GetCamera()->position = boneVector + glm::vec3(0, scale * 0.1f, 0);
+		game->camera->GetController()->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
 		box->parent->position = glm::vec3(100, -100, 100);
 	}
 	else
@@ -292,6 +294,7 @@ void Person::Update(float timeDelta)
 	if (connected)
 	{
 		SetStatusMessage("Kinect is connected");
+		Game::Instance()->PrintText("Press H to toggle the head camera");
 		// Wait for 0ms, just quickly test if it is time to process a skeleton
 		if ( WAIT_OBJECT_0 == WaitForSingleObject(m_hNextSkeletonEvent, 0) )
 		{

@@ -18,13 +18,13 @@ PhysicsFactory::~PhysicsFactory(void)
 {
 }
 
-shared_ptr<PhysicsComponent> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat)
+shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat)
 {
 	shared_ptr<GameComponent> sphere (new Sphere(radius));
 	Game::Instance()->AddChild(sphere);
 
-	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(PhysicsComponent::GLToBtQuat(quat)
-		,PhysicsComponent::GLToBtVector(pos)));	
+	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(PhysicsController::GLToBtQuat(quat)
+		,PhysicsController::GLToBtVector(pos)));	
 
 	btScalar mass = 1;
 	btVector3 sphereInertia(0,0,0);
@@ -35,14 +35,14 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateSphere(float radius, glm::vec
 	btRigidBody * sphereBody = new btRigidBody(fallRigidBodyCI);
 	dynamicsWorld->addRigidBody(sphereBody);
 
-	shared_ptr<PhysicsComponent> sphereComponent (new PhysicsComponent(sphereShape, sphereBody, sphereMotionState));	
+	shared_ptr<PhysicsController> sphereComponent (new PhysicsController(sphereShape, sphereBody, sphereMotionState));	
 	sphere->AddChild(sphereComponent);
 	sphereComponent->id = "Sphere";	
 	return sphereComponent;
 }
 
 
-shared_ptr<PhysicsComponent> PhysicsFactory::CreateBox(float width, float height, float depth, glm::vec3 pos, glm::quat quat)
+shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float height, float depth, glm::vec3 pos, glm::quat quat)
 {
 	// Create the shape
 	btCollisionShape * boxShape = new btBoxShape(btVector3(width, height, depth) * 0.5);
@@ -56,15 +56,15 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateBox(float width, float height
 	Game::Instance()->AddChild(box);
 
 	// Create the rigid body
-	btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(PhysicsComponent::GLToBtQuat(quat)
-		,PhysicsComponent::GLToBtVector(pos)));			
+	btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(PhysicsController::GLToBtQuat(quat)
+		,PhysicsController::GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass,  boxMotionState, boxShape, boxInertia);
 	btRigidBody * boxBody = new btRigidBody(fallRigidBodyCI);
 	boxBody->setFriction(567);
 	dynamicsWorld->addRigidBody(boxBody);
 
 	// Create the physics component and add it to the box
-	shared_ptr<PhysicsComponent> boxComponent = make_shared<PhysicsComponent>(PhysicsComponent(boxShape, boxBody, boxMotionState));
+	shared_ptr<PhysicsController> boxComponent = make_shared<PhysicsController>(PhysicsController(boxShape, boxBody, boxMotionState));
 	boxComponent->id = "Box";
 	boxBody->setUserPointer(boxComponent.get());
 	boxComponent->scale = box->scale;
@@ -73,7 +73,7 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateBox(float width, float height
 	return boxComponent;
 }
 
-shared_ptr<PhysicsComponent> PhysicsFactory::CreateCylinder(float radius, float height, glm::vec3 pos, glm::quat quat)
+shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float height, glm::vec3 pos, glm::quat quat)
 {
 	// Create the shape
 	btCollisionShape * shape = new btCylinderShape(btVector3(radius, height * 0.5f, radius));
@@ -87,14 +87,14 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateCylinder(float radius, float 
 	Game::Instance()->AddChild(cyl);
 
 	// Create the rigid body
-	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(PhysicsComponent::GLToBtQuat(quat)
-		,PhysicsComponent::GLToBtVector(pos)));			
+	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(PhysicsController::GLToBtQuat(quat)
+		,PhysicsController::GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass,  motionState, shape, inertia);
 	btRigidBody * body = new btRigidBody(rigidBodyCI);
 	dynamicsWorld->addRigidBody(body);
 
 	// Create the physics component and add it to the box
-	shared_ptr<PhysicsComponent> component = make_shared<PhysicsComponent>(PhysicsComponent(shape, body, motionState));
+	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(PhysicsController(shape, body, motionState));
 	component->id = "Cylinder";
 	component->scale = cyl->scale;
 	cyl->AddChild(component);
@@ -102,7 +102,7 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateCylinder(float radius, float 
 	return component;
 }
 
-shared_ptr<PhysicsComponent> PhysicsFactory::CreateCameraPhysics()
+shared_ptr<PhysicsController> PhysicsFactory::CreateCameraPhysics()
 {
 	btVector3 inertia;
 	// Now add physics to the camera
@@ -110,7 +110,7 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateCameraPhysics()
 	cameraCyl->calculateLocalInertia(1, inertia);
 	shared_ptr<PhysicsCamera> physicsCamera (new PhysicsCamera());
 
-	shared_ptr<Camera> camera = Game::Instance()->GetCamera();
+	shared_ptr<Camera> camera = Game::Instance()->camera;
 	camera->AddChild(physicsCamera);
 
 	btRigidBody::btRigidBodyConstructionInfo cameraCI(10,physicsCamera.get(), cameraCyl, inertia);  
@@ -123,7 +123,7 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateCameraPhysics()
 	return physicsCamera;
 }
 
-shared_ptr<PhysicsComponent> PhysicsFactory::CreateVehicle(glm::vec3 position)
+shared_ptr<PhysicsController> PhysicsFactory::CreateVehicle(glm::vec3 position)
 {
 	float width = 15;
 	float height = 2;
@@ -132,9 +132,9 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateVehicle(glm::vec3 position)
 	float wheelRadius = 2;
 	float wheelOffset = 2.0f;
 
-	shared_ptr<PhysicsComponent> chassis = CreateBox(width, height, length, position, glm::quat());
+	shared_ptr<PhysicsController> chassis = CreateBox(width, height, length, position, glm::quat());
 
-	shared_ptr<PhysicsComponent> wheel;
+	shared_ptr<PhysicsController> wheel;
 	glm::quat q =  glm::angleAxis(glm::half_pi<float>(), glm::vec3(1, 0, 0));
 
 	glm::vec3 offset;
@@ -142,28 +142,28 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateVehicle(glm::vec3 position)
 
 	offset = glm::vec3(- (width / 2 - wheelRadius), 0, - (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, position + offset, q);	 
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsComponent::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	offset = glm::vec3(+ (width / 2 - wheelRadius), 0, - (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, glm::vec3(position.x + (width / 2) - wheelRadius, position.y, position.z - (length / 2) - wheelWidth), q);
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsComponent::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	offset = glm::vec3(- (width / 2 - wheelRadius), 0, + (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, position + offset, q);	 
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsComponent::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	offset = glm::vec3(+ (width / 2 - wheelRadius), 0, + (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, position + offset, q);	 
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsComponent::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	return chassis;
 }
 
-shared_ptr<PhysicsComponent> PhysicsFactory::CreateGroundPhysics()
+shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 {
 	shared_ptr<Ground> ground (new Ground());
 
@@ -175,7 +175,7 @@ shared_ptr<PhysicsComponent> PhysicsFactory::CreateGroundPhysics()
 	groundRigidBody->setFriction(100);
 	dynamicsWorld->addRigidBody(groundRigidBody);
 	groundRigidBody->setUserPointer(ground.get());
-	shared_ptr<PhysicsComponent> groundComponent (new PhysicsComponent(groundShape, groundRigidBody, groundMotionState));
+	shared_ptr<PhysicsController> groundComponent (new PhysicsController(groundShape, groundRigidBody, groundMotionState));
 	groundComponent->id = "Ground";
 	ground->AddChild(groundComponent);	
 	Game::Instance()->SetGround(ground);

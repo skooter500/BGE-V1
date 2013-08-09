@@ -1,4 +1,4 @@
-#include "ThreeDSteerable.h"
+#include "Steerable3DController.h"
 #include "Content.h"
 #include "Model.h"
 #include <gtc/quaternion.hpp>
@@ -10,7 +10,7 @@
 using namespace BGE;
 using namespace std;
 
-ThreeDSteerable::ThreeDSteerable(shared_ptr<Model> model):GameComponent()
+Steerable3DController::Steerable3DController(shared_ptr<Model> model):GameComponent()
 {
 	mass = 10.0f;
 	velocity = glm::vec3(0);
@@ -19,22 +19,28 @@ ThreeDSteerable::ThreeDSteerable(shared_ptr<Model> model):GameComponent()
 	angularAcceleration = glm::vec3(0);
 	angularVelocity = glm::vec3(0);
 	torque = glm::vec3(0);
+	worldMode = world_modes::to_parent;
 	this->model = model;
 }
 
 
-ThreeDSteerable::~ThreeDSteerable(void)
+Steerable3DController::~Steerable3DController(void)
 {
 }
 
-bool ThreeDSteerable::Initialise()
+bool Steerable3DController::Initialise()
 {
+	if (!model->initialised)
+	{
+		model->Initialise();
+	}
 	CalculateInertiaTensor();
+	
 	GameComponent::Initialise();
 	return true;
 }
 
-void ThreeDSteerable::CalculateInertiaTensor() { 
+void Steerable3DController::CalculateInertiaTensor() { 
 	float width = model->boundingBox.max.x - model->boundingBox.min.x;
 	float height = model->boundingBox.max.y - model->boundingBox.min.y;
 	float depth = model->boundingBox.max.z - model->boundingBox.min.z;
@@ -44,17 +50,17 @@ void ThreeDSteerable::CalculateInertiaTensor() {
     inertialTensor[2][2] = (float) (mass * (pow(width, 2) + pow(height, 2))) / 12.0f;
 }
 
-void ThreeDSteerable::AddForce(glm::vec3 force)
+void Steerable3DController::AddForce(glm::vec3 force)
 {
     this->force += force;
 }
 
-void ThreeDSteerable::AddTorque(glm::vec3 torque)
+void Steerable3DController::AddTorque(glm::vec3 torque)
 {
     this->torque += torque;
 }
 
-void ThreeDSteerable::AddForceAtPoint(glm::vec3 force, glm::vec3 point)
+void Steerable3DController::AddForceAtPoint(glm::vec3 force, glm::vec3 point)
 {
 	glm::vec3 to = glm::cross(force, point);
     torque += to;
@@ -62,22 +68,13 @@ void ThreeDSteerable::AddForceAtPoint(glm::vec3 force, glm::vec3 point)
     force += force;
 }
 
-void ThreeDSteerable::Draw()
+void Steerable3DController::Draw()
 {
 	GameComponent::Draw();
 }
 
 
-void ThreeDSteerable::UpdateParent()
-{
-	parent->position = position;
-	parent->up = up;
-	parent->look = look;
-	parent->right = right;
-	parent->orientation = orientation;
-}
-
-void ThreeDSteerable::Update(float timeDelta)
+void Steerable3DController::Update(float timeDelta)
 {
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
 
@@ -146,8 +143,6 @@ void ThreeDSteerable::Update(float timeDelta)
 	look = RotateVector(basisLook, orientation);
 	up = RotateVector(basisUp, orientation);
 	right = RotateVector(basisRight, orientation);
-
-	UpdateParent();
 
 	GameComponent::Update(timeDelta);
 }

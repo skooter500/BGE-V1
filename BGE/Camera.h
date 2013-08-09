@@ -3,9 +3,6 @@
 
 namespace BGE {
 	class Camera:public GameComponent {
-	private:
-		glm::mat4 view;
-		glm::mat4 projection;
 	public:
 		Camera(void);
 		~Camera(void);
@@ -13,8 +10,8 @@ namespace BGE {
 		void Draw();
 		bool Initialise();
 		
-		glm::mat4 GetView();
-		glm::mat4 GetProjection();
+		glm::mat4 view;
+		glm::mat4 projection;
 	};
 }
 

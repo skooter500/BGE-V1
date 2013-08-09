@@ -21,6 +21,9 @@
     <Filter Include="Prefabs">
       <UniqueIdentifier>{697651d2-0cd7-45c2-b4a6-56fe6f15526c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{b8283cc0-8725-4a13-a2c1-fc02e47c494e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,9 +71,6 @@
     <ClCompile Include="PhysicsGame1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MotionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -89,8 +89,14 @@
     <ClCompile Include="KinematicMotionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ThreeDSteerable.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Steerable3DController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsController.cpp">
+      <Filter>Controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,9 +142,6 @@
     <ClInclude Include="PhysicsGame1.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsComponent.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -154,8 +157,16 @@
     <ClInclude Include="Exception.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="KinematicMotionState.h" />
-    <ClInclude Include="ThreeDSteerable.h">
+    <ClInclude Include="Steerable3DController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicMotionState.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

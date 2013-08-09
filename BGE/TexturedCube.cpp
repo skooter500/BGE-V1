@@ -117,8 +117,8 @@ void TexturedCube::Draw() {
 	glUseProgram(programID);
 
 	glm::mat4 Model = glm::mat4(1.0f);  
-	glm::mat4 MVP = Game::Instance()->GetCamera()->GetProjection() 
-		* Game::Instance()->GetCamera()->GetView() 
+	glm::mat4 MVP = Game::Instance()->camera->projection 
+		* Game::Instance()->camera->view 
 		* Model; // Remember, matrix multiplication is the other way around
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);

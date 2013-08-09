@@ -1,15 +1,15 @@
-#include "PhysicsComponent.h"
+#include "PhysicsController.h"
 
 using namespace BGE;
 
-PhysicsComponent::PhysicsComponent()
+PhysicsController::PhysicsController()
 {
 	shape = NULL;
 	rigidBody = NULL;
 	motionState = NULL;
 }
 
-PhysicsComponent::PhysicsComponent(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
+PhysicsController::PhysicsController(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
 {
 	this->shape = shape;
 	this->rigidBody = rigidBody;
@@ -19,41 +19,41 @@ PhysicsComponent::PhysicsComponent(btCollisionShape * shape, btRigidBody * rigid
 	}
 	this->id = "Physics Component";
 	this->motionState = motionState;
-	attachedToParent = false;
+	worldMode = world_modes::to_parent;
 }
 
-void PhysicsComponent::SetPhysicsStuff(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
+void PhysicsController::SetPhysicsStuff(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
 {
 	this->shape = shape;
 	this->rigidBody = rigidBody;
 	this->rigidBody->setUserPointer(this);
 	this->motionState = motionState;
 }
-PhysicsComponent::~PhysicsComponent(void)
+PhysicsController::~PhysicsController(void)
 {
 }
 
-glm::vec3 PhysicsComponent::BtToGLVector(const btVector3 & v)
+glm::vec3 PhysicsController::BtToGLVector(const btVector3 & v)
 {
 	return glm::vec3(v.getX(), v.getY(), v.getZ());
 }
 
-glm::quat PhysicsComponent::BtToGLQuat(const btQuaternion & q)
+glm::quat PhysicsController::BtToGLQuat(const btQuaternion & q)
 {
 	return glm::quat(q.getW(), q.getX(), q.getY(), q.getZ());
 }
 
-btVector3 PhysicsComponent::GLToBtVector(const glm::vec3 & v)
+btVector3 PhysicsController::GLToBtVector(const glm::vec3 & v)
 {
 	return btVector3(v.x, v.y, v.z);
 }
 
-btQuaternion PhysicsComponent::GLToBtQuat(const glm::quat & q)
+btQuaternion PhysicsController::GLToBtQuat(const glm::quat & q)
 {
 	return  btQuaternion(q.x, q.y, q.z, q.w);
 }
 
-void PhysicsComponent::Update(float timeDelta)
+void PhysicsController::Update(float timeDelta)
 {
 
 	btTransform trans;
@@ -63,14 +63,9 @@ void PhysicsComponent::Update(float timeDelta)
 	
 	// Calculate the world transform 
 	GameComponent::Update(timeDelta);
-
-	// Update the parent...
-	parent->position = position;
-	parent->orientation = orientation;
-	parent->world = world;
 }
 
-void PhysicsComponent::Cleanup()
+void PhysicsController::Cleanup()
 {
 	GameComponent::Cleanup();
 

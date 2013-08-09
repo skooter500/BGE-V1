@@ -25,7 +25,7 @@ namespace BGE
 	private:		
 		void RotateVectors();
 	protected:
-		bool initialised;	
+		
 	public:
 		GameComponent(void);
 
@@ -43,16 +43,17 @@ namespace BGE
 		glm::vec3 velocity;
 		glm::mat4 world;
 		glm::quat orientation;
-		bool attachedToParent;
 		glm::vec3 ambient;
 		glm::vec3 specular;
 		glm::vec3 diffuse; // Will use either this of the array of colours depending on the drawMode setting
-
+		bool initialised;	
 		std::string id;
 
 		enum draw_modes {materials, textured, single_material};
+		enum world_modes {from_self, from_self_with_parent, from_child, to_parent};
 
 		draw_modes drawMode;
+		world_modes worldMode;
 		
 		std::list<std::shared_ptr<GameComponent>> children;
 		static const glm::vec3 basisUp;
@@ -70,6 +71,7 @@ namespace BGE
 		void Roll(float angle);  // rotate on look vector
 		void AddChild(std::shared_ptr<GameComponent> child);
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
+		std::shared_ptr<GameComponent> GetController();
 
 	};
 }
