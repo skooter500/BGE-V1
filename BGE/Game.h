@@ -44,8 +44,7 @@ namespace BGE
 		
 		int width, height;
 		static Game * instance;
-		shared_ptr<Camera> camera;
-		shared_ptr<Ground> ground;
+		
 		const Uint8 * keyState;
 		TTF_Font *font; // Declare a SDL_ttf font 
 
@@ -64,8 +63,6 @@ namespace BGE
 		void PostDraw();
 		void Cleanup();
 		static Game * Instance();
-		shared_ptr<Camera> GetCamera();
-		void SetCamera(shared_ptr<Camera> ground);
 		shared_ptr<Ground> GetGround();
 		void SetGround(shared_ptr<Ground> ground);
 		const Uint8 * GetKeyState();
@@ -76,6 +73,9 @@ namespace BGE
 
 		void PrintText(string message, glm::vec2 position);
 		void PrintText(string message);
+
+		shared_ptr<Camera> camera;
+		shared_ptr<Ground> ground;
 
 		SDL_Window * mainwindow; /* Our window handle */
 		bool fullscreen;

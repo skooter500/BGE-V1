@@ -4,13 +4,13 @@
 
 namespace BGE
 {
-	class PhysicsComponent :
+	class PhysicsController :
 		public GameComponent
 	{
 	public:
-		PhysicsComponent(btCollisionShape * shape, btRigidBody * PhysicsComponent, btMotionState * motionState);
-		PhysicsComponent();
-		~PhysicsComponent(void);
+		PhysicsController(btCollisionShape * shape, btRigidBody * PhysicsComponent, btMotionState * motionState);
+		PhysicsController();
+		~PhysicsController(void);
 		void Update(float timeDelta);
 		void Cleanup();
 

@@ -4,7 +4,7 @@
 #include "Ground.h"
 #include "Box.h"
 #include "Sphere.h"
-#include "ThreeDSteerable.h"
+#include "Steerable3DController.h"
 #include "Cylinder.h"
 
 using namespace BGE;
@@ -39,7 +39,7 @@ bool ModelTest::Initialise() {
 	
 	std::shared_ptr<GameComponent> ship = make_shared<GameComponent>();
 	std::shared_ptr<Model> model = Content::LoadModel("marimba");	
-	std::shared_ptr<GameComponent> steerable = make_shared<ThreeDSteerable>(model);
+	std::shared_ptr<GameComponent> steerable = make_shared<Steerable3DController>(model);
 	steerable->position = glm::vec3(20, 5, -20);
 	ship->AddChild(steerable);
 	ship->AddChild(model);

@@ -1,6 +1,6 @@
 #pragma once
 #include "Game.h"
-#include "PhysicsComponent.h"
+#include "PhysicsController.h"
 #include "PhysicsFactory.h"
 #include <btBulletDynamicsCommon.h>
 

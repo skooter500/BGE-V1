@@ -31,14 +31,14 @@ GameComponent::GameComponent(void)
 	speed = 10.0f;
 	initialised = false;
 	scale = glm::vec3(1.0, 1.0, 1.0);
-	attachedToParent = true;
+	worldMode = world_modes::from_self_with_parent;
 	parent = NULL;
 	id = "Nothing";
 }
 
 
 bool GameComponent::Initialise()
-{
+{	
 	// Initialise all the children
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
@@ -72,11 +72,30 @@ void GameComponent::Cleanup()
 
 
 void GameComponent::Update(float timeDelta) {
-	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
-	if (parent != NULL && attachedToParent)
+
+	switch (worldMode)
 	{
-		 world = parent->world * world;
+		case world_modes::from_self:
+			world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
+			break;
+		case world_modes::from_self_with_parent:		
+			world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
+			if (parent != NULL)
+			{
+				world = (glm::translate(glm::mat4(1), parent->position) * glm::mat4_cast(parent->orientation)) * world;
+			}
+			break;
+		case world_modes::to_parent:			
+			world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
+			parent->world = world;
+			parent->position = this->position;
+			parent->up = this->up;
+			parent->look = this->look;
+			parent->right = this->right;
+			parent->orientation = this->orientation;
+			break;		
 	}
+	
 	moved = false;
 
 	// Update all the children
@@ -182,4 +201,19 @@ void GameComponent::AddChild(shared_ptr<GameComponent> child)
 std::list<std::shared_ptr<GameComponent>> * GameComponent::GetChildren()
 {
 	return & children;
+}
+
+shared_ptr<GameComponent> GameComponent::GetController()
+{
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{	
+		if ((*it)->worldMode == world_modes::to_parent)
+		{
+			return * it;
+
+		}
+		it ++;
+	}
+	throw new BGE::Exception("Tried to get a controller for a game component, but none exists");
 }

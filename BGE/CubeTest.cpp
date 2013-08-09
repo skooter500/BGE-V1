@@ -159,8 +159,8 @@ void CubeTest::Draw() {
 
 	glm::mat4 Model = glm::mat4(1.0f);  // Changes for each model !
 	// Our ModelViewProjection : multiplication of our 3 matrices
-	glm::mat4 MVP = Game::Instance()->GetCamera()->GetProjection() 
-		* Game::Instance()->GetCamera()->GetView() 
+	glm::mat4 MVP = Game::Instance()->camera->projection 
+		* Game::Instance()->camera->view 
 		* Model; // Remember, matrix multiplication is the other way around
 
 	// Get a handle for our "MVP" uniform.

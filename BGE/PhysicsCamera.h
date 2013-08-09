@@ -1,16 +1,16 @@
 #pragma once
 #include "Camera.h"
-#include "PhysicsComponent.h"
+#include "PhysicsController.h"
 #include <btBulletDynamicsCommon.h>
 
 namespace BGE
 
 {
 	class PhysicsCamera :
-		public PhysicsComponent, public btMotionState 
+		public PhysicsController, public btMotionState 
 	{
 	private:
-		PhysicsComponent * pickedUp;
+		PhysicsController * pickedUp;
 	public:
 		PhysicsCamera();
 		~PhysicsCamera(void);

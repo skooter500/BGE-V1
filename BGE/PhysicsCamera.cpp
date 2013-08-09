@@ -7,7 +7,7 @@
 
 using namespace BGE;
 
-PhysicsCamera::PhysicsCamera():PhysicsComponent()
+PhysicsCamera::PhysicsCamera():PhysicsController()
 {
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
@@ -47,7 +47,7 @@ void PhysicsCamera::Update(float timeDelta)
 		glm::vec3 pos = parent->position + (parent->look * 5.0f);
 		glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
 		glm::normalize(q);
-		shared_ptr<PhysicsComponent> physicsComponent = game->physicsFactory->CreateBox(1,1,1, pos, q);
+		shared_ptr<PhysicsController> physicsComponent = game->physicsFactory->CreateBox(1,1,1, pos, q);
 		
 		float force = 5000.0f;
 		physicsComponent->rigidBody->applyCentralForce(GLToBtVector(parent->look) * force);
@@ -72,7 +72,7 @@ void PhysicsCamera::Update(float timeDelta)
 			
 			if (rayCallback.hasHit())
 			{
-				pickedUp = reinterpret_cast<PhysicsComponent*>(rayCallback.m_collisionObject->getUserPointer());
+				pickedUp = reinterpret_cast<PhysicsController*>(rayCallback.m_collisionObject->getUserPointer());
 				if (pickedUp->parent == game->GetGround().get())
 				{
 					pickedUp = NULL;

@@ -102,13 +102,13 @@ void Ground::Draw()
 	glUseProgram(programID);
 
 	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
-	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetView()[0][0]);
-	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->GetCamera()->GetProjection()[0][0]);
+	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->camera->view[0][0]);
+	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->camera->projection[0][0]);
 	glUniform3f(specularID, specular.r, specular.g, specular.b);
 	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
 
 
-	glm::mat4 MV = Game::Instance()->GetCamera()->GetView() * world;
+	glm::mat4 MV = Game::Instance()->camera->view * world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));
 	glUniformMatrix3fv(nID, 1, GL_FALSE, & gl_NormalMatrix[0][0]);
 	

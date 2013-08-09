@@ -5,16 +5,15 @@
 using namespace std;
 namespace BGE
 {
-	class ThreeDSteerable :
+	class Steerable3DController :
 		public GameComponent
 	{
 	private:
-		void ThreeDSteerable::CalculateInertiaTensor();
+		void Steerable3DController::CalculateInertiaTensor();
 		shared_ptr<Model> model;
-		void UpdateParent();
 	public:
-		ThreeDSteerable(shared_ptr<Model> model);
-		~ThreeDSteerable(void);
+		Steerable3DController(shared_ptr<Model> model);
+		~Steerable3DController(void);
 
 		bool Initialise();
 		void Update(float timeDelta);

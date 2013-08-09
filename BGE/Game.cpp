@@ -10,6 +10,8 @@
 #include <ctime>
 #include <SDL_ttf.h>
 #include "Content.h"
+#include "FPSController.h"
+#include "Steerable3DController.h"
 
 using namespace BGE;
 
@@ -40,17 +42,19 @@ Game::Game(void) {
 	srand(time(0));
 
 	lastPrintPosition = glm::vec2(0,0);
-	fontSize = 14;
+	fontSize = 14;	
 
-	SetCamera(shared_ptr<Camera>(new Camera()));
+	worldMode = world_modes::from_self;
+
+	camera = make_shared<Camera>();
+	shared_ptr<GameComponent> controller = make_shared<FPSController>();
+	controller->position = glm::vec3(0, 10, 10);
+	camera->AddChild(controller);
+	AddChild(camera);
+
 }
 
 Game::~Game(void) {
-}
-
-shared_ptr<Camera> Game::GetCamera()
-{
-	return camera;
 }
 
 shared_ptr<Ground> Game::GetGround()
@@ -119,7 +123,10 @@ bool Game::Initialise() {
 	}// Initilize SDL_ttf
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 
+	//shared_ptr<GameComponent> controller = make_shared<Steerable3DController>(Content::LoadModel("cube"));
+	
     running = true;
+	initialised = true;
 	
 	return GameComponent::Initialise();
 }
@@ -161,13 +168,6 @@ void Game::SetGround(shared_ptr<Ground> ground)
 	children.remove(this->ground);
 	this->ground = ground;
 	AddChild(ground);
-}
-
-void Game::SetCamera(shared_ptr<Camera> camera)
-{
-	children.remove(this->camera);
-	this->camera = camera;
-	AddChild(camera);
 }
 
 void Game::Update(float timeDelta) {
