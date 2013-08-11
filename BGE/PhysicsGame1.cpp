@@ -65,7 +65,7 @@ bool PhysicsGame1::Initialise()
 	broadphase = new btAxisSweep3(worldMin,worldMax);
 	solver = new btSequentialImpulseConstraintSolver();
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-    dynamicsWorld->setGravity(btVector3(0,0,0));
+    dynamicsWorld->setGravity(btVector3(0,-9,0));
 
 	physicsFactory = new PhysicsFactory(dynamicsWorld);
 

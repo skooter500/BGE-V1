@@ -35,8 +35,8 @@ Game::Game(void) {
 	running = false;
 	console = true;
 	fullscreen = false;
-	width = 1024;
-	height = 768;
+	width = 800;
+	height = 600;
 	mainwindow = NULL;
 	instance = this;
 	srand(time(0));

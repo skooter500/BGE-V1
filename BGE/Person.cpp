@@ -131,7 +131,7 @@ void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 		lastPressed = false;
 	}	
 
-	if (footHeight == 0.0f)
+	//if (footHeight == 0.0f)
 	{
 		footHeight = glm::min<float>(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_RIGHT].y, skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_LEFT].y);
 	}	
