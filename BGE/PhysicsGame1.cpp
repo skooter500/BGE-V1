@@ -40,7 +40,7 @@ void PhysicsGame1::CreateWall()
 	float z = -40;
 	float gap = 1;
 
-	for (int w = 0 ; w < 10 ; w ++)
+	for (int w = 0 ; w < 5 ; w ++)
 	{
 		for (int h = 0 ; h < 5 ; h ++)	
 		{

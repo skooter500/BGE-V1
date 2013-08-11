@@ -39,8 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\Dependancies\SDL2-2.0.0\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet-2.81-rev2613\src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Dependancies\LibOVR\Include;..\Dependancies\SDL2-2.0.0\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet-2.81-rev2613\src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Dependancies\LibOVR\Lib\x86;..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,7 +76,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -100,6 +100,7 @@
     <ClCompile Include="PhysicsFactory.cpp" />
     <ClCompile Include="PhysicsGame1.cpp" />
     <ClCompile Include="PhysicsController.cpp" />
+    <ClCompile Include="RiftController.cpp" />
     <ClCompile Include="Steerable3DController.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="PhysicsFactory.h" />
     <ClInclude Include="PhysicsGame1.h" />
     <ClInclude Include="PhysicsController.h" />
+    <ClInclude Include="RiftController.h" />
     <ClInclude Include="Steerable3DController.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="TexturedCube.h" />

@@ -8,9 +8,11 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <ctime>
+
 #include <SDL_ttf.h>
 #include "Content.h"
 #include "FPSController.h"
+#include "RiftController.h"
 #include "Steerable3DController.h"
 
 using namespace BGE;
@@ -35,8 +37,8 @@ Game::Game(void) {
 	running = false;
 	console = true;
 	fullscreen = false;
-	width = 800;
-	height = 600;
+	width = 1024;
+	height = 768;
 	mainwindow = NULL;
 	instance = this;
 	srand(time(0));
@@ -49,7 +51,11 @@ Game::Game(void) {
 	camera = make_shared<Camera>();
 	shared_ptr<GameComponent> controller = make_shared<FPSController>();
 	controller->position = glm::vec3(0, 10, 10);
-	camera->AddChild(controller);
+	//camera->AddChild(controller);
+	
+	shared_ptr<RiftController> riftController = make_shared<RiftController>();
+	riftController->position = glm::vec3(0, 10, 10);
+	camera->AddChild(riftController);
 	AddChild(camera);
 
 }
@@ -60,6 +66,76 @@ Game::~Game(void) {
 shared_ptr<Ground> Game::GetGround()
 {
 	return ground;
+}
+
+
+
+void Game::DetectRift()
+{
+
+	OVR::System::Init(OVR::Log::ConfigureDefaultLog(OVR::LogMask_All));
+
+	pManager = *DeviceManager::Create();
+
+	// We'll handle it's messages in this case.
+	//pManager->SetMessageHandler(this);
+
+
+    int         detectionResult = IDCONTINUE;
+    const char* detectionMessage;
+
+    pSensor.Clear();
+    pHMD.Clear();
+    //RenderParams.MonitorName.Clear();
+
+    pHMD  = *pManager->EnumerateDevices<HMDDevice>().CreateDevice();
+    if (pHMD)
+    {
+        pSensor = *pHMD->GetSensor();
+
+        // This will initialize HMDInfo with information about configured IPD,
+        // screen size and other variables needed for correct projection.
+        // We pass HMD DisplayDeviceName into the renderer to select the
+        // correct monitor in full-screen mode.
+        if (pHMD->GetDeviceInfo(&HMDInfo))
+        {            
+            //RenderParams.MonitorName = HMDInfo.DisplayDeviceName;
+            //RenderParams.DisplayId = HMDInfo.DisplayId;
+            //SConfig.SetHMDInfo(HMDInfo);
+        }
+    }
+    else
+    {            
+        // If we didn't detect an HMD, try to create the sensor directly.
+        // This is useful for debugging sensor interaction; it is not needed in
+        // a shipping app.
+        pSensor = *pManager->EnumerateDevices<SensorDevice>().CreateDevice();
+    }
+
+
+    // If there was a problem detecting the Rift, display appropriate message.
+    detectionResult  = IDCONTINUE;        
+
+    if (!pHMD && !pSensor)
+        riftMessage = "Oculus Rift not detected.";
+    else if (!pHMD)
+        riftMessage = "Oculus Sensor detected; HMD Display not detected.";
+    else if (!pSensor)
+        riftMessage = "Oculus HMD Display detected; Sensor not detected.";
+    else if (HMDInfo.DisplayDeviceName[0] == '\0')
+        riftMessage = "Oculus Sensor detected; HMD display EDID not detected.";
+    else
+        riftMessage = "Oculus Rift detected!";
+
+	if (pSensor)
+    {
+        // We need to attach sensor to SensorFusion object for it to receive 
+        // body frame messages and update orientation. SFusion.GetOrientation() 
+        // is used in OnIdle() to orient the view.
+        SFusion.AttachToSensor(pSensor);
+        //SFusion.SetDelegateMessageHandler(this);
+        SFusion.SetPredictionEnabled(true);
+    }
 }
 
 bool Game::Initialise() {
@@ -120,12 +196,12 @@ bool Game::Initialise() {
 	if (TTF_Init() < 0)
 	{
 		throw BGE::Exception("Could not init TTF");
-	}// Initilize SDL_ttf
+	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 
-	//shared_ptr<GameComponent> controller = make_shared<Steerable3DController>(Content::LoadModel("cube"));
-	
-    running = true;
+	DetectRift();
+
+	running = true;
 	initialised = true;
 	
 	return GameComponent::Initialise();
@@ -189,6 +265,8 @@ void Game::Update(float timeDelta) {
 		Cleanup();
 		exit(0);
 	}
+	PrintText(riftMessage);
+
 	GameComponent::Update(timeDelta);
 }
 
