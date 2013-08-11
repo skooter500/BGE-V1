@@ -25,7 +25,7 @@ bool ModelTest::Initialise() {
 	box->position = glm::vec3(0, 5, -20);
 	AddChild(box);
 
-	std::shared_ptr<GameComponent> box1 (new Box(1, 2, 1));
+	/*std::shared_ptr<GameComponent> box1 (new Box(1, 2, 1));
 	box1->position = glm::vec3(5, 2, 0);
 	box->AddChild(box1);
 
@@ -43,7 +43,7 @@ bool ModelTest::Initialise() {
 	steerable->position = glm::vec3(20, 5, -20);
 	ship->AddChild(steerable);
 	ship->AddChild(model);
-
+	AddChild(ship);*/
 	
 	//Initialise OpenGL, GLEW and SDL and then initialize all my children!
 	if (!Game::Initialise()) {
