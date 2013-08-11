@@ -98,6 +98,9 @@
     <ClCompile Include="PhysicsController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="RiftController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -169,6 +172,7 @@
     <ClInclude Include="KinematicMotionState.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="RiftController.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
