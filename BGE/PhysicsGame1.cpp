@@ -71,8 +71,8 @@ bool PhysicsGame1::Initialise()
 
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
-	shared_ptr<Person> person = make_shared<Person>();
-	AddChild(person);
+	//shared_ptr<Person> person = make_shared<Person>();
+	//AddChild(person);
 
 	CreateWall();
 	//
