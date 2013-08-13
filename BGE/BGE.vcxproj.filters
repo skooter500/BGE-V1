@@ -24,6 +24,9 @@
     <Filter Include="Controllers">
       <UniqueIdentifier>{b8283cc0-8725-4a13-a2c1-fc02e47c494e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OVRKill">
+      <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,6 +104,15 @@
     <ClCompile Include="RiftController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OVRkill.cpp">
+      <Filter>OVRKill</Filter>
+    </ClCompile>
+    <ClCompile Include="FBO.cpp">
+      <Filter>OVRKill</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFunctions.cpp">
+      <Filter>OVRKill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -172,7 +184,21 @@
     <ClInclude Include="KinematicMotionState.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="RiftController.h" />
+    <ClInclude Include="RiftController.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OVR_Shaders.h">
+      <Filter>OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="OVRkill.h">
+      <Filter>OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="FBO.h">
+      <Filter>OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFunctions.h">
+      <Filter>OVRKill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">

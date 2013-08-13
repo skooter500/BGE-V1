@@ -120,8 +120,8 @@ bool PhysicsGame1::Initialise()
 	station->AddChild(ship1);
 
 	physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
-	fullscreen = false;
-	console = true;
+	fullscreen = true;
+	console = false;
 	if (!Game::Initialise()) {
 		return false;
 	}

@@ -86,13 +86,9 @@ namespace BGE
 		bool fullscreen;
 		bool console;
 		
-		// Rift Stuff
-		Ptr<DeviceManager>  pManager;
-		Ptr<SensorDevice>   pSensor;
-		Ptr<HMDDevice>      pHMD;
-		SensorFusion        SFusion;
-		OVR::HMDInfo        HMDInfo;
+		
 		string riftMessage;
+		bool renderToRift;
 	};
 }
 
