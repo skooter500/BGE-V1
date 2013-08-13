@@ -24,6 +24,9 @@
     <Filter Include="Controllers">
       <UniqueIdentifier>{b8283cc0-8725-4a13-a2c1-fc02e47c494e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OVRKill">
+      <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,9 +71,6 @@
     <ClCompile Include="Cylinder.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsGame1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MotionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,6 +97,24 @@
     </ClCompile>
     <ClCompile Include="PhysicsController.cpp">
       <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FBO.cpp">
+      <Filter>OVRKill</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFunctions.cpp">
+      <Filter>OVRKill</Filter>
+    </ClCompile>
+    <ClCompile Include="RiftController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="XBoxController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsGame1.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="VRGame.cpp">
+      <Filter>Games</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,9 +157,6 @@
     <ClInclude Include="Cylinder.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsGame1.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -168,6 +183,27 @@
     </ClInclude>
     <ClInclude Include="KinematicMotionState.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OVR_Shaders.h">
+      <Filter>OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="FBO.h">
+      <Filter>OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFunctions.h">
+      <Filter>OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="RiftController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="XBoxController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsGame1.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="VRGame.h">
+      <Filter>Games</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

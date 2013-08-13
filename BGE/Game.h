@@ -9,9 +9,14 @@
 #include<glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include<vector>
+#include<sstream>
 #include <SDL_ttf.h>
+#include <OVR.h>
 #include "Camera.h"
 #include "Ground.h"
+#include "RiftController.h"
+
+using namespace OVR;
 
 namespace BGE
 {
@@ -70,7 +75,7 @@ namespace BGE
 		int GetWidth();
 		int GetHeight();		
 		bool Run();
-
+		
 		void PrintText(string message, glm::vec2 position);
 		void PrintText(string message);
 
@@ -80,6 +85,12 @@ namespace BGE
 		SDL_Window * mainwindow; /* Our window handle */
 		bool fullscreen;
 		bool console;
+
+		shared_ptr<RiftController> riftController;
+		
+		
+		string riftMessage;
+		bool renderToRift;
 	};
 }
 

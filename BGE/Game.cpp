@@ -8,9 +8,12 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <ctime>
+
 #include <SDL_ttf.h>
 #include "Content.h"
 #include "FPSController.h"
+#include "RiftController.h"
+#include "XBoxController.h"
 #include "Steerable3DController.h"
 
 using namespace BGE;
@@ -34,9 +37,13 @@ void BGE::Log(string message)
 Game::Game(void) {
 	running = false;
 	console = true;
-	fullscreen = false;
-	width = 800;
-	height = 600;
+	fullscreen = true;
+	width = 1024;
+	height = 768;
+
+	// Rift
+	width = 1280;
+	height = 800;
 	mainwindow = NULL;
 	instance = this;
 	srand(time(0));
@@ -44,12 +51,25 @@ Game::Game(void) {
 	lastPrintPosition = glm::vec2(0,0);
 	fontSize = 14;	
 
+	renderToRift = true;
 	worldMode = world_modes::from_self;
 
 	camera = make_shared<Camera>();
-	shared_ptr<GameComponent> controller = make_shared<FPSController>();
-	controller->position = glm::vec3(0, 10, 10);
-	camera->AddChild(controller);
+
+	if (renderToRift)
+	{
+		shared_ptr<RiftController> riftController = make_shared<RiftController>();
+		riftController->position = glm::vec3(0, 10, 10);
+		this->riftController = riftController;
+		camera->AddChild(riftController);
+	}
+	else
+	{
+		shared_ptr<GameComponent> controller = make_shared<FPSController>();
+		controller->position = glm::vec3(0, 10, 10);
+		camera->AddChild(controller);
+	}
+
 	AddChild(camera);
 
 }
@@ -120,12 +140,11 @@ bool Game::Initialise() {
 	if (TTF_Init() < 0)
 	{
 		throw BGE::Exception("Could not init TTF");
-	}// Initilize SDL_ttf
+	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 
-	//shared_ptr<GameComponent> controller = make_shared<Steerable3DController>(Content::LoadModel("cube"));
 	
-    running = true;
+	running = true;
 	initialised = true;
 	
 	return GameComponent::Initialise();
@@ -156,8 +175,7 @@ bool Game::Run() {
         Draw();
 		PostDraw();
 		last = now;
-    }
- 
+    } 
     Cleanup();
  
     return 0;
@@ -189,6 +207,8 @@ void Game::Update(float timeDelta) {
 		Cleanup();
 		exit(0);
 	}
+	//PrintText(riftMessage);
+
 	GameComponent::Update(timeDelta);
 }
 
@@ -196,6 +216,9 @@ void Game::PreDraw()
 {
 	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 }
 
 void Game::PostDraw()
@@ -209,7 +232,7 @@ void Game::PostDraw()
 	}
 	messages.clear();
 	lastPrintPosition.y = 0;
-	SDL_GL_SwapWindow(mainwindow);	
+	SDL_GL_SwapWindow(mainwindow);
 }
 
 void Game::Cleanup () {
@@ -236,7 +259,69 @@ SDL_Window * Game::GetMainWindow()
 
 void Game::Draw()
 {	
-	GameComponent::Draw();	
+	if (renderToRift)
+	{
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_CULL_FACE);
+		
+		riftController->BindRenderBuffer();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		const int fboWidth = riftController->GetRenderBufferWidth();
+		const int fboHeight = riftController->GetRenderBufferHeight();
+		const int halfWidth = fboWidth/2;
+		const OVR::HMDInfo& hmd = riftController->GetHMD();
+		// Compute Aspect Ratio. Stereo mode cuts width in half.
+		float aspectRatio = float(hmd.HResolution * 0.5f) / float(hmd.VResolution);
+
+		// Compute Vertical FOV based on distance.
+		float halfScreenDistance = (hmd.VScreenSize / 2);
+		float yfov = 2.0f * atan(halfScreenDistance/hmd.EyeToScreenDistance);
+
+		// Post-projection viewport coordinates range from (-1.0, 1.0), with the
+		// center of the left viewport falling at (1/4) of horizontal screen size.
+		// We need to shift this projection center to match with the lens center.
+		// We compute this shift in physical units (meters) to correct
+		// for different screen sizes and then rescale to viewport coordinates.
+		float viewCenterValue = hmd.HScreenSize * 0.25f;
+		float eyeProjectionShift = viewCenterValue - hmd.LensSeparationDistance * 0.5f;
+		float projectionCenterOffset = 4.0f * eyeProjectionShift / hmd.HScreenSize;
+
+		// Projection matrix for the "center eye", which the left/right matrices are based on.
+		OVR::Matrix4f projCenter = OVR::Matrix4f::PerspectiveRH(yfov, aspectRatio, 0.3f, 1000.0f);
+		OVR::Matrix4f projLeft   = OVR::Matrix4f::Translation(projectionCenterOffset, 0, 0) * projCenter;
+		OVR::Matrix4f projRight  = OVR::Matrix4f::Translation(-projectionCenterOffset, 0, 0) * projCenter;
+
+		glm::mat4 cameraCentreView = camera->view;
+		// View transformation translation in world units.
+		float halfIPD = hmd.InterpupillaryDistance * 0.5f;
+		OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * RiftController::GLToOVRMat4(camera->view);
+		OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * RiftController::GLToOVRMat4(camera->view);
+
+		glViewport(0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		glScissor (0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		camera->view = RiftController::OVRToGLMat4(viewLeft);
+		camera->projection = RiftController::OVRToGLMat4(projLeft);
+		// Draw all my children
+		GameComponent::Draw();
+
+		glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		glScissor (halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		camera->view = RiftController::OVRToGLMat4(viewRight);
+		camera->projection = RiftController::OVRToGLMat4(projRight);
+		// Draw all my children
+		GameComponent::Draw();
+
+		riftController->UnBindRenderBuffer();
+		glDisable(GL_LIGHTING);
+		glDisable(GL_DEPTH_TEST);
+		riftController->PresentFbo();
+		camera->view = cameraCentreView;
+	}
+	else
+	{
+		glViewport(0, 0, width, height);
+		GameComponent::Draw();
+	}
 }
 
 

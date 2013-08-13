@@ -72,6 +72,6 @@ namespace BGE
 		void AddChild(std::shared_ptr<GameComponent> child);
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 		std::shared_ptr<GameComponent> GetController();
-
+		void RecalculateVectors();
 	};
 }

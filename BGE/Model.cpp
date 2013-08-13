@@ -59,6 +59,7 @@ bool Model::Initialise()
 		glBufferData(GL_ARRAY_BUFFER, colours.size() * sizeof(glm::vec3), &colours[0], GL_STATIC_DRAW);
 	}
 	CalculateBounds();
+	glUseProgram(0);
 	initialised = true;
 	return true;
 }
@@ -116,6 +117,7 @@ void Model::UpdateFromParent()
 
 void Model::Draw()
 {
+	
 	UpdateFromParent(); // Necessary beuase models are reusable
 	glUseProgram(programID);
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
@@ -183,7 +185,7 @@ void Model::Draw()
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
-	
+	glUseProgram(0);
 	// Draw my children
 	GameComponent::Draw();
 }

@@ -158,8 +158,7 @@ void Ground::Draw()
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
-	
-	// Dont forget to call the superclass draw so that OpenGL Swap Buffers can be called
+	glUseProgram(0);	
 	GameComponent::Draw();
 }
 void Ground::Cleanup()
