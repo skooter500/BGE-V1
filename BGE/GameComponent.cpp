@@ -70,9 +70,17 @@ void GameComponent::Cleanup()
 	}
 }
 
+void GameComponent::RecalculateVectors()
+{
+	look = RotateVector(basisLook, orientation);
+	right = RotateVector(basisRight, orientation);
+	up = RotateVector(basisUp, orientation);
+}
 
 void GameComponent::Update(float timeDelta) {
-
+	
+	RecalculateVectors();
+	
 	switch (worldMode)
 	{
 		case world_modes::from_self:
@@ -131,9 +139,6 @@ void GameComponent::Pitch(float angle)
 
 	orientation = rot * orientation;
 	
-	look = RotateVector(basisLook, orientation);
-	up = RotateVector(basisUp, orientation);
-
 	/*
 	glm::mat4 pitch;
 	pitch = glm::rotate(pitch, angle, right);
@@ -155,13 +160,6 @@ void GameComponent::Yaw(float angle)
 	glm::quat rot = glm::angleAxis(angle, basisUp);
 
 	orientation = rot * orientation;
-
-	look = RotateVector(basisLook, orientation);
-	right = RotateVector(basisRight, orientation);
-
-	//look = basisLook * orientation;
-	//right = basisRight * orientation;
-
 
 	/*
 	glm::mat4 yaw;

@@ -46,6 +46,7 @@ namespace BGE
 		void UpdateBox( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX joint, bool isFace);
 		map<string, std::shared_ptr<PhysicsController>> boneComponents;
 		bool connected;
+		bool tracked;
 		float footHeight;
 		float scale;
 	public:
