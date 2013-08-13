@@ -37,12 +37,12 @@ void PhysicsGame1::CreateWall()
 	float blockDepth = 5;
 
 	float start = -40;
-	float z = -40;
+	float z = 27;
 	float gap = 1;
 
-	for (int w = 0 ; w < 5 ; w ++)
+	for (int w = 0 ; w < 30 ; w ++)
 	{
-		for (int h = 0 ; h < 5 ; h ++)	
+		for (int h = 0 ; h < 10 ; h ++)	
 		{
 			float x = start + ((blockWidth + 2) * w);
 			float y = ((blockHeight + gap) / 2.0f) + ((blockHeight + gap) * h);
@@ -71,22 +71,23 @@ bool PhysicsGame1::Initialise()
 
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
-	//shared_ptr<Person> person = make_shared<Person>();
-	//AddChild(person);
+	shared_ptr<Person> person = make_shared<Person>();
+	AddChild(person);
 
 	CreateWall();
 	//
 	//// Now some constraints
-	shared_ptr<PhysicsController> box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 0), glm::quat()); 
-	shared_ptr<PhysicsController> box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 5), glm::quat()); 
+	//shared_ptr<PhysicsController> box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 0), glm::quat()); 
+	//shared_ptr<PhysicsController> box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 5), glm::quat()); 
 
-	// A hinge
-	btHingeConstraint * hinge = new btHingeConstraint(*box1->rigidBody, *box2->rigidBody, btVector3(0,0,2.5f),btVector3(0,0,-2.5f), btVector3(0,1,0), btVector3(0,1,0), true);
-	dynamicsWorld->addConstraint(hinge);
+	//// A hinge
+	//btHingeConstraint * hinge = new btHingeConstraint(*box1->rigidBody, *box2->rigidBody, btVector3(0,0,2.5f),btVector3(0,0,-2.5f), btVector3(0,1,0), btVector3(0,1,0), true);
+	//dynamicsWorld->addConstraint(hinge);
 
-	box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 0), glm::quat()); 
-	box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 5), glm::quat());
+	//box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 0), glm::quat()); 
+	//box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(10, 5, 5), glm::quat());
 
+	//physicsFactory->CreateCylinder(10, 3, glm::vec3(0, 20, 0), glm::quat());
 
 	std::shared_ptr<GameComponent> ship = make_shared<GameComponent>();
 	ship->ambient = glm::vec3(0.2f, 0.2, 0.2f);
@@ -119,9 +120,7 @@ bool PhysicsGame1::Initialise()
 	ship1->position = glm::vec3(0, 0, -10);
 	station->AddChild(ship1);
 
-	physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
-	fullscreen = true;
-	console = false;
+	//physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
 	if (!Game::Initialise()) {
 		return false;
 	}
@@ -138,6 +137,5 @@ void BGE::PhysicsGame1::Update(float timeDelta)
 
 void BGE::PhysicsGame1::Cleanup()
 {
-	
 	Game::Cleanup();
 }

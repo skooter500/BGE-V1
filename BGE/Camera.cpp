@@ -42,15 +42,11 @@ void Camera::Draw()
 void Camera::Update(float timeDelta) {
 	fps = (int) 1.0f / timeDelta;
 	GameComponent::Update(timeDelta);
-	moved = true;
-	if (moved) {
-		// Camera matrix
-		view = glm::lookAt(
-			position
-			, position + look
-			, basisUp
-			);
-	}
+	view = glm::lookAt(
+		position
+		, position + look
+		, basisUp
+		);
 	stringstream ss;
 	ss << "Camera Pos: " << position.x << " " << position.y << " " << position.z;
 	Game::Instance()->PrintText(ss.str());
