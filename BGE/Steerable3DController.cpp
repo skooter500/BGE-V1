@@ -23,7 +23,6 @@ Steerable3DController::Steerable3DController(shared_ptr<Model> model):GameCompon
 	this->model = model;
 }
 
-
 Steerable3DController::~Steerable3DController(void)
 {
 }

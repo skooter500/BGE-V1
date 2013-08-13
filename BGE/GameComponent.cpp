@@ -70,13 +70,17 @@ void GameComponent::Cleanup()
 	}
 }
 
-
-void GameComponent::Update(float timeDelta) {
-
+void GameComponent::RecalculateVectors()
+{
 	look = RotateVector(basisLook, orientation);
 	right = RotateVector(basisRight, orientation);
 	up = RotateVector(basisUp, orientation);
+}
 
+void GameComponent::Update(float timeDelta) {
+	
+	RecalculateVectors();
+	
 	switch (worldMode)
 	{
 		case world_modes::from_self:

@@ -32,13 +32,15 @@ void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, co
 	}      
 	else      
 	{          
+		person->tracked = false;
 		person->connected = false;       
 	}
 }
 Person::Person(void):GameComponent()
 {
 	connected = false;
-	headCamera = false;
+	tracked = false;
+	headCamera = true;
 	m_pNuiSensor = NULL;
 	scale = 20.0f;
 	footHeight = 0.0f;
@@ -203,23 +205,22 @@ void Person::UpdateBone(
 	string boneKey = ss.str();
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
-	shared_ptr<PhysicsController> cyl;
+	shared_ptr<PhysicsController> cylController;
 	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
 	if (it == boneComponents.end())
 	{
-		cyl = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, orientation);
-		cyl->rigidBody->setCollisionFlags(cyl->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		cyl->rigidBody->setMotionState(new KinematicMotionState(cyl->parent));
-		boneComponents[boneKey] = cyl;
+		cylController = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, orientation);
+		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
+		boneComponents[boneKey] = cylController;
 	}
 	else
 	{
-		cyl = it->second;
+		cylController = it->second;
 	}
-
-
-	cyl->parent->position = centrePos;
-	cyl->parent->orientation = q;
+	cylController->parent->position = this->position + centrePos;
+	cylController->parent->orientation = q;
 }
 
 void Person::UpdateBox(
@@ -247,35 +248,37 @@ void Person::UpdateBox(
 	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
-	shared_ptr<PhysicsController> box;
+	shared_ptr<PhysicsController> boxController;
 	if (it == boneComponents.end())
 	{
-		box = game->physicsFactory->CreateBox(6.0f, 6.0f, 0.5f, boneVector, orientation);
-		box->rigidBody->setCollisionFlags(box->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		box->rigidBody->setMotionState(new KinematicMotionState(box->parent));
+		boxController = game->physicsFactory->CreateBox(6.0f, 6.0f, 0.5f, boneVector, orientation);
+		boxController->rigidBody->setCollisionFlags(boxController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		boxController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		boxController->rigidBody->setMotionState(new KinematicMotionState(boxController->parent));
 
-		boneComponents[boneKey] = box;
+		boneComponents[boneKey] = boxController;
 	}
 	else
 	{
-		box = it->second;
+		boxController = it->second;
 	}
 
 	if (headCamera && isFace)
 	{
 		game->camera->GetController()->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
-		box->parent->position = glm::vec3(100, -100, 100);
+		boxController->parent->position = glm::vec3(100, -100, 100);
 	}
 	else
 	{
-		box->parent->position = boneVector;
+		boxController->parent->position = this->position + boneVector;
 	}
-	box->parent->orientation = q;
+	boxController->parent->orientation = q;
 	
 }
 
 void Person::SkeletonFrameReady( NUI_SKELETON_FRAME* pSkeletonFrame )
 {
+	tracked = false;
 	for (int i = 0; i < NUI_SKELETON_COUNT; i++)
 	{
 		const NUI_SKELETON_DATA & skeleton = pSkeletonFrame->SkeletonData[i];
@@ -284,9 +287,15 @@ void Person::SkeletonFrameReady( NUI_SKELETON_FRAME* pSkeletonFrame )
 		{
 		case NUI_SKELETON_TRACKED:
 			UpdateSkeleton(skeleton);
+			tracked = true;
+			// Just draw the first skeleton I find
+			return;
+		case NUI_SKELETON_NOT_TRACKED:
+		case NUI_SKELETON_POSITION_ONLY:
 			break;
 		}
 	}
+	
 }
 
 void Person::Update(float timeDelta)
@@ -294,7 +303,15 @@ void Person::Update(float timeDelta)
 	if (connected)
 	{
 		SetStatusMessage("Kinect is connected");
-		Game::Instance()->PrintText("Press H to toggle the head camera");
+		SetStatusMessage("Press H to toggle the head camera");
+		if (tracked)
+		{
+			SetStatusMessage("Kinect is tracking");
+		}
+		else
+		{
+			SetStatusMessage("Kinect is not tracking");
+		}
 		// Wait for 0ms, just quickly test if it is time to process a skeleton
 		if ( WAIT_OBJECT_0 == WaitForSingleObject(m_hNextSkeletonEvent, 0) )
 		{
@@ -304,8 +321,7 @@ void Person::Update(float timeDelta)
 			if (SUCCEEDED(m_pNuiSensor->NuiSkeletonGetNextFrame(0, &skeletonFrame)))
 			{
 				m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, &verySmoothParams);
-				// Process the skeleton frame
-				
+				// Process the skeleton frame				
 				SkeletonFrameReady(&skeletonFrame);
 			}
 		}

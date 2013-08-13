@@ -45,7 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>..\Dependancies\SDL2-2.0.0\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet-2.81-rev2613\src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\Dependancies\LibOVR\Lib\x86;..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -70,6 +70,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -96,7 +97,6 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelTest.cpp" />
     <ClCompile Include="MotionState.cpp" />
-    <ClCompile Include="OVRkill.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="PhysicsCamera.cpp" />
     <ClCompile Include="PhysicsFactory.cpp" />
@@ -108,6 +108,8 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
+    <ClCompile Include="VRGame.cpp" />
+    <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exception.h" />
@@ -125,7 +127,6 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelTest.h" />
     <ClInclude Include="MotionState.h" />
-    <ClInclude Include="OVRkill.h" />
     <ClInclude Include="OVR_Shaders.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="PhysicsCamera.h" />
@@ -138,6 +139,8 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TriangleTest.h" />
+    <ClInclude Include="VRGame.h" />
+    <ClInclude Include="XBoxController.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader" />

@@ -7,6 +7,7 @@ using namespace BGE;
 Cylinder::Cylinder(float radius, float height)
 {
 	shared_ptr<Model> model = Content::LoadModel("cyl");
+	model->Initialise();
 	drawMode = Model::draw_modes::single_material;
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	specular = glm::vec3(0,0,0);
