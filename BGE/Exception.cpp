@@ -2,7 +2,7 @@
 
 using namespace BGE;
 
-Exception::Exception(char * what)
+Exception::Exception(const char * what)
 {
 	this->what = what;
 }

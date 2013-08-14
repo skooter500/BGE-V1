@@ -21,5 +21,7 @@ namespace BGE
 		shared_ptr<PhysicsController> CreateVehicle(glm::vec3 pos);
 		shared_ptr<PhysicsController> CreateCameraPhysics();
 		shared_ptr<PhysicsController> CreateGroundPhysics();
+
+		void CreateWall(glm::vec3 startAt, float width, float height, float blockWidth = 5, float blockHeight = 5, float blockDepth = 5);
 	};
 }

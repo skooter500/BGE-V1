@@ -162,11 +162,67 @@ void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_KNEE_RIGHT, NUI_SKELETON_POSITION_ANKLE_RIGHT);
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_ANKLE_RIGHT, NUI_SKELETON_POSITION_FOOT_RIGHT);
 
-	UpdateBox(skeleton, NUI_SKELETON_POSITION_HAND_RIGHT, false);
-	UpdateBox(skeleton, NUI_SKELETON_POSITION_HAND_LEFT, false);
-	UpdateBox(skeleton, NUI_SKELETON_POSITION_HEAD, true);
+	UpdateHand(skeleton, NUI_SKELETON_POSITION_WRIST_LEFT, NUI_SKELETON_POSITION_HAND_LEFT, 0);
+	UpdateHand(skeleton, NUI_SKELETON_POSITION_WRIST_RIGHT, NUI_SKELETON_POSITION_HAND_RIGHT, 1);
+	UpdateHead(skeleton, NUI_SKELETON_POSITION_HEAD);
 }
 
+void Person::UpdateHand(
+	const NUI_SKELETON_DATA & skeleton,
+	NUI_SKELETON_POSITION_INDEX jointFrom,
+	NUI_SKELETON_POSITION_INDEX jointTo, int handIndex)
+{
+	NUI_SKELETON_POSITION_TRACKING_STATE jointFromState = skeleton.eSkeletonPositionTrackingState[jointFrom];
+	NUI_SKELETON_POSITION_TRACKING_STATE jointToState = skeleton.eSkeletonPositionTrackingState[jointTo];
+
+
+	if (jointFromState == NUI_SKELETON_POSITION_NOT_TRACKED || jointToState == NUI_SKELETON_POSITION_NOT_TRACKED)
+	{
+		return; // nothing to draw, one of the joints is not tracked
+	}
+
+	glm::vec3 start = NUIToGLVector(skeleton.SkeletonPositions[jointFrom], !headCamera);
+	glm::vec3 end = NUIToGLVector(skeleton.SkeletonPositions[jointTo], !headCamera);
+	start.y -= footHeight;
+	end.y -= footHeight;
+
+	start *= scale;
+	end *= scale;
+
+	glm::vec3 boneVector = end - start;
+	float boneLength = glm::length(boneVector);
+	boneVector = glm::normalize(boneVector);
+	glm::vec3 centrePos = end + ((boneVector) * 2.0f);
+	glm::vec3 axis = glm::cross(GameComponent::basisUp, boneVector);
+	axis = glm::normalize(axis);
+	float theta = (float) glm::acos<float>(glm::dot<float>(GameComponent::basisUp, boneVector));
+	glm::quat q = glm::angleAxis(glm::degrees(theta), axis);
+
+	stringstream ss;
+	ss << jointTo;
+	string boneKey = ss.str();
+
+	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
+	shared_ptr<PhysicsController> cylController;
+	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
+	if (it == boneComponents.end())
+	{
+		cylController = game->physicsFactory->CreateCylinder(2.0f, 0.5f, centrePos, orientation);
+		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
+		boneComponents[boneKey] = cylController;
+	}
+	else
+	{
+		cylController = it->second;
+	}
+
+	hands[handIndex].pos = centrePos;
+	hands[handIndex].look = boneVector;
+	cylController->parent->position = this->position + centrePos;
+	cylController->parent->orientation = q;
+}
 
 
 void Person::UpdateBone(
@@ -223,9 +279,9 @@ void Person::UpdateBone(
 	cylController->parent->orientation = q;
 }
 
-void Person::UpdateBox(
+void Person::UpdateHead(
 	const NUI_SKELETON_DATA & skeleton,
-	NUI_SKELETON_POSITION_INDEX joint, bool isFace)
+	NUI_SKELETON_POSITION_INDEX joint)
 {
 	NUI_SKELETON_POSITION_TRACKING_STATE jointFromState = skeleton.eSkeletonPositionTrackingState[joint];
 
@@ -263,7 +319,7 @@ void Person::UpdateBox(
 		boxController = it->second;
 	}
 
-	if (headCamera && isFace)
+	if (headCamera)
 	{
 		game->camera->GetController()->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
 		boxController->parent->position = glm::vec3(100, -100, 100);
@@ -320,7 +376,7 @@ void Person::Update(float timeDelta)
 			// Get the skeleton frame that is ready
 			if (SUCCEEDED(m_pNuiSensor->NuiSkeletonGetNextFrame(0, &skeletonFrame)))
 			{
-				m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, &verySmoothParams);
+				m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, &somewhatLatentParams);
 				// Process the skeleton frame				
 				SkeletonFrameReady(&skeletonFrame);
 			}

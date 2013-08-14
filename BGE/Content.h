@@ -6,6 +6,7 @@
 #include <sstream>
 #include <map>
 #include "Model.h"
+#include <fmod.hpp>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ namespace BGE
 			static map<string, GLuint> shaders;			
 		public:
 			static shared_ptr<Model> LoadModel(string name, glm::mat4 localTransform = glm::mat4(1));
+			static FMOD::Sound * LoadSound(string name, FMOD::System * system);
 			static GLuint LoadShaderPair(string name);
 			static GLuint LoadTexture(std::string path);
 
