@@ -18,6 +18,22 @@ PhysicsFactory::~PhysicsFactory(void)
 {
 }
 
+void PhysicsFactory::CreateWall(glm::vec3 startAt, float width, float height, float blockWidth, float blockHeight, float blockDepth)
+{
+	float z = startAt.z;
+	float gap = 1;
+
+	for (int w = 0 ; w < width ; w ++)
+	{
+		for (int h = 0 ; h < height ; h ++)	
+		{
+			float x = startAt.x + ((blockWidth + 2) * w);
+			float y = ((blockHeight + gap) / 2.0f) + ((blockHeight + gap) * h);
+			CreateBox(blockWidth, blockHeight, blockDepth, glm::vec3(x, y, z), glm::quat());
+		}
+	}
+}
+
 shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat)
 {
 	shared_ptr<GameComponent> sphere (new Sphere(radius));

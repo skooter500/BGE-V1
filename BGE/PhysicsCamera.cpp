@@ -61,7 +61,7 @@ void PhysicsCamera::Update(float timeDelta)
 	// Handle the gravity gun
 	if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
 	{
-		float dist = 10.0f;
+		float dist = 1000.0f;
 		if (pickedUp == NULL)
 		{		
 			btVector3 rayFrom = GLToBtVector(parent->position + (parent->look * dist)); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time

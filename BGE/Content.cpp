@@ -8,6 +8,19 @@ map<string, shared_ptr<Model>> Content::models = map<string, shared_ptr<Model>>(
 map<string, GLuint> Content::textures = map<string, GLuint>();
 map<string, GLuint> Content::shaders = map<string, GLuint>();	
 
+FMOD::Sound * Content::LoadSound(string name, FMOD::System * system)
+{
+	FMOD::Sound * sound;
+	string fileName = Content::prefix + name + ".wav";
+	FMOD_RESULT res = system->createSound(fileName.c_str(), FMOD_3D, 0, & sound);
+	if (res != FMOD_OK)
+	{
+		string message = "Could not load sound file: " + fileName;
+		throw BGE::Exception(message.c_str());
+	}
+	return sound;
+}
+
 shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	// First check to see if it's already loaded and if so, just return it
 	map<string, shared_ptr<Model>>::iterator mit = Content::models.find(name);

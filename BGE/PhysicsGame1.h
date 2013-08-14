@@ -28,7 +28,7 @@ namespace BGE
 		void CreateWall();
 		
 		// The world.
-		PhysicsFactory * physicsFactory;
+		std::shared_ptr<PhysicsFactory> physicsFactory;
 		btDiscreteDynamicsWorld * dynamicsWorld;
 	};
 }

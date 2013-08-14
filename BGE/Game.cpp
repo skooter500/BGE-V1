@@ -34,6 +34,8 @@ void BGE::Log(string message)
 	printf("%s\n", message.c_str());
 }
 
+
+
 Game::Game(void) {
 	running = false;
 	console = true;
@@ -154,6 +156,21 @@ void Game::PrintText(string message, glm::vec2 position)
 {
 	messages.push_back(PrintMessage(message, position));
 }
+
+void Game::PrintVector(string message, glm::vec3 v)
+{
+	stringstream ss;
+	ss << message << v.x << " " << v.y << " " << v.z;
+	PrintText(ss.str());
+}
+
+void Game::PrintInt(string message, int i)
+{
+	stringstream ss;
+	ss << message << i;
+	PrintText(ss.str());
+}
+
 
 void Game::PrintText(string message)
 {

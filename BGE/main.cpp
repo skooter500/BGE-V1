@@ -9,13 +9,14 @@
 #include "TexturedCube.h"
 #include "CubeTest.h"
 #include "PhysicsGame1.h"
+#include "VRGame.h"
 #include "ModelTest.h"
 
 using namespace BGE;
 
 int main(int argc, char *argv[])
 {
-	PhysicsGame1 game;
+	VRGame game;
 
 	game.Run();
 
