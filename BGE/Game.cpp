@@ -15,6 +15,7 @@
 #include "RiftController.h"
 #include "XBoxController.h"
 #include "Steerable3DController.h"
+#include "Conversions.h"
 
 using namespace BGE;
 
@@ -53,10 +54,14 @@ Game::Game(void) {
 	lastPrintPosition = glm::vec2(0,0);
 	fontSize = 14;	
 
+	fps = 0;
+
 	riftEnabled = false;
 	worldMode = world_modes::from_self;
 
 	camera = make_shared<Camera>();
+	soundSystem = make_shared<SoundSystem>();
+	soundSystem->Initialise();
 	AddChild(camera);
 
 }
@@ -139,7 +144,7 @@ bool Game::Initialise() {
 	}
 	else
 	{
-		shared_ptr<GameComponent> controller = make_shared<XBoxController>();
+		shared_ptr<GameComponent> controller = make_shared<FPSController>();
 		controller->position = glm::vec3(0, 10, 10);
 		camera->AddChild(controller);
 	}
@@ -205,6 +210,9 @@ void Game::SetGround(shared_ptr<Ground> ground)
 
 void Game::Update(float timeDelta) {
 	// Check for messages
+	fps = (int) 1.0f / timeDelta;
+	PrintText("FPS: " + to_string((long double) fps));
+	soundSystem->Update();
 	SDL_Event event;
     if (SDL_PollEvent(&event))
     {
@@ -274,6 +282,7 @@ SDL_Window * Game::GetMainWindow()
 
 void Game::Draw()
 {	
+
 	if (riftEnabled)
 	{
 		glEnable(GL_DEPTH_TEST);
@@ -309,20 +318,20 @@ void Game::Draw()
 		glm::mat4 cameraCentreView = camera->view;
 		// View transformation translation in world units.
 		float halfIPD = hmd.InterpupillaryDistance * 0.5f;
-		OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * RiftController::GLToOVRMat4(camera->view);
-		OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * RiftController::GLToOVRMat4(camera->view);
+		OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * GLToOVRMat4(camera->view);
+		OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * GLToOVRMat4(camera->view);
 
 		glViewport(0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
 		glScissor (0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		camera->view = RiftController::OVRToGLMat4(viewLeft);
-		camera->projection = RiftController::OVRToGLMat4(projLeft);
+		camera->view = OVRToGLMat4(viewLeft);
+		camera->projection = OVRToGLMat4(projLeft);
 		// Draw all my children
 		GameComponent::Draw();
 
 		glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
 		glScissor (halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		camera->view = RiftController::OVRToGLMat4(viewRight);
-		camera->projection = RiftController::OVRToGLMat4(projRight);
+		camera->view = OVRToGLMat4(viewRight);
+		camera->projection = OVRToGLMat4(projRight);
 		// Draw all my children
 		GameComponent::Draw();
 

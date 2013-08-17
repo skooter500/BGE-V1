@@ -36,11 +36,7 @@ namespace BGE
 		std::shared_ptr<PhysicsFactory> physicsFactory;
 		btDiscreteDynamicsWorld * dynamicsWorld;
 
-		// FMOD
-		FMOD::System * fmodSystem;
-
-		vector<FMOD::Sound *> sounds;
-
+		
 		// Now stuff we need to track
 		shared_ptr<Person> person;
 		PhysicsController * leftHandPickedUp;

@@ -14,6 +14,7 @@
 #include <OVR.h>
 #include "Camera.h"
 #include "Ground.h"
+#include "SoundSystem.h"
 #include "RiftController.h"
 
 using namespace OVR;
@@ -89,10 +90,13 @@ namespace BGE
 		bool console;
 
 		shared_ptr<RiftController> riftController;
-		
-		
+		shared_ptr<SoundSystem> soundSystem;
+
 		string riftMessage;
 		bool riftEnabled;
+
+		float fps;
+
 	};
 }
 

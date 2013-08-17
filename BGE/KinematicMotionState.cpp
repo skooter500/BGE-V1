@@ -1,5 +1,6 @@
 #include "KinematicMotionState.h"
 #include "PhysicsController.h"
+#include "Conversions.h"
 
 using namespace BGE;
 
@@ -15,8 +16,8 @@ KinematicMotionState::~KinematicMotionState(void)
 
 void KinematicMotionState::getWorldTransform(btTransform &worldTrans) const
 {
-	worldTrans.setOrigin(PhysicsController::GLToBtVector(owner->position));
-	worldTrans.setRotation(PhysicsController::GLToBtQuat(owner->orientation));
+	worldTrans.setOrigin(GLToBtVector(owner->position));
+	worldTrans.setRotation(GLToBtQuat(owner->orientation));
 }
 
 void KinematicMotionState::setWorldTransform(const btTransform &worldTrans)

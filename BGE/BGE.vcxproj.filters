@@ -116,6 +116,12 @@
     <ClCompile Include="VRGame.cpp">
       <Filter>Games</Filter>
     </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -204,6 +210,13 @@
     </ClInclude>
     <ClInclude Include="VRGame.h">
       <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h" />
+    <ClInclude Include="Conversions.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

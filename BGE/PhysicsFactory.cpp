@@ -4,8 +4,11 @@
 #include "Box.h"
 #include "Cylinder.h"
 #include "Ground.h"
+#include "Content.h"
 #include "PhysicsCamera.h"
-
+#include "Model.h"
+#include "dirent.h"
+#include "Conversions.h"
 using namespace BGE;
 
 PhysicsFactory::PhysicsFactory(btDiscreteDynamicsWorld * dynamicsWorld)
@@ -34,13 +37,53 @@ void PhysicsFactory::CreateWall(glm::vec3 startAt, float width, float height, fl
 	}
 }
 
+shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::vec3 pos, glm::quat quat, glm::vec3 scale)
+{
+	shared_ptr<GameComponent> component = make_shared<GameComponent>();
+	component->id = name;
+	Game::Instance()->AddChild(component);
+	shared_ptr<Model> model = Content::LoadModel(name);
+	model->Initialise();
+	component->AddChild(model);
+
+	std::vector<glm::vec3>::iterator it = model->vertices.begin(); 	
+	btConvexHullShape * tetraShape = new btConvexHullShape();
+
+	while (it != model->vertices.end())
+	{
+		glm::vec4 point = glm::vec4(* it, 0) * glm::scale(glm::mat4(1), scale);
+		tetraShape->addPoint(GLToBtVector(glm::vec3(point)));
+		it ++;
+	}
+	
+	btScalar mass = 1;
+	btVector3 inertia(0,0,0);
+	
+	tetraShape->calculateLocalInertia(mass,inertia);
+	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
+		,GLToBtVector(pos)));	
+	
+	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass,motionState, tetraShape, inertia);
+	btRigidBody * body = new btRigidBody(rigidBodyCI);
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	dynamicsWorld->addRigidBody(body);
+
+	shared_ptr<PhysicsController> controller =make_shared<PhysicsController>(tetraShape, body, motionState);	
+	body->setUserPointer(controller.get());
+	component->AddChild(controller);
+	controller->scale = scale;
+
+	controller->id = name;	
+	return controller;
+}
+
 shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat)
 {
 	shared_ptr<GameComponent> sphere (new Sphere(radius));
 	Game::Instance()->AddChild(sphere);
 
-	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(PhysicsController::GLToBtQuat(quat)
-		,PhysicsController::GLToBtVector(pos)));	
+	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
+		,GLToBtVector(pos)));	
 
 	btScalar mass = 1;
 	btVector3 sphereInertia(0,0,0);
@@ -74,8 +117,8 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	Game::Instance()->AddChild(box);
 
 	// Create the rigid body
-	btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(PhysicsController::GLToBtQuat(quat)
-		,PhysicsController::GLToBtVector(pos)));			
+	btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
+		,GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass,  boxMotionState, boxShape, boxInertia);
 	btRigidBody * body = new btRigidBody(fallRigidBodyCI);
 	body->setFriction(567);
@@ -106,8 +149,8 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	Game::Instance()->AddChild(cyl);
 
 	// Create the rigid body
-	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(PhysicsController::GLToBtQuat(quat)
-		,PhysicsController::GLToBtVector(pos)));			
+	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
+		,GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass,  motionState, shape, inertia);
 	btRigidBody * body = new btRigidBody(rigidBodyCI);
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
@@ -163,22 +206,22 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateVehicle(glm::vec3 position)
 
 	offset = glm::vec3(- (width / 2 - wheelRadius), 0, - (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, position + offset, q);	 
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	offset = glm::vec3(+ (width / 2 - wheelRadius), 0, - (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, glm::vec3(position.x + (width / 2) - wheelRadius, position.y, position.z - (length / 2) - wheelWidth), q);
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	offset = glm::vec3(- (width / 2 - wheelRadius), 0, + (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, position + offset, q);	 
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	offset = glm::vec3(+ (width / 2 - wheelRadius), 0, + (length / 2 + wheelOffset));
 	wheel = CreateCylinder(wheelRadius, wheelWidth, position + offset, q);	 
-	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, PhysicsController::GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
+	hinge = new btHingeConstraint(* chassis->rigidBody, * wheel->rigidBody, GLToBtVector(offset),btVector3(0,0, 0), btVector3(0,0,1), btVector3(0,1,0), true);
 	dynamicsWorld->addConstraint(hinge);
 
 	return chassis;
@@ -202,4 +245,37 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 	ground->AddChild(groundComponent);	
 	Game::Instance()->SetGround(ground);
 	return groundComponent;
+}
+
+shared_ptr<PhysicsController> PhysicsFactory::CreateRandomObject(glm::vec3 point, glm::quat q)
+{
+	vector<string> names;
+	DIR * dir;
+	struct dirent * ent;
+	dir = opendir (Content::prefix.c_str());
+	if (dir != NULL) 
+	{
+		/* print all the files and directories within directory */
+		while ((ent = readdir (dir)) != NULL) 
+		{
+			string fname = string(ent->d_name);
+			int fpos = fname.find("objm");
+			if (fpos != string::npos)
+			{
+				if ((fname.find("cube") == string::npos) && (fname.find("cyl") == string::npos) && (fname.find("sphere") == string::npos))
+				{
+					names.push_back(fname.substr(0, fpos - 1));
+				}
+			}
+		}
+		closedir (dir);
+	} 
+	else 
+	{
+		throw BGE::Exception("Could not list obj files in content folder");
+	}
+
+	int which = rand() % names.size();
+	string name = names[which];
+	return CreateFromModel(name, point, q, glm::vec3(3,3,3));
 }
