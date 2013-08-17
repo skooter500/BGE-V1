@@ -55,4 +55,12 @@ void Camera::Update(float timeDelta) {
 	ss << "Camera Look: " << look.x << " " << look.y << " " << look.z;
 	Game::Instance()->PrintText(ss.str());
 
+	ss.str("");
+	ss << "Camera Up: " << up.x << " " << up.y << " " << up.z;
+	Game::Instance()->PrintText(ss.str());
+
+	ss.str("");
+	ss << "Camera Right: " << right.x << " " << right.y << " " << right.z;
+	Game::Instance()->PrintText(ss.str());
+
 }

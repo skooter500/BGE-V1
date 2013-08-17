@@ -92,7 +92,7 @@ namespace BGE
 		
 		
 		string riftMessage;
-		bool renderToRift;
+		bool riftEnabled;
 	};
 }
 

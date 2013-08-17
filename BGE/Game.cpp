@@ -53,25 +53,10 @@ Game::Game(void) {
 	lastPrintPosition = glm::vec2(0,0);
 	fontSize = 14;	
 
-	renderToRift = true;
+	riftEnabled = false;
 	worldMode = world_modes::from_self;
 
 	camera = make_shared<Camera>();
-
-	if (renderToRift)
-	{
-		shared_ptr<RiftController> riftController = make_shared<RiftController>();
-		riftController->position = glm::vec3(0, 10, 10);
-		this->riftController = riftController;
-		camera->AddChild(riftController);
-	}
-	else
-	{
-		shared_ptr<GameComponent> controller = make_shared<FPSController>();
-		controller->position = glm::vec3(0, 10, 10);
-		camera->AddChild(controller);
-	}
-
 	AddChild(camera);
 
 }
@@ -145,6 +130,19 @@ bool Game::Initialise() {
 	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 
+	if (riftEnabled)
+	{
+		shared_ptr<RiftController> riftController = make_shared<RiftController>();
+		riftController->position = glm::vec3(0, 10, 10);
+		this->riftController = riftController;
+		camera->AddChild(riftController);
+	}
+	else
+	{
+		shared_ptr<GameComponent> controller = make_shared<XBoxController>();
+		controller->position = glm::vec3(0, 10, 10);
+		camera->AddChild(controller);
+	}
 	
 	running = true;
 	initialised = true;
@@ -276,7 +274,7 @@ SDL_Window * Game::GetMainWindow()
 
 void Game::Draw()
 {	
-	if (renderToRift)
+	if (riftEnabled)
 	{
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);

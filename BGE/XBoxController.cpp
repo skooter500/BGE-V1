@@ -22,6 +22,14 @@ bool XBoxController::Initialise()
 }
 
 
+void CheckOverflow( int & x )
+{
+	if (x == -32768)
+	{
+		x = - x;
+	}
+}
+
 void XBoxController::Update(float timeDelta)
 {
 	SDL_Joystick *joy;
@@ -36,6 +44,7 @@ void XBoxController::Update(float timeDelta)
 			float range = 1;
 
 			int strafeAxis = SDL_JoystickGetAxis(joy, 0);
+			
 			if (glm::abs<int>(strafeAxis) > 8000)
 			{
 				float strafe = ((float) strafeAxis / (float) numeric_limits<short int>::max()) * range;
@@ -43,13 +52,15 @@ void XBoxController::Update(float timeDelta)
 			}
 			
 			int walkAxis = SDL_JoystickGetAxis(joy, 1);
+			CheckOverflow(walkAxis);
 			if (glm::abs<int>(walkAxis) > 8000)
 			{
 				float walk = ((float) walkAxis / (float) numeric_limits<short int>::max()) * range;
+				
 				Walk(-walk);
 			}
 			
-			range = 5; 
+			range = 3; 
 			int x = SDL_JoystickGetAxis(joy, 2);	
 			float yaw = ((float) x / (float) numeric_limits<short int>::max()) * range;
 			Yaw((int) -yaw);
@@ -57,6 +68,7 @@ void XBoxController::Update(float timeDelta)
 			if (!disablePitch)
 			{
 				int y = SDL_JoystickGetAxis(joy, 3);	
+				CheckOverflow(y);
 				float pitch = ((float) y / (float) numeric_limits<short int>::max()) * range;
 				Pitch((int) -pitch);
 			}

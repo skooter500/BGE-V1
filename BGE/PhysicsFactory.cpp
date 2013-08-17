@@ -48,10 +48,12 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::ve
 
 	sphereShape->calculateLocalInertia(mass,sphereInertia);
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass,sphereMotionState, sphereShape, sphereInertia);
-	btRigidBody * sphereBody = new btRigidBody(fallRigidBodyCI);
-	dynamicsWorld->addRigidBody(sphereBody);
+	btRigidBody * body = new btRigidBody(fallRigidBodyCI);
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	dynamicsWorld->addRigidBody(body);
 
-	shared_ptr<PhysicsController> sphereComponent (new PhysicsController(sphereShape, sphereBody, sphereMotionState));	
+	shared_ptr<PhysicsController> sphereComponent (new PhysicsController(sphereShape, body, sphereMotionState));	
+	body->setUserPointer(sphereComponent.get());
 	sphere->AddChild(sphereComponent);
 	sphereComponent->id = "Sphere";	
 	return sphereComponent;
@@ -75,14 +77,15 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(PhysicsController::GLToBtQuat(quat)
 		,PhysicsController::GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass,  boxMotionState, boxShape, boxInertia);
-	btRigidBody * boxBody = new btRigidBody(fallRigidBodyCI);
-	boxBody->setFriction(567);
-	dynamicsWorld->addRigidBody(boxBody);
+	btRigidBody * body = new btRigidBody(fallRigidBodyCI);
+	body->setFriction(567);
+	dynamicsWorld->addRigidBody(body);
 
 	// Create the physics component and add it to the box
-	shared_ptr<PhysicsController> boxComponent = make_shared<PhysicsController>(PhysicsController(boxShape, boxBody, boxMotionState));
+	shared_ptr<PhysicsController> boxComponent = make_shared<PhysicsController>(PhysicsController(boxShape, body, boxMotionState));
 	boxComponent->id = "Box";
-	boxBody->setUserPointer(boxComponent.get());
+	body->setUserPointer(boxComponent.get());
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	boxComponent->scale = box->scale;
 	box->AddChild(boxComponent);
 
@@ -107,10 +110,12 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 		,PhysicsController::GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass,  motionState, shape, inertia);
 	btRigidBody * body = new btRigidBody(rigidBodyCI);
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	dynamicsWorld->addRigidBody(body);
 
 	// Create the physics component and add it to the box
 	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(PhysicsController(shape, body, motionState));
+	body->setUserPointer(component.get());
 	component->id = "Cylinder";
 	component->scale = cyl->scale;
 	cyl->AddChild(component);
@@ -130,12 +135,12 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCameraPhysics()
 	camera->AddChild(physicsCamera);
 
 	btRigidBody::btRigidBodyConstructionInfo cameraCI(10,physicsCamera.get(), cameraCyl, inertia);  
-	btRigidBody * cameraBody = new btRigidBody(cameraCI);
-	physicsCamera->SetPhysicsStuff(cameraCyl, cameraBody, physicsCamera.get());
-	cameraBody->setCollisionFlags(cameraBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-	cameraBody->setActivationState(DISABLE_DEACTIVATION);
+	btRigidBody * body = new btRigidBody(cameraCI);
+	physicsCamera->SetPhysicsStuff(cameraCyl, body, physicsCamera.get());
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+	body->setActivationState(DISABLE_DEACTIVATION);
 
-	dynamicsWorld->addRigidBody(cameraBody);
+	dynamicsWorld->addRigidBody(body);
 	return physicsCamera;
 }
 
@@ -187,11 +192,12 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 	btDefaultMotionState * groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,-1,0)));
 
 	btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0,groundMotionState,groundShape,btVector3(0,0,0));
-	btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI);
-	groundRigidBody->setFriction(100);
-	dynamicsWorld->addRigidBody(groundRigidBody);
-	groundRigidBody->setUserPointer(ground.get());
-	shared_ptr<PhysicsController> groundComponent (new PhysicsController(groundShape, groundRigidBody, groundMotionState));
+	btRigidBody* body = new btRigidBody(groundRigidBodyCI);
+	body->setFriction(100);
+	dynamicsWorld->addRigidBody(body);
+	body->setUserPointer(ground.get());
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	shared_ptr<PhysicsController> groundComponent (new PhysicsController(groundShape, body, groundMotionState));
 	groundComponent->id = "Ground";
 	ground->AddChild(groundComponent);	
 	Game::Instance()->SetGround(ground);
