@@ -211,6 +211,7 @@ void Person::UpdateHand(
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
+		cylController->id = "PersonHand";
 		boneComponents[boneKey] = cylController;
 	}
 	else
@@ -269,6 +270,7 @@ void Person::UpdateBone(
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
+		cylController->id = "PersonBone";
 		boneComponents[boneKey] = cylController;
 	}
 	else
@@ -311,6 +313,7 @@ void Person::UpdateHead(
 		boxController->rigidBody->setCollisionFlags(boxController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		boxController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		boxController->rigidBody->setMotionState(new KinematicMotionState(boxController->parent));
+		boxController->id = "PersonHead";
 
 		boneComponents[boneKey] = boxController;
 	}
@@ -376,7 +379,7 @@ void Person::Update(float timeDelta)
 			// Get the skeleton frame that is ready
 			if (SUCCEEDED(m_pNuiSensor->NuiSkeletonGetNextFrame(0, &skeletonFrame)))
 			{
-				m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, &somewhatLatentParams);
+				m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, &verySmoothParams);
 				// Process the skeleton frame				
 				SkeletonFrameReady(&skeletonFrame);
 			}

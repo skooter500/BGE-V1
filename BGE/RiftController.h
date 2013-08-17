@@ -19,11 +19,6 @@ namespace BGE
 
 		void Update(float timeDelta);
 		bool RiftController::Initialise();
-		static glm::quat OVRToGLQuat(OVR::Quatf q);
-		static OVR::Vector3f GLToOVRVector(glm::vec3);
-		static glm::mat4 OVRToGLMat4(OVR::Matrix4f m);
-		static OVR::Matrix4f GLToOVRMat4(glm::mat4);
-
 
 		// Rift specific stuff!
 
@@ -85,7 +80,8 @@ namespace BGE
 		int m_windowWidth;
 		int m_windowHeight;
 
-		
+		glm::vec3 ypr;
+		float lastYaw;
 
 	};
 }

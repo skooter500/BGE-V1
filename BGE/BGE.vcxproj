@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Conversions.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="PhysicsController.cpp" />
     <ClCompile Include="RiftController.cpp" />
     <ClCompile Include="ShaderFunctions.cpp" />
+    <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="Steerable3DController.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
@@ -112,6 +114,8 @@
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Conversions.h" />
+    <ClInclude Include="dirent.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
@@ -135,6 +139,7 @@
     <ClInclude Include="PhysicsController.h" />
     <ClInclude Include="RiftController.h" />
     <ClInclude Include="ShaderFunctions.h" />
+    <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="Steerable3DController.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="TexturedCube.h" />

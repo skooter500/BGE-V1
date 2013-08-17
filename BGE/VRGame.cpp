@@ -5,82 +5,40 @@
 #include <sstream>
 #include <string>
 #include "Content.h"
-
-#define NUM_HIT_SOUNDS 7
-
+#include "Conversions.h"
 using namespace BGE;
 using namespace std;
 
-FMOD_VECTOR GLToFMODVector(glm::vec3 v)
-{
-	FMOD_VECTOR fv;
-	fv.x = v.x;
-	fv.y = v.y;
-	fv.z = v.z;
-	return fv;
-}
-
-struct SoundEvent
-{
-	FMOD::Sound * sound;
-	FMOD::Channel * channel;
-	long last;
-};
-
-map<GameComponent *, SoundEvent> soundEvents;
-
 bool collisionCallback(btManifoldPoint& cp,	const btCollisionObjectWrapper* colObj0Wrap,int partId0,int index0,const btCollisionObjectWrapper* colObj1Wrap,int partId1,int index1)
 {
-	long interval = 5000; // Allow X ms to elapse before allowing an object to play a sound
-	long now = SDL_GetTicks();
 	VRGame * game = (VRGame *) Game::Instance();
-	PhysicsController * object = reinterpret_cast<PhysicsController*> (colObj0Wrap->getCollisionObject()->getUserPointer());
-	
-	if (object->parent == game->ground.get())
+	PhysicsController * object0 = reinterpret_cast<PhysicsController*> (colObj0Wrap->getCollisionObject()->getUserPointer());
+	PhysicsController * object1 = reinterpret_cast<PhysicsController*> (colObj1Wrap->getCollisionObject()->getUserPointer());
+
+	// Swap if the ground is the first object
+	if (object0->parent == game->ground.get())
 	{
-		object = (PhysicsController *) reinterpret_cast<PhysicsController*> (colObj1Wrap->getCollisionObject()->getUserPointer());
+		PhysicsController * temp = object0;
+		object0 = object1;
+		object1 = object0;
 	}
 
-	// Has this object already played a sound?
-	map<GameComponent *, SoundEvent>::iterator it = soundEvents.find(object);
-	SoundEvent soundEvent;
-	bool isPlaying = false;
-	if (it != soundEvents.end())
+	// Is it just two pieces of the person? Then dont play a sound
+	if ((object0->id.find("Person") == 0) && (object1->id.find("Person") == 0))
 	{
-		if (now - it->second.last > interval)
-		{
-			// Is the sound already playing?
-			soundEvent = it->second;
-			soundEvent.channel->isPlaying(& isPlaying);
-			if (isPlaying)
-			{
-				return false;
-			}
-		}
-		else
-		{
-			// Its too soon to play this object's sound
-			return false;
-		}
+		return false;
 	}
-	else
+
+	// Also if its a piece of the person touching the ground
+	if ((object0->id.find("Person") == 0) && (object1->parent == game->ground.get()))
 	{
-		int which = rand() % NUM_HIT_SOUNDS;
-		stringstream ss;
-		ss << "Hit" << which;
-		soundEvent.sound = Content::LoadSound(ss.str(), game->fmodSystem);
+		return false;
 	}
+
 	
-	game->fmodSystem->playSound(FMOD_CHANNEL_FREE, soundEvent.sound, false, & soundEvent.channel);
-	if (soundEvent.channel != NULL)
-	{
-		if (isPlaying)
-		{
-			soundEvent.channel->set3DAttributes(& GLToFMODVector(object->position), & GLToFMODVector(glm::vec3(0)));
-		}
-	}
-	soundEvent.last = now;
-	soundEvents[object] = soundEvent;
+	game->soundSystem->PlayHitSoundIfReady(object0, 5000);
+
+	
 	return false;
 }
 
@@ -92,12 +50,13 @@ VRGame::VRGame(void)
 	broadphase = NULL;
 	dispatcher = NULL;
 	solver = NULL;
+	person = NULL;
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = false;
+	fullscreen = true;
 	riftEnabled = true;
 
 	id = "VR Game";
@@ -105,15 +64,6 @@ VRGame::VRGame(void)
 
 VRGame::~VRGame(void)
 {
-}
-
-void CheckFMODResult( FMOD_RESULT res )
-{
-	if (res != FMOD_OK)
-	{
-		const char * error = FMOD_ErrorString(res);
-		throw BGE::Exception(error);
-	}
 }
 
 bool VRGame::Initialise() 
@@ -131,15 +81,7 @@ bool VRGame::Initialise()
 	dynamicsWorld->setGravity(btVector3(0,-9,0));
 
 	camera->position = glm::vec3(-1,20,46);
-
-	// FMOD
-	FMOD_SPEAKERMODE speakerMode;
-	FMOD_CAPS caps;
-	CheckFMODResult(FMOD::System_Create(& fmodSystem));
-	CheckFMODResult(fmodSystem->getDriverCaps(0, &caps, 0, &speakerMode));
-	CheckFMODResult(fmodSystem->setSpeakerMode(speakerMode));
-
-	CheckFMODResult(fmodSystem->init(1000, FMOD_INIT_NORMAL, 0));
+	camera->look = glm::vec3(0, 0, 1);
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
@@ -147,16 +89,18 @@ bool VRGame::Initialise()
 	physicsFactory->CreateCameraPhysics();
 	person = make_shared<Person>();
 	AddChild(person);
+	person->headCamera = true;
 
 	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 
-	//gContactAddedCallback = collisionCallback;
-
-	person->headCamera = true;
+	gContactAddedCallback = collisionCallback;
 
 	if (!Game::Initialise()) {
 		return false;
 	}
+
+	camera->GetController()->position = camera->position;
+	camera->GetController()->look = camera->look;
 
 	return true;
 }
@@ -166,9 +110,10 @@ void VRGame::FireProjectile(glm::vec3 pos, glm::vec3 look)
 	glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
 	glm::normalize(q);
 	shared_ptr<PhysicsController> physicsComponent = physicsFactory->CreateSphere(1, pos, q);
-
-	float force = 1000.0f;
-	physicsComponent->rigidBody->applyCentralForce(PhysicsController::GLToBtVector(look) * force);
+	soundSystem->PlaySound("Fire", pos);
+	//soundSystem->Vibrate(200, 1.0f);
+	float force = 3000.0f;
+	physicsComponent->rigidBody->applyCentralForce(GLToBtVector(look) * force);
 }
 
 // Note that pickedUp is passed by reference and so can be changed!!
@@ -180,8 +125,8 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 		float dist = 1000.0f;
 		if (pickedUp == NULL)
 		{		
-			btVector3 rayFrom = PhysicsController::GLToBtVector(hand.pos); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
-			btVector3 rayTo = PhysicsController::GLToBtVector(hand.pos + (hand.look * dist));
+			btVector3 rayFrom = GLToBtVector(hand.pos); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
+			btVector3 rayTo = GLToBtVector(hand.pos + (hand.look * dist));
 
 			btCollisionWorld::ClosestRayResultCallback rayCallback(rayFrom, rayTo);
 			dynamicsWorld->rayTest(rayFrom, rayTo, rayCallback);
@@ -201,8 +146,8 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 			int yb = SDL_JoystickGetButton(joy, 13);
 			if (yb)
 			{
-				float force = 1000.0f;
-				pickedUp->rigidBody->applyCentralForce(PhysicsController::GLToBtVector(hand.look) * force);
+				float force = 300.0f;
+				pickedUp->rigidBody->applyCentralForce(GLToBtVector(hand.look) * force);
 				pickedUp = NULL;
 				return;
 			}
@@ -221,7 +166,7 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 				v = glm::normalize(v);
 				v *= maxVel; // just set correction-velocity to the maximum
 			}
-			pickedUp->rigidBody->setLinearVelocity(PhysicsController::GLToBtVector(v));    
+			pickedUp->rigidBody->setLinearVelocity(GLToBtVector(v));    
 			pickedUp->rigidBody->activate();	
 
 		}
@@ -232,21 +177,12 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 	}
 }
 
-
 void VRGame::Update(float timeDelta)
 {
 	string leftHandWhat = "Nothing";
 	string rightHandWhat = "Nothing";
 
 	dynamicsWorld->stepSimulation(timeDelta,100);
-
-	fmodSystem->set3DListenerAttributes(0,
-		& GLToFMODVector(camera->position)
-		, & GLToFMODVector(glm::vec3(0))
-		, & GLToFMODVector(camera->look)
-		, & GLToFMODVector(camera->up)
-		);
-	fmodSystem->update();
 
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
 
@@ -292,6 +228,7 @@ void VRGame::Update(float timeDelta)
 				{
 					point.y = 5;
 					physicsFactory->CreateVehicle(point);
+					soundSystem->PlaySound("spawn", point);
 				}
 				elapsed = 0.0f;
 			}
@@ -306,21 +243,36 @@ void VRGame::Update(float timeDelta)
 				{
 					point.y = 5;
 					physicsFactory->CreateSphere(3, point, glm::quat());
+					soundSystem->PlaySound("spawn", point);
 				}
 				elapsed = 0.0f;
 			}
-			GravityGun(joy, 4, leftHandPickedUp, person->hands[0]);
-			GravityGun(joy, 5, rightHandPickedUp, person->hands[1]);
+			// Check the X key to spawn a random object
+			int xb = SDL_JoystickGetButton(joy, 12);
+			if (xb && (elapsed > timeToPass))
+			{
+				glm::vec3 point;
+				bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
+				if (hit)
+				{
+					point.y = 5;
+					physicsFactory->CreateRandomObject(point, glm::quat());
+					soundSystem->PlaySound("spawn", point);
+				}
+				elapsed = 0.0f;
+			}
+
+			if (person)
+			{
+				GravityGun(joy, 4, leftHandPickedUp, person->hands[0]);
+				GravityGun(joy, 5, rightHandPickedUp, person->hands[1]);
+			}
 		}
 		
-
 		if (SDL_JoystickGetAttached(joy)) {
 			SDL_JoystickClose(joy);
 		}
 	}
-
-		
-	
 
 	Game::Update(timeDelta);
 }
