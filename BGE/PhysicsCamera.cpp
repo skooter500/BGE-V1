@@ -64,8 +64,8 @@ void PhysicsCamera::Update(float timeDelta)
 		float dist = 1000.0f;
 		if (pickedUp == NULL)
 		{		
-			btVector3 rayFrom = GLToBtVector(parent->position + (parent->look * dist)); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
-			btVector3 rayTo = GLToBtVector(parent->position + (parent->look * dist * dist));
+			btVector3 rayFrom = GLToBtVector(parent->position + (parent->look * 4.0f)); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
+			btVector3 rayTo = GLToBtVector(parent->position + (parent->look * dist));
 
 			btCollisionWorld::ClosestRayResultCallback rayCallback(rayFrom, rayTo);
 			game->dynamicsWorld->rayTest(rayFrom, rayTo, rayCallback);
@@ -83,9 +83,10 @@ void PhysicsCamera::Update(float timeDelta)
 		{
 			float powerfactor = 4.0f; // Higher values causes the targets moving faster to the holding point.
             float maxVel = 3.0f;      // Lower values prevent objects flying through walls.
+			float holdDist = 6.0f;
 
             // Calculate the hold point in front of the camera
-			glm::vec3 holdPos = parent->position + (parent->look * dist);
+			glm::vec3 holdPos = parent->position + (parent->look * holdDist);
 
             glm::vec3 v = holdPos - pickedUp->position; // direction to move the Target
             v *= powerfactor; // powerfactor of the GravityGun

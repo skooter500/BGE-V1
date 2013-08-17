@@ -134,6 +134,17 @@ void GameComponent::Fly(float units)
 
 void GameComponent::Pitch(float angle)
 {
+	// See http://math.stackexchange.com/questions/90081/quaternion-distance
+	
+	
+	
+	float invcosTheta1 = glm::dot(look, basisUp);
+	float threshold = 0.95f;
+	if ((angle < 0 && invcosTheta1 < (-threshold)) || (angle > 0 && invcosTheta1 > (threshold)))
+	{
+		return;
+	}
+	
 	// A pitch is a rotation around the right vector
 	glm::quat rot = glm::angleAxis(angle, right);
 
@@ -157,7 +168,7 @@ void GameComponent::Pitch(float angle)
 void GameComponent::Yaw(float angle)
 {
 	// A yaw is a rotation around the global up vector
-	glm::quat rot = glm::angleAxis(angle, basisUp);
+	glm::quat rot = glm::angleAxis(angle, GameComponent::basisUp);
 
 	orientation = rot * orientation;
 

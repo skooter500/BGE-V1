@@ -6,8 +6,8 @@ using namespace BGE;
 
 Ground::Ground(void):GameComponent()
 {
-	width = 500;
-	height = 500;
+	width = 5000;
+	height = 5000;
 	// Diffuse will come from the texture
 	ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	specular = glm::vec3(0,0,0);
@@ -37,8 +37,8 @@ Ground::~Ground(void)
 
 bool Ground::Initialise()
 {
-	const float twidth = 50;
-    const float theight = 50;
+	const float twidth = 500;
+    const float theight = 500;
 
 	if (!GameComponent::Initialise()) {
 		return false;
