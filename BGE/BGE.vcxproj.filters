@@ -122,6 +122,9 @@
     <ClCompile Include="Conversions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LineDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -218,6 +221,7 @@
     <ClInclude Include="dirent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="LineDrawer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
@@ -272,6 +276,12 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Content\TextShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Lines.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Lines.vertexshader">
       <Filter>Content</Filter>
     </None>
   </ItemGroup>

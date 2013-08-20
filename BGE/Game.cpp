@@ -148,6 +148,8 @@ bool Game::Initialise() {
 		controller->position = glm::vec3(0, 10, 10);
 		camera->AddChild(controller);
 	}
+
+	LineDrawer::Instance()->Initialise();
 	
 	running = true;
 	initialised = true;
@@ -326,6 +328,7 @@ void Game::Draw()
 		camera->view = OVRToGLMat4(viewLeft);
 		camera->projection = OVRToGLMat4(projLeft);
 		// Draw all my children
+		LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
@@ -333,6 +336,7 @@ void Game::Draw()
 		camera->view = OVRToGLMat4(viewRight);
 		camera->projection = OVRToGLMat4(projRight);
 		// Draw all my children
+		LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		riftController->UnBindRenderBuffer();
@@ -343,8 +347,9 @@ void Game::Draw()
 	}
 	else
 	{
-		glViewport(0, 0, width, height);
-		GameComponent::Draw();
+		glViewport(0, 0, width, height);	
+		//GameComponent::Draw();		
+		LineDrawer::Instance()->Draw();
 	}
 }
 
