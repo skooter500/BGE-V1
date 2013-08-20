@@ -16,6 +16,7 @@
 #include "Ground.h"
 #include "SoundSystem.h"
 #include "RiftController.h"
+#include "LineDrawer.h"
 
 using namespace OVR;
 

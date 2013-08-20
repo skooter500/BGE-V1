@@ -94,6 +94,7 @@
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="KinematicMotionState.cpp" />
+    <ClCompile Include="LineDrawer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelTest.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="KinematicMotionState.h" />
+    <ClInclude Include="LineDrawer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelTest.h" />
     <ClInclude Include="MotionState.h" />
@@ -152,6 +154,8 @@
     <None Include="Content\CubeShader.vertexshader" />
     <None Include="Content\diffuse.fragmentshader" />
     <None Include="Content\diffuse.vertexshader" />
+    <None Include="Content\Lines.fragmentshader" />
+    <None Include="Content\Lines.vertexshader" />
     <None Include="Content\SimpleShader.fragmentshader" />
     <None Include="Content\SimpleShader.vertexshader" />
     <None Include="Content\standard_materials.fragmentshader" />

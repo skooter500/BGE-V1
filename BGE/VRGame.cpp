@@ -56,8 +56,8 @@ VRGame::VRGame(void)
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = true;
-	riftEnabled = true;
+	fullscreen = false;
+	riftEnabled = false;
 
 	id = "VR Game";
 }
@@ -68,39 +68,41 @@ VRGame::~VRGame(void)
 
 bool VRGame::Initialise() 
 {
+
+	
 	// Set up the collision configuration and dispatcher
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	//collisionConfiguration = new btDefaultCollisionConfiguration();
+	//dispatcher = new btCollisionDispatcher(collisionConfiguration);
 
-	// The world.
-	btVector3 worldMin(-1000,-1000,-1000);
-	btVector3 worldMax(1000,1000,1000);
-	broadphase = new btAxisSweep3(worldMin,worldMax);
-	solver = new btSequentialImpulseConstraintSolver();
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0,-9,0));
+	//// The world.
+	//btVector3 worldMin(-1000,-1000,-1000);
+	//btVector3 worldMax(1000,1000,1000);
+	//broadphase = new btAxisSweep3(worldMin,worldMax);
+	//solver = new btSequentialImpulseConstraintSolver();
+	//dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
+	//dynamicsWorld->setGravity(btVector3(0,-9,0));
 
-	camera->position = glm::vec3(-1,20,46);
-	camera->look = glm::vec3(0, 0, 1);
+	//camera->position = glm::vec3(-1,20,46);
+	//camera->look = glm::vec3(0, 0, 1);
 
-	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
+	//physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
-	physicsFactory->CreateGroundPhysics();
-	physicsFactory->CreateCameraPhysics();
-	person = make_shared<Person>();
-	AddChild(person);
-	person->headCamera = true;
+	//physicsFactory->CreateGroundPhysics();
+	//physicsFactory->CreateCameraPhysics();
+	//person = make_shared<Person>();
+	//AddChild(person);
+	//person->headCamera = true;
 
-	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
+	//physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 
-	gContactAddedCallback = collisionCallback;
+	//gContactAddedCallback = collisionCallback;
 
 	if (!Game::Initialise()) {
 		return false;
 	}
 
-	camera->GetController()->position = camera->position;
-	camera->GetController()->look = camera->look;
+	//camera->GetController()->position = camera->position;
+	//camera->GetController()->look = camera->look;
 
 	return true;
 }
@@ -179,100 +181,107 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 
 void VRGame::Update(float timeDelta)
 {
-	string leftHandWhat = "Nothing";
-	string rightHandWhat = "Nothing";
 
-	dynamicsWorld->stepSimulation(timeDelta,100);
+	LineDrawer::DrawLine(glm::vec3(10, 5, -10), glm::vec3(20, 5, -10), glm::vec3(1,0,0));
 
-	const Uint8 * keyState = Game::Instance()->GetKeyState();
+	//string leftHandWhat = "Nothing";
+	//string rightHandWhat = "Nothing";
 
-	float moveSpeed = speed;
-	float timeToPass = 1.0f / fireRate;
+	//dynamicsWorld->stepSimulation(timeDelta,100);
 
-	elapsed += timeDelta;
+	//const Uint8 * keyState = Game::Instance()->GetKeyState();
 
-	SDL_Joystick * joy;
-	if (SDL_NumJoysticks() > 0) 
-	{
-		// Open joystick
-		joy = SDL_JoystickOpen(0);
-		if (joy) 
-		{
-			// Check left button
-			int lb = SDL_JoystickGetButton(joy, 8);
-			if (lb && (elapsed > timeToPass))
-			{
-				float dist = 3.0f;
-				glm::vec3 pos = person->hands[0].pos + (person->hands[0].look * dist);
-				FireProjectile(pos, person->hands[0].look);
-				elapsed = 0.0f;
-			}
+	//float moveSpeed = speed;
+	//float timeToPass = 1.0f / fireRate;
 
-			// Check right button
-			int rb = SDL_JoystickGetButton(joy, 9);
-			if (rb && (elapsed > timeToPass))
-			{
-				float dist = 3.0f;
-				glm::vec3 pos = person->hands[1].pos + (person->hands[1].look * dist);
-				FireProjectile(pos, person->hands[1].look);
-				elapsed = 0.0f;
-			}
+	//elapsed += timeDelta;
 
-			// Check the A key and spawn a car
-			int ab = SDL_JoystickGetButton(joy, 10);
-			if (ab && (elapsed > timeToPass))
-			{
-				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
-				if (hit)
-				{
-					point.y = 5;
-					physicsFactory->CreateVehicle(point);
-					soundSystem->PlaySound("spawn", point);
-				}
-				elapsed = 0.0f;
-			}
+	//SDL_Joystick * joy;
+	//if (SDL_NumJoysticks() > 0) 
+	//{
+	//	// Open joystick
+	//	joy = SDL_JoystickOpen(0);
+	//	if (joy) 
+	//	{
+	//		// Check left button
+	//		int lb = SDL_JoystickGetButton(joy, 8);
+	//		if (lb && (elapsed > timeToPass))
+	//		{
+	//			float dist = 3.0f;
+	//			glm::vec3 pos = person->hands[0].pos + (person->hands[0].look * dist);
+	//			FireProjectile(pos, person->hands[0].look);
+	//			elapsed = 0.0f;
+	//		}
 
-			// Check the B key and spawn a ball
-			int bb = SDL_JoystickGetButton(joy, 11);
-			if (bb && (elapsed > timeToPass))
-			{
-				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
-				if (hit)
-				{
-					point.y = 5;
-					physicsFactory->CreateSphere(3, point, glm::quat());
-					soundSystem->PlaySound("spawn", point);
-				}
-				elapsed = 0.0f;
-			}
-			// Check the X key to spawn a random object
-			int xb = SDL_JoystickGetButton(joy, 12);
-			if (xb && (elapsed > timeToPass))
-			{
-				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
-				if (hit)
-				{
-					point.y = 5;
-					physicsFactory->CreateRandomObject(point, glm::quat());
-					soundSystem->PlaySound("spawn", point);
-				}
-				elapsed = 0.0f;
-			}
+	//		// Check right button
+	//		int rb = SDL_JoystickGetButton(joy, 9);
+	//		if (rb && (elapsed > timeToPass))
+	//		{
+	//			float dist = 3.0f;
+	//			glm::vec3 pos = person->hands[1].pos + (person->hands[1].look * dist);
+	//			FireProjectile(pos, person->hands[1].look);
+	//			elapsed = 0.0f;
+	//		}
 
-			if (person)
-			{
-				GravityGun(joy, 4, leftHandPickedUp, person->hands[0]);
-				GravityGun(joy, 5, rightHandPickedUp, person->hands[1]);
-			}
-		}
-		
-		if (SDL_JoystickGetAttached(joy)) {
-			SDL_JoystickClose(joy);
-		}
-	}
+	//		// Check the A key and spawn a car
+	//		int ab = SDL_JoystickGetButton(joy, 10);
+	//		if (ab && (elapsed > timeToPass))
+	//		{
+	//			glm::vec3 point;
+	//			bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
+	//			if (hit)
+	//			{
+	//				point.y = 5;
+	//				physicsFactory->CreateVehicle(point);
+	//				soundSystem->PlaySound("spawn", point);
+	//			}
+	//			elapsed = 0.0f;
+	//		}
+
+	//		// Check the B key and spawn a ball
+	//		int bb = SDL_JoystickGetButton(joy, 11);
+	//		if (bb && (elapsed > timeToPass))
+	//		{
+	//			glm::vec3 point;
+	//			bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
+	//			if (hit)
+	//			{
+	//				point.y = 5;
+	//				physicsFactory->CreateSphere(3, point, glm::quat());
+	//				soundSystem->PlaySound("spawn", point);
+	//			}
+	//			elapsed = 0.0f;
+	//		}
+	//		// Check the X key to spawn a random object
+	//		int xb = SDL_JoystickGetButton(joy, 12);
+	//		if (xb && (elapsed > timeToPass))
+	//		{
+	//			glm::vec3 point;
+	//			bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
+	//			if (hit)
+	//			{
+	//				point.y = 5;
+	//				physicsFactory->CreateRandomObject(point, glm::quat());
+	//				soundSystem->PlaySound("spawn", point);
+	//			}
+	//			elapsed = 0.0f;
+	//		}
+
+	//		if (person)
+	//		{
+	//			GravityGun(joy, 4, leftHandPickedUp, person->hands[0]);
+	//			GravityGun(joy, 5, rightHandPickedUp, person->hands[1]);
+	//		}
+	//	}
+	//	
+	//	if (SDL_JoystickGetAttached(joy)) {
+	//		SDL_JoystickClose(joy);
+	//	}
+	//}
+
+	LineDrawer::DrawLine(camera->position, camera->position + (camera->look * 100.0f), glm::vec3(1,0,0));
+	LineDrawer::DrawLine(camera->position, glm::vec3(0,0,0), glm::vec3(1,0,0));
+	LineDrawer::DrawLine(camera->position + (camera->look * 5.0f), camera->position + (camera->look * 15.0f), glm::vec3(1,0,0));
 
 	Game::Update(timeDelta);
 }
