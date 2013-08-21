@@ -1,4 +1,5 @@
 #include "Content.h"
+#include "Game.h"
 #include <string>
 
 using namespace BGE;
@@ -7,6 +8,30 @@ string Content::prefix = "Content/";
 map<string, shared_ptr<Model>> Content::models = map<string, shared_ptr<Model>>();
 map<string, GLuint> Content::textures = map<string, GLuint>();
 map<string, GLuint> Content::shaders = map<string, GLuint>();	
+map<string, FMOD::Sound*> Content::sounds = map<string, FMOD::Sound*>();	
+
+
+
+FMOD::Sound * Content::LoadSound(string name)
+{
+	// First check to see if it's already loaded and if so, just return it
+	map<string, FMOD::Sound*>::iterator mit = Content::sounds.find(name);
+	if (mit != Content::sounds.end())
+	{
+		return mit->second;
+	}
+	FMOD::Sound * sound;
+
+	string fileName = Content::prefix + name + ".wav";
+	FMOD_RESULT res = Game::Instance()->soundSystem->fmodSystem->createSound(fileName.c_str(), FMOD_3D, 0, & sound);
+	if (res != FMOD_OK)
+	{
+		string message = "Could not load sound file: " + fileName;
+		throw BGE::Exception(message.c_str());
+	}
+	sounds[name] = sound;
+	return sound;
+}
 
 shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	// First check to see if it's already loaded and if so, just return it

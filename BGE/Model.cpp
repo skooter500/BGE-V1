@@ -14,6 +14,7 @@ Model::Model():GameComponent()
 	ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	localTransform = glm::mat4(1);
+	worldMode = GameComponent::from_parent; // Get the world transform from my parent
 }
 
 Model::~Model()
@@ -24,6 +25,11 @@ Model::~Model()
 bool Model::Initialise()
 {
 	GameComponent::Initialise();
+	if (!Game::Instance()->initialised)
+	{
+		return false;
+	}
+
 	if (initialised)
 	{
 		return true;
@@ -106,19 +112,11 @@ void Model::CalculateBounds()
 	}
 }
 
-void Model::UpdateFromParent()
-{
-	world = parent->world * localTransform;
-	diffuse = parent->diffuse;
-	specular = parent->specular;
-	ambient = parent->ambient;
-	drawMode = parent->drawMode;
-}
+
 
 void Model::Draw()
-{
-	
-	UpdateFromParent(); // Necessary beuase models are reusable
+{	
+	world = world * localTransform;
 	glUseProgram(programID);
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
 	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
@@ -137,7 +135,7 @@ void Model::Draw()
 	glUniform3f(specularID, specular.r, specular.g, specular.b);
 	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
 
-	glm::mat4 MV = Game::Instance()->camera->view * world;
+	glm::mat4 MV = world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));
 	glUniformMatrix3fv(nID, 1, GL_FALSE, & gl_NormalMatrix[0][0]);
 	

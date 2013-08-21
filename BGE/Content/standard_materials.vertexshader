@@ -37,5 +37,4 @@ void main()
   }
   model_ambient = ambient;
   model_specular = specular;
-
 }

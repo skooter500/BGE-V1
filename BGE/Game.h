@@ -14,7 +14,9 @@
 #include <OVR.h>
 #include "Camera.h"
 #include "Ground.h"
+#include "SoundSystem.h"
 #include "RiftController.h"
+#include "LineDrawer.h"
 
 using namespace OVR;
 
@@ -78,6 +80,8 @@ namespace BGE
 		
 		void PrintText(string message, glm::vec2 position);
 		void PrintText(string message);
+		void PrintVector(string message, glm::vec3 v);
+		void PrintInt(string message, int i);
 
 		shared_ptr<Camera> camera;
 		shared_ptr<Ground> ground;
@@ -87,10 +91,13 @@ namespace BGE
 		bool console;
 
 		shared_ptr<RiftController> riftController;
-		
-		
+		shared_ptr<SoundSystem> soundSystem;
+
 		string riftMessage;
-		bool renderToRift;
+		bool riftEnabled;
+
+		float fps;
+
 	};
 }
 

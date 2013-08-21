@@ -29,18 +29,15 @@ bool Camera::Initialise()
 	return GameComponent::Initialise();
 }
 
-float fps = 0;;
+
 
 void Camera::Draw()
 {
-	stringstream msg;
-	msg << "FPS: " << (int) fps;
-	Game::Instance()->PrintText(msg.str());
 	GameComponent::Draw();
 }
 
 void Camera::Update(float timeDelta) {
-	fps = (int) 1.0f / timeDelta;
+	
 	GameComponent::Update(timeDelta);
 	view = glm::lookAt(
 		position
@@ -53,6 +50,14 @@ void Camera::Update(float timeDelta) {
 
 	ss.str("");
 	ss << "Camera Look: " << look.x << " " << look.y << " " << look.z;
+	Game::Instance()->PrintText(ss.str());
+
+	ss.str("");
+	ss << "Camera Up: " << up.x << " " << up.y << " " << up.z;
+	Game::Instance()->PrintText(ss.str());
+
+	ss.str("");
+	ss << "Camera Right: " << right.x << " " << right.y << " " << right.z;
 	Game::Instance()->PrintText(ss.str());
 
 }

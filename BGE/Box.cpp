@@ -1,6 +1,7 @@
 #include "Box.h"
 #include "Model.h"
 #include "Content.h"
+#include "VectorDrawer.h"
 
 using namespace BGE;
 
