@@ -5,6 +5,7 @@
 #include <cmath>
 #include <gtx\constants.hpp>
 #include <ctime>
+#include "VectorDrawer.h"
 
 using namespace BGE;
 using namespace std;
@@ -48,13 +49,31 @@ bool GameComponent::Initialise()
 	return true;
 }
 
+void GameComponent::UpdateFromParent()
+{
+	world = parent->world;
+	position = parent->position;
+	orientation = parent->orientation;
+	look = parent->look;
+	up = parent->up;
+	right = parent->right;
+	diffuse = parent->diffuse;
+	specular = parent->specular;
+	ambient = parent->ambient;
+	drawMode = parent->drawMode;
+}
+
 void GameComponent::Draw()
 {
 	// Draw all the children
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{
-		(*it)->parent = this;
+		if ((*it)->worldMode == GameComponent::from_parent)
+		{
+			(*it)->parent = this;
+			(*it)->UpdateFromParent();
+		}
 		(*it ++)->Draw();		
 	}
 }
@@ -134,6 +153,17 @@ void GameComponent::Fly(float units)
 
 void GameComponent::Pitch(float angle)
 {
+	// See http://math.stackexchange.com/questions/90081/quaternion-distance
+	
+	
+	
+	float invcosTheta1 = glm::dot(look, basisUp);
+	float threshold = 0.95f;
+	if ((angle < 0 && invcosTheta1 < (-threshold)) || (angle > 0 && invcosTheta1 > (threshold)))
+	{
+		return;
+	}
+	
 	// A pitch is a rotation around the right vector
 	glm::quat rot = glm::angleAxis(angle, right);
 
@@ -157,7 +187,7 @@ void GameComponent::Pitch(float angle)
 void GameComponent::Yaw(float angle)
 {
 	// A yaw is a rotation around the global up vector
-	glm::quat rot = glm::angleAxis(angle, basisUp);
+	glm::quat rot = glm::angleAxis(angle, GameComponent::basisUp);
 
 	orientation = rot * orientation;
 

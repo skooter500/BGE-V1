@@ -1,0 +1,15 @@
+#version 330 core
+
+layout (location = 0) in vec3 v_coord;
+layout (location = 1) in vec3 v_diffuse;
+
+uniform mat4 v, p; 
+
+out vec3 colour;
+
+void main(){
+ 
+	mat4 VP = p * v;
+	gl_Position = VP * vec4(v_coord,1);
+	colour = v_diffuse;
+}

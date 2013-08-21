@@ -50,7 +50,7 @@ namespace BGE
 		std::string id;
 
 		enum draw_modes {materials, textured, single_material};
-		enum world_modes {from_self, from_self_with_parent, from_child, to_parent};
+		enum world_modes {from_self, from_self_with_parent, from_child, to_parent, from_parent};
 
 		draw_modes drawMode;
 		world_modes worldMode;
@@ -73,5 +73,6 @@ namespace BGE
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 		std::shared_ptr<GameComponent> GetController();
 		void RecalculateVectors();
+		void UpdateFromParent();
 	};
 }

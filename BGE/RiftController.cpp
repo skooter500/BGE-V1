@@ -4,6 +4,7 @@
 #include "GameComponent.h"
 #include "OVR_Shaders.h"
 #include "ShaderFunctions.h"
+#include "Conversions.h"
 
 using namespace BGE;
 using namespace OVR;
@@ -14,9 +15,14 @@ void RiftController::AccumulateInputs()
 	if (SensorActive())
 	{
 		OVR::Quatf hmdOrient = m_SFusion.GetOrientation();
-		float yaw = 0.0f;
-		glm::quat headOrientation = RiftController::OVRToGLQuat(hmdOrient);
-		orientation = headOrientation * xboxController->orientation;
+		float yaw;
+		hmdOrient.GetEulerAngles<OVR::Axis_Y, OVR::Axis_X, OVR::Axis_Z>(&yaw, &ypr.p, &ypr.r);
+
+		ypr.y += (yaw - lastYaw);
+		lastYaw = yaw;
+
+		glm::quat headOrientation = OVRToGLQuat(hmdOrient);
+		orientation = xboxController->orientation * headOrientation;
 	}
 }
 
@@ -38,6 +44,7 @@ RiftController::RiftController(): m_pManager(NULL)
 	xboxController = make_shared<XBoxController>();
 	xboxController->worldMode = GameComponent::from_self;
 	xboxController->disablePitch = true;
+	lastYaw = 0.0f;
 	AddChild(xboxController);
 }
 
@@ -47,32 +54,7 @@ RiftController::~RiftController(void)
 	DestroyOVR();
 }
 
-glm::quat RiftController::OVRToGLQuat(Quatf q)
-{
-	return glm::quat(q.w, q.x, q.y, q.z);
-}
 
-OVR::Vector3f RiftController::GLToOVRVector(glm::vec3 v)
-{
-	return OVR::Vector3f(v.x, v.y, v.z);
-}
-
-
-OVR::Matrix4f RiftController::GLToOVRMat4(glm::mat4 m)
-{
-	m = glm::transpose(m);
-	OVR::Matrix4f ret;
-	memcpy(& ret, & m, sizeof(OVR::Matrix4f));
-	return ret;
-}
-
-glm::mat4 RiftController::OVRToGLMat4(OVR::Matrix4f m)
-{
-	glm::mat4 ret;
-	m.Transpose();
-	memcpy(& ret, & m, sizeof(OVR::Matrix4f));
-	return ret;
-}
 
 void RiftController::Update(float timeDelta)
 {

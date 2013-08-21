@@ -1,5 +1,5 @@
 #include "PhysicsController.h"
-
+#include "Conversions.h"
 using namespace BGE;
 
 PhysicsController::PhysicsController()
@@ -33,25 +33,7 @@ PhysicsController::~PhysicsController(void)
 {
 }
 
-glm::vec3 PhysicsController::BtToGLVector(const btVector3 & v)
-{
-	return glm::vec3(v.getX(), v.getY(), v.getZ());
-}
 
-glm::quat PhysicsController::BtToGLQuat(const btQuaternion & q)
-{
-	return glm::quat(q.getW(), q.getX(), q.getY(), q.getZ());
-}
-
-btVector3 PhysicsController::GLToBtVector(const glm::vec3 & v)
-{
-	return btVector3(v.x, v.y, v.z);
-}
-
-btQuaternion PhysicsController::GLToBtQuat(const glm::quat & q)
-{
-	return  btQuaternion(q.x, q.y, q.z, q.w);
-}
 
 void PhysicsController::Update(float timeDelta)
 {

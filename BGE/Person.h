@@ -32,6 +32,12 @@ namespace BGE
 {
 	void CALLBACK StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, const OLECHAR* uniqueDeviceName, void* pUserData);
 
+	struct Hand
+	{
+		glm::vec3 pos;
+		glm::vec3 look;
+	};
+
 	class Person :
 		public GameComponent
 	{
@@ -43,7 +49,10 @@ namespace BGE
 		void UpdateSkeleton(const NUI_SKELETON_DATA & skeleton);
 		void SkeletonFrameReady( NUI_SKELETON_FRAME* skeletonFrame );
 		void UpdateBone( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX jointFrom, NUI_SKELETON_POSITION_INDEX jointTo);
-		void UpdateBox( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX joint, bool isFace);
+		void UpdateHead( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX joint);
+		
+		void UpdateHand( const NUI_SKELETON_DATA & skeleton, NUI_SKELETON_POSITION_INDEX jointFrom, NUI_SKELETON_POSITION_INDEX jointTo, int handIndex);
+		
 		map<string, std::shared_ptr<PhysicsController>> boneComponents;
 		bool connected;
 		bool tracked;
@@ -59,6 +68,7 @@ namespace BGE
 		bool headCamera;
 		friend void CALLBACK StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, const OLECHAR* uniqueDeviceName, void* pUserData);
 
+		Hand hands[2];
 	};
 }
 

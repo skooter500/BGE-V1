@@ -116,6 +116,18 @@
     <ClCompile Include="VRGame.cpp">
       <Filter>Games</Filter>
     </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LineDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -205,6 +217,17 @@
     <ClInclude Include="VRGame.h">
       <Filter>Games</Filter>
     </ClInclude>
+    <ClInclude Include="SoundSystem.h" />
+    <ClInclude Include="Conversions.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LineDrawer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorDrawer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
@@ -259,6 +282,12 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Content\TextShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Lines.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Lines.vertexshader">
       <Filter>Content</Filter>
     </None>
   </ItemGroup>

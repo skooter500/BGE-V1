@@ -15,6 +15,7 @@
 #include "RiftController.h"
 #include "XBoxController.h"
 #include "Steerable3DController.h"
+#include "Conversions.h"
 
 using namespace BGE;
 
@@ -34,6 +35,8 @@ void BGE::Log(string message)
 	printf("%s\n", message.c_str());
 }
 
+
+
 Game::Game(void) {
 	running = false;
 	console = true;
@@ -51,25 +54,14 @@ Game::Game(void) {
 	lastPrintPosition = glm::vec2(0,0);
 	fontSize = 14;	
 
-	renderToRift = true;
+	fps = 0;
+
+	riftEnabled = false;
 	worldMode = world_modes::from_self;
 
 	camera = make_shared<Camera>();
-
-	if (renderToRift)
-	{
-		shared_ptr<RiftController> riftController = make_shared<RiftController>();
-		riftController->position = glm::vec3(0, 10, 10);
-		this->riftController = riftController;
-		camera->AddChild(riftController);
-	}
-	else
-	{
-		shared_ptr<GameComponent> controller = make_shared<FPSController>();
-		controller->position = glm::vec3(0, 10, 10);
-		camera->AddChild(controller);
-	}
-
+	soundSystem = make_shared<SoundSystem>();
+	soundSystem->Initialise();
 	AddChild(camera);
 
 }
@@ -143,6 +135,21 @@ bool Game::Initialise() {
 	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 
+	if (riftEnabled)
+	{
+		shared_ptr<RiftController> riftController = make_shared<RiftController>();
+		riftController->position = glm::vec3(0, 10, 10);
+		this->riftController = riftController;
+		camera->AddChild(riftController);
+	}
+	else
+	{
+		shared_ptr<GameComponent> controller = make_shared<FPSController>();
+		controller->position = glm::vec3(0, 10, 10);
+		camera->AddChild(controller);
+	}
+
+	LineDrawer::Instance()->Initialise();
 	
 	running = true;
 	initialised = true;
@@ -154,6 +161,21 @@ void Game::PrintText(string message, glm::vec2 position)
 {
 	messages.push_back(PrintMessage(message, position));
 }
+
+void Game::PrintVector(string message, glm::vec3 v)
+{
+	stringstream ss;
+	ss << message << v.x << " " << v.y << " " << v.z;
+	PrintText(ss.str());
+}
+
+void Game::PrintInt(string message, int i)
+{
+	stringstream ss;
+	ss << message << i;
+	PrintText(ss.str());
+}
+
 
 void Game::PrintText(string message)
 {
@@ -190,6 +212,9 @@ void Game::SetGround(shared_ptr<Ground> ground)
 
 void Game::Update(float timeDelta) {
 	// Check for messages
+	fps = (int) 1.0f / timeDelta;
+	PrintText("FPS: " + to_string((long double) fps));
+	soundSystem->Update();
 	SDL_Event event;
     if (SDL_PollEvent(&event))
     {
@@ -259,7 +284,8 @@ SDL_Window * Game::GetMainWindow()
 
 void Game::Draw()
 {	
-	if (renderToRift)
+
+	if (riftEnabled)
 	{
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);
@@ -294,21 +320,23 @@ void Game::Draw()
 		glm::mat4 cameraCentreView = camera->view;
 		// View transformation translation in world units.
 		float halfIPD = hmd.InterpupillaryDistance * 0.5f;
-		OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * RiftController::GLToOVRMat4(camera->view);
-		OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * RiftController::GLToOVRMat4(camera->view);
+		OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * GLToOVRMat4(camera->view);
+		OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * GLToOVRMat4(camera->view);
 
 		glViewport(0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
 		glScissor (0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		camera->view = RiftController::OVRToGLMat4(viewLeft);
-		camera->projection = RiftController::OVRToGLMat4(projLeft);
+		camera->view = OVRToGLMat4(viewLeft);
+		camera->projection = OVRToGLMat4(projLeft);
 		// Draw all my children
+		LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
 		glScissor (halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		camera->view = RiftController::OVRToGLMat4(viewRight);
-		camera->projection = RiftController::OVRToGLMat4(projRight);
+		camera->view = OVRToGLMat4(viewRight);
+		camera->projection = OVRToGLMat4(projRight);
 		// Draw all my children
+		LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		riftController->UnBindRenderBuffer();
@@ -319,8 +347,9 @@ void Game::Draw()
 	}
 	else
 	{
-		glViewport(0, 0, width, height);
-		GameComponent::Draw();
+		glViewport(0, 0, width, height);	
+		GameComponent::Draw();		
+		LineDrawer::Instance()->Draw();
 	}
 }
 

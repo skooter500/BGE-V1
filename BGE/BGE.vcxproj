@@ -39,13 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\Dependancies\LibOVR\Include;..\Dependancies\SDL2-2.0.0\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet-2.81-rev2613\src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Dependancies\LibOVR\Lib\x86;..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Dependancies\FMOD\inc;..\Dependancies\LibOVR\Include;..\Dependancies\SDL2-2.0.0\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet-2.81-rev2613\src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Dependancies\FMOD\lib;..\Dependancies\LibOVR\Lib\x86;..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\Dependancies\SDL2-2.0.0\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet-2.81-rev2613\src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Dependancies\LibOVR\Lib\x86;..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Dependancies\FMOD\inc;..\Dependancies\SDL2-2.0.0\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet-2.81-rev2613\src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Dependancies\FMOD\lib;..\Dependancies\LibOVR\Lib\x86;..\Dependancies\SDL2-2.0.0\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,10 +77,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Conversions.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -93,6 +94,7 @@
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="KinematicMotionState.cpp" />
+    <ClCompile Include="LineDrawer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelTest.cpp" />
@@ -104,14 +106,18 @@
     <ClCompile Include="PhysicsController.cpp" />
     <ClCompile Include="RiftController.cpp" />
     <ClCompile Include="ShaderFunctions.cpp" />
+    <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="Steerable3DController.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
+    <ClCompile Include="VectorDrawer.cpp" />
     <ClCompile Include="VRGame.cpp" />
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Conversions.h" />
+    <ClInclude Include="dirent.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
@@ -124,6 +130,7 @@
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="KinematicMotionState.h" />
+    <ClInclude Include="LineDrawer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelTest.h" />
     <ClInclude Include="MotionState.h" />
@@ -135,10 +142,12 @@
     <ClInclude Include="PhysicsController.h" />
     <ClInclude Include="RiftController.h" />
     <ClInclude Include="ShaderFunctions.h" />
+    <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="Steerable3DController.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TriangleTest.h" />
+    <ClInclude Include="VectorDrawer.h" />
     <ClInclude Include="VRGame.h" />
     <ClInclude Include="XBoxController.h" />
   </ItemGroup>
@@ -147,6 +156,8 @@
     <None Include="Content\CubeShader.vertexshader" />
     <None Include="Content\diffuse.fragmentshader" />
     <None Include="Content\diffuse.vertexshader" />
+    <None Include="Content\Lines.fragmentshader" />
+    <None Include="Content\Lines.vertexshader" />
     <None Include="Content\SimpleShader.fragmentshader" />
     <None Include="Content\SimpleShader.vertexshader" />
     <None Include="Content\standard_materials.fragmentshader" />

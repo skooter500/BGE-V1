@@ -5,8 +5,8 @@ namespace BGE
 	class Exception
 	{
 	public:
-		char * what;
-		Exception(char * what);
+		const char * what;
+		Exception(const char * what);
 		~Exception(void);
 		const char * What();
 
