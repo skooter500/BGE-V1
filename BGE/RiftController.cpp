@@ -15,12 +15,6 @@ void RiftController::AccumulateInputs()
 	if (SensorActive())
 	{
 		OVR::Quatf hmdOrient = m_SFusion.GetOrientation();
-		float yaw;
-		hmdOrient.GetEulerAngles<OVR::Axis_Y, OVR::Axis_X, OVR::Axis_Z>(&yaw, &ypr.p, &ypr.r);
-
-		ypr.y += (yaw - lastYaw);
-		lastYaw = yaw;
-
 		glm::quat headOrientation = OVRToGLQuat(hmdOrient);
 		orientation = xboxController->orientation * headOrientation;
 	}
@@ -59,7 +53,6 @@ RiftController::~RiftController(void)
 void RiftController::Update(float timeDelta)
 {
 	AccumulateInputs();
-	//AssembleViewMatrix();
 	GameComponent::Update(timeDelta);
 }
 
@@ -278,7 +271,7 @@ void RiftController::PresentFbo_PostProcessDistortion(const OVR::Util::Render::S
 
 
 		const unsigned int tris[] = {
-			0,1,2,  0,3,2, // ccw
+			0,1,2,  0,2,3, // ccw
 		};
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);

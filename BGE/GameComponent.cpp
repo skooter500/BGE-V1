@@ -98,8 +98,6 @@ void GameComponent::RecalculateVectors()
 
 void GameComponent::Update(float timeDelta) {
 	
-	RecalculateVectors();
-	
 	switch (worldMode)
 	{
 		case world_modes::from_self:
@@ -122,7 +120,7 @@ void GameComponent::Update(float timeDelta) {
 			parent->orientation = this->orientation;
 			break;		
 	}
-	
+	RecalculateVectors();
 	moved = false;
 
 	// Update all the children

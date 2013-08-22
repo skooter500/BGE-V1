@@ -11,7 +11,7 @@ using namespace std;
 Model::Model():GameComponent()
 {
 	drawMode = draw_modes::materials;
-	ambient = glm::vec3(0.2f, 0.2, 0.2f);
+	ambient = glm::vec3(0.5f, 0.5f, 0.5f);
 	specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	localTransform = glm::mat4(1);
 	worldMode = GameComponent::from_parent; // Get the world transform from my parent

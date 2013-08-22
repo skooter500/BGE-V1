@@ -41,13 +41,13 @@ Game::Game(void) {
 	running = false;
 	console = true;
 	fullscreen = true;
-	width = 1024;
-	height = 768;
+	width = 800;
+	height = 600;
 
 	// Rift
-	width = 1280;
+	/*width = 1280;
 	height = 800;
-	mainwindow = NULL;
+	*/mainwindow = NULL;
 	instance = this;
 	srand(time(0));
 
@@ -288,7 +288,7 @@ void Game::Draw()
 	if (riftEnabled)
 	{
 		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_CULL_FACE);
+		//glDisable(GL_CULL_FACE);
 		
 		riftController->BindRenderBuffer();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

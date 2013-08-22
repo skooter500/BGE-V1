@@ -57,7 +57,7 @@ VRGame::VRGame(void)
 	rightHandPickedUp= NULL;
 
 	fullscreen = false;
-	riftEnabled = false;
+	riftEnabled = true;
 
 	id = "VR Game";
 }

@@ -91,6 +91,7 @@ bool PhysicsGame1::Initialise()
 	station->scale = glm::vec3(2,2,2);
 	std::shared_ptr<Model> cmodel = Content::LoadModel("coriolis", glm::rotate(glm::mat4(1), 90.0f, GameComponent::basisUp));	
 	station->AddChild(cmodel);
+	station->AddChild(make_shared<VectorDrawer>(glm::vec3(7,7,7)));
 	station->position = glm::vec3(40, 5, -20);
 	AddChild(station);
 

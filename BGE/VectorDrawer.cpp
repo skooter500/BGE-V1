@@ -4,10 +4,13 @@
 using namespace BGE;
 using namespace std;
 
-VectorDrawer::VectorDrawer(void)
+
+
+VectorDrawer::VectorDrawer(glm::vec3 scale)
 {
 	float back = 0.2f;
 	float side = 0.1f;
+	this->scale = scale;
 
 	// The lines
 	lines.push_back(glm::vec3(0));
