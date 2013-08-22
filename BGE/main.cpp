@@ -16,7 +16,7 @@ using namespace BGE;
 
 int main(int argc, char *argv[])
 {
-	PhysicsGame1 game;
+	VRGame game;
 
 	game.Run();
 

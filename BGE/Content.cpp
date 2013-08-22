@@ -10,8 +10,6 @@ map<string, GLuint> Content::textures = map<string, GLuint>();
 map<string, GLuint> Content::shaders = map<string, GLuint>();	
 map<string, FMOD::Sound*> Content::sounds = map<string, FMOD::Sound*>();	
 
-
-
 FMOD::Sound * Content::LoadSound(string name)
 {
 	// First check to see if it's already loaded and if so, just return it
@@ -200,7 +198,6 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 
 GLuint Content::LoadTexture(std::string textureName)
 {
-
 	// First check to see if it's already loaded and if so, just return it
 	map<string, GLuint>::iterator it = Content::textures.find(textureName);
 	if (it != Content::textures.end())
@@ -261,8 +258,8 @@ GLuint Content::LoadTexture(std::string textureName)
 	// Generate mipmaps, by the way.
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	//GLfloat maxAniso = 0.0f;
-	//glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAniso);
+	GLfloat maxAniso = 0.0f;
+	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAniso);
 	glSamplerParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 4);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

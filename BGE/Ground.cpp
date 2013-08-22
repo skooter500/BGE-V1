@@ -10,7 +10,6 @@ Ground::Ground(void):GameComponent()
 	height = 5000;
 	// Diffuse will come from the texture
 	ambient = glm::vec3(0.2f, 0.2, 0.2f);
-	specular = glm::vec3(0,0,0);
 }
 
 bool Ground::rayIntersectsWorldPlane(glm::vec3 origin, glm::vec3 look, glm::vec3 & point)
@@ -108,7 +107,7 @@ void Ground::Draw()
 	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
 
 
-	glm::mat4 MV = Game::Instance()->camera->view * world;
+	glm::mat4 MV = world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));
 	glUniformMatrix3fv(nID, 1, GL_FALSE, & gl_NormalMatrix[0][0]);
 	
