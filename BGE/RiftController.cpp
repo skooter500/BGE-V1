@@ -16,6 +16,7 @@ void RiftController::AccumulateInputs()
 	{
 		OVR::Quatf hmdOrient = m_SFusion.GetOrientation();
 		glm::quat headOrientation = OVRToGLQuat(hmdOrient);
+		// Combine the orientation of the head with the yaw from the XBOX controller...
 		orientation = xboxController->orientation * headOrientation;
 	}
 }
@@ -38,7 +39,6 @@ RiftController::RiftController(): m_pManager(NULL)
 	xboxController = make_shared<XBoxController>();
 	xboxController->worldMode = GameComponent::from_self;
 	xboxController->disablePitch = true;
-	lastYaw = 0.0f;
 	AddChild(xboxController);
 }
 
@@ -270,8 +270,9 @@ void RiftController::PresentFbo_PostProcessDistortion(const OVR::Util::Render::S
 		}
 
 
+		// BD Fixed the winding order of these vertices so backface culling works...
 		const unsigned int tris[] = {
-			0,1,2,  0,2,3, // ccw
+			0,1,2,  0,2,3
 		};
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
