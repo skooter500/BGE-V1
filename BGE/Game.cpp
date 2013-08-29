@@ -212,8 +212,8 @@ void Game::SetGround(shared_ptr<Ground> ground)
 
 void Game::Update(float timeDelta) {
 	// Check for messages
-	fps = (int) 1.0f / timeDelta;
-	PrintText("FPS: " + to_string((long double) fps));
+	fps = 1.0f / timeDelta;
+	PrintText("FPS: " + to_string((long long) fps));
 	soundSystem->Update();
 	SDL_Event event;
     if (SDL_PollEvent(&event))
@@ -348,8 +348,8 @@ void Game::Draw()
 	else
 	{
 		glViewport(0, 0, width, height);	
-		GameComponent::Draw();		
 		LineDrawer::Instance()->Draw();
+		GameComponent::Draw();			
 	}
 }
 
