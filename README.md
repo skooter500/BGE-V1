@@ -1,6 +1,6 @@
 ![Alt text](https://raw.github.com/skooter500/BGE/master/Logo/BGE_Logo_01.png)
 
-My scene graph based, 3D engine that makes us of:
+My scene graph based, 3D engine that makes use of:
 * OpenGL 3 with shaders
 * GLEW
 * SDL
