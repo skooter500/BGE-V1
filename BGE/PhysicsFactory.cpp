@@ -43,6 +43,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	component->id = name;
 	Game::Instance()->AddChild(component);
 	shared_ptr<Model> model = Content::LoadModel(name);
+	component->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	model->Initialise();
 	component->AddChild(model);
 
@@ -73,7 +74,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	component->AddChild(controller);
 	controller->scale = scale;
 
-	controller->id = name;	
+	controller->id = "Model";	
 	return controller;
 }
 
@@ -229,7 +230,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateVehicle(glm::vec3 position)
 
 shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 {
-	shared_ptr<Ground> ground (new Ground());
+	shared_ptr<Ground> ground = make_shared<Ground>();
 
 	btCollisionShape * groundShape = new btStaticPlaneShape(btVector3(0,1,0),1);
 	btDefaultMotionState * groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,-1,0)));

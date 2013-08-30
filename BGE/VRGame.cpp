@@ -51,7 +51,7 @@ VRGame::VRGame(void)
 	dispatcher = NULL;
 	solver = NULL;
 	person = NULL;
-	elapsed = 10000.0f;
+	
 	fireRate = 5.0f;
 	width = 1280;
 	height = 800;
@@ -59,13 +59,35 @@ VRGame::VRGame(void)
 	rightHandPickedUp= NULL;
 
 	fullscreen = false;
-	riftEnabled = false;
+	riftEnabled = true;
 
 	id = "VR Game";
 }
 
 VRGame::~VRGame(void)
 {
+}
+
+void VRGame::ResetScene()
+{
+
+	list<shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		shared_ptr<GameComponent> component = * it;
+		if ((component->id == "Box") || (component->id == "Model") || (component->id == "Cylinder") || (component->id == "Sphere"))
+		{
+			shared_ptr<PhysicsController> physics = dynamic_pointer_cast<PhysicsController> (component->GetController());
+			dynamicsWorld->removeRigidBody(physics->rigidBody);
+			it = children.erase(it);
+		}
+		else
+		{
+			it ++;
+		}
+	}
+	
+	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 }
 
 bool VRGame::Initialise() 
@@ -87,15 +109,16 @@ bool VRGame::Initialise()
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
-	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
+	physicsFactory->CreateGroundPhysics();
+
+	gContactAddedCallback = collisionCallback;
+
 	person = make_shared<Person>();
 	AddChild(person);
 	person->headCamera = true;
 
-	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
-
-	gContactAddedCallback = collisionCallback;
+	ResetScene();
 
 	if (!Game::Initialise()) {
 		return false;
@@ -182,8 +205,6 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 void VRGame::Update(float timeDelta)
 {
 
-	LineDrawer::DrawLine(glm::vec3(10, 5, -10), glm::vec3(20, 5, -10), glm::vec3(1,0,0));
-
 	string leftHandWhat = "Nothing";
 	string rightHandWhat = "Nothing";
 
@@ -195,6 +216,21 @@ void VRGame::Update(float timeDelta)
 	float timeToPass = 1.0f / fireRate;
 
 	elapsed += timeDelta;
+
+	PrintText("Press R to reset scene");
+	static bool lastPressed = false;
+	if (keyState[SDL_SCANCODE_R])
+	{
+		if (! lastPressed)
+		{
+			ResetScene();
+		}
+		lastPressed = true;
+	}
+	else
+	{
+		lastPressed = false;
+	}	
 
 	SDL_Joystick * joy;
 	if (SDL_NumJoysticks() > 0) 

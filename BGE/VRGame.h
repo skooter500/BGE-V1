@@ -31,6 +31,7 @@ namespace BGE
 
 		void FireProjectile(glm::vec3 pos, glm::vec3 look);
 		void GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & leftHandPickedUp, Hand hand);
+		void ResetScene();
 		
 		// The world.
 		std::shared_ptr<PhysicsFactory> physicsFactory;
@@ -41,7 +42,6 @@ namespace BGE
 		shared_ptr<Person> person;
 		PhysicsController * leftHandPickedUp;
 		PhysicsController * rightHandPickedUp;
-		float elapsed;
 		float fireRate;
 	};
 }

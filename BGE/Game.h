@@ -100,6 +100,8 @@ namespace BGE
 		int width, height;
 		float fps;
 		const Uint8 * keyState;
+		float elapsed;
+
 	};
 }
 

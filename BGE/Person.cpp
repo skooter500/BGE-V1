@@ -120,7 +120,7 @@ void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 {
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
 	static bool lastPressed = false;
-	if (keyState[SDL_SCANCODE_H])
+	if (keyState[SDL_SCANCODE_C])
 	{
 		if (! lastPressed)
 		{
@@ -362,7 +362,7 @@ void Person::Update(float timeDelta)
 	if (connected)
 	{
 		SetStatusMessage("Kinect is connected");
-		SetStatusMessage("Press H to toggle the head camera");
+		SetStatusMessage("Press C to toggle the head camera");
 		if (tracked)
 		{
 			SetStatusMessage("Kinect is tracking");
