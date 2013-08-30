@@ -46,6 +46,7 @@ void SoundSystem::Vibrate(int millis, float power)
 
 SoundSystem::SoundSystem(void)
 {
+	enabled = true;
 }
 
 
@@ -66,6 +67,10 @@ void SoundSystem::Initialise()
 
 void SoundSystem::PlayHitSoundIfReady(GameComponent * object, int interval)
 {
+	if (! enabled)
+	{
+		return;
+	}
 	long now = SDL_GetTicks();
 	// Has this object already played a sound?
 	map<GameComponent *, SoundEvent>::iterator it = soundEvents.find(object);
@@ -111,6 +116,10 @@ void SoundSystem::PlayHitSoundIfReady(GameComponent * object, int interval)
 
 void BGE::SoundSystem::Update()
 {
+	if (! enabled)
+	{
+		return;
+	}
 	shared_ptr<Camera> camera = Game::Instance()->camera;
 	fmodSystem->set3DListenerAttributes(0,
 		& GLToFMODVector(camera->position)
@@ -124,6 +133,10 @@ void BGE::SoundSystem::Update()
 
 void SoundSystem::PlaySound(string name, glm::vec3 pos)
 {
+	if (! enabled)
+	{
+		return;
+	}
 	FMOD::Sound * sound = Content::LoadSound(name);
 	FMOD::Channel * channel;
 	fmodSystem->playSound(FMOD_CHANNEL_FREE, sound, false, & channel);

@@ -56,7 +56,7 @@ VRGame::VRGame(void)
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = false;
+	fullscreen = true;
 	riftEnabled = true;
 
 	id = "VR Game";
@@ -179,8 +179,6 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 
 void VRGame::Update(float timeDelta)
 {
-
-	LineDrawer::DrawLine(glm::vec3(10, 5, -10), glm::vec3(20, 5, -10), glm::vec3(1,0,0));
 
 	string leftHandWhat = "Nothing";
 	string rightHandWhat = "Nothing";
