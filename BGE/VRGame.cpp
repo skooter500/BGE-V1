@@ -53,11 +53,13 @@ VRGame::VRGame(void)
 	person = NULL;
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
+	width = 1280;
+	height = 800;
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
 	fullscreen = false;
-	riftEnabled = true;
+	riftEnabled = false;
 
 	id = "VR Game";
 }
