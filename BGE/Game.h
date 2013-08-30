@@ -49,10 +49,10 @@ namespace BGE
 		SDL_GLContext maincontext; /* Our opengl context handle */
 		bool running;
 		
-		int width, height;
+		
 		static Game * instance;
 		
-		const Uint8 * keyState;
+		
 		TTF_Font *font; // Declare a SDL_ttf font 
 
 		std::vector<PrintMessage> messages;
@@ -60,6 +60,7 @@ namespace BGE
 		float fontSize;
 		void Print(string message, glm::vec2);
 	public:
+
 		Game(void);
 		~Game(void);
 
@@ -89,15 +90,16 @@ namespace BGE
 		SDL_Window * mainwindow; /* Our window handle */
 		bool fullscreen;
 		bool console;
+		bool hud;
 
 		shared_ptr<RiftController> riftController;
 		shared_ptr<SoundSystem> soundSystem;
 
 		string riftMessage;
 		bool riftEnabled;
-
+		int width, height;
 		float fps;
-
+		const Uint8 * keyState;
 	};
 }
 

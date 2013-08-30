@@ -41,8 +41,10 @@ Game::Game(void) {
 	running = false;
 	console = true;
 	fullscreen = true;
+	hud = true;
 	width = 800;
 	height = 600;
+	riftEnabled = false;
 
 	// Rift
 	/*width = 1280;
@@ -56,7 +58,6 @@ Game::Game(void) {
 
 	fps = 0;
 
-	riftEnabled = false;
 	worldMode = world_modes::from_self;
 
 	camera = make_shared<Camera>();
