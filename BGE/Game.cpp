@@ -41,17 +41,18 @@ Game::Game(void) {
 	running = false;
 	console = true;
 	fullscreen = true;
+
 	hud = true;
 	width = 800;
 	height = 600;
 	riftEnabled = false;
-
 	// Rift
-	/*width = 1280;
+	width = 1280;
 	height = 800;
-	*/mainwindow = NULL;
+	mainwindow = NULL;
 	instance = this;
 	srand(time(0));
+	elapsed = 10000.0f;
 
 	lastPrintPosition = glm::vec2(0,0);
 	fontSize = 14;	
@@ -216,6 +217,21 @@ void Game::Update(float timeDelta) {
 	fps = 1.0f / timeDelta;
 	PrintText("FPS: " + to_string((long long) fps));
 	soundSystem->Update();
+
+	static bool lastPressed = false;
+	if (keyState[SDL_SCANCODE_I])
+	{
+		if (! lastPressed)
+		{
+			hud = ! hud;
+		}
+		lastPressed = true;
+	}
+	else
+	{
+		lastPressed = false;
+	}	
+
 	SDL_Event event;
     if (SDL_PollEvent(&event))
     {
@@ -250,11 +266,14 @@ void Game::PreDraw()
 void Game::PostDraw()
 {	
 	// Printing has to be done last, so we batch up the print messages
-	vector<PrintMessage>::iterator it = messages.begin();
-	while (it != messages.end())
+	if (hud)
 	{
-		Print(it->message, it->position);
-		it ++;
+		vector<PrintMessage>::iterator it = messages.begin();
+		while (it != messages.end())
+		{
+			Print(it->message, it->position);
+			it ++;
+		}
 	}
 	messages.clear();
 	lastPrintPosition.y = 0;
@@ -285,7 +304,7 @@ SDL_Window * Game::GetMainWindow()
 
 void Game::Draw()
 {	
-
+	PrintText("Press I to toggle info");
 	if (riftEnabled)
 	{
 		glEnable(GL_DEPTH_TEST);
@@ -329,7 +348,7 @@ void Game::Draw()
 		camera->view = OVRToGLMat4(viewLeft);
 		camera->projection = OVRToGLMat4(projLeft);
 		// Draw all my children
-		LineDrawer::Instance()->Draw();
+		//LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
@@ -337,7 +356,7 @@ void Game::Draw()
 		camera->view = OVRToGLMat4(viewRight);
 		camera->projection = OVRToGLMat4(projRight);
 		// Draw all my children
-		LineDrawer::Instance()->Draw();
+		//LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		riftController->UnBindRenderBuffer();
