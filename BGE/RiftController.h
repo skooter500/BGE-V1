@@ -40,7 +40,6 @@ namespace BGE
 		void PresentFbo_NoDistortion();
 		void PresentFbo_PostProcessDistortion(const OVR::Util::Render::StereoEyeParams& eyeParams);
 
-		void AssembleViewMatrix();
 		void AccumulateInputs();
 
 		OVR::Ptr<OVR::DeviceManager>  m_pManager;
@@ -79,9 +78,5 @@ namespace BGE
 
 		int m_windowWidth;
 		int m_windowHeight;
-
-		glm::vec3 ypr;
-		float lastYaw;
-
 	};
 }
