@@ -34,5 +34,7 @@ namespace BGE
 		FMOD::System * fmodSystem;
 		map<GameComponent *, SoundEvent> soundEvents;
 		void Vibrate(int millis, float power);
+
+		bool enabled;
 	};
 }

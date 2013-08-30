@@ -43,6 +43,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	component->id = name;
 	Game::Instance()->AddChild(component);
 	shared_ptr<Model> model = Content::LoadModel(name);
+	component->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	model->Initialise();
 	component->AddChild(model);
 
