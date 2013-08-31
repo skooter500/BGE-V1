@@ -58,7 +58,7 @@ VRGame::VRGame(void)
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = false;
+	fullscreen = true;
 	riftEnabled = true;
 
 	id = "VR Game";
