@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 #include "Content.h"
-#include "Conversions.h"
+#include "Utils.h"
 using namespace BGE;
 using namespace std;
 
@@ -115,7 +115,7 @@ bool VRGame::Initialise()
 	gContactAddedCallback = collisionCallback;
 
 	person = make_shared<Person>();
-	AddChild(person);
+	Attach(person);
 	person->headCamera = true;
 
 	ResetScene();

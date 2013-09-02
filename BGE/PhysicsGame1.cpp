@@ -54,7 +54,7 @@ bool PhysicsGame1::Initialise()
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
 	shared_ptr<Person> person = make_shared<Person>();
-	AddChild(person);
+	Attach(person);
 
 	physicsFactory->CreateWall(glm::vec3(-20,0,20), 5, 5);
 	// Now some constraints
@@ -78,10 +78,10 @@ bool PhysicsGame1::Initialise()
 	steerable->position = glm::vec3(20, 5, -20);
 	std::shared_ptr<VectorDrawer> vectorDrawer = make_shared<VectorDrawer>();
 	vectorDrawer->scale = glm::vec3(5,5,10);
-	ship->AddChild(steerable);
-	ship->AddChild(model);
-	ship->AddChild(vectorDrawer);
-	AddChild(ship);
+	ship->Attach(steerable);
+	ship->Attach(model);
+	ship->Attach(vectorDrawer);
+	Attach(ship);
 
 	// Create a hierarchy
 	station = make_shared<GameComponent>();
@@ -90,10 +90,10 @@ bool PhysicsGame1::Initialise()
 	station->specular = glm::vec3(0,0,0);
 	station->scale = glm::vec3(2,2,2);
 	std::shared_ptr<Model> cmodel = Content::LoadModel("coriolis", glm::rotate(glm::mat4(1), 90.0f, GameComponent::basisUp));	
-	station->AddChild(cmodel);
-	station->AddChild(make_shared<VectorDrawer>(glm::vec3(7,7,7)));
+	station->Attach(cmodel);
+	station->Attach(make_shared<VectorDrawer>(glm::vec3(7,7,7)));
 	station->position = glm::vec3(40, 5, -20);
-	AddChild(station);
+	Attach(station);
 
 	// Add a child to the station and update by including the parent's world transform
 	std::shared_ptr<GameComponent> ship1 = make_shared<GameComponent>();
@@ -101,9 +101,9 @@ bool PhysicsGame1::Initialise()
 	ship1->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	ship1->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	std::shared_ptr<Model> ana = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp));	
-	ship1->AddChild(ana);
+	ship1->Attach(ana);
 	ship1->position = glm::vec3(0, 0, -10);
-	station->AddChild(ship1);
+	station->Attach(ship1);
 
 	physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
 	if (!Game::Initialise()) {

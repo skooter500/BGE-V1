@@ -217,7 +217,7 @@ void GameComponent::Roll(float angle)
 	moved = true;
 }
 
-void GameComponent::AddChild(shared_ptr<GameComponent> child)
+void GameComponent::Attach(shared_ptr<GameComponent> child)
 {
 	child->parent = this;
 	children.push_back(child);

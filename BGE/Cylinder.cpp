@@ -12,7 +12,7 @@ Cylinder::Cylinder(float radius, float height)
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	//specular = glm::vec3(0,0,0);
 	id = "Cylinder";
-	AddChild(model);
+	Attach(model);
 	scale = glm::vec3(radius, height, radius);
 }
 

@@ -40,7 +40,7 @@ namespace BGE
 	};
 
 	glm::vec3 RotateVector(glm::vec3, glm::quat);
-	void Log(string message);
+	
 
 	class Game:
 		public GameComponent
@@ -49,9 +49,7 @@ namespace BGE
 		SDL_GLContext maincontext; /* Our opengl context handle */
 		bool running;
 		
-		
 		static Game * instance;
-		
 		
 		TTF_Font *font; // Declare a SDL_ttf font 
 

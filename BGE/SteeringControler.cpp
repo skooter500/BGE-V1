@@ -1,0 +1,729 @@
+#include "SteeringControler.h"
+#include "Game.h"
+#include <gtx/norm.hpp>
+#include <string>
+#include "Utils.h"
+#include "Params.h"
+
+using namespace BGE;
+
+SteeringControler::SteeringControler(void)
+{
+	force = glm::vec3(0);
+	acceleration = glm::vec3(0);
+	mass = 1.0f;
+	timeDelta = 0.0f;
+	worldMode = world_modes::to_parent;
+	calculationMethod = CalculationMethods::WeightedTruncatedRunningSumWithPrioritisation;
+	maxSpeed = Params::GetFloat("max_speed");
+	maxForce = Params::GetFloat("max_force");
+
+	wanderTarget = RandomPosition(1.0f);
+	wanderTarget = glm::normalize(wanderTarget);
+	wanderTarget *= Params::GetFloat("wander_radius");
+
+	// Start with all behaviours turned off
+	TurnOffAll();
+}
+
+
+SteeringControler::~SteeringControler(void)
+{
+}
+
+void SteeringControler::Update(float timeDelta)
+{
+	float smoothRate;
+	this->timeDelta = timeDelta;
+	force = Calculate();
+	CheckNaN(force);
+	glm::vec3 newAcceleration = force / mass;
+
+	if (timeDelta > 0)
+	{
+		smoothRate = Clip(9 * timeDelta, 0.15f, 0.4f) / 2.0f;
+		BlendIntoAccumulator(smoothRate, newAcceleration,  acceleration);
+	}
+
+	velocity += acceleration * timeDelta;
+	float speed = glm::length(velocity);
+	if (speed > maxSpeed)
+	{
+
+		velocity = glm::normalize(velocity);
+		velocity *= maxSpeed;
+	}
+	position += velocity * timeDelta;            
+
+	// the length of this global-upward-pointing vector controls the vehicle's
+	// tendency to right itself as it is rolled over from turning acceleration
+	glm::vec3 globalUp = glm::vec3(0, 0.2f, 0);
+	// acceleration points toward the center of local path curvature, the
+	// length determines how much the vehicle will roll while turning
+	glm::vec3 accelUp = acceleration * 0.05f;
+	// combined banking, sum of UP due to turning and global UP
+	glm::vec3 bankUp = accelUp + globalUp;
+	// blend bankUp into vehicle's UP basis vector
+	smoothRate = timeDelta * 3;
+	glm::vec3 tempUp = up;
+	BlendIntoAccumulator(smoothRate, bankUp, tempUp);
+	up = tempUp;
+	up = glm::normalize(up);
+
+	if (speed > 0.0001f)
+	{
+		look = velocity;
+		look = glm::normalize(look);
+		if (look == right)
+		{
+			right = GameComponent::basisRight;
+		}
+		else
+		{
+			right = glm::cross(look, up);
+			glm::normalize(right);
+
+			CheckNaN(right, GameComponent::basisRight);
+			up = glm::cross(right, look);
+			up = glm::normalize(up);
+			CheckNaN(up, GameComponent::basisUp);
+		}
+		// Apply damping
+		velocity *= 0.99f;
+	}
+
+	if (look != GameComponent::basisLook)
+	{
+		// Make a quaternion from the vectors
+		glm::mat4 rotationMatrix = glm::lookAt(glm::vec3(0),look,up);
+		rotationMatrix = glm::transpose(rotationMatrix);
+		orientation = glm::quat(rotationMatrix);
+	}
+
+	GameComponent::Update(timeDelta);
+}
+
+int SteeringControler::TagNeighboursSimple(float inRange)
+{
+	tagged.clear();
+
+	list<shared_ptr<GameComponent>>::iterator it = Game::Instance()->children.begin();
+
+	while (it != Game::Instance()->children.end())
+	{
+		if ( ((*it)->id == "Steerable") && (* it).get() != parent) 
+		{
+			shared_ptr<GameComponent> neighbour =  * it;
+			float distance = glm::length(parent->position - neighbour->position);
+			if (distance < inRange)
+			{
+				tagged.push_back(neighbour);                
+			}			
+		}
+		it ++;
+	}
+	return tagged.size();
+}
+
+bool SteeringControler::IsOn(behaviour_type behaviour)
+{
+	return ((flags & (int)behaviour) == (int)behaviour);
+}
+
+void SteeringControler::TurnOn(behaviour_type behaviour)
+{
+	flags |= ((int)behaviour);
+}
+
+void SteeringControler::TurnOffAll()
+{
+	flags = (int) SteeringControler::behaviour_type::none;
+}
+
+glm::vec3 SteeringControler::Cohesion()
+{
+	glm::vec3 steeringForce = glm::vec3(0);
+	glm::vec3 centreOfMass = glm::vec3(0);
+	int taggedCount = 0;
+
+	vector<shared_ptr<GameComponent>>::iterator it = tagged.begin();
+	while (it != tagged.end())
+	{
+		shared_ptr<GameComponent> entity = * it;
+		if (entity.get() != parent)
+		{
+			centreOfMass += entity->position;
+			taggedCount++;
+		}
+		it ++;
+	}
+	if (taggedCount > 0)
+	{
+		centreOfMass /= (float) taggedCount;
+		if (glm::length2(centreOfMass) == 0)
+		{
+			steeringForce = glm::vec3(0);
+		}
+		else
+		{
+			steeringForce = glm::normalize(Seek(centreOfMass));
+		}
+	}
+	CheckNaN(steeringForce);
+	return steeringForce;
+}
+
+glm::vec3 SteeringControler::Alignment()
+{
+	glm::vec3 steeringForce = glm::vec3(0);
+	int taggedCount = 0;
+
+	vector<shared_ptr<GameComponent>>::iterator it = tagged.begin();
+	while (it != tagged.end())
+	{
+		shared_ptr<GameComponent> entity = * it;
+		if (entity.get() != parent)
+		{
+			steeringForce += entity->look;
+			taggedCount++;
+		}
+		it ++;
+	}
+
+	if (taggedCount > 0)
+	{
+		steeringForce /= (float) taggedCount;
+		steeringForce -= look;
+	}
+	return steeringForce;
+
+}
+
+glm::vec3 SteeringControler::SphereConstrain(float radius)
+{
+	float distance = glm::length(position);
+	glm::vec3 steeringForce = glm::vec3(0);
+	if (distance > radius)
+	{
+		steeringForce = glm::normalize(position) * (radius - distance);
+	}
+	return steeringForce;
+}
+
+
+glm::vec3 SteeringControler::Separation()
+{
+	glm::vec3 steeringForce = glm::vec3(0);
+
+	vector<shared_ptr<GameComponent>>::iterator it = tagged.begin();
+	while (it != tagged.end())
+	{
+		shared_ptr<GameComponent> entity = * it;
+		if (entity.get() != parent)
+		{
+			glm::vec3 toEntity = position- entity->position;
+			steeringForce += (glm::normalize(toEntity) / glm::length(toEntity));
+		}
+		it ++;
+	}
+
+	return steeringForce;
+}
+
+glm::vec3  SteeringControler::Evade()
+{
+    float dist = glm::length(target->position - position);
+    float lookAhead = (dist / maxSpeed);
+
+    glm::vec3 targetPos = target->position + (lookAhead * target->velocity);
+    return Flee(targetPos);
+}
+
+
+glm::vec3 SteeringControler::ObstacleAvoidance()
+{
+    glm::vec3 force = glm::vec3(0);
+    makeFeelers();
+	/*
+    List<Sphere> tagged = new List<Sphere>();
+    float minBoxLength = 20.0f;
+	float boxLength = minBoxLength + ((fighter.velocity.Length()/fighter.maxSpeed) * minBoxLength * 2.0f);
+            
+    if (glm::isnan(boxLength))
+    {
+        BGE::LogMessage("NAN");
+    }
+    // Matt Bucklands Obstacle avoidance
+    // First tag obstacles in range
+    foreach (Entity child in XNAGame.Instance.Children)
+    {
+        if (child is Obstacle)
+        {
+            Obstacle obstacle = (Obstacle)child;
+
+            glm::vec3 toCentre = fighter.Position - obstacle.Position;
+            float dist = toCentre.Length();
+            if (dist < boxLength)
+            {
+                tagged.Add(obstacle);
+            }
+        }
+    }
+
+    float distToClosestIP = float.MaxValue;
+	Sphere closestIntersectingObstacle = null;
+	glm::vec3 localPosOfClosestObstacle = glm::vec3(0);
+	glm::vec3 intersection = glm::vec3(0);
+
+    Matrix localTransform = Matrix.Invert(fighter.worldTransform);
+    foreach (Obstacle o in tagged)
+    {
+        glm::vec3 localPos = glm::vec3.Transform(o.Position, localTransform);
+        //glm::vec3 localPos = o.pos - fighter.pos;
+
+		// If the local position has a positive Z value then it must lay
+		// behind the agent. (in which case it can be ignored)
+        if (localPos.z <=0)
+		{
+			// If the distance from the x axis to the object's position is less
+			// than its radius + half the width of the detection box then there
+			// is a potential intersection.
+			float expandedRadius = fighter.BoundingSphere.Radius + o.Radius;
+			if ((Math.Abs(localPos.y) < expandedRadius) && (Math.Abs(localPos.x) < expandedRadius))
+			{
+				// Now to do a ray/sphere intersection test. The center of the				
+				// Create a temp Entity to hold the sphere in local space
+                Sphere tempSphere = new Sphere(expandedRadius);
+				tempSphere.Position = localPos;				            
+
+				// Create a ray
+				Ray ray = new Ray();
+				ray.pos = new glm::vec3(0, 0, 0);
+                ray.look = fighter.basis;
+
+				// Find the point of intersection
+                if (tempSphere.closestRayIntersects(ray, glm::vec3(0), intersection) == false)
+                {
+                    return glm::vec3(0);
+                }
+
+				// Now see if its the closest, there may be other intersecting spheres
+				float dist = intersection.Length();
+				if (dist < distToClosestIP)
+				{
+					dist = distToClosestIP;
+                    closestIntersectingObstacle = o;
+					localPosOfClosestObstacle = localPos;
+				}				
+			}
+		}              
+		if (closestIntersectingObstacle != null)
+		{
+			// Now calculate the force
+			// Calculate Z Axis braking  force
+			float multiplier = 200 * (1.0f + (boxLength - localPosOfClosestObstacle.z) / boxLength);
+
+                    
+			
+			//calculate the lateral force
+            float expandedRadius = fighter.BoundingSphere.Radius + o.Radius;
+			force.x = (expandedRadius - Math.Abs(localPosOfClosestObstacle.x))  * multiplier;
+
+            force.y = (expandedRadius - -Math.Abs(localPosOfClosestObstacle.x)) * multiplier;
+
+            if (localPosOfClosestObstacle.x > 0)
+            {
+                force.x = -force.x;
+            }
+                    
+            if (localPosOfClosestObstacle.y > 0)
+            {
+                force.y = -force.y;
+            }                  
+            Line.DrawLine(fighter.Position, fighter.Position + fighter.Look * boxLength, Color.BlueViolet);
+			//apply a braking force proportional to the obstacle's distance from
+			//the vehicle.
+			const float brakingWeight = 40.0f;
+            force.z = (closestIntersectingObstacle.Radius -
+                                localPosOfClosestObstacle.z) *
+                                brakingWeight;
+
+			//finally, convert the steering vector from local to world space
+            force = glm::vec3.Transform(force, fighter.worldTransform);                    
+        }                
+    }
+             
+    fighter.DrawFeelers = false;
+    fighter.DrawAxis = false;
+	*/           
+            
+    return force;
+}
+
+
+
+
+
+glm::vec3 SteeringControler::OffsetPursuit(glm::vec3 offset)
+{
+    glm::vec3 target = glm::vec3(0);
+
+    target = glm::vec3(leader->world * glm::vec4(offset, 1));
+
+    float dist = glm::length(target - position);     
+      
+    float lookAhead = (dist / maxSpeed);
+
+    target = target + (lookAhead * leader->velocity);
+
+    CheckNaN(target);
+    return Arrive(target);
+}
+
+glm::vec3 SteeringControler::Pursue()
+{
+    float dist = glm::length(target->position - position);
+
+    if (dist < 1.0f)
+    {
+        //fighter.Target.pos = new glm::vec3(20, 20, 0);
+    }
+    float lookAhead = (dist / maxSpeed);
+
+    glm::vec3 targetPos = target->position + (lookAhead * target->velocity);
+    return Seek(targetPos);
+}
+
+glm::vec3 SteeringControler::Flee(glm::vec3 targetPos)
+{
+    float panicDistance = 100.0f;
+    glm::vec3 desiredVelocity;
+    desiredVelocity = position - targetPos;
+    if (glm::length(desiredVelocity)  > panicDistance)
+    {
+        return glm::vec3(0);
+    }
+
+    desiredVelocity = glm::normalize(desiredVelocity);
+    desiredVelocity *= maxSpeed;
+
+    return (desiredVelocity - velocity);
+}
+
+glm::vec3 SteeringControler::RandomWalk()
+{
+    float dist = glm::length(position - randomWalkTarget);
+    if (dist < 50)
+    {
+        randomWalkTarget.x = RandomClamped() * Params::GetFloat("world_range");
+        randomWalkTarget.y = RandomClamped() * Params::GetFloat("world_range");
+        randomWalkTarget.z = RandomClamped() * Params::GetFloat("world_range");
+    }
+    return Seek(randomWalkTarget);
+}
+
+glm::vec3 SteeringControler::Seek(glm::vec3 targetPos)
+{           
+    glm::vec3 desiredVelocity;
+
+    desiredVelocity = targetPos - position;
+    
+	desiredVelocity = glm::normalize(desiredVelocity);
+    desiredVelocity *= maxSpeed;
+
+    return (desiredVelocity - velocity);
+}
+
+
+glm::vec3 SteeringControler::Wander()
+{
+    float jitterTimeSlice = Params::GetFloat("wander_jitter") * timeDelta;
+
+    glm::vec3 toAdd = glm::vec3(RandomClamped(), RandomClamped(), RandomClamped()) * jitterTimeSlice;
+    wanderTarget += toAdd;
+    wanderTarget = glm::normalize(wanderTarget);
+    wanderTarget *= Params::GetFloat("wander_radius");
+
+    glm::vec3 worldTarget = glm::vec3(world * glm::vec4(wanderTarget + (GameComponent::basisLook * Params::GetFloat("wander_distance")), 1.0f) );
+
+    return (worldTarget - position);
+            
+}
+
+glm::vec3 SteeringControler::WallAvoidance()
+{
+    makeFeelers();
+
+
+    glm::vec3 force = glm::vec3(0);
+
+	/*
+	Plane worldPlane = new Plane(new glm::vec3(0, 1, 0), 0);
+
+    foreach (glm::vec3 feeler in fighter.Feelers)
+    {
+        float dot = worldPlane.DotCoordinate(feeler);
+        if (dot < 0)
+        {
+            float distance = Math.Abs(dot - worldPlane.D);
+            force += worldPlane.Normal * distance;
+        }           
+    }
+
+    if (force.Length() > 0.0)
+    {
+        fighter.DrawFeelers = true;
+    }
+    else
+    {
+        fighter.DrawFeelers = false;
+    }
+    fighter.DrawAxis = false;
+	*/
+    return force;
+}
+
+void SteeringControler::makeFeelers()
+{
+ 	feelers.clear();
+    float feelerDistance = 20.0f;
+    // Make the forward feeler
+    glm::vec3 newFeeler = GameComponent::basisLook * feelerDistance;
+    newFeeler = glm::vec3(world * glm::vec4(newFeeler, 1));
+    feelers.push_back(newFeeler);
+
+	newFeeler = GameComponent::basisLook * feelerDistance;
+	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), 45.0f, GameComponent::basisUp) * glm::vec4(newFeeler, 1));
+	newFeeler = glm::vec3(world * glm::vec4(newFeeler, 1));
+	feelers.push_back(newFeeler);
+
+	newFeeler = GameComponent::basisLook * feelerDistance;
+	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), -45.0f, GameComponent::basisUp) * glm::vec4(newFeeler, 1));
+	newFeeler = glm::vec3(world * glm::vec4(newFeeler, 1));
+	feelers.push_back(newFeeler);
+
+	newFeeler = GameComponent::basisLook * feelerDistance;
+	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), 45.0f, GameComponent::basisRight) * glm::vec4(newFeeler, 1));
+	newFeeler = glm::vec3(world * glm::vec4(newFeeler, 1));
+	feelers.push_back(newFeeler);
+
+	newFeeler = GameComponent::basisLook * feelerDistance;
+	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), -45.0f, GameComponent::basisRight) * glm::vec4(newFeeler, 1));
+	newFeeler = glm::vec3(world * glm::vec4(newFeeler, 1));
+	feelers.push_back(newFeeler);
+
+}
+
+
+glm::vec3 SteeringControler::Arrive(glm::vec3 target)
+{
+    glm::vec3 toTarget = target - position;
+            
+    float slowingDistance = 8.0f;
+    float distance = glm::length(toTarget);
+    if (distance == 0.0f)
+    {
+        return glm::vec3(0);
+    }
+    const float DecelerationTweaker = 10.3f;
+    float ramped = maxSpeed * (distance / (slowingDistance * DecelerationTweaker));
+
+    float clamped = glm::min<float>(ramped, maxSpeed);
+    glm::vec3 desired = clamped * (toTarget / distance);
+
+    CheckNaN(desired);
+          
+    return desired - velocity;
+}
+
+glm::vec3 SteeringControler::Calculate()
+{            
+    if (calculationMethod == CalculationMethods::WeightedTruncatedRunningSumWithPrioritisation)
+    {
+        return CalculateWeightedPrioritised();
+    }
+
+    return glm::vec3(0);            
+}
+
+glm::vec3 SteeringControler::CalculateWeightedPrioritised()
+{
+    glm::vec3 force = glm::vec3(0);
+    glm::vec3 steeringForce = glm::vec3(0);
+            
+    if (IsOn(behaviour_type::obstacle_avoidance))
+    {
+        force = ObstacleAvoidance() * Params::GetWeight("obstacle_avoidance_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+    CheckNaN(force);
+    if (IsOn(behaviour_type::wall_avoidance))
+    {
+        force = WallAvoidance() * Params::GetWeight("wall_avoidance_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::sphere_constrain))
+    {
+        force = SphereConstrain(Params::GetFloat("world_range")) * Params::GetWeight("sphere_constrain_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::evade))
+    {
+        force = Evade() * Params::GetWeight("evade_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    int tagged = 0;
+    if (IsOn(behaviour_type::separation) || IsOn(behaviour_type::cohesion) || IsOn(behaviour_type::alignment))
+    {
+        tagged = TagNeighboursSimple(Params::GetFloat("tag_range"));
+    }
+            
+    if (IsOn(behaviour_type::separation) && (tagged > 0) )
+    {
+        force = Separation() * Params::GetWeight("separation_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::alignment) && (tagged > 0))
+    {
+        force = Alignment() * Params::GetWeight("alignment_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::cohesion) && (tagged > 0))
+    {
+        force = Cohesion() * Params::GetWeight("cohesion_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::seek))
+    {
+        force = Seek(targetPos) * Params::GetWeight("seek_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::arrive))
+    {
+        force = Arrive(targetPos) * Params::GetWeight("arrive_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::wander))
+    {
+        force = Wander() * Params::GetWeight("wander_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::pursuit))
+    {
+        force = Pursue() * Params::GetWeight("pursuit_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::offset_pursuit))
+    {
+        force = OffsetPursuit(offset) * Params::GetWeight("offset_pursuit_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::follow_path))
+    {
+        force = FollowPath() * Params::GetWeight("follow_path_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    if (IsOn(behaviour_type::random_walk))
+    {
+        force = RandomWalk() * Params::GetWeight("random_walk_weight");
+        if (!AccumulateForce(steeringForce, force))
+        {
+            return steeringForce;
+        }
+    }
+            
+    return steeringForce;
+}
+
+glm::vec3 SteeringControler::FollowPath()
+{
+    float epsilon = 5.0f;
+    float dist = glm::length(position - route.NextWaypoint());
+    if (dist < epsilon)
+    {
+        route.AdvanceToNext();
+    }
+    if ((! route.looped) && route.IsLast())
+    {
+        return Arrive(route.NextWaypoint());
+    }
+    else
+    {
+        return Seek(route.NextWaypoint());
+    }
+}
+
+bool SteeringControler::AccumulateForce(glm::vec3 & runningTotal, glm::vec3 force)
+{
+    float soFar = glm::length(runningTotal);
+
+    float remaining = maxForce - soFar;
+    if (remaining <= 0)
+    {
+        return false;
+    }
+
+    float toAdd = glm::length(force);
+           
+
+    if (toAdd < remaining)
+    {
+        runningTotal += force;
+    }
+    else
+    {
+        runningTotal += glm::normalize(force) * remaining;
+    }
+    return true;
+}

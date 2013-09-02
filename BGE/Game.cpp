@@ -15,7 +15,7 @@
 #include "RiftController.h"
 #include "XBoxController.h"
 #include "Steerable3DController.h"
-#include "Conversions.h"
+#include "Utils.h"
 
 using namespace BGE;
 
@@ -28,11 +28,6 @@ glm::vec3 BGE::RotateVector(glm::vec3 v, glm::quat q)
 	w = q * w * qinv;
 
 	return glm::vec3(w.x, w.y, w.z);
-}
-
-void BGE::Log(string message)
-{
-	printf("%s\n", message.c_str());
 }
 
 
@@ -64,7 +59,7 @@ Game::Game(void) {
 	camera = make_shared<Camera>();
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
-	AddChild(camera);
+	Attach(camera);
 
 }
 
@@ -142,13 +137,13 @@ bool Game::Initialise() {
 		shared_ptr<RiftController> riftController = make_shared<RiftController>();
 		riftController->position = glm::vec3(0, 10, 10);
 		this->riftController = riftController;
-		camera->AddChild(riftController);
+		camera->Attach(riftController);
 	}
 	else
 	{
 		shared_ptr<GameComponent> controller = make_shared<FPSController>();
 		controller->position = glm::vec3(0, 10, 10);
-		camera->AddChild(controller);
+		camera->Attach(controller);
 	}
 
 	LineDrawer::Instance()->Initialise();
@@ -209,7 +204,7 @@ void Game::SetGround(shared_ptr<Ground> ground)
 {
 	children.remove(this->ground);
 	this->ground = ground;
-	AddChild(ground);
+	Attach(ground);
 }
 
 void Game::Update(float timeDelta) {

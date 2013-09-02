@@ -11,6 +11,7 @@
 #include "PhysicsGame1.h"
 #include "VRGame.h"
 #include "ModelTest.h"
+#include "SteeringGame.h"
 
 using namespace BGE;
 

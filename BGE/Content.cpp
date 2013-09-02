@@ -1,6 +1,7 @@
 #include "Content.h"
 #include "Game.h"
 #include <string>
+#include "Utils.h"
 
 using namespace BGE;
 
@@ -47,9 +48,9 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	map<string, glm::vec3> diffuse;
 	bool hasUVs = false;
 
-	// First load the materialss
+	// First load the materials
 	string materialsFileName = Content::prefix + name + ".mtl";
-	cout << "Loading materials file: " << materialsFileName << endl;
+	LogMessage("Loading materials file: " + materialsFileName);
 	std::ifstream is;
 	
 	is.open(materialsFileName, ios::in);	
@@ -80,7 +81,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	}
 
 	string objFileName = Content::prefix + name + ".objm";	
-	cout << "Loading OBJ file: " << name << endl;
+	LogMessage("Loading OBJ file: " + name);
 
 	is.open(objFileName, ios::in);
 
@@ -252,12 +253,13 @@ GLuint Content::LoadTexture(std::string textureName)
  
 	
 	// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
+	glGenerateMipmap(GL_TEXTURE_2D);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	// Generate mipmaps, by the way.
-	glGenerateMipmap(GL_TEXTURE_2D);
-
+	
 	GLfloat maxAniso = 0.0f;
 	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAniso);
 	glSamplerParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 4);
