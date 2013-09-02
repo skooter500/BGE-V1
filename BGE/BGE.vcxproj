@@ -81,7 +81,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Conversions.cpp" />
+    <ClCompile Include="Route.cpp" />
+    <ClCompile Include="Scenario.cpp" />
+    <ClCompile Include="SteeringGame.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -99,6 +102,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelTest.cpp" />
     <ClCompile Include="MotionState.cpp" />
+    <ClCompile Include="Params.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="PhysicsCamera.cpp" />
     <ClCompile Include="PhysicsFactory.cpp" />
@@ -109,6 +113,7 @@
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="Steerable3DController.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SteeringControler.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="VectorDrawer.cpp" />
@@ -116,7 +121,10 @@
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Conversions.h" />
+    <ClInclude Include="Route.h" />
+    <ClInclude Include="Scenario.h" />
+    <ClInclude Include="SteeringGame.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Box.h" />
@@ -135,6 +143,7 @@
     <ClInclude Include="ModelTest.h" />
     <ClInclude Include="MotionState.h" />
     <ClInclude Include="OVR_Shaders.h" />
+    <ClInclude Include="Params.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="PhysicsCamera.h" />
     <ClInclude Include="PhysicsFactory.h" />
@@ -145,6 +154,7 @@
     <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="Steerable3DController.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SteeringControler.h" />
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="VectorDrawer.h" />
@@ -154,8 +164,10 @@
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader" />
     <None Include="Content\CubeShader.vertexshader" />
+    <None Include="Content\default.properties" />
     <None Include="Content\diffuse.fragmentshader" />
     <None Include="Content\diffuse.vertexshader" />
+    <None Include="Content\flocking.properties" />
     <None Include="Content\Lines.fragmentshader" />
     <None Include="Content\Lines.vertexshader" />
     <None Include="Content\SimpleShader.fragmentshader" />

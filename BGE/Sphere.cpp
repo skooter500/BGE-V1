@@ -12,7 +12,7 @@ Sphere::Sphere(float radius)
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	specular = glm::vec3(1.2f,1.2f, 1.2f);
 	id = "Sphere";
-	AddChild(model);
+	Attach(model);
 	scale = glm::vec3(radius, radius, radius);
 }
 

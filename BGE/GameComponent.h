@@ -69,7 +69,7 @@ namespace BGE
 		void Pitch(float angle); // rotate on right vector
 		void Yaw(float angle);   // rotate on up vector
 		void Roll(float angle);  // rotate on look vector
-		void AddChild(std::shared_ptr<GameComponent> child);
+		void Attach(std::shared_ptr<GameComponent> child);
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 		std::shared_ptr<GameComponent> GetController();
 		void RecalculateVectors();

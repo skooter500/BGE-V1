@@ -119,13 +119,28 @@
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Conversions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LineDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VectorDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Params.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Route.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringControler.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringGame.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenario.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -217,19 +232,34 @@
     <ClInclude Include="VRGame.h">
       <Filter>Games</Filter>
     </ClInclude>
-    <ClInclude Include="Conversions.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="dirent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="LineDrawer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="VectorDrawer.h" />
     <ClInclude Include="SoundSystem.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Params.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorDrawer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Route.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringControler.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringGame.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenario.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
@@ -290,6 +320,12 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Content\Lines.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\default.properties">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\flocking.properties">
       <Filter>Content</Filter>
     </None>
   </ItemGroup>

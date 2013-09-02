@@ -4,7 +4,7 @@
 #include "GameComponent.h"
 #include "OVR_Shaders.h"
 #include "ShaderFunctions.h"
-#include "Conversions.h"
+#include "Utils.h"
 
 using namespace BGE;
 using namespace OVR;
@@ -39,7 +39,7 @@ RiftController::RiftController(): m_pManager(NULL)
 	xboxController = make_shared<XBoxController>();
 	xboxController->worldMode = GameComponent::from_self;
 	xboxController->disablePitch = true;
-	AddChild(xboxController);
+	Attach(xboxController);
 }
 
 

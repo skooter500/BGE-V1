@@ -12,7 +12,7 @@ Box::Box(float width, float height, float depth):GameComponent()
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	specular = glm::vec3(0,0,0);
 	id = "Box";
-	AddChild(model);
+	Attach(model);
 	scale = glm::vec3(width, height, depth);
 }
 

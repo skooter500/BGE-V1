@@ -8,7 +8,7 @@
 #include "PhysicsCamera.h"
 #include "Model.h"
 #include "dirent.h"
-#include "Conversions.h"
+#include "Utils.h"
 using namespace BGE;
 
 PhysicsFactory::PhysicsFactory(btDiscreteDynamicsWorld * dynamicsWorld)
@@ -41,11 +41,11 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 {
 	shared_ptr<GameComponent> component = make_shared<GameComponent>();
 	component->id = name;
-	Game::Instance()->AddChild(component);
+	Game::Instance()->Attach(component);
 	shared_ptr<Model> model = Content::LoadModel(name);
 	component->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	model->Initialise();
-	component->AddChild(model);
+	component->Attach(model);
 
 	std::vector<glm::vec3>::iterator it = model->vertices.begin(); 	
 	btConvexHullShape * tetraShape = new btConvexHullShape();
@@ -71,7 +71,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 
 	shared_ptr<PhysicsController> controller =make_shared<PhysicsController>(tetraShape, body, motionState);	
 	body->setUserPointer(controller.get());
-	component->AddChild(controller);
+	component->Attach(controller);
 	controller->scale = scale;
 
 	controller->id = "Model";	
@@ -81,7 +81,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat)
 {
 	shared_ptr<GameComponent> sphere (new Sphere(radius));
-	Game::Instance()->AddChild(sphere);
+	Game::Instance()->Attach(sphere);
 
 	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
 		,GLToBtVector(pos)));	
@@ -98,7 +98,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::ve
 
 	shared_ptr<PhysicsController> sphereComponent (new PhysicsController(sphereShape, body, sphereMotionState));	
 	body->setUserPointer(sphereComponent.get());
-	sphere->AddChild(sphereComponent);
+	sphere->Attach(sphereComponent);
 	sphereComponent->id = "Sphere";	
 	return sphereComponent;
 }
@@ -115,7 +115,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	// This is a container for the box model
 	shared_ptr<Box> box = make_shared<Box>(Box(width, height, depth));
 	box->position = pos;
-	Game::Instance()->AddChild(box);
+	Game::Instance()->Attach(box);
 
 	// Create the rigid body
 	btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
@@ -131,7 +131,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	body->setUserPointer(boxComponent.get());
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	boxComponent->scale = box->scale;
-	box->AddChild(boxComponent);
+	box->Attach(boxComponent);
 
 	return boxComponent;
 }
@@ -147,7 +147,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	// This is a container for the box model
 	shared_ptr<GameComponent> cyl = make_shared<GameComponent>(Cylinder(radius, height));
 	cyl->position = pos;
-	Game::Instance()->AddChild(cyl);
+	Game::Instance()->Attach(cyl);
 
 	// Create the rigid body
 	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
@@ -162,7 +162,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	body->setUserPointer(component.get());
 	component->id = "Cylinder";
 	component->scale = cyl->scale;
-	cyl->AddChild(component);
+	cyl->Attach(component);
 
 	return component;
 }
@@ -176,7 +176,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCameraPhysics()
 	shared_ptr<PhysicsCamera> physicsCamera (new PhysicsCamera());
 
 	shared_ptr<Camera> camera = Game::Instance()->camera;
-	camera->AddChild(physicsCamera);
+	camera->Attach(physicsCamera);
 
 	btRigidBody::btRigidBodyConstructionInfo cameraCI(10,physicsCamera.get(), cameraCyl, inertia);  
 	btRigidBody * body = new btRigidBody(cameraCI);
@@ -243,7 +243,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	shared_ptr<PhysicsController> groundComponent (new PhysicsController(groundShape, body, groundMotionState));
 	groundComponent->id = "Ground";
-	ground->AddChild(groundComponent);	
+	ground->Attach(groundComponent);	
 	Game::Instance()->SetGround(ground);
 	return groundComponent;
 }

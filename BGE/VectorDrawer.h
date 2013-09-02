@@ -2,7 +2,6 @@
 #include "GameComponent.h"
 #include <vector>
 
-
 namespace BGE
 {
 	class VectorDrawer :
