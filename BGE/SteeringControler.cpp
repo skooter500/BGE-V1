@@ -4,6 +4,8 @@
 #include <string>
 #include "Utils.h"
 #include "Params.h"
+#include "Sphere.h"
+#include <limits>
 
 using namespace BGE;
 
@@ -242,10 +244,11 @@ glm::vec3  SteeringControler::Evade()
 
 glm::vec3 SteeringControler::ObstacleAvoidance()
 {
-    glm::vec3 force = glm::vec3(0);
+	glm::vec3 force = glm::vec3(0);
     makeFeelers();
+	
 	/*
-    List<Sphere> tagged = new List<Sphere>();
+    list<shared_ptr<GameComponent>> tagged;
     float minBoxLength = 20.0f;
 	float boxLength = minBoxLength + ((fighter.velocity.Length()/fighter.maxSpeed) * minBoxLength * 2.0f);
             
@@ -255,30 +258,34 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
     }
     // Matt Bucklands Obstacle avoidance
     // First tag obstacles in range
-    foreach (Entity child in XNAGame.Instance.Children)
-    {
-        if (child is Obstacle)
+	
+	list<shared_ptr<GameComponent>>::iterator it = Game::Instance()->children.begin();
+	while(it != Game::Instance()->children.end())
+	{
+        if ((* it)->id == "Obstacle")
         {
-            Obstacle obstacle = (Obstacle)child;
+            //shared_ptr<Sphere> obstacle =  dynamic_pointer_cast<Sphere> (* it);
 
-            glm::vec3 toCentre = fighter.Position - obstacle.Position;
-            float dist = toCentre.Length();
+            glm::vec3 toCentre = position -  (*it)->position;
+            float dist = glm::length(toCentre);
             if (dist < boxLength)
             {
-                tagged.Add(obstacle);
+                tagged.push_back(* it);
             }
         }
+		it ++;
     }
 
-    float distToClosestIP = float.MaxValue;
-	Sphere closestIntersectingObstacle = null;
+    float distToClosestIP = numeric_limits<float>::max();
+	shared_ptr<GameComponent> closestIntersectingObstacle = nullptr;
 	glm::vec3 localPosOfClosestObstacle = glm::vec3(0);
 	glm::vec3 intersection = glm::vec3(0);
 
-    Matrix localTransform = Matrix.Invert(fighter.worldTransform);
-    foreach (Obstacle o in tagged)
+    glm::mat4 localTransform = glm::inverse(world);
+	list<shared_ptr<GameComponent>>::iterator it = tagged.begin();
+    while (it != tagged.end())
     {
-        glm::vec3 localPos = glm::vec3.Transform(o.Position, localTransform);
+        glm::vec3 localPos = glm::vec3(localTransform * glm::vec4((*it)->position));
         //glm::vec3 localPos = o.pos - fighter.pos;
 
 		// If the local position has a positive Z value then it must lay
@@ -288,8 +295,8 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 			// If the distance from the x axis to the object's position is less
 			// than its radius + half the width of the detection box then there
 			// is a potential intersection.
-			float expandedRadius = fighter.BoundingSphere.Radius + o.Radius;
-			if ((Math.Abs(localPos.y) < expandedRadius) && (Math.Abs(localPos.x) < expandedRadius))
+			float expandedRadius = scale.z + (* it)->scale.z;
+			if ((glm::abs(localPos.y) < expandedRadius) && (glm::abs(localPos.x) < expandedRadius))
 			{
 				// Now to do a ray/sphere intersection test. The center of the				
 				// Create a temp Entity to hold the sphere in local space
@@ -384,10 +391,6 @@ glm::vec3 SteeringControler::Pursue()
 {
     float dist = glm::length(target->position - position);
 
-    if (dist < 1.0f)
-    {
-        //fighter.Target.pos = new glm::vec3(20, 20, 0);
-    }
     float lookAhead = (dist / maxSpeed);
 
     glm::vec3 targetPos = target->position + (lookAhead * target->velocity);

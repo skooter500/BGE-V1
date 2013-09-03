@@ -96,11 +96,11 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::ve
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	dynamicsWorld->addRigidBody(body);
 
-	shared_ptr<PhysicsController> sphereComponent (new PhysicsController(sphereShape, body, sphereMotionState));	
-	body->setUserPointer(sphereComponent.get());
-	sphere->Attach(sphereComponent);
-	sphereComponent->id = "Sphere";	
-	return sphereComponent;
+	shared_ptr<PhysicsController> sphereController (new PhysicsController(sphereShape, body, sphereMotionState));	
+	body->setUserPointer(sphereController.get());
+	sphere->Attach(sphereController);
+	sphereController->id = "Sphere";	
+	return sphereController;
 }
 
 
@@ -113,7 +113,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	boxShape->calculateLocalInertia(mass,boxInertia);
 
 	// This is a container for the box model
-	shared_ptr<Box> box = make_shared<Box>(Box(width, height, depth));
+	shared_ptr<Box> box = make_shared<Box>(width, height, depth);
 	box->position = pos;
 	Game::Instance()->Attach(box);
 
@@ -126,14 +126,14 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	dynamicsWorld->addRigidBody(body);
 
 	// Create the physics component and add it to the box
-	shared_ptr<PhysicsController> boxComponent = make_shared<PhysicsController>(PhysicsController(boxShape, body, boxMotionState));
-	boxComponent->id = "Box";
-	body->setUserPointer(boxComponent.get());
+	shared_ptr<PhysicsController> boxController = make_shared<PhysicsController>(PhysicsController(boxShape, body, boxMotionState));
+	boxController->id = "Box";
+	body->setUserPointer(boxController.get());
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-	boxComponent->scale = box->scale;
-	box->Attach(boxComponent);
+	boxController->scale = box->scale;
+	box->Attach(boxController);
 
-	return boxComponent;
+	return boxController;
 }
 
 shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float height, glm::vec3 pos, glm::quat quat)

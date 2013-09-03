@@ -17,7 +17,7 @@ using namespace BGE;
 
 int main(int argc, char *argv[])
 {
-	VRGame game;
+	SteeringGame game;
 
 	game.Run();
 
