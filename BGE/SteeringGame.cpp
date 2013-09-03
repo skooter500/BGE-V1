@@ -43,10 +43,15 @@ bool SteeringGame::Initialise()
 
 void SteeringGame::Update(float timeDelta)
 {
-	if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
+	/*if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
 	{
 		shipSteering->targetPos = camera->position + camera->look * 50.0f;
-	}
+	}*/
+
+	camera->GetController()->position = camFollower->position;
+	camera->GetController()->orientation = camFollower->orientation;
 
 	Game::Update(timeDelta);
+
+	
 }

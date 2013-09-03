@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include "SteeringControler.h"
+#include "GameComponent.h"
 
 namespace BGE
 {
@@ -14,7 +15,7 @@ namespace BGE
 		bool Initialise();
 		void Update(float timeDelta);
 
-		shared_ptr<SteeringControler> shipSteering;
+		shared_ptr<GameComponent> camFollower;
 
 	};
 }
