@@ -40,7 +40,7 @@ void PhysicsFactory::CreateWall(glm::vec3 startAt, float width, float height, fl
 shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::vec3 pos, glm::quat quat, glm::vec3 scale)
 {
 	shared_ptr<GameComponent> component = make_shared<GameComponent>();
-	component->id = name;
+	component->tag = name;
 	Game::Instance()->Attach(component);
 	shared_ptr<Model> model = Content::LoadModel(name);
 	component->specular = glm::vec3(1.2f, 1.2f, 1.2f);
@@ -74,7 +74,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	component->Attach(controller);
 	controller->scale = scale;
 
-	controller->id = "Model";	
+	controller->tag = "Model";	
 	return controller;
 }
 
@@ -99,7 +99,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::ve
 	shared_ptr<PhysicsController> sphereController (new PhysicsController(sphereShape, body, sphereMotionState));	
 	body->setUserPointer(sphereController.get());
 	sphere->Attach(sphereController);
-	sphereController->id = "Sphere";	
+	sphereController->tag = "Sphere";	
 	return sphereController;
 }
 
@@ -127,7 +127,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 
 	// Create the physics component and add it to the box
 	shared_ptr<PhysicsController> boxController = make_shared<PhysicsController>(PhysicsController(boxShape, body, boxMotionState));
-	boxController->id = "Box";
+	boxController->tag = "Box";
 	body->setUserPointer(boxController.get());
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	boxController->scale = box->scale;
@@ -160,7 +160,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	// Create the physics component and add it to the box
 	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(PhysicsController(shape, body, motionState));
 	body->setUserPointer(component.get());
-	component->id = "Cylinder";
+	component->tag = "Cylinder";
 	component->scale = cyl->scale;
 	cyl->Attach(component);
 
@@ -242,7 +242,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 	body->setUserPointer(ground.get());
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	shared_ptr<PhysicsController> groundComponent (new PhysicsController(groundShape, body, groundMotionState));
-	groundComponent->id = "Ground";
+	groundComponent->tag = "Ground";
 	ground->Attach(groundComponent);	
 	Game::Instance()->SetGround(ground);
 	return groundComponent;

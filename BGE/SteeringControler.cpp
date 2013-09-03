@@ -113,10 +113,10 @@ int SteeringControler::TagNeighboursSimple(float inRange)
 
 	while (it != Game::Instance()->children.end())
 	{
-		if ( ((*it)->id == "Steerable") && (* it).get() != parent) 
+		if ( ((*it)->tag == "Steerable") && (* it).get() != parent) 
 		{
 			shared_ptr<GameComponent> neighbour =  * it;
-			float distance = glm::length(parent->position - neighbour->position);
+			float distance = glm::length(position - neighbour->position);
 			if (distance < inRange)
 			{
 				tagged.push_back(neighbour);                
@@ -247,10 +247,10 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 	glm::vec3 force = glm::vec3(0);
     makeFeelers();
 	
-	/*
-    list<shared_ptr<GameComponent>> tagged;
-    float minBoxLength = 20.0f;
-	float boxLength = minBoxLength + ((fighter.velocity.Length()/fighter.maxSpeed) * minBoxLength * 2.0f);
+    vector<shared_ptr<GameComponent>> tagged;
+    
+	float minBoxLength = 20.0f;
+	float boxLength = minBoxLength + ((glm::length(velocity)/maxSpeed) * minBoxLength * 2.0f);
             
     if (glm::isnan(boxLength))
     {
@@ -262,10 +262,8 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 	list<shared_ptr<GameComponent>>::iterator it = Game::Instance()->children.begin();
 	while(it != Game::Instance()->children.end())
 	{
-        if ((* it)->id == "Obstacle")
+        if ((* it)->tag == "Obstacle")
         {
-            //shared_ptr<Sphere> obstacle =  dynamic_pointer_cast<Sphere> (* it);
-
             glm::vec3 toCentre = position -  (*it)->position;
             float dist = glm::length(toCentre);
             if (dist < boxLength)
@@ -282,12 +280,11 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 	glm::vec3 intersection = glm::vec3(0);
 
     glm::mat4 localTransform = glm::inverse(world);
-	list<shared_ptr<GameComponent>>::iterator it = tagged.begin();
-    while (it != tagged.end())
+	vector<shared_ptr<GameComponent>>::iterator taggedIt = tagged.begin();
+    while (taggedIt != tagged.end())
     {
-        glm::vec3 localPos = glm::vec3(localTransform * glm::vec4((*it)->position));
-        //glm::vec3 localPos = o.pos - fighter.pos;
-
+        glm::vec3 localPos = glm::vec3(localTransform * glm::vec4((*taggedIt)->position, 1.0f));
+        
 		// If the local position has a positive Z value then it must lay
 		// behind the agent. (in which case it can be ignored)
         if (localPos.z <=0)
@@ -295,48 +292,43 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 			// If the distance from the x axis to the object's position is less
 			// than its radius + half the width of the detection box then there
 			// is a potential intersection.
-			float expandedRadius = scale.z + (* it)->scale.z;
+			float expandedRadius = scale.z + (* taggedIt)->scale.z;
 			if ((glm::abs(localPos.y) < expandedRadius) && (glm::abs(localPos.x) < expandedRadius))
 			{
 				// Now to do a ray/sphere intersection test. The center of the				
-				// Create a temp Entity to hold the sphere in local space
-                Sphere tempSphere = new Sphere(expandedRadius);
-				tempSphere.Position = localPos;				            
+                SphereGeom tempSphere;
+				tempSphere.radius = expandedRadius;
+				tempSphere.pos = localPos;				            
 
 				// Create a ray
-				Ray ray = new Ray();
-				ray.pos = new glm::vec3(0, 0, 0);
-                ray.look = fighter.basis;
+				RayGeom ray;
+				ray.pos = glm::vec3(0, 0, 0);
+                ray.look = GameComponent::basisLook;
 
 				// Find the point of intersection
-                if (tempSphere.closestRayIntersects(ray, glm::vec3(0), intersection) == false)
-                {
-                    return glm::vec3(0);
-                }
-
-				// Now see if its the closest, there may be other intersecting spheres
-				float dist = intersection.Length();
-				if (dist < distToClosestIP)
+                if (ClosestRayIntersectsSphere(ray, tempSphere, glm::vec3(0), intersection))
 				{
-					dist = distToClosestIP;
-                    closestIntersectingObstacle = o;
-					localPosOfClosestObstacle = localPos;
-				}				
-			}
+					// Now see if its the closest, there may be other intersecting spheres
+					float dist = glm::length(intersection);
+					if (dist < distToClosestIP)
+					{
+						dist = distToClosestIP;
+						closestIntersectingObstacle = * taggedIt;
+						localPosOfClosestObstacle = localPos;
+					}		
+				}
+			}	
 		}              
-		if (closestIntersectingObstacle != null)
+		if (closestIntersectingObstacle != nullptr)
 		{
 			// Now calculate the force
 			// Calculate Z Axis braking  force
 			float multiplier = 200 * (1.0f + (boxLength - localPosOfClosestObstacle.z) / boxLength);
 
-                    
-			
 			//calculate the lateral force
-            float expandedRadius = fighter.BoundingSphere.Radius + o.Radius;
-			force.x = (expandedRadius - Math.Abs(localPosOfClosestObstacle.x))  * multiplier;
-
-            force.y = (expandedRadius - -Math.Abs(localPosOfClosestObstacle.x)) * multiplier;
+            float expandedRadius = scale.x + closestIntersectingObstacle->scale.x;
+			force.x = (expandedRadius - glm::abs(localPosOfClosestObstacle.x))  * multiplier;
+            force.y = (expandedRadius - -glm::abs(localPosOfClosestObstacle.y)) * multiplier;
 
             if (localPosOfClosestObstacle.x > 0)
             {
@@ -347,23 +339,19 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
             {
                 force.y = -force.y;
             }                  
-            Line.DrawLine(fighter.Position, fighter.Position + fighter.Look * boxLength, Color.BlueViolet);
+            LineDrawer::DrawLine(position, position + look * boxLength, glm::vec3(1,0,1));
 			//apply a braking force proportional to the obstacle's distance from
 			//the vehicle.
 			const float brakingWeight = 40.0f;
-            force.z = (closestIntersectingObstacle.Radius -
+            force.z = (closestIntersectingObstacle->scale.x -
                                 localPosOfClosestObstacle.z) *
                                 brakingWeight;
 
 			//finally, convert the steering vector from local to world space
-            force = glm::vec3.Transform(force, fighter.worldTransform);                    
-        }                
-    }
-             
-    fighter.DrawFeelers = false;
-    fighter.DrawAxis = false;
-	*/           
-            
+            force = glm::vec3(world * glm::vec4(force, 1.0f));                    
+        }       
+		taggedIt ++;
+    }            
     return force;
 }
 

@@ -16,6 +16,7 @@ namespace BGE
 		void Update(float timeDelta);
 
 		shared_ptr<GameComponent> camFollower;
-
+		bool lastPressed;
+		bool camFollowing;
 	};
 }
