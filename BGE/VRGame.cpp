@@ -24,13 +24,13 @@ bool collisionCallback(btManifoldPoint& cp,	const btCollisionObjectWrapper* colO
 	}
 
 	// Is it just two pieces of the person? Then dont play a sound
-	if ((object0->id.find("Person") == 0) && (object1->id.find("Person") == 0))
+	if ((object0->tag.find("Person") == 0) && (object1->tag.find("Person") == 0))
 	{
 		return false;
 	}
 
 	// Also if its a piece of the person touching the ground
-	if ((object0->id.find("Person") == 0) && (object1->parent == game->ground.get()))
+	if ((object0->tag.find("Person") == 0) && (object1->parent == game->ground.get()))
 	{
 		return false;
 	}
@@ -61,7 +61,7 @@ VRGame::VRGame(void)
 	fullscreen = true;
 	riftEnabled = true;
 
-	id = "VR Game";
+	tag = "VR Game";
 }
 
 VRGame::~VRGame(void)
@@ -75,7 +75,7 @@ void VRGame::ResetScene()
 	while (it != children.end())
 	{
 		shared_ptr<GameComponent> component = * it;
-		if ((component->id == "Box") || (component->id == "Model") || (component->id == "Cylinder") || (component->id == "Sphere"))
+		if ((component->tag == "Box") || (component->tag == "Model") || (component->tag == "Cylinder") || (component->tag == "Sphere"))
 		{
 			shared_ptr<PhysicsController> physics = dynamic_pointer_cast<PhysicsController> (component->GetController());
 			dynamicsWorld->removeRigidBody(physics->rigidBody);

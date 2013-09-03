@@ -12,7 +12,7 @@ PhysicsCamera::PhysicsCamera():PhysicsController()
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
 	pickedUp = NULL;
-	id = "Physics Camera";
+	tag = "Physics Camera";
 }
 
 
@@ -99,7 +99,7 @@ void PhysicsCamera::Update(float timeDelta)
             }
 			pickedUp->rigidBody->setLinearVelocity(GLToBtVector(v));    
 			pickedUp->rigidBody->activate();		
-			what = pickedUp->id;	
+			what = pickedUp->tag;	
 		}
 	}
 	else

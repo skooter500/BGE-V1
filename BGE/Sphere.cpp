@@ -11,7 +11,7 @@ Sphere::Sphere(float radius)
 	drawMode = Model::draw_modes::single_material;
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	specular = glm::vec3(1.2f,1.2f, 1.2f);
-	id = "Sphere";
+	tag = "Sphere";
 	Attach(model);
 	scale = glm::vec3(radius, radius, radius);
 }

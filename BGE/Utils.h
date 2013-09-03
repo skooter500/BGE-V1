@@ -17,6 +17,19 @@ using namespace std;
 
 namespace BGE
 {
+
+	struct RayGeom
+	{
+		glm::vec3 pos;
+		glm::vec3 look;
+	};
+
+	struct SphereGeom
+	{
+		glm::vec3 pos;
+		float radius;
+	};
+
 	FMOD_VECTOR GLToFMODVector(glm::vec3 v);
 	glm::quat OVRToGLQuat(Quatf q);
 	OVR::Vector3f GLToOVRVector(glm::vec3 v);
@@ -44,4 +57,6 @@ namespace BGE
 	glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest);
 	float RandomClamped();
 	glm::vec3 RandomPosition(float range);
+
+	bool ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sphere, const glm::vec3 & point, glm::vec3 & intersection);
 }

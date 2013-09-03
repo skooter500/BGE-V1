@@ -34,7 +34,7 @@ GameComponent::GameComponent(void)
 	scale = glm::vec3(1.0, 1.0, 1.0);
 	worldMode = world_modes::from_self_with_parent;
 	parent = NULL;
-	id = "Nothing";
+	tag = "Nothing";
 }
 
 

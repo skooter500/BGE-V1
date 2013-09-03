@@ -17,7 +17,7 @@ PhysicsController::PhysicsController(btCollisionShape * shape, btRigidBody * rig
 	{
 		this->rigidBody->setUserPointer(this);
 	}
-	this->id = "Physics Component";
+	this->tag = "Physics Component";
 	this->motionState = motionState;
 	worldMode = world_modes::to_parent;
 }

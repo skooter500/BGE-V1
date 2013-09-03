@@ -206,3 +206,53 @@ glm::vec3 BGE::RandomPosition(float range)
 	pos.z = RandomClamped() * range - (range /2.0f);
 	return pos;
 }
+
+bool BGE::ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sphere, const glm::vec3 & point, glm::vec3 & intersection)
+{
+    // Calculate p0-c call it v
+
+    glm::vec3 v = ray.pos - sphere.pos;
+    glm::vec3 p0 = glm::vec3(0), p1 = glm::vec3(0);
+
+    // Now calculate a, b and c
+    float a, b, c;
+
+    /*
+        *  a = u.u
+        b = 2u(p0 – pc)
+        c = (p0 – c).(p0 – c) - r2
+    */
+    a = glm::dot(ray.look, ray.look);
+    b = 2.0f * glm::dot(v, ray.look);
+    c = glm::dot(v, v) - (sphere.radius * sphere.radius);
+
+    // Calculate the discriminant
+    float discriminant = (b * b) - (4.0f * a * c);
+
+    // Test for imaginary number
+    // If discriminant > 0, calculate values for t0 and t1
+    // Substitute into the ray equation and calculate the 2 intersection points
+    // Push the interesctions into the vector intersections
+    if (discriminant >= 0.0f)
+    {
+
+        discriminant = (float) glm::sqrt(discriminant);
+
+        float t0 = (-b + discriminant) / (2.0f * a);
+        float t1 = (-b - discriminant) / (2.0f * a);
+
+        p0 = ray.pos + (ray.look * t0);
+        p1 = ray.pos + (ray.look * t1);
+
+        if (glm::length(point - p0) < glm::length(point - p1))
+        {
+            intersection = p0;
+        }
+        else
+        {
+            intersection = p1;
+        }
+        return true;
+    }
+    return false;
+}

@@ -47,7 +47,7 @@ namespace BGE
 		glm::vec3 specular;
 		glm::vec3 diffuse; // Will use either this of the array of colours depending on the drawMode setting
 		bool initialised;	
-		std::string id;
+		std::string tag;
 
 		enum draw_modes {materials, textured, single_material};
 		enum world_modes {from_self, from_self_with_parent, from_child, to_parent, from_parent};

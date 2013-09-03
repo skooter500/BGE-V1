@@ -211,7 +211,7 @@ void Person::UpdateHand(
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
-		cylController->id = "PersonHand";
+		cylController->tag = "PersonHand";
 		boneComponents[boneKey] = cylController;
 	}
 	else
@@ -270,7 +270,7 @@ void Person::UpdateBone(
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
-		cylController->id = "PersonBone";
+		cylController->tag = "PersonBone";
 		boneComponents[boneKey] = cylController;
 	}
 	else
@@ -313,7 +313,7 @@ void Person::UpdateHead(
 		boxController->rigidBody->setCollisionFlags(boxController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		boxController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		boxController->rigidBody->setMotionState(new KinematicMotionState(boxController->parent));
-		boxController->id = "PersonHead";
+		boxController->tag = "PersonHead";
 
 		boneComponents[boneKey] = boxController;
 	}
