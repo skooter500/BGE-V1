@@ -9,12 +9,12 @@
 
 using namespace BGE;
 
-bool SteeringControler::counted = false;
-vector<shared_ptr<GameComponent>> SteeringControler::obstacles;
-vector<shared_ptr<GameComponent>> SteeringControler::steerables;
+bool SteeringController::counted = false;
+vector<shared_ptr<GameComponent>> SteeringController::obstacles;
+vector<shared_ptr<GameComponent>> SteeringController::steerables;
 
 
-SteeringControler::SteeringControler(void)
+SteeringController::SteeringController(void)
 {
 	force = glm::vec3(0);
 	acceleration = glm::vec3(0);
@@ -30,36 +30,45 @@ SteeringControler::SteeringControler(void)
 	wanderTarget *= Params::GetFloat("wander_radius");
 	counted = false;
 
+	route = make_shared<Route>();
+
 	// Start with all behaviours turned off
 	TurnOffAll();
 }
 
+bool SteeringController::Initialise()
+{
+	
+	Attach(route);
+	return GameComponent::Initialise();
+}
 
-SteeringControler::~SteeringControler(void)
+
+SteeringController::~SteeringController(void)
 {
 }
 
-void SteeringControler::Update(float timeDelta)
+void SteeringController::Update(float timeDelta)
 {
 	float smoothRate;
 	this->timeDelta = timeDelta;
 
-	if (! SteeringControler::counted)
+	if (! SteeringController::counted)
 	{
 		list<shared_ptr<GameComponent>>::iterator oit = Game::Instance()->children.begin();
 		while (oit != Game::Instance()->children.end())
 		{
 			if ((* oit)->tag == "Obstacle")
 			{
-				SteeringControler::obstacles.push_back(* oit);
+				SteeringController::obstacles.push_back(* oit);
 			}
 			if ((* oit)->tag == "Steerable")
 			{
-				SteeringControler::steerables.push_back(* oit);
+				SteeringController::steerables.push_back(* oit);
 			}
 			oit ++;
 		}
-		SteeringControler::counted = true;
+		SteeringController::counted = true;
 	}
 
 
@@ -131,13 +140,13 @@ void SteeringControler::Update(float timeDelta)
 	GameComponent::Update(timeDelta);
 }
 
-int SteeringControler::TagNeighboursSimple(float inRange)
+int SteeringController::TagNeighboursSimple(float inRange)
 {
 	tagged.clear();
 	static float inRange2 = inRange * inRange;
-	for (int i = 0 ; i < SteeringControler::steerables.size() ; i ++)
+	for (int i = 0 ; i < SteeringController::steerables.size() ; i ++)
 	{	
-		if (SteeringControler::steerables[i].get() != parent) 
+		if (SteeringController::steerables[i].get() != parent) 
 		{
 			shared_ptr<GameComponent> neighbour =  steerables[i];
 			float distance = glm::length2(position - neighbour->position);
@@ -150,22 +159,22 @@ int SteeringControler::TagNeighboursSimple(float inRange)
 	return tagged.size();
 }
 
-bool SteeringControler::IsOn(behaviour_type behaviour)
+bool SteeringController::IsOn(behaviour_type behaviour)
 {
 	return ((flags & (int)behaviour) == (int)behaviour);
 }
 
-void SteeringControler::TurnOn(behaviour_type behaviour)
+void SteeringController::TurnOn(behaviour_type behaviour)
 {
 	flags |= ((int)behaviour);
 }
 
-void SteeringControler::TurnOffAll()
+void SteeringController::TurnOffAll()
 {
-	flags = (int) SteeringControler::behaviour_type::none;
+	flags = (int) SteeringController::behaviour_type::none;
 }
 
-glm::vec3 SteeringControler::Cohesion()
+glm::vec3 SteeringController::Cohesion()
 {
 	glm::vec3 steeringForce = glm::vec3(0);
 	glm::vec3 centreOfMass = glm::vec3(0);
@@ -196,7 +205,7 @@ glm::vec3 SteeringControler::Cohesion()
 	return steeringForce;
 }
 
-glm::vec3 SteeringControler::Alignment()
+glm::vec3 SteeringController::Alignment()
 {
 	glm::vec3 steeringForce = glm::vec3(0);
 	int taggedCount = 0;
@@ -220,7 +229,7 @@ glm::vec3 SteeringControler::Alignment()
 
 }
 
-glm::vec3 SteeringControler::SphereConstrain(float radius)
+glm::vec3 SteeringController::SphereConstrain(float radius)
 {
 	float distance = glm::length(position);
 	glm::vec3 steeringForce = glm::vec3(0);
@@ -232,7 +241,7 @@ glm::vec3 SteeringControler::SphereConstrain(float radius)
 }
 
 
-glm::vec3 SteeringControler::Separation()
+glm::vec3 SteeringController::Separation()
 {
 	glm::vec3 steeringForce = glm::vec3(0);
 
@@ -249,7 +258,7 @@ glm::vec3 SteeringControler::Separation()
 	return steeringForce;
 }
 
-glm::vec3  SteeringControler::Evade()
+glm::vec3  SteeringController::Evade()
 {
     float dist = glm::length(target->position - position);
     float lookAhead = (dist / maxSpeed);
@@ -259,7 +268,7 @@ glm::vec3  SteeringControler::Evade()
 }
 
 
-glm::vec3 SteeringControler::ObstacleAvoidance()
+glm::vec3 SteeringController::ObstacleAvoidance()
 {
 	glm::vec3 force = glm::vec3(0);
     makeFeelers();
@@ -377,7 +386,7 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
     return force;
 }
 
-glm::vec3 SteeringControler::OffsetPursuit(glm::vec3 offset)
+glm::vec3 SteeringController::OffsetPursuit(glm::vec3 offset)
 {
     glm::vec3 target = glm::vec3(0);
 
@@ -393,7 +402,7 @@ glm::vec3 SteeringControler::OffsetPursuit(glm::vec3 offset)
     return Arrive(target);
 }
 
-glm::vec3 SteeringControler::Pursue()
+glm::vec3 SteeringController::Pursue()
 {
     float dist = glm::length(target->position - position);
 
@@ -403,7 +412,7 @@ glm::vec3 SteeringControler::Pursue()
     return Seek(targetPos);
 }
 
-glm::vec3 SteeringControler::Flee(glm::vec3 targetPos)
+glm::vec3 SteeringController::Flee(glm::vec3 targetPos)
 {
     float panicDistance = 100.0f;
     glm::vec3 desiredVelocity;
@@ -419,7 +428,7 @@ glm::vec3 SteeringControler::Flee(glm::vec3 targetPos)
     return (desiredVelocity - velocity);
 }
 
-glm::vec3 SteeringControler::RandomWalk()
+glm::vec3 SteeringController::RandomWalk()
 {
     float dist = glm::length(position - randomWalkTarget);
     if (dist < 50)
@@ -431,7 +440,7 @@ glm::vec3 SteeringControler::RandomWalk()
     return Seek(randomWalkTarget);
 }
 
-glm::vec3 SteeringControler::Seek(glm::vec3 targetPos)
+glm::vec3 SteeringController::Seek(glm::vec3 targetPos)
 {           
     glm::vec3 desiredVelocity;
 
@@ -444,7 +453,7 @@ glm::vec3 SteeringControler::Seek(glm::vec3 targetPos)
 }
 
 
-glm::vec3 SteeringControler::Wander()
+glm::vec3 SteeringController::Wander()
 {
     float jitterTimeSlice = Params::GetFloat("wander_jitter") * timeDelta;
 
@@ -459,7 +468,7 @@ glm::vec3 SteeringControler::Wander()
             
 }
 
-glm::vec3 SteeringControler::WallAvoidance()
+glm::vec3 SteeringController::WallAvoidance()
 {
     makeFeelers();
 
@@ -492,7 +501,7 @@ glm::vec3 SteeringControler::WallAvoidance()
     return force;
 }
 
-void SteeringControler::makeFeelers()
+void SteeringController::makeFeelers()
 {
  	feelers.clear();
     float feelerDistance = 20.0f;
@@ -524,7 +533,7 @@ void SteeringControler::makeFeelers()
 }
 
 
-glm::vec3 SteeringControler::Arrive(glm::vec3 target)
+glm::vec3 SteeringController::Arrive(glm::vec3 target)
 {
     glm::vec3 toTarget = target - position;
             
@@ -545,7 +554,7 @@ glm::vec3 SteeringControler::Arrive(glm::vec3 target)
     return desired - velocity;
 }
 
-glm::vec3 SteeringControler::Calculate()
+glm::vec3 SteeringController::Calculate()
 {            
     if (calculationMethod == CalculationMethods::WeightedTruncatedRunningSumWithPrioritisation)
     {
@@ -555,7 +564,7 @@ glm::vec3 SteeringControler::Calculate()
     return glm::vec3(0);            
 }
 
-glm::vec3 SteeringControler::CalculateWeightedPrioritised()
+glm::vec3 SteeringController::CalculateWeightedPrioritised()
 {
     glm::vec3 force = glm::vec3(0);
     glm::vec3 steeringForce = glm::vec3(0);
@@ -696,25 +705,25 @@ glm::vec3 SteeringControler::CalculateWeightedPrioritised()
     return steeringForce;
 }
 
-glm::vec3 SteeringControler::FollowPath()
+glm::vec3 SteeringController::FollowPath()
 {
     float epsilon = 5.0f;
-    float dist = glm::length(position - route.NextWaypoint());
+    float dist = glm::length(position - route->NextWaypoint());
     if (dist < epsilon)
     {
-        route.AdvanceToNext();
+        route->AdvanceToNext();
     }
-    if ((! route.looped) && route.IsLast())
+    if ((! route->looped) && route->IsLast())
     {
-        return Arrive(route.NextWaypoint());
+        return Arrive(route->NextWaypoint());
     }
     else
     {
-        return Seek(route.NextWaypoint());
+        return Seek(route->NextWaypoint());
     }
 }
 
-bool SteeringControler::AccumulateForce(glm::vec3 & runningTotal, glm::vec3 force)
+bool SteeringController::AccumulateForce(glm::vec3 & runningTotal, glm::vec3 force)
 {
     float soFar = glm::length(runningTotal);
 

@@ -8,7 +8,7 @@ Route::Route(void)
 	worldMode = world_modes::from_self;
 	looped = false;
 	draw = true;
-	next = waypoints.begin();
+	next = 0;
 }
 
 Route::~Route(void)
@@ -17,44 +17,39 @@ Route::~Route(void)
 
 void Route::Draw()
 {
-	list<glm::vec3>::iterator it = waypoints.begin();
-	while (it != waypoints.end())
+	for (int i = 1 ; i < waypoints.size() ; i ++)
 	{
-		LineDrawer::DrawLine(* (it ++), * (it ++), glm::vec3(137, 207, 240));
+		LineDrawer::DrawLine(waypoints[i - 1], waypoints[i], glm::vec3(1, 0, 1));
 	}
 	if (looped)
 	{
-		LineDrawer::DrawLine(* (-- it), * waypoints.begin(), glm::vec3(137, 207, 240));
+		LineDrawer::DrawLine(waypoints[0], waypoints[waypoints.size() - 1], glm::vec3(1, 0, 1));
 	}
 
 }
 
 glm::vec3 Route::NextWaypoint()
 {
-	return * next;
+	return waypoints[next];
 }
 
 bool Route::IsLast()
 {
 
-	return (next == (-- waypoints.end()) );
+	return (next == waypoints.size() - 1);
 }
 
 void Route::AdvanceToNext()
 {
 	if (looped)
 	{                
-		next ++;
-		if (next == waypoints.end())
-		{
-			next = waypoints.begin();
-		}
+		next = (next + 1) % waypoints.size();
 	}
 	else
 	{
-		if (! IsLast())
+		if (next != waypoints.size() - 1)
 		{
-			next ++;
+			next = next + 1;
 		}
 	}
 }

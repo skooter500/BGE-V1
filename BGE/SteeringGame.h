@@ -2,6 +2,10 @@
 #include "Game.h"
 #include "SteeringControler.h"
 #include "GameComponent.h"
+#include <vector>
+#include "Scenario.h"
+
+using namespace std;
 
 namespace BGE
 {
@@ -18,5 +22,8 @@ namespace BGE
 		shared_ptr<GameComponent> camFollower;
 		bool lastPressed;
 		bool camFollowing;
+
+		vector<shared_ptr<Scenario>> scenarios;
+		int currentScenario;
 	};
 }

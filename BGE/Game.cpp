@@ -343,7 +343,7 @@ void Game::Draw()
 		camera->view = OVRToGLMat4(viewLeft);
 		camera->projection = OVRToGLMat4(projLeft);
 		// Draw all my children
-		//LineDrawer::Instance()->Draw();
+		LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
@@ -351,7 +351,7 @@ void Game::Draw()
 		camera->view = OVRToGLMat4(viewRight);
 		camera->projection = OVRToGLMat4(projRight);
 		// Draw all my children
-		//LineDrawer::Instance()->Draw();
+		LineDrawer::Instance()->Draw();
 		GameComponent::Draw();
 
 		riftController->UnBindRenderBuffer();

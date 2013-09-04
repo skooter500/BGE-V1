@@ -8,7 +8,7 @@ using namespace std;
 namespace BGE
 {
 
-	class SteeringControler :
+	class SteeringController :
 		public GameComponent
 	{
 	private:
@@ -17,8 +17,8 @@ namespace BGE
 		static vector<shared_ptr<GameComponent>> obstacles;
 		static bool counted;
 	public:
-		SteeringControler(void);
-		~SteeringControler(void);
+		SteeringController(void);
+		~SteeringController(void);
 
 		enum CalculationMethods { WeightedTruncatedSum, WeightedTruncatedRunningSumWithPrioritisation, PrioritisedDithering };
 		enum behaviour_type
@@ -49,6 +49,7 @@ namespace BGE
 
 		// From Game Component
 		void Update(float timeDelta);
+		bool Initialise();
 
 		// Support stuff
 		int TagNeighboursSimple(float inRange);
@@ -70,7 +71,7 @@ namespace BGE
 		glm::vec3 offset;
 		float timeDelta;
 
-		Route route;
+		shared_ptr<Route> route;
 
 		// Behaviours
 		glm::vec3 Cohesion();

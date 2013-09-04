@@ -1,6 +1,6 @@
 #pragma once
 #include "GameComponent.h"
-#include <list>
+#include <vector>
 
 using namespace std;
 
@@ -10,7 +10,7 @@ namespace BGE
 		public GameComponent
 	{
 	private:
-		list<glm::vec3>::iterator next;
+		int next;
 	public:
 		Route(void);
 		~Route(void);
@@ -22,6 +22,6 @@ namespace BGE
 
 		bool looped;
 		bool draw;
-		list<glm::vec3> waypoints;
+		vector<glm::vec3> waypoints;
 	};
 }
