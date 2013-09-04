@@ -15,7 +15,7 @@ SteeringGame::SteeringGame(void)
 	camFollowing = false;
 	scenarios.push_back(make_shared<FlockingScenario>());
 	scenarios.push_back(make_shared<PathFollowingScenario>());
-	currentScenario = 1;
+	currentScenario = 0;
 	elapsed = 10000;
 }
 
@@ -28,8 +28,8 @@ bool SteeringGame::Initialise()
 {
 	Params::Load("default");
 
-	riftEnabled = false;
-	fullscreen = false;
+	riftEnabled = true;
+	fullscreen = true;
 
 	scenarios[currentScenario]->Initialise();
 
