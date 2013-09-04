@@ -35,12 +35,12 @@ void FlockingScenario::Initialise()
 	bigFighterController->position = bigFighter->position = pos;
 	bigFighterController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
 	bigFighterController->TurnOn(SteeringController::behaviour_type::wander);
-	bigFighterController->TurnOn(SteeringController::behaviour_type::pursuit);
 	bigFighterController->TurnOn(SteeringController::behaviour_type::sphere_constrain);
-	bigFighter->scale = glm::vec3(5, 5, 5);
+	bigFighter->scale = glm::vec3(10, 10, 10);
 	bigFighter->Attach(bigFighterController);
-	bigFighter->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	bigFighter->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 	game->Attach(bigFighter);
+	bigFighterController->Initialise();
 
 	shared_ptr<GameComponent> fighter;
 	shared_ptr<SteeringController> fighterController;
@@ -61,9 +61,10 @@ void FlockingScenario::Initialise()
 		fighterController->TurnOn(SteeringController::behaviour_type::evade);
 		fighterController->TurnOn(SteeringController::behaviour_type::sphere_constrain);
 		fighterController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
-		fighter->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+		fighter->Attach(Content::LoadModel("moray", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 		fighter->scale = glm::vec3(5,5, 5);
 		fighter->Attach(fighterController);
+		fighterController->Initialise();
 		game->Attach(fighter);
 	}
 
@@ -82,14 +83,12 @@ void FlockingScenario::Initialise()
 
 	bigFighterController->target = fighter;
 
-
 	game->camFollower = make_shared<GameComponent>();
 	shared_ptr<SteeringController> camController = make_shared<SteeringController>();
 	camController->offset = glm::vec3(0,0,3);
-	camController->leader = fighter;
-	camController->position = game->camFollower->position = fighter->position + camController->offset;
-	//fighter->scale = fighterController->scale  = glm::vec3(1002, 1002, 1002);
-
+	camController->leader = bigFighter;
+	camController->position = game->camFollower->position = bigFighter->position + camController->offset;
+	
 	camController->TurnOffAll();
 	camController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
 	camController->TurnOn(SteeringController::behaviour_type::sphere_constrain);

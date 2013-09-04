@@ -16,6 +16,7 @@ SteeringGame::SteeringGame(void)
 	scenarios.push_back(make_shared<FlockingScenario>());
 	scenarios.push_back(make_shared<PathFollowingScenario>());
 	currentScenario = 1;
+	elapsed = 10000;
 }
 
 
@@ -27,18 +28,40 @@ bool SteeringGame::Initialise()
 {
 	Params::Load("default");
 
-	riftEnabled = true;
-	fullscreen = true;
-
+	riftEnabled = false;
+	fullscreen = false;
 
 	scenarios[currentScenario]->Initialise();
 
 	return Game::Initialise();
 }
 
+void SteeringGame::Reset()
+{
+	list<shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		if ((*it)->tag == "Steerable" || (*it)->tag == "Route" || (*it)->tag == "Obstacle")
+		{
+			it = children.erase(it);
+		}
+		else
+		{
+			++ it;
+		}
+	}
+	if (ground != nullptr)
+	{
+		children.remove(ground);
+		ground = nullptr;
+	}
+}
+
 void SteeringGame::Update(float timeDelta)
 {
 	static float multiplier = 1.0f;
+
+	float timeToPass = 1.0f;
 
 	PrintText("Press F1 to toggle camera following");
 	if (keyState[SDL_SCANCODE_F1])
@@ -54,6 +77,25 @@ void SteeringGame::Update(float timeDelta)
 		lastPressed = false;
 	}
 
+	PrintText("Press number keys to cycle Scenarios");
+
+	for (int i = 0 ; i < scenarios.size() ; i ++)
+	{
+		if (keyState[SDL_SCANCODE_1 + i] && (elapsed > timeToPass))
+		{
+			currentScenario = i;
+			Reset();
+			scenarios[currentScenario]->Initialise();
+			if (ground != nullptr)
+			{
+				ground->Initialise();
+			}
+			Content::InitialiseModels();
+			elapsed = 0.0f;
+		}
+	}
+	elapsed += timeDelta;
+	
 	PrintText("Press O to decrease speed");
 	PrintText("Press P to increase speed");
 
@@ -65,7 +107,6 @@ void SteeringGame::Update(float timeDelta)
 	{
 		multiplier += timeDelta;
 	}
-
 	scenarios[currentScenario]->Update(timeDelta * multiplier);
 
 	Game::Update(timeDelta  * multiplier);

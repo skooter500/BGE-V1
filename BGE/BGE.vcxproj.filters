@@ -150,7 +150,7 @@
       <Filter>Scenarios</Filter>
     </ClCompile>
     <ClCompile Include="PathFollowingScenario.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Scenarios</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,7 +274,9 @@
     <ClInclude Include="FlockingScenario.h">
       <Filter>Scenarios</Filter>
     </ClInclude>
-    <ClInclude Include="PathFollowingScenario.h" />
+    <ClInclude Include="PathFollowingScenario.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
