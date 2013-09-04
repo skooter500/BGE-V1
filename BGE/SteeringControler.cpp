@@ -38,8 +38,12 @@ SteeringController::SteeringController(void)
 
 bool SteeringController::Initialise()
 {
-	
+	if (initialised)
+	{
+		return true;
+	}
 	Attach(route);
+	initialised = true;
 	return GameComponent::Initialise();
 }
 

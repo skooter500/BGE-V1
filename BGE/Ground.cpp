@@ -36,6 +36,10 @@ Ground::~Ground(void)
 
 bool Ground::Initialise()
 {
+	if (initialised)
+	{
+		return true;
+	}
 	const float twidth = 500;
     const float theight = 500;
 
@@ -92,6 +96,8 @@ bool Ground::Initialise()
 	specularID = glGetUniformLocation(programID,"specular");
 	
 	textureSampler  = glGetUniformLocation(programID, "myTextureSampler");
+
+	initialised = true;
 
 	return true;
 }

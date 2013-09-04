@@ -18,6 +18,7 @@ namespace BGE
 
 		bool Initialise();
 		void Update(float timeDelta);
+		void Reset();
 
 		shared_ptr<GameComponent> camFollower;
 		bool lastPressed;
@@ -25,5 +26,7 @@ namespace BGE
 
 		vector<shared_ptr<Scenario>> scenarios;
 		int currentScenario;
+
+		float elapsed;
 	};
 }

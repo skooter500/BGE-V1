@@ -28,8 +28,8 @@ void PathFollowingScenario::Initialise()
 	shared_ptr<Ground> ground = make_shared<Ground>();
 	game->Attach(ground);
 	game->ground= ground;
-
 	shared_ptr<GameComponent> fighter = make_shared<GameComponent>();
+	fighter->tag = "Steerable";
 	fighter->scale = glm::vec3(4, 4, 4);
 	shared_ptr<SteeringController> fighterController = make_shared<SteeringController>();
 	fighterController->position = fighter->position = glm::vec3(10, 50, 0);
@@ -44,11 +44,11 @@ void PathFollowingScenario::Initialise()
 	fighterController->TurnOffAll();
 	fighterController->TurnOn(SteeringController::behaviour_type::follow_path);
 	fighterController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
+	fighterController->Initialise();
 
 	fighter->Attach(fighterController);
 	fighter->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 	game->Attach(fighter);
-
 	
 	game->camFollower = make_shared<GameComponent>();
 	shared_ptr<SteeringController> camController = make_shared<SteeringController>();
@@ -62,7 +62,6 @@ void PathFollowingScenario::Initialise()
 
 	game->Attach(game->camFollower);
 	game->camFollower->Attach(camController);
-	
 	
 	game->camera->position = camController->position;
 }

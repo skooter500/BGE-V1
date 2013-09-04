@@ -273,6 +273,16 @@ GLuint Content::LoadTexture(std::string textureName)
 	return texture;
 }
 
+void Content::InitialiseModels()
+{
+	map<string, shared_ptr<Model>>::iterator mit = Content::models.begin();
+	while (mit != Content::models.end())
+	{
+		(mit ++) ->second->Initialise();
+
+	}
+}
+
 GLuint Content::LoadShaderPair(string name) {
 
 	// First check to see if it's already loaded and if so, just return it

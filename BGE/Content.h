@@ -25,6 +25,6 @@ namespace BGE
 			static FMOD::Sound * LoadSound(string name);
 			static GLuint LoadShaderPair(string name);
 			static GLuint LoadTexture(std::string path);
-
+			static void InitialiseModels();
 	};
 }
