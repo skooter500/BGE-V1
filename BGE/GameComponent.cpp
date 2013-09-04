@@ -52,7 +52,7 @@ bool GameComponent::Initialise()
 void GameComponent::UpdateFromParent()
 {
 	world = parent->world;
-	scale = parent->scale;
+	scale = parent->scale * scale;
 	position = parent->position;
 	orientation = parent->orientation;
 	look = parent->look;

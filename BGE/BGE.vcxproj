@@ -81,6 +81,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FlockingScenario.cpp" />
+    <ClCompile Include="PathFollowingScenario.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="SteeringGame.cpp" />
@@ -121,6 +123,8 @@
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FlockingScenario.h" />
+    <ClInclude Include="PathFollowingScenario.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="SteeringGame.h" />

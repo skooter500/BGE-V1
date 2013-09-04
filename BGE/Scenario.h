@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+
+using namespace std;
 
 namespace BGE
 {
@@ -8,6 +11,8 @@ namespace BGE
 		Scenario(void);
 		~Scenario(void);
 
-		static void Setup();
+		virtual string Description() = 0;
+		virtual void Initialise() = 0;
+		virtual void Update(float timeDelta);
 	};
 }

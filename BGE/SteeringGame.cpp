@@ -4,6 +4,8 @@
 #include "Content.h"
 #include "VectorDrawer.h"
 #include "Scenario.h"
+#include "FlockingScenario.h"
+#include "PathFollowingScenario.h"
 
 using namespace BGE;
 
@@ -11,6 +13,9 @@ SteeringGame::SteeringGame(void)
 {
 	lastPressed = false;
 	camFollowing = false;
+	scenarios.push_back(make_shared<FlockingScenario>());
+	scenarios.push_back(make_shared<PathFollowingScenario>());
+	currentScenario = 1;
 }
 
 
@@ -22,11 +27,11 @@ bool SteeringGame::Initialise()
 {
 	Params::Load("default");
 
-	riftEnabled = false;
-	fullscreen = false;
+	riftEnabled = true;
+	fullscreen = true;
 
 
-	Scenario::Setup();
+	scenarios[currentScenario]->Initialise();
 
 	return Game::Initialise();
 }
@@ -61,11 +66,20 @@ void SteeringGame::Update(float timeDelta)
 		multiplier += timeDelta;
 	}
 
+	scenarios[currentScenario]->Update(timeDelta * multiplier);
+
+	Game::Update(timeDelta  * multiplier);
+
 	if (camFollowing)
 	{
 		camera->GetController()->position = camFollower->position;
-		camera->GetController()->orientation = camFollower->orientation;
-	}
+		camera->orientation = camFollower->orientation * camera->GetController()->orientation;
+		camera->RecalculateVectors();
+		camera->view = glm::lookAt(
+			camera->position
+			, camera->position + camera->look
+			, camera->up
+			);
 
-	Game::Update(timeDelta  * multiplier);
+	}
 }
