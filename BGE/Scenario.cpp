@@ -22,12 +22,10 @@ void Scenario::Setup()
 	bigFighterController->TurnOn(SteeringControler::behaviour_type::wander);
 	bigFighterController->TurnOn(SteeringControler::behaviour_type::pursuit);
 	bigFighterController->TurnOn(SteeringControler::behaviour_type::sphere_constrain);
-	bigFighter->scale = bigFighterController->scale  = glm::vec3(5, 5, 5);
+	bigFighter->scale = glm::vec3(5, 5, 5);
 	bigFighter->Attach(bigFighterController);
 	bigFighter->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 	game->Attach(bigFighter);
-
-	
 
 	shared_ptr<GameComponent> fighter;
 	shared_ptr<SteeringControler> fighterController;
@@ -49,7 +47,7 @@ void Scenario::Setup()
 		fighterController->TurnOn(SteeringControler::behaviour_type::sphere_constrain);
 		fighterController->TurnOn(SteeringControler::behaviour_type::obstacle_avoidance);
 		fighter->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
-		fighter->scale = fighterController->scale  = glm::vec3(5,5, 5);
+		fighter->scale = glm::vec3(5,5, 5);
 		fighter->Attach(fighterController);
 		game->Attach(fighter);
 	}

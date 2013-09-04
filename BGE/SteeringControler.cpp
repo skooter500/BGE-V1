@@ -9,6 +9,11 @@
 
 using namespace BGE;
 
+bool SteeringControler::counted = false;
+vector<shared_ptr<GameComponent>> SteeringControler::obstacles;
+vector<shared_ptr<GameComponent>> SteeringControler::steerables;
+
+
 SteeringControler::SteeringControler(void)
 {
 	force = glm::vec3(0);
@@ -23,6 +28,7 @@ SteeringControler::SteeringControler(void)
 	wanderTarget = RandomPosition(1.0f);
 	wanderTarget = glm::normalize(wanderTarget);
 	wanderTarget *= Params::GetFloat("wander_radius");
+	counted = false;
 
 	// Start with all behaviours turned off
 	TurnOffAll();
@@ -37,6 +43,26 @@ void SteeringControler::Update(float timeDelta)
 {
 	float smoothRate;
 	this->timeDelta = timeDelta;
+
+	if (! SteeringControler::counted)
+	{
+		list<shared_ptr<GameComponent>>::iterator oit = Game::Instance()->children.begin();
+		while (oit != Game::Instance()->children.end())
+		{
+			if ((* oit)->tag == "Obstacle")
+			{
+				SteeringControler::obstacles.push_back(* oit);
+			}
+			if ((* oit)->tag == "Steerable")
+			{
+				SteeringControler::steerables.push_back(* oit);
+			}
+			oit ++;
+		}
+		SteeringControler::counted = true;
+	}
+
+
 	force = Calculate();
 	CheckNaN(force);
 	glm::vec3 newAcceleration = force / mass;
@@ -108,21 +134,18 @@ void SteeringControler::Update(float timeDelta)
 int SteeringControler::TagNeighboursSimple(float inRange)
 {
 	tagged.clear();
-
-	list<shared_ptr<GameComponent>>::iterator it = Game::Instance()->children.begin();
-
-	while (it != Game::Instance()->children.end())
-	{
-		if ( ((*it)->tag == "Steerable") && (* it).get() != parent) 
+	static float inRange2 = inRange * inRange;
+	for (int i = 0 ; i < SteeringControler::steerables.size() ; i ++)
+	{	
+		if (SteeringControler::steerables[i].get() != parent) 
 		{
-			shared_ptr<GameComponent> neighbour =  * it;
-			float distance = glm::length(position - neighbour->position);
-			if (distance < inRange)
+			shared_ptr<GameComponent> neighbour =  steerables[i];
+			float distance = glm::length2(position - neighbour->position);
+			if (distance < inRange2)
 			{
 				tagged.push_back(neighbour);                
 			}			
 		}
-		it ++;
 	}
 	return tagged.size();
 }
@@ -148,16 +171,14 @@ glm::vec3 SteeringControler::Cohesion()
 	glm::vec3 centreOfMass = glm::vec3(0);
 	int taggedCount = 0;
 
-	vector<shared_ptr<GameComponent>>::iterator it = tagged.begin();
-	while (it != tagged.end())
+	for (int i = 0 ; i < tagged.size(); i ++)
 	{
-		shared_ptr<GameComponent> entity = * it;
+		shared_ptr<GameComponent> entity = tagged[i];
 		if (entity.get() != parent)
 		{
 			centreOfMass += entity->position;
 			taggedCount++;
 		}
-		it ++;
 	}
 	if (taggedCount > 0)
 	{
@@ -180,16 +201,14 @@ glm::vec3 SteeringControler::Alignment()
 	glm::vec3 steeringForce = glm::vec3(0);
 	int taggedCount = 0;
 
-	vector<shared_ptr<GameComponent>>::iterator it = tagged.begin();
-	while (it != tagged.end())
+	for (int i = 0 ; i < tagged.size(); i ++)
 	{
-		shared_ptr<GameComponent> entity = * it;
+		shared_ptr<GameComponent> entity = tagged[i];
 		if (entity.get() != parent)
 		{
 			steeringForce += entity->look;
 			taggedCount++;
 		}
-		it ++;
 	}
 
 	if (taggedCount > 0)
@@ -217,16 +236,14 @@ glm::vec3 SteeringControler::Separation()
 {
 	glm::vec3 steeringForce = glm::vec3(0);
 
-	vector<shared_ptr<GameComponent>>::iterator it = tagged.begin();
-	while (it != tagged.end())
+	for (int i = 0 ; i < tagged.size(); i ++)
 	{
-		shared_ptr<GameComponent> entity = * it;
+		shared_ptr<GameComponent> entity = tagged[i];
 		if (entity.get() != parent)
 		{
 			glm::vec3 toEntity = position- entity->position;
 			steeringForce += (glm::normalize(toEntity) / glm::length(toEntity));
 		}
-		it ++;
 	}
 
 	return steeringForce;
@@ -259,31 +276,37 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
     // Matt Bucklands Obstacle avoidance
     // First tag obstacles in range
 	
-	list<shared_ptr<GameComponent>>::iterator it = Game::Instance()->children.begin();
-	while(it != Game::Instance()->children.end())
+	for (int i = 0 ; i < obstacles.size() ; ++i)
 	{
-        if ((* it)->tag == "Obstacle")
+		glm::vec3 toCentre = position -  obstacles[i]->position;
+		float dist = glm::length(toCentre);
+		if (dist < boxLength)
+		{
+			tagged.push_back(obstacles[i]);
+		}
+	}
+	/*
+	vector<shared_ptr<GameComponent>>::iterator it = obstacles.begin();
+	while(it != obstacles.end())
+	{
+		glm::vec3 toCentre = position -  (*it)->position;
+        float dist = glm::length(toCentre);
+        if (dist < boxLength)
         {
-            glm::vec3 toCentre = position -  (*it)->position;
-            float dist = glm::length(toCentre);
-            if (dist < boxLength)
-            {
-                tagged.push_back(* it);
-            }
-        }
-		it ++;
+            tagged.push_back(* it);
+		}
+		++ it;
     }
-
+	*/
     float distToClosestIP = numeric_limits<float>::max();
 	shared_ptr<GameComponent> closestIntersectingObstacle = nullptr;
 	glm::vec3 localPosOfClosestObstacle = glm::vec3(0);
 	glm::vec3 intersection = glm::vec3(0);
 
     glm::mat4 localTransform = glm::inverse(world);
-	vector<shared_ptr<GameComponent>>::iterator taggedIt = tagged.begin();
-    while (taggedIt != tagged.end())
-    {
-        glm::vec3 localPos = glm::vec3(localTransform * glm::vec4((*taggedIt)->position, 1.0f));
+	for (int i = 0 ; i < tagged.size() ; i ++)
+	{
+        glm::vec3 localPos = glm::vec3(localTransform * glm::vec4(tagged[i]->position, 1.0f));
         
 		// If the local position has a positive Z value then it must lay
 		// behind the agent. (in which case it can be ignored)
@@ -292,7 +315,7 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 			// If the distance from the x axis to the object's position is less
 			// than its radius + half the width of the detection box then there
 			// is a potential intersection.
-			float expandedRadius = scale.z + (* taggedIt)->scale.z;
+			float expandedRadius = scale.z + tagged[i]->scale.z;
 			if ((glm::abs(localPos.y) < expandedRadius) && (glm::abs(localPos.x) < expandedRadius))
 			{
 				// Now to do a ray/sphere intersection test. The center of the				
@@ -313,7 +336,7 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 					if (dist < distToClosestIP)
 					{
 						dist = distToClosestIP;
-						closestIntersectingObstacle = * taggedIt;
+						closestIntersectingObstacle = tagged[i];
 						localPosOfClosestObstacle = localPos;
 					}		
 				}
@@ -350,14 +373,9 @@ glm::vec3 SteeringControler::ObstacleAvoidance()
 			//finally, convert the steering vector from local to world space
             force = glm::vec3(world * glm::vec4(force, 1.0f));                    
         }       
-		taggedIt ++;
     }            
     return force;
 }
-
-
-
-
 
 glm::vec3 SteeringControler::OffsetPursuit(glm::vec3 offset)
 {
@@ -581,8 +599,9 @@ glm::vec3 SteeringControler::CalculateWeightedPrioritised()
     int tagged = 0;
     if (IsOn(behaviour_type::separation) || IsOn(behaviour_type::cohesion) || IsOn(behaviour_type::alignment))
     {
-        tagged = TagNeighboursSimple(Params::GetFloat("tag_range"));
+        //tagged = TagNeighboursSimple(Params::GetFloat("tag_range"));
     }
+	tagged = TagNeighboursSimple(Params::GetFloat("tag_range"));
             
     if (IsOn(behaviour_type::separation) && (tagged > 0) )
     {
