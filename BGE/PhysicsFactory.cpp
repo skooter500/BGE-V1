@@ -72,8 +72,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	shared_ptr<PhysicsController> controller =make_shared<PhysicsController>(tetraShape, body, motionState);	
 	body->setUserPointer(controller.get());
 	component->Attach(controller);
-	controller->scale = scale;
-
+	
 	controller->tag = "Model";	
 	return controller;
 }
@@ -114,6 +113,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 
 	// This is a container for the box model
 	shared_ptr<Box> box = make_shared<Box>(width, height, depth);
+	box->worldMode = GameComponent::from_child;
 	box->position = pos;
 	Game::Instance()->Attach(box);
 
@@ -130,7 +130,6 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	boxController->tag = "Box";
 	body->setUserPointer(boxController.get());
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-	boxController->scale = box->scale;
 	box->Attach(boxController);
 
 	return boxController;
@@ -161,7 +160,6 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(PhysicsController(shape, body, motionState));
 	body->setUserPointer(component.get());
 	component->tag = "Cylinder";
-	component->scale = cyl->scale;
 	cyl->Attach(component);
 
 	return component;

@@ -113,7 +113,7 @@ void GameComponent::Update(float timeDelta) {
 			break;
 		case world_modes::to_parent:			
 			world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
-			parent->world = world;
+			parent->world =  glm::scale(world, parent->scale);
 			parent->position = this->position;
 			parent->up = this->up;
 			parent->look = this->look;

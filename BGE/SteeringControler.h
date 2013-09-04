@@ -13,6 +13,9 @@ namespace BGE
 	{
 	private:
 		void makeFeelers();
+		static vector<shared_ptr<GameComponent>> steerables;
+		static vector<shared_ptr<GameComponent>> obstacles;
+		static bool counted;
 	public:
 		SteeringControler(void);
 		~SteeringControler(void);
