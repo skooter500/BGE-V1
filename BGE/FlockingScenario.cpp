@@ -61,7 +61,7 @@ void FlockingScenario::Initialise()
 		fighterController->TurnOn(SteeringController::behaviour_type::evade);
 		fighterController->TurnOn(SteeringController::behaviour_type::sphere_constrain);
 		fighterController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
-		fighter->Attach(Content::LoadModel("moray", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+		fighter->Attach(Content::LoadModel("adder", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 		fighter->scale = glm::vec3(5,5, 5);
 		fighter->Attach(fighterController);
 		fighterController->Initialise();
