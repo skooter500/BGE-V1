@@ -307,7 +307,9 @@
     <ClInclude Include="AttackingState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="LazerBeam.h" />
+    <ClInclude Include="LazerBeam.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
