@@ -9,7 +9,7 @@ using namespace BGE;
 
 Scenario::Scenario(void)
 {
-	enemyController = nullptr;
+	leaderController = nullptr;
 }
 
 Scenario::~Scenario(void)
@@ -23,9 +23,9 @@ void Scenario::Update(float timeDelta)
 	{
 		shared_ptr<GameComponent> camController = Game::Instance()->camera->GetController();
 		glm::vec3 newEnemyPos = camController->position + camController->look * 100.0f;
-		if (enemyController != nullptr)
+		if (leaderController != nullptr)
 		{
-			enemyController->targetPos = newEnemyPos;
+			leaderController->targetPos = newEnemyPos;
 		}
 	}
 }

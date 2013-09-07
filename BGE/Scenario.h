@@ -16,6 +16,6 @@ namespace BGE
 		virtual void Initialise() = 0;
 		virtual void Update(float timeDelta);
 
-		shared_ptr<SteeringController> enemyController;
+		shared_ptr<SteeringController> leaderController;
 	};
 }

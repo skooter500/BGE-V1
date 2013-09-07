@@ -34,6 +34,7 @@ void FlockingScenario::Initialise()
 	shared_ptr<SteeringController> bigFighterController = make_shared<SteeringController>();
 	bigFighterController->position = bigFighter->position = pos;
 	bigFighterController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
+	bigFighterController->TurnOn(SteeringController::behaviour_type::pursuit);
 	bigFighterController->TurnOn(SteeringController::behaviour_type::wander);
 	bigFighterController->TurnOn(SteeringController::behaviour_type::sphere_constrain);
 	bigFighter->scale = glm::vec3(10, 10, 10);
@@ -67,6 +68,8 @@ void FlockingScenario::Initialise()
 		fighterController->Initialise();
 		game->Attach(fighter);
 	}
+
+	bigFighterController->target = fighter;
 
 	int numObstacles = 10;
 	float dist = (range * 2) / numObstacles;

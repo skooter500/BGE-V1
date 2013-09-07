@@ -46,7 +46,8 @@ void ObstacleAvoidanceScenario::Initialise()
 	leaderController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
 	leaderController->TurnOn(SteeringController::behaviour_type::separation);
 	leaderController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
-	leaderController->targetPos = glm::vec3(0, 100, -450);
+	leaderController->targetPos = glm::vec3(0, 100, -550);
+	this->leaderController = leaderController;
 	leader->Attach(leaderController);
 	leader->Attach(Content::LoadModel("viper", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 	leader->scale = glm::vec3(2,2,2);
@@ -54,14 +55,14 @@ void ObstacleAvoidanceScenario::Initialise()
 
 	// Add some Obstacles
 	vector<ObstacleParam> obsParams;
-	obsParams.push_back(ObstacleParam(glm::vec3(0, 110, -10), 4));
-	obsParams.push_back(ObstacleParam(glm::vec3(-10, 116, -80), 17));
-	obsParams.push_back(ObstacleParam(glm::vec3(10, 115, -120), 10));
+	obsParams.push_back(ObstacleParam(glm::vec3(0, 110, -10), 20));
+	obsParams.push_back(ObstacleParam(glm::vec3(10, 136, -80), 17));
+	obsParams.push_back(ObstacleParam(glm::vec3(-10, 115, -120), 10));
 	obsParams.push_back(ObstacleParam(glm::vec3(5, 90, -150), 12));
 	obsParams.push_back(ObstacleParam(glm::vec3(-2, 105, -200), 20));
+	obsParams.push_back(ObstacleParam(glm::vec3(-25, 120, -250), 10));
 	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -250), 10));
-	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -250), 10));
-	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -250), 35));
+	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -280), 14));
 	for (int i = 0 ; i < obsParams.size() ; i ++)
 	{
 		shared_ptr<Sphere> obstacle = make_shared<Sphere>(obsParams[i].radius);
@@ -110,7 +111,7 @@ void ObstacleAvoidanceScenario::Initialise()
 	camController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
 	game->Attach(game->camFollower);
 	game->camFollower->Attach(camController);
-	game->camera->position = camController->position;
+	game->camera->GetController()->position = camController->position;
 
 	shared_ptr<Ground> ground = make_shared<Ground>();
 	game->Attach(ground);
