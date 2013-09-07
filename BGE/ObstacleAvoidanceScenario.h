@@ -1,21 +1,17 @@
 #pragma once
 #include "Scenario.h"
-#include <string>
-
-using namespace std;
 
 namespace BGE
 {
-	class FlockingScenario :
+	class ObstacleAvoidanceScenario :
 		public Scenario
 	{
 	public:
-		FlockingScenario(void);
-		~FlockingScenario(void);
+		ObstacleAvoidanceScenario(void);
+		~ObstacleAvoidanceScenario(void);
 
 		string Description();
 		void Initialise();
 
 	};
 }
-

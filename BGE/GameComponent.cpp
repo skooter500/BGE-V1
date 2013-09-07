@@ -35,6 +35,7 @@ GameComponent::GameComponent(void)
 	worldMode = world_modes::from_self_with_parent;
 	parent = NULL;
 	tag = "Nothing";
+	alive = true;
 }
 
 
@@ -128,7 +129,14 @@ void GameComponent::Update(float timeDelta) {
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{	
-		(*it ++)->Update(timeDelta);
+		if (!(*it)->alive)
+		{
+			it = children.erase(it);
+		}
+		else
+		{
+			(*it ++)->Update(timeDelta);
+		}
 	}
 }
 
@@ -238,7 +246,6 @@ shared_ptr<GameComponent> GameComponent::GetController()
 		if ((*it)->worldMode == world_modes::to_parent)
 		{
 			return * it;
-
 		}
 		it ++;
 	}
