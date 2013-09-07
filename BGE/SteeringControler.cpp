@@ -375,8 +375,7 @@ glm::vec3 SteeringController::ObstacleAvoidance()
             {
                 force.y = -force.y;
             }                  
-            LineDrawer::DrawLine(position, position + look * boxLength, glm::vec3(1,0,1));
-			//apply a braking force proportional to the obstacle's distance from
+            //apply a braking force proportional to the obstacle's distance from
 			//the vehicle.
 			const float brakingWeight = 40.0f;
             force.z = (closestIntersectingObstacle->scale.x -

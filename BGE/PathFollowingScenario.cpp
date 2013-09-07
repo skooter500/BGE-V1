@@ -53,9 +53,9 @@ void PathFollowingScenario::Initialise()
 	enemyController->targetPos = fighterController->position + glm::vec3(-50, 0, -80);
 	enemyController->TurnOffAll();
 	enemyController->TurnOn(SteeringController::behaviour_type::arrive);
-	this->enemyController = enemyController;
+	this->leaderController = enemyController;
 	enemy->Attach(enemyController);
-	enemy->Attach(Content::LoadModel("moray", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	enemy->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 
 	game->Attach(enemy);
 
