@@ -6,6 +6,7 @@
 #include "Scenario.h"
 #include "FlockingScenario.h"
 #include "PathFollowingScenario.h"
+#include "ObstacleAvoidanceScenario.h"
 
 using namespace BGE;
 
@@ -13,8 +14,10 @@ SteeringGame::SteeringGame(void)
 {
 	lastPressed = false;
 	camFollowing = false;
-	scenarios.push_back(make_shared<FlockingScenario>());
 	scenarios.push_back(make_shared<PathFollowingScenario>());
+	scenarios.push_back(make_shared<ObstacleAvoidanceScenario>());
+	scenarios.push_back(make_shared<FlockingScenario>());
+	
 	currentScenario = 0;
 	elapsed = 10000;
 }
@@ -28,8 +31,8 @@ bool SteeringGame::Initialise()
 {
 	Params::Load("default");
 
-	riftEnabled = true;
-	fullscreen = true;
+	riftEnabled = false;
+	fullscreen = false;
 
 	scenarios[currentScenario]->Initialise();
 
@@ -64,6 +67,8 @@ void SteeringGame::Update(float timeDelta)
 	float timeToPass = 1.0f;
 
 	PrintText("Press F1 to toggle camera following");
+	PrintText(string("Current Scenario:" + scenarios[currentScenario]->Description()));
+
 	if (keyState[SDL_SCANCODE_F1])
 	{
 		if (! lastPressed)

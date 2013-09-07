@@ -9,8 +9,9 @@ using namespace BGE;
 
 Scenario::Scenario(void)
 {
-
+	enemyController = nullptr;
 }
+
 Scenario::~Scenario(void)
 {
 
@@ -18,19 +19,13 @@ Scenario::~Scenario(void)
 
 void Scenario::Update(float timeDelta)
 {
-	//MouseState mouseState = Mouse.GetState();
-	//if (mouseState.LeftButton == ButtonState.Pressed)
-	//{
-	//	Vector3 newTargetPos = XNAGame.Instance.Camera.Position + (XNAGame.Instance.Camera.Look * 100.0f);
-	//	//newTargetPos.Y = 8;
-	//	XNAGame.Instance.Leader.TargetPos = newTargetPos;
-
-	//}
-
-	//if (mouseState.RightButton == ButtonState.Pressed)
-	//{
-	//	Vector3 newTargetPos = XNAGame.Instance.Camera.Position;
-	//	XNAGame.Instance.Leader.TargetPos = newTargetPos;
-
-	//}
+	if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
+	{
+		shared_ptr<GameComponent> camController = Game::Instance()->camera->GetController();
+		glm::vec3 newEnemyPos = camController->position + camController->look * 100.0f;
+		if (enemyController != nullptr)
+		{
+			enemyController->targetPos = newEnemyPos;
+		}
+	}
 }

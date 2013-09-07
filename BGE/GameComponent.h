@@ -61,6 +61,7 @@ namespace BGE
 		static const glm::vec3 basisRight;
 		bool moved;
 		float speed;
+		bool alive;
 
 		void Strafe(float units); 
 		void Fly(float units);    

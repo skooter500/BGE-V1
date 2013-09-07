@@ -21,6 +21,7 @@ namespace BGE
 		void Reset();
 
 		shared_ptr<GameComponent> camFollower;
+		
 		bool lastPressed;
 		bool camFollowing;
 

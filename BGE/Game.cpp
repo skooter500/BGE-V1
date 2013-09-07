@@ -112,6 +112,11 @@ bool Game::Initialise() {
 		std::cerr << "Error:" << glewGetErrorString(err);
 		return false;
 	}
+
+	if (! GLEW_VERSION_2_0)
+	{
+		throw BGE::Exception("OpenGL Shaders not supported. Upgrade your graphics card drivers");
+	}
 	
 	glViewport(0, 0, width, height);
 
@@ -166,10 +171,10 @@ void Game::PrintVector(string message, glm::vec3 v)
 	PrintText(ss.str());
 }
 
-void Game::PrintInt(string message, int i)
+void Game::PrintFloat(string message, float f)
 {
 	stringstream ss;
-	ss << message << i;
+	ss << message << f;
 	PrintText(ss.str());
 }
 

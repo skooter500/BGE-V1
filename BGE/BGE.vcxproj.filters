@@ -30,6 +30,9 @@
     <Filter Include="Scenarios">
       <UniqueIdentifier>{82919e9f-6727-4dac-9428-1308d1d5e346}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{e477bb02-ac64-447a-a4c0-9a1da63c6cf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -151,6 +154,21 @@
     </ClCompile>
     <ClCompile Include="PathFollowingScenario.cpp">
       <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleAvoidanceScenario.cpp">
+      <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackingState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="LazerBeam.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +295,19 @@
     <ClInclude Include="PathFollowingScenario.h">
       <Filter>Scenarios</Filter>
     </ClInclude>
+    <ClInclude Include="ObstacleAvoidanceScenario.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackingState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="LazerBeam.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">

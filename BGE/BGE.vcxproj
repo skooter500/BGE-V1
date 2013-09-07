@@ -81,10 +81,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="FlockingScenario.cpp" />
+    <ClCompile Include="IdleState.cpp" />
+    <ClCompile Include="LazerBeam.cpp" />
+    <ClCompile Include="ObstacleAvoidanceScenario.cpp" />
     <ClCompile Include="PathFollowingScenario.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Scenario.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="SteeringGame.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Exception.cpp" />
@@ -123,10 +128,15 @@
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackingState.h" />
     <ClInclude Include="FlockingScenario.h" />
+    <ClInclude Include="IdleState.h" />
+    <ClInclude Include="LazerBeam.h" />
+    <ClInclude Include="ObstacleAvoidanceScenario.h" />
     <ClInclude Include="PathFollowingScenario.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Scenario.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="SteeringGame.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="dirent.h" />

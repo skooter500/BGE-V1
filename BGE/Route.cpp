@@ -18,13 +18,16 @@ Route::~Route(void)
 
 void Route::Draw()
 {
-	for (int i = 1 ; i < waypoints.size() ; i ++)
+	if (waypoints.size() > 0)
 	{
-		LineDrawer::DrawLine(waypoints[i - 1], waypoints[i], glm::vec3(1, 0, 0));
-	}
-	if (looped)
-	{
-		LineDrawer::DrawLine(waypoints[0], waypoints[waypoints.size() - 1], glm::vec3(1, 0, 0));
+		for (int i = 1 ; i < waypoints.size() ; i ++)
+		{
+			LineDrawer::DrawLine(waypoints[i - 1], waypoints[i], glm::vec3(1, 0, 0));
+		}
+		if (looped)
+		{
+			LineDrawer::DrawLine(waypoints[0], waypoints[waypoints.size() - 1], glm::vec3(1, 0, 0));
+		}
 	}
 
 }

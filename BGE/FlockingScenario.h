@@ -1,5 +1,9 @@
 #pragma once
 #include "Scenario.h"
+#include <string>
+
+using namespace std;
+
 namespace BGE
 {
 	class FlockingScenario :

@@ -80,7 +80,7 @@ namespace BGE
 		void PrintText(string message, glm::vec2 position);
 		void PrintText(string message);
 		void PrintVector(string message, glm::vec3 v);
-		void PrintInt(string message, int i);
+		void PrintFloat(string message, float f);
 
 		shared_ptr<Camera> camera;
 		shared_ptr<Ground> ground;
