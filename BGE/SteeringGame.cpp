@@ -7,6 +7,9 @@
 #include "FlockingScenario.h"
 #include "PathFollowingScenario.h"
 #include "ObstacleAvoidanceScenario.h"
+#include "ParticleEffect.h"
+#include "FountainEffect.h"
+#include "SnowEffect.h"
 
 using namespace BGE;
 
@@ -27,6 +30,8 @@ SteeringGame::~SteeringGame(void)
 {
 }
 
+shared_ptr<ParticleEffect> effect;
+
 bool SteeringGame::Initialise()
 {
 	Params::Load("default");
@@ -36,6 +41,14 @@ bool SteeringGame::Initialise()
 
 	scenarios[currentScenario]->Initialise();
 
+	/*shared_ptr<SnowEffect> snowEffect = make_shared<SnowEffect>(); 
+	snowEffect->position = glm::vec3(0,0,0);
+	Attach(snowEffect);
+*/
+
+	effect = make_shared<FountainEffect>(); 
+	effect->position = glm::vec3(0,0,0);
+	Attach(effect);
 	return Game::Initialise();
 }
 
@@ -82,10 +95,12 @@ void SteeringGame::Update(float timeDelta)
 		lastPressed = false;
 	}
 
-	PrintText("Press number keys to cycle Scenarios");
 
 	for (int i = 0 ; i < scenarios.size() ; i ++)
 	{
+		stringstream ss;
+		ss << "Press " << (i + 1) << " for " << scenarios[i]->Description();
+		PrintText(ss.str());
 		if (keyState[SDL_SCANCODE_1 + i] && (elapsed > timeToPass))
 		{
 			currentScenario = i;
@@ -111,6 +126,13 @@ void SteeringGame::Update(float timeDelta)
 	if (keyState[SDL_SCANCODE_P])
 	{
 		multiplier += timeDelta;
+	}
+	if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
+	{
+		shared_ptr<GameComponent> camController = Game::Instance()->camera->GetController();
+		glm::vec3 newEnemyPos = camController->position + camController->look * 100.0f;
+		effect->position = newEnemyPos;
+	
 	}
 	scenarios[currentScenario]->Update(timeDelta * multiplier);
 

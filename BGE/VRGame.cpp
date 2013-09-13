@@ -53,13 +53,13 @@ VRGame::VRGame(void)
 	person = NULL;
 	
 	fireRate = 5.0f;
-	width = 1280;
-	height = 800;
+	width = 800;
+	height = 600;
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = false;
-	riftEnabled = false;
+	fullscreen = true;
+	riftEnabled = true;
 
 	tag = "VR Game";
 }
@@ -87,7 +87,7 @@ void VRGame::ResetScene()
 		}
 	}
 	
-	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
+	//physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 }
 
 bool VRGame::Initialise() 

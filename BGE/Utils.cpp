@@ -192,10 +192,11 @@ glm::quat BGE::RotationBetweenVectors(glm::vec3 start, glm::vec3 dest)
 		);
 }
 
-float BGE::RandomClamped()
+float BGE::RandomClamped(float min, float max)
 {
 	float r = (float)rand()/(float)RAND_MAX;
-	return 1.0f - (r * 2.0f); 
+	float range = max - min;
+	return max - (r * range); 
 }      
 
 glm::vec3 BGE::RandomPosition(float range)

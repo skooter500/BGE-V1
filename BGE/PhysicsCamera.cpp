@@ -12,6 +12,7 @@ PhysicsCamera::PhysicsCamera():PhysicsController()
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
 	pickedUp = NULL;
+	worldMode = world_modes::from_parent;
 	tag = "Physics Camera";
 }
 
