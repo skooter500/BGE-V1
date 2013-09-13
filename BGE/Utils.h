@@ -17,6 +17,11 @@ using namespace std;
 
 namespace BGE
 {
+	struct Material
+	{
+		glm::vec3 diffuse;
+		string textureName;
+	};
 
 	struct RayGeom
 	{

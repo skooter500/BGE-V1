@@ -165,5 +165,7 @@ void main()
     }
  
   float fFogCoord = abs(vEyeSpacePos.z/vEyeSpacePos.w); 
-  gl_FragColor =  mix(vec4(totalLighting, 1.0), fogParams.vFogColor, getFogFactor(fogParams, fFogCoord));
+  //gl_FragColor =  mix(vec4(totalLighting, 1.0), fogParams.vFogColor, getFogFactor(fogParams, fFogCoord));
+  gl_FragColor = vec4(texture2D( myTextureSampler, UV ).rgb, 1.0f);
+  
 }

@@ -58,8 +58,8 @@ VRGame::VRGame(void)
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = true;
-	riftEnabled = true;
+	fullscreen = false;
+	riftEnabled = false;
 
 	tag = "VR Game";
 }
@@ -117,6 +117,12 @@ bool VRGame::Initialise()
 	person = make_shared<Person>();
 	Attach(person);
 	person->headCamera = true;
+
+	shared_ptr<GameComponent> scott = make_shared<GameComponent>();
+	scott->drawMode = GameComponent::draw_modes::textured;
+	scott->Attach(Content::LoadModel("gccontent/Cellcube"));
+	scott->position = glm::vec3(0, 10, -20);
+	Attach(scott);
 
 	ResetScene();
 

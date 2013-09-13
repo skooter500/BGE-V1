@@ -43,9 +43,11 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	std::vector<unsigned int> vertexIndices, normalIndices, uvIndices;
 	std::vector<glm::vec3> temp_vertices; 
 	std::vector<glm::vec3> tempColours;
+	std::vector<glm::vec2> tempUVs;
 	std::vector<glm::vec3> temp_normals;
 	
-	map<string, glm::vec3> diffuse;
+	string textureName;
+	map<string, Material> materials;
 	bool hasUVs = false;
 
 	// First load the materials
@@ -58,6 +60,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	{
 		string materialPrefix = "newmtl";
 		string diffusePrefix = "Kd";
+		string bmpSuffix = ".bmp";
 		string s;	
 		string junk;
 		string materialName;
@@ -74,8 +77,24 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 				glm::vec3 colour;
 				stringstream ss(s);
 				ss >> junk >> colour.r >> colour.g >> colour.b;
-				diffuse[materialName] = colour;
+				materials[materialName].diffuse = colour;
 			}
+			if (s.find(bmpSuffix) != string::npos)
+			{
+				int startAt = s.find_last_of(' ');
+				if (startAt == string::npos)
+				{
+					startAt = 0;
+				}
+				else
+				{
+					++ startAt;
+				}
+				int length = s.length() - (startAt + bmpSuffix.length());
+				string texName = s.substr(startAt, length);
+				materials[materialName].textureName;
+				textureName = texName;
+			}		
 		}
 		is.close();
 	}
@@ -108,6 +127,14 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 				ss >> junk >> vertex.x >> vertex.y >> vertex.z;
 				temp_vertices.push_back(vertex);
 			}			
+			else if (s.find("vt ") == 0)
+			{
+				stringstream ss(s);
+				glm::vec2 uv;
+				ss >> junk >> uv.x >> uv.y;
+				tempUVs.push_back(uv);
+			}			
+
 			else if (s.find(materialPrefix) == 0)
 			{
 				materialName = s.substr(materialPrefix.length() + 1);
@@ -139,7 +166,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 					}
 					uvIndices.push_back(uvIndex[0]);
 					uvIndices.push_back(uvIndex[1]);
-					uvIndices.push_back(uvIndex[2]);				
+					uvIndices.push_back(uvIndex[2]);		
 				}
 				else
 				{
@@ -164,9 +191,9 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 				vertexIndices.push_back(vertexIndex[1]);
 				vertexIndices.push_back(vertexIndex[2]);
 				
-				tempColours.push_back(diffuse[materialName]);
-				tempColours.push_back(diffuse[materialName]);
-				tempColours.push_back(diffuse[materialName]);
+				tempColours.push_back(materials[materialName].diffuse);
+				tempColours.push_back(materials[materialName].diffuse);
+				tempColours.push_back(materials[materialName].diffuse);
 
 				normalIndices.push_back(normalIndex[0]);
 				normalIndices.push_back(normalIndex[1]);
@@ -186,12 +213,22 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 		// Get the attributes thanks to the index
 		glm::vec3 vertex = temp_vertices[ vertexIndex-1 ];
 		glm::vec3 normal = temp_normals[ normalIndex-1 ];
-		
+
 		// Put the attributes in buffers
 		model->vertices.push_back(vertex);
 		model->normals.push_back(normal);
 		model->colours.push_back(tempColours[i]);
-	
+	}
+	if (hasUVs)
+	{
+		for (int i = 0 ; i < uvIndices.size() ; i ++)
+		{
+			unsigned int uvIndex = uvIndices[i];
+			glm::vec2 uv = tempUVs[ uvIndex - 1 ];
+			model->uvs.push_back(uv);
+		}
+		model->textureName = textureName;
+		model->drawMode = Model::draw_modes::textured;
 	}
 	Content::models[name] = model;	
 	return model;
