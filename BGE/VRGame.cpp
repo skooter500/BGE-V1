@@ -53,16 +53,16 @@ VRGame::VRGame(void)
 	dispatcher = NULL;
 	solver = NULL;
 	person = NULL;
-	
+	high = false;
 	fireRate = 5.0f;
-	width = 800;
-	height = 600;
+	width = 1280;
+	height = 800;
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
 	fullscreen = false;
 	riftEnabled = false;
-	camFollowing = false;
+	camFollowing = true;
 
 	tag = "VR Game";
 }
@@ -130,14 +130,61 @@ bool VRGame::Initialise()
 	kfc = make_shared<KinectFlyingController>(flyModel);
 	flyThing->Attach(kfc);
 	kfc->position = glm::vec3(0, 20, -10);
-	flyThing->Attach(flyModel);
+	//flyThing->Attach(flyModel);
 	Attach(flyThing);
+
+	shared_ptr<GameComponent> floor = make_shared<GameComponent>();
+	floor->drawMode = GameComponent::draw_modes::textured;
+	floor->Attach(Content::LoadModel("gccontent/floor_01"));
+	floor->position = glm::vec3(0, 0, 0);
+	Attach(floor);
+
+
+	shared_ptr<GameComponent> wall1 = make_shared<GameComponent>();
+	wall1->drawMode = GameComponent::draw_modes::textured;
+	wall1->Attach(Content::LoadModel("gccontent/wall_01"));
+	wall1->position = glm::vec3(0, 0, 0);
+	Attach(wall1);
+
+	shared_ptr<GameComponent> wall2 = make_shared<GameComponent>();
+	wall2->drawMode = GameComponent::draw_modes::textured;
+	wall2->Attach(Content::LoadModel("gccontent/wall_02"));
+	wall2->position = glm::vec3(0, 0, 0);
+	Attach(wall2);
+
+	shared_ptr<GameComponent> wall3 = make_shared<GameComponent>();
+	wall3->drawMode = GameComponent::draw_modes::textured;
+	wall3->Attach(Content::LoadModel("gccontent/wall_03"));
+	wall3->position = glm::vec3(0, 0, 0);
+	Attach(wall3);
+
+	shared_ptr<GameComponent> wall4 = make_shared<GameComponent>();
+	wall4->drawMode = GameComponent::draw_modes::textured;
+	wall4->Attach(Content::LoadModel("gccontent/wall_04"));
+	wall4->position = glm::vec3(0, 0, 0);
+	Attach(wall4);
+
+	shared_ptr<GameComponent> table = make_shared<GameComponent>();
+	table->drawMode = GameComponent::draw_modes::textured;
+	table->Attach(Content::LoadModel("gccontent/table01"));
+	table->position = glm::vec3(0, 0, 0);
+	Attach(table);
 	
+
 	shared_ptr<GameComponent> scott = make_shared<GameComponent>();
 	scott->drawMode = GameComponent::draw_modes::textured;
+	scott->scale = glm::vec3(0.2f, 0.2f, 0.2f);
 	scott->Attach(Content::LoadModel("gccontent/Mushroom"));
-	scott->position = glm::vec3(0, 10, -20);
+	scott->position = glm::vec3(0, 18, -70);
 	Attach(scott);
+	
+
+	shared_ptr<GameComponent> cb = make_shared<GameComponent>();
+	cb->drawMode = GameComponent::draw_modes::textured;
+	cb->Attach(Content::LoadModel("gccontent/chalkboard"));
+	cb->position = glm::vec3(0, 3, 0);
+	Attach(cb);
+
 
 	ResetScene();
 
@@ -355,7 +402,7 @@ void VRGame::Update(float timeDelta)
 
 	if (camFollowing)
 	{
-		camera->GetController()->position = camera->position = flyThing->position - (kfc->look * 20.0f);
+		camera->GetController()->position = camera->position = flyThing->position;
 		camera->orientation = flyThing->orientation * camera->GetController()->orientation;
 		camera->RecalculateVectors();
 		camera->view = glm::lookAt(

@@ -210,34 +210,64 @@ void KinectFlyingController::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	rightHandPos = NUIToGLVector(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT], false);
 	shoulderPos = NUIToGLVector(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_SHOULDER_CENTER], false);
 
-	float leftDiff = leftHandPos.y - shoulderPos.y;
-	float rightDiff = rightHandPos.y - shoulderPos.y;
 	float forceScale = 1000.0f;
-	//steerable->AddForce(glm::vec3(0.0f, -9.8f, 0.0f) * timeDelta * forceScale);
-	if ((leftDiff > 0.0f) && (rightDiff > 0.0f))
+
+	//SDL_Joystick *joy;
+	//if (SDL_NumJoysticks() > 0) {
+	//	// Open joystick
+	//	joy = SDL_JoystickOpen(0);
+	//	if (joy) {
+	//		stringstream ss;
+	//		ss << SDL_JoystickNameForIndex(0) << " detected";
+	//		Game::Instance()->PrintText(ss.str());
+
+	//		float range = 1;
+
+	//		int walkAxis = SDL_JoystickGetAxis(joy, 1);
+	//		//CheckOverflow(walkAxis);
+	//		if (glm::abs<int>(walkAxis) > 8000)
+	//		{
+	//			float walk = ((float) walkAxis / (float) numeric_limits<short int>::max()) * range;
+	//			steerable->AddForce(look * walk * forceScale);
+	//		}
+	//	}
+	//}
+
+	// Close if opened
+	/*if (SDL_JoystickGetAttached(joy)) {
+		SDL_JoystickClose(joy);
+	}*/
+
+	float leftDiffY = leftHandPos.y - shoulderPos.y;
+	float rightDiffY = rightHandPos.y - shoulderPos.y;
+
+	float leftDiffZ = leftHandPos.z - shoulderPos.z;
+	float rightDiffZ = rightHandPos.z - shoulderPos.z;
+
+	Game::Instance()->PrintFloat("Left Z", leftDiffZ);
+	Game::Instance()->PrintFloat("Right Z", rightDiffZ);
+
+	if ((leftDiffY > 0.0f) && (rightDiffY > 0.0f))
 	{
-		float forceAmount = glm::max(leftDiff, rightDiff) * 20.0f;
-		steerable->AddForce(glm::vec3(0, forceAmount * forceScale * timeDelta * 7.0f, 0));
-		steerable->gravity = glm::vec3(0.0f, -9.0f, 0.0f);
+		float forceAmount = glm::max(leftDiffY, rightDiffY) * 20.0f;
+		steerable->AddForce(glm::vec3(0, forceAmount * forceScale * timeDelta, 0));
+		steerable->gravity = glm::vec3(0,0,0);
 		return;		
 	}
-	if ((leftDiff > 0.0f))
+	if ((leftDiffY > 0.0f))
 	{
-		float forceAmount = leftHandPos.y - rightHandPos.y;
-		//steerable->AddForce(steerable->right * forceAmount * forceScale * timeDelta);
+		float forceAmount = - (leftHandPos.y - rightHandPos.y);
 		steerable->AddTorque(up * forceAmount * forceScale * timeDelta * 0.5f);
-		myRoll = forceAmount;
-		//steerable->gravity = glm::vec3(0.0f, -1.0f, 0.0f);
+		steerable->gravity = glm::vec3(0,0,0);
 		return;
 	}
-	if ((rightDiff > 0.0f))
+	if ((rightDiffY > 0.0f))
 	{
-		float forceAmount = - (rightHandPos.y - leftHandPos.y);
+		float forceAmount = (rightHandPos.y - leftHandPos.y);
 		myRoll = forceAmount;
-		
-		//steerable->AddForce(steerable->right * forceAmount * forceScale * timeDelta);
-
 		steerable->AddTorque(up * forceAmount * forceScale * timeDelta * 0.5f);
-		//steerable->gravity = glm::vec3(0.0f, -1.0f, 0.0f);
+		
+		return;
 	}
+	steerable->gravity = glm::vec3(0.0f, -9.0f, 0.0f);
 }

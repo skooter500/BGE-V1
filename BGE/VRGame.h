@@ -47,5 +47,6 @@ namespace BGE
 		shared_ptr<GameComponent> camFollower;
 		bool camFollowing;
 		float fireRate;
+		bool high;
 	};
 }

@@ -13,6 +13,7 @@ newmtl Material__184
 	Ks 0.000000 0.000000 0.000000
 	Ke 0.000000 0.000000 0.000000
 	map_Ka gccontent\table.bmp
+	map_Kd gccontent\table.bmp
 
 newmtl Material__163
 	Ns 10.000000

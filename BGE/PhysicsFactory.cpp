@@ -37,7 +37,7 @@ void PhysicsFactory::CreateWall(glm::vec3 startAt, float width, float height, fl
 	}
 }
 
-shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::vec3 pos, glm::quat quat, glm::vec3 scale)
+shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::vec3 pos, glm::quat quat, glm::vec3 scale )
 {
 	shared_ptr<GameComponent> component = make_shared<GameComponent>();
 	component->tag = name;
@@ -72,7 +72,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	shared_ptr<PhysicsController> controller =make_shared<PhysicsController>(tetraShape, body, motionState);	
 	body->setUserPointer(controller.get());
 	component->Attach(controller);
-	
+	component->drawMode = model->drawMode;
 	controller->tag = "Model";	
 	return controller;
 }

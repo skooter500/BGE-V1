@@ -13,3 +13,4 @@ newmtl Material__26
 	Ks 0.000000 0.000000 0.000000
 	Ke 0.000000 0.000000 0.000000
 	map_Ka gccontent\mushroom.bmp
+	map_Kd gccontent\mushroom.bmp

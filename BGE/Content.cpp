@@ -47,6 +47,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	std::vector<glm::vec3> temp_normals;
 	
 	string textureName;
+	bool hasTexture = false;
 	map<string, Material> materials;
 	bool hasUVs = false;
 
@@ -72,7 +73,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 			{
 				materialName = s.substr(materialPrefix.length() + 1);
 			}
-			if (s.find(diffusePrefix) == 0)
+			if (s.find(diffusePrefix) != string::npos)
 			{
 				glm::vec3 colour;
 				stringstream ss(s);
@@ -94,6 +95,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 				string texName = s.substr(startAt, length);
 				materials[materialName].textureName;
 				textureName = texName;
+				hasTexture = true;
 			}		
 		}
 		is.close();
@@ -228,8 +230,15 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 			uv.y = 1.0f - uv.y;
 			model->uvs.push_back(uv);
 		}
+	}
+	if (hasTexture)
+	{
 		model->textureName = textureName;
 		model->drawMode = Model::draw_modes::textured;
+	}
+	else
+	{
+		model->drawMode = GameComponent::draw_modes::materials;
 	}
 	Content::models[name] = model;	
 	return model;
