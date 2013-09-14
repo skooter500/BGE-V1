@@ -208,6 +208,18 @@ glm::vec3 BGE::RandomPosition(float range)
 	return pos;
 }
 
+glm::vec3 BGE::NUIToGLVector( Vector4 v, bool flipZ)
+{
+	if (flipZ)
+	{
+		return glm::vec3(v.x, v.y, -v.z);
+	}
+	else
+	{
+		return glm::vec3(v.x, v.y, v.z);
+	}
+}
+
 bool BGE::ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sphere, const glm::vec3 & point, glm::vec3 & intersection)
 {
     // Calculate p0-c call it v

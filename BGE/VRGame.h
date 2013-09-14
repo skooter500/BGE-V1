@@ -5,6 +5,7 @@
 #include "Person.h"
 #include <btBulletDynamicsCommon.h>
 #include <fmod.hpp>
+#include "KinectFlyingController.h"
 
 namespace BGE
 {
@@ -36,12 +37,15 @@ namespace BGE
 		// The world.
 		std::shared_ptr<PhysicsFactory> physicsFactory;
 		btDiscreteDynamicsWorld * dynamicsWorld;
-
+		shared_ptr<KinectFlyingController> kfc;
+		shared_ptr<GameComponent> flyThing;
 		
 		// Now stuff we need to track
 		shared_ptr<Person> person;
 		PhysicsController * leftHandPickedUp;
 		PhysicsController * rightHandPickedUp;
+		shared_ptr<GameComponent> camFollower;
+		bool camFollowing;
 		float fireRate;
 	};
 }

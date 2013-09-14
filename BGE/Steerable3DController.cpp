@@ -20,6 +20,7 @@ Steerable3DController::Steerable3DController(shared_ptr<Model> model):GameCompon
 	angularVelocity = glm::vec3(0);
 	torque = glm::vec3(0);
 	worldMode = world_modes::to_parent;
+	gravity = glm::vec3(0,0,0);
 	this->model = model;
 }
 
@@ -116,8 +117,9 @@ void Steerable3DController::Update(float timeDelta)
         AddTorque(- look * scale * timeDelta);
     }
 
-    // Do the Newtonian integration
+	// Do the Newtonian integration
     acceleration = force / mass;
+	acceleration += gravity;
     velocity += acceleration * timeDelta;
     position += velocity * timeDelta;
 	
@@ -131,6 +133,7 @@ void Steerable3DController::Update(float timeDelta)
     // Do the Hamiltonian integration
 	angularAcceleration = torque * glm::inverse(inertialTensor);
     angularVelocity = angularVelocity + angularAcceleration * timeDelta;
+	angularVelocity *= 0.9f;
 
     glm::quat w = glm::quat(0, angularVelocity.x, angularVelocity.y, angularVelocity.z);
 

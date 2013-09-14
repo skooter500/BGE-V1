@@ -6,6 +6,8 @@
 #include <string>
 #include "Content.h"
 #include "Utils.h"
+#include "KinectFlyingController.h"
+#include "Params.h"
 using namespace BGE;
 using namespace std;
 
@@ -60,6 +62,7 @@ VRGame::VRGame(void)
 
 	fullscreen = false;
 	riftEnabled = false;
+	camFollowing = false;
 
 	tag = "VR Game";
 }
@@ -92,6 +95,8 @@ void VRGame::ResetScene()
 
 bool VRGame::Initialise() 
 {
+	Params::Load("default");
+
 	// Set up the collision configuration and dispatcher
 	collisionConfiguration = new btDefaultCollisionConfiguration();
 	dispatcher = new btCollisionDispatcher(collisionConfiguration);
@@ -114,13 +119,23 @@ bool VRGame::Initialise()
 
 	gContactAddedCallback = collisionCallback;
 
-	person = make_shared<Person>();
+	/*person = make_shared<Person>();
 	Attach(person);
 	person->headCamera = true;
-
+	*/
+	
+	flyThing = make_shared<GameComponent>();	
+	shared_ptr<Model> flyModel = Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp));
+	flyThing->drawMode = GameComponent::draw_modes::materials;
+	kfc = make_shared<KinectFlyingController>(flyModel);
+	flyThing->Attach(kfc);
+	kfc->position = glm::vec3(0, 20, -10);
+	flyThing->Attach(flyModel);
+	Attach(flyThing);
+	
 	shared_ptr<GameComponent> scott = make_shared<GameComponent>();
 	scott->drawMode = GameComponent::draw_modes::textured;
-	scott->Attach(Content::LoadModel("gccontent/Cellcube"));
+	scott->Attach(Content::LoadModel("gccontent/Mushroom"));
 	scott->position = glm::vec3(0, 10, -20);
 	Attach(scott);
 
@@ -225,6 +240,21 @@ void VRGame::Update(float timeDelta)
 
 	PrintText("Press R to reset scene");
 	static bool lastPressed = false;
+
+	if (keyState[SDL_SCANCODE_F1])
+	{
+		if (! lastPressed)
+		{
+			camFollowing = !camFollowing;
+			lastPressed = true;
+		}	
+	}
+	else
+	{
+		lastPressed = false;
+	}
+
+	
 	if (keyState[SDL_SCANCODE_R])
 	{
 		if (! lastPressed)
@@ -322,6 +352,19 @@ void VRGame::Update(float timeDelta)
 	}
 
 	Game::Update(timeDelta);
+
+	if (camFollowing)
+	{
+		camera->GetController()->position = camera->position = flyThing->position - (kfc->look * 20.0f);
+		camera->orientation = flyThing->orientation * camera->GetController()->orientation;
+		camera->RecalculateVectors();
+		camera->view = glm::lookAt(
+			camera->GetController()->position
+			, camera->position + camera->look
+			, camera->up
+			);
+
+	}
 }
 
 void VRGame::Cleanup()

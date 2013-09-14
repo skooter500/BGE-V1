@@ -12,5 +12,4 @@ newmtl Material__26
 	Kd 0.588000 0.588000 0.588000
 	Ks 0.000000 0.000000 0.000000
 	Ke 0.000000 0.000000 0.000000
-	map_Ka C:\Users\Izzy\Desktop\BGE\gamecraft\BGE\Content\gccontent\mushroom.bmp
-	map_Kd C:\Users\Izzy\Desktop\BGE\gamecraft\BGE\Content\gccontent\mushroom.bmp
+	map_Ka gccontent\mushroom.bmp

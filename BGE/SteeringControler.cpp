@@ -140,7 +140,6 @@ void SteeringController::Update(float timeDelta)
 		rotationMatrix = glm::transpose(rotationMatrix);
 		orientation = glm::quat(rotationMatrix);
 	}
-
 	GameComponent::Update(timeDelta);
 }
 
@@ -395,6 +394,7 @@ glm::vec3 SteeringController::OffsetPursuit(glm::vec3 offset)
 
     target = glm::vec3(leader->world * glm::vec4(offset, 1));
 
+	Game::Instance()->PrintVector("Pursuit target", target);
     float dist = glm::length(target - position);     
       
     float lookAhead = (dist / maxSpeed);
@@ -748,4 +748,9 @@ bool SteeringController::AccumulateForce(glm::vec3 & runningTotal, glm::vec3 for
         runningTotal += glm::normalize(force) * remaining;
     }
     return true;
+}
+
+void SteeringController::AddForce( glm::vec3 force )
+{
+	this->force += force;
 }

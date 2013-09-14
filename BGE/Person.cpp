@@ -6,22 +6,12 @@
 #include "PhysicsController.h"
 #include "KinematicMotionState.h"
 #include "PhysicsGame1.h"
+#include "Utils.h"
 #include <btBulletDynamicsCommon.h>
 
 using namespace BGE;
 using namespace std;
 
-glm::vec3 NUIToGLVector( Vector4 v, bool flip)
-{
-	if (flip)
-	{
-		return glm::vec3(v.x, v.y, -v.z);
-	}
-	else
-	{
-		return glm::vec3(v.x, v.y, v.z);
-	}
-}
 
 void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, const OLECHAR* uniqueDeviceName, void * pUserData)
 {      
@@ -138,6 +128,7 @@ void Person::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 		footHeight = glm::min<float>(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_RIGHT].y, skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_LEFT].y);
 	}	
 
+	
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_HEAD, NUI_SKELETON_POSITION_SHOULDER_CENTER);
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_SHOULDER_CENTER, NUI_SKELETON_POSITION_SHOULDER_LEFT);
 	UpdateBone(skeleton, NUI_SKELETON_POSITION_SHOULDER_CENTER, NUI_SKELETON_POSITION_SHOULDER_RIGHT);
@@ -277,6 +268,11 @@ void Person::UpdateBone(
 	{
 		cylController = it->second;
 	}
+
+	if (jointFrom == NUI_SKELETON_POSITION_SHOULDER_CENTER)
+	{
+		shoulderPos = start;
+	}
 	cylController->parent->position = this->position + centrePos;
 	cylController->parent->orientation = q;
 }
@@ -324,7 +320,7 @@ void Person::UpdateHead(
 
 	if (headCamera)
 	{
-		game->camera->GetController()->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
+		game->camera->GetController()->position = this->position + boneVector + glm::vec3(0, scale * 0.2f, 0);
 		boxController->parent->position = glm::vec3(100, -100, 100);
 	}
 	else

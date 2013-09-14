@@ -42,6 +42,7 @@ namespace BGE
 			offset_pursuit = 0x10000,
 			sphere_constrain = 0x20000,
 			random_walk = 0x40000,
+
 		};
 		CalculationMethods calculationMethod;
 		vector<shared_ptr<GameComponent>> tagged;
@@ -89,6 +90,8 @@ namespace BGE
 		glm::vec3 WallAvoidance();
 		glm::vec3 Arrive(glm::vec3 target);
 		glm::vec3 FollowPath();
+
+		void AddForce(glm::vec3 force);
 
 		// Calculation Methods
 		glm::vec3 Calculate();

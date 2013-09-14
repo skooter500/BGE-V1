@@ -10,6 +10,7 @@
 #include <functional> 
 #include <cctype>
 #include <string>
+#include "NuiApi.h"
 
 using namespace FMOD;
 using namespace OVR;
@@ -17,6 +18,27 @@ using namespace std;
 
 namespace BGE
 {
+
+	// Some smoothing with little latency (defaults).
+	// Only filters out small jitters.
+	// Good for gesture recognition in games.
+	const NUI_TRANSFORM_SMOOTH_PARAMETERS defaultParams =
+	{0.5f, 0.5f, 0.5f, 0.05f, 0.04f};
+
+	// Smoothed with some latency.
+	// Filters out medium jitters.
+	// Good for a menu system that needs to be smooth but
+	// doesn't need the reduced latency as much as gesture recognition does.
+	const NUI_TRANSFORM_SMOOTH_PARAMETERS somewhatLatentParams =
+	{0.5f, 0.1f, 0.5f, 0.1f, 0.1f};
+
+	// Very smooth, but with a lot of latency.
+	// Filters out large jitters.
+	// Good for situations where smooth data is absolutely required
+	// and latency is not an issue.
+	const NUI_TRANSFORM_SMOOTH_PARAMETERS verySmoothParams =
+	{0.7f, 0.3f, 1.0f, 1.0f, 1.0f};
+
 	struct Material
 	{
 		glm::vec3 diffuse;
@@ -44,6 +66,9 @@ namespace BGE
 	glm::quat BtToGLQuat(const btQuaternion & q);
 	btVector3 GLToBtVector(const glm::vec3 & v);
 	btQuaternion GLToBtQuat(const glm::quat & q);
+
+	glm::vec3 NUIToGLVector( Vector4 v, bool flipZ);
+
 
 	string ltrim(string s);
 	string rtrim(string s);
