@@ -225,6 +225,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 		{
 			unsigned int uvIndex = uvIndices[i];
 			glm::vec2 uv = tempUVs[ uvIndex - 1 ];
+			uv.y = 1.0f - uv.y;
 			model->uvs.push_back(uv);
 		}
 		model->textureName = textureName;
@@ -364,7 +365,6 @@ GLuint Content::LoadShaderPair(string name) {
 		throw BGE::Exception("Could not load fragment sharer");
 	}
 
- 
 	GLint Result = GL_FALSE;
 	int InfoLogLength;
  

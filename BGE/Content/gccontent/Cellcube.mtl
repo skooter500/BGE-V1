@@ -11,5 +11,5 @@ newmtl Material__27
 	Ka 0.588000 0.588000 0.588000
 	Kd 0.588000 0.588000 0.588000
 	Ks 0.000000 0.000000 0.000000
-	Ke 0.000000 0.000000 0.000000
-	map_Ka gccontent\UV_01_Cell.bmp
+	Ke 0.000000 0.000000 0000000
+	map_Ka gccontent/UV_01_Cell.bmp

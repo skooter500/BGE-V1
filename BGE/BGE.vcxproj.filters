@@ -181,6 +181,9 @@
     <ClCompile Include="SnowEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="KinectFlyingController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -331,6 +334,7 @@
       <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="SnowEffect.h" />
+    <ClInclude Include="KinectFlyingController.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">

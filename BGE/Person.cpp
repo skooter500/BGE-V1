@@ -324,8 +324,7 @@ void Person::UpdateHead(
 
 	if (headCamera)
 	{
-		shared_ptr<RiftController> riftController = dynamic_pointer_cast<RiftController>(Game::Instance()->camera->GetController());
-		riftController->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
+		game->camera->GetController()->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
 		boxController->parent->position = glm::vec3(100, -100, 100);
 	}
 	else
