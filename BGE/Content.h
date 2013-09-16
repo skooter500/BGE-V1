@@ -22,7 +22,7 @@ namespace BGE
 		public:
 			static string prefix;
 			static shared_ptr<Model> LoadModel(string name, glm::mat4 localTransform = glm::mat4(1));
-			static FMOD::Sound * LoadSound(string name);
+			static FMOD::Sound * LoadSound(string name, bool looped = false);
 			static GLuint LoadShaderPair(string name);
 			static GLuint LoadTexture(std::string path);
 			static void InitialiseModels();

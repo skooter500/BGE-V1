@@ -6,6 +6,8 @@
 #include "Utils.h"
 using namespace BGE;
 
+FMOD::Channel * startChannel;
+
 void CheckFMODResult( FMOD_RESULT res )
 {
 	if (res != FMOD_OK)
@@ -131,19 +133,29 @@ void BGE::SoundSystem::Update()
 
 }
 
-void SoundSystem::PlaySound(string name, glm::vec3 pos)
+void SoundSystem::PlaySound(string name, glm::vec3 pos, bool looped)
 {
 	if (! enabled)
 	{
 		return;
 	}
-	FMOD::Sound * sound = Content::LoadSound(name);
+
+	if (name == "gccontent/escapekick")
+	{
+		startChannel->stop();
+	}
+	FMOD::Sound * sound = Content::LoadSound(name, looped);
 	FMOD::Channel * channel;
 	fmodSystem->playSound(FMOD_CHANNEL_FREE, sound, false, & channel);
-	if (channel != NULL)
+
+	if (name == "gccontent/mushroom")
+	{
+		startChannel = channel;
+	}
+	/*if (channel != NULL)
 	{
 		channel->set3DAttributes(& GLToFMODVector(pos), & GLToFMODVector(glm::vec3(0)));	
-	}
+	}*/
 }
 
 

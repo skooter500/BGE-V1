@@ -1,7 +1,7 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 14.09.2013 14:26:03
+# File Created: 14.09.2013 16:13:21
 
-newmtl Material__366
+newmtl Material__608
 	Ns 10.000000
 	Ni 1.500000
 	d 1.000000
@@ -12,5 +12,5 @@ newmtl Material__366
 	Kd 0.588000 0.588000 0.588000
 	Ks 0.000000 0.000000 0.000000
 	Ke 0.000000 0.000000 0.000000
-	map_Ka gccontent\wall03.bmp
-	map_Kd gccontent\wall03.bmp
+	map_Ka gccontent\wall_02.bmp
+	map_Kd gccontent\wall_02.bmp

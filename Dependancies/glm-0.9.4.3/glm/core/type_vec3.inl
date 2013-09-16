@@ -734,6 +734,20 @@ namespace detail
 			v.z * T(s));
 	}
 
+	//Conversational AI in a 3D avatar;
+
+
+	// Architectural modelling service
+	
+	// 3D environment modelling
+
+	//Aproach Dublin Tourism for funding!!!
+	// Meditation trails
+	//Climbing croac P?
+	// Doing a virtual retreat
+	// When I was a ittle boy .. flying .. bein a programmer and having friends that were like me. and got to experience that dream...
+	// Pitch Game Craft the movie to Tom & Andy
+	
 	template <typename T> 
 	GLM_FUNC_QUALIFIER tvec3<T> operator* 
 	(

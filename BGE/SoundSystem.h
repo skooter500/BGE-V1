@@ -29,7 +29,7 @@ namespace BGE
 		void Initialise();
 		void Update();
 		void PlayHitSoundIfReady(GameComponent * component, int waitMs);
-		void PlaySound(string name, glm::vec3);
+		void PlaySound(string name, glm::vec3, bool looped = false);
 		// FMOD
 		FMOD::System * fmodSystem;
 		map<GameComponent *, SoundEvent> soundEvents;

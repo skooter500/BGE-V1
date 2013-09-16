@@ -10,6 +10,8 @@ namespace BGE {
 		void Draw();
 		bool Initialise();
 		
+		glm::vec3 combinedLook;
+
 		glm::mat4 view;
 		glm::mat4 projection;
 	};

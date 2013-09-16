@@ -11,6 +11,10 @@
 using namespace BGE;
 using namespace std;
 
+float findDist = 50;
+
+vector<shared_ptr<GameComponent>> removable;
+
 bool collisionCallback(btManifoldPoint& cp,	const btCollisionObjectWrapper* colObj0Wrap,int partId0,int index0,const btCollisionObjectWrapper* colObj1Wrap,int partId1,int index1)
 {
 	VRGame * game = (VRGame *) Game::Instance();
@@ -37,8 +41,7 @@ bool collisionCallback(btManifoldPoint& cp,	const btCollisionObjectWrapper* colO
 		return false;
 	}
 
-	
-	game->soundSystem->PlayHitSoundIfReady(object0, 5000);
+	//game->soundSystem->PlayHitSoundIfReady(object0, 5000);
 
 	
 	return false;
@@ -55,14 +58,14 @@ VRGame::VRGame(void)
 	person = NULL;
 	high = false;
 	fireRate = 5.0f;
-	width = 1280;
-	height = 800;
+	width = 800;
+	height = 600;
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = false;
-	riftEnabled = false;
-	camFollowing = true;
+	fullscreen = true;
+	riftEnabled = true;
+	camFollowing = false;
 
 	tag = "VR Game";
 }
@@ -109,7 +112,7 @@ bool VRGame::Initialise()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,-9,0));
 
-	camera->position = glm::vec3(-1,20,46);
+	camera->position = glm::vec3(-1,30,46);
 	camera->look = glm::vec3(0, 0, 1);
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
@@ -133,36 +136,54 @@ bool VRGame::Initialise()
 	//flyThing->Attach(flyModel);
 	Attach(flyThing);
 
+	
 	shared_ptr<GameComponent> floor = make_shared<GameComponent>();
 	floor->drawMode = GameComponent::draw_modes::textured;
 	floor->Attach(Content::LoadModel("gccontent/floor_01"));
 	floor->position = glm::vec3(0, 0, 0);
 	Attach(floor);
+	removable.push_back(floor);
 
+	shared_ptr<GameComponent> ceiling = make_shared<GameComponent>();
+	ceiling->drawMode = GameComponent::draw_modes::textured;
+	ceiling->Attach(Content::LoadModel("gccontent/ceiling"));
+	ceiling->position = glm::vec3(0, 0, 0);
+	Attach(ceiling);
+	removable.push_back(ceiling);
+
+	shared_ptr<GameComponent> childtable = make_shared<GameComponent>();
+	childtable->drawMode = GameComponent::draw_modes::textured;
+	childtable->Attach(Content::LoadModel("gccontent/childtable"));
+	childtable->position = glm::vec3(0, 0, 0);
+	Attach(childtable);
 
 	shared_ptr<GameComponent> wall1 = make_shared<GameComponent>();
 	wall1->drawMode = GameComponent::draw_modes::textured;
 	wall1->Attach(Content::LoadModel("gccontent/wall_01"));
 	wall1->position = glm::vec3(0, 0, 0);
 	Attach(wall1);
+	removable.push_back(wall1);
 
 	shared_ptr<GameComponent> wall2 = make_shared<GameComponent>();
 	wall2->drawMode = GameComponent::draw_modes::textured;
 	wall2->Attach(Content::LoadModel("gccontent/wall_02"));
 	wall2->position = glm::vec3(0, 0, 0);
 	Attach(wall2);
+	removable.push_back(wall2);
 
 	shared_ptr<GameComponent> wall3 = make_shared<GameComponent>();
 	wall3->drawMode = GameComponent::draw_modes::textured;
 	wall3->Attach(Content::LoadModel("gccontent/wall_03"));
 	wall3->position = glm::vec3(0, 0, 0);
 	Attach(wall3);
+	removable.push_back(wall3);
 
 	shared_ptr<GameComponent> wall4 = make_shared<GameComponent>();
 	wall4->drawMode = GameComponent::draw_modes::textured;
 	wall4->Attach(Content::LoadModel("gccontent/wall_04"));
 	wall4->position = glm::vec3(0, 0, 0);
 	Attach(wall4);
+	removable.push_back(wall4);
 
 	shared_ptr<GameComponent> table = make_shared<GameComponent>();
 	table->drawMode = GameComponent::draw_modes::textured;
@@ -170,20 +191,86 @@ bool VRGame::Initialise()
 	table->position = glm::vec3(0, 0, 0);
 	Attach(table);
 	
+	shared_ptr<GameComponent> book = make_shared<GameComponent>();
+	book->drawMode = GameComponent::draw_modes::textured;
+	book->Attach(Content::LoadModel("gccontent/books"));
+	book->position = glm::vec3(0, 0, 0);
+	Attach(book);
+
 
 	shared_ptr<GameComponent> scott = make_shared<GameComponent>();
 	scott->drawMode = GameComponent::draw_modes::textured;
 	scott->scale = glm::vec3(0.2f, 0.2f, 0.2f);
 	scott->Attach(Content::LoadModel("gccontent/Mushroom"));
+	scott->tag = "Mushroom";
 	scott->position = glm::vec3(0, 18, -70);
 	Attach(scott);
-	
+
+	{
+		shared_ptr<GameComponent> scott = make_shared<GameComponent>();
+		scott->drawMode = GameComponent::draw_modes::textured;
+		scott->Attach(Content::LoadModel("gccontent/Mushroom"));
+		scott->tag = "Mushroom";
+		scott->position = glm::vec3(-150, 0, -170);
+		Attach(scott);
+	}
+
+	{
+		shared_ptr<GameComponent> scott = make_shared<GameComponent>();
+		scott->drawMode = GameComponent::draw_modes::textured;
+		scott->Attach(Content::LoadModel("gccontent/Mushroom"));
+		scott->tag = "Mushroom";
+		scott->position = glm::vec3(150, 0, -170);
+		Attach(scott);
+	}
+
+	{
+		shared_ptr<GameComponent> scott = make_shared<GameComponent>();
+		scott->drawMode = GameComponent::draw_modes::textured;
+		scott->Attach(Content::LoadModel("gccontent/Mushroom"));
+		scott->tag = "Mushroom";
+		scott->position = glm::vec3(150, 0, 170);
+		Attach(scott);
+	}
+
+	{
+		shared_ptr<GameComponent> scott = make_shared<GameComponent>();
+		scott->drawMode = GameComponent::draw_modes::textured;
+		scott->Attach(Content::LoadModel("gccontent/Mushroom"));
+		scott->tag = "Mushroom";
+		scott->position = glm::vec3(300, 0, 100);
+		Attach(scott);
+	}
+
+	{
+		shared_ptr<GameComponent> scott = make_shared<GameComponent>();
+		scott->drawMode = GameComponent::draw_modes::textured;
+		scott->Attach(Content::LoadModel("gccontent/Mushroom"));
+		scott->tag = "Mushroom";
+		scott->position = glm::vec3(-300, 0, -100);
+		Attach(scott);
+	}
+
+	{
+		shared_ptr<GameComponent> scott = make_shared<GameComponent>();
+		scott->drawMode = GameComponent::draw_modes::textured;
+		scott->Attach(Content::LoadModel("gccontent/Mushroom"));
+		scott->tag = "Mushroom";
+		scott->position = glm::vec3(-200, 0, 300);
+		Attach(scott);
+	}
 
 	shared_ptr<GameComponent> cb = make_shared<GameComponent>();
 	cb->drawMode = GameComponent::draw_modes::textured;
 	cb->Attach(Content::LoadModel("gccontent/chalkboard"));
 	cb->position = glm::vec3(0, 3, 0);
 	Attach(cb);
+
+	shared_ptr<GameComponent> skySphere = make_shared<GameComponent>();
+	skySphere->drawMode = GameComponent::draw_modes::textured;
+	skySphere->Attach(Content::LoadModel("gccontent/skysphere"));
+	skySphere->position = glm::vec3(0, 0, 0);
+	Attach(skySphere);
 
 
 	ResetScene();
@@ -192,6 +279,7 @@ bool VRGame::Initialise()
 		return false;
 	}
 
+	soundSystem->PlaySoundW("gccontent/escape", glm::vec3(0), true);
 	camera->GetController()->position = camera->position;
 	camera->GetController()->look = camera->look;
 
@@ -405,12 +493,56 @@ void VRGame::Update(float timeDelta)
 		camera->GetController()->position = camera->position = flyThing->position;
 		camera->orientation = flyThing->orientation * camera->GetController()->orientation;
 		camera->RecalculateVectors();
+		camera->combinedLook = camera->look; 
 		camera->view = glm::lookAt(
 			camera->GetController()->position
 			, camera->position + camera->look
 			, camera->up
 			);
+	}
 
+	if (high)
+	{
+		PrintText("Its full of stars!!");
+	}
+
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != Game::Instance()->children.end())
+	{	
+		bool deleted = false;
+		if ((*it)->tag == "Mushroom")
+		{
+			float dist = glm::length((*it)->position - camera->position);
+			PrintFloat("Dist: ", dist);
+			
+			if (dist < findDist)
+			{
+				high = true;
+				
+				camFollowing = true;
+				findDist = 100.0f;
+				it = children.erase(it);
+				deleted = true;
+				soundSystem->PlaySound("gccontent/mushroom", camera->position);
+			}
+		}
+		if (! deleted)
+		{
+			++ it;
+		}
+	}
+
+	if (high)
+	{
+		if (removable.size() > 0 )
+		{
+			for (int i = 0 ; i < removable.size() ; i ++)
+			{
+				children.remove(removable[i]);
+			}
+			removable.clear();
+			soundSystem->PlaySound("gccontent/escapekick", camera->position);
+		}
 	}
 }
 

@@ -11,7 +11,7 @@ map<string, GLuint> Content::textures = map<string, GLuint>();
 map<string, GLuint> Content::shaders = map<string, GLuint>();	
 map<string, FMOD::Sound*> Content::sounds = map<string, FMOD::Sound*>();	
 
-FMOD::Sound * Content::LoadSound(string name)
+FMOD::Sound * Content::LoadSound(string name, bool looped)
 {
 	// First check to see if it's already loaded and if so, just return it
 	map<string, FMOD::Sound*>::iterator mit = Content::sounds.find(name);
@@ -22,7 +22,7 @@ FMOD::Sound * Content::LoadSound(string name)
 	FMOD::Sound * sound;
 
 	string fileName = Content::prefix + name + ".wav";
-	FMOD_RESULT res = Game::Instance()->soundSystem->fmodSystem->createSound(fileName.c_str(), FMOD_3D, 0, & sound);
+	FMOD_RESULT res = Game::Instance()->soundSystem->fmodSystem->createSound(fileName.c_str(), (looped) ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF , 0, & sound);
 	if (res != FMOD_OK)
 	{
 		string message = "Could not load sound file: " + fileName;

@@ -48,5 +48,6 @@ namespace BGE
 		bool camFollowing;
 		float fireRate;
 		bool high;
+
 	};
 }

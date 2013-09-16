@@ -47,34 +47,36 @@ bool Ground::Initialise()
 		return false;
 	}
 
-
-	vertices.push_back(glm::vec3(width, 0, -height));
+	float yval = -1.0f;
+	vertices.push_back(glm::vec3(width, yval, -height));
 	normals.push_back(GameComponent::basisUp);
 	texels.push_back(glm::vec2(twidth, 0));
 
-	vertices.push_back(glm::vec3(-width, 0, -height));
+	vertices.push_back(glm::vec3(-width, yval, -height));
 	normals.push_back(GameComponent::basisUp);
 	texels.push_back(glm::vec2(0, 0));
 
-	vertices.push_back(glm::vec3(width, 0, height));
+	vertices.push_back(glm::vec3(width, yval, height));
 	normals.push_back(GameComponent::basisUp);
 	texels.push_back(glm::vec2(twidth, theight));
     
-	vertices.push_back(glm::vec3(width, 0, height));
+	vertices.push_back(glm::vec3(width, yval, height));
 	normals.push_back(GameComponent::basisUp);
 	texels.push_back(glm::vec2(twidth, theight));
 	
-	vertices.push_back(glm::vec3(-width, 0, -height));
+	vertices.push_back(glm::vec3(-width, yval, -height));
 	normals.push_back(GameComponent::basisUp);
 	texels.push_back(glm::vec2(0,0));
 	
-	vertices.push_back(glm::vec3(-width, 0, height));
+	vertices.push_back(glm::vec3(-width, yval, height));
 	normals.push_back(GameComponent::basisUp);
 	texels.push_back(glm::vec2(0, theight)); 
     
 	programID = Content::LoadShaderPair("standard_texture");
 
-	textureID = Content::LoadTexture("BGE_Logo_01");
+	//textureID = Content::LoadTexture("BGE_Logo_01");
+
+	textureID = Content::LoadTexture("gccontent/grass");
 
 	glGenBuffers(1, &vertexbuffer); 
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

@@ -18,6 +18,10 @@ void CALLBACK BGE::StatusProc1( HRESULT hrStatus, const OLECHAR* instanceName, c
 	}
 }
 
+float leftDiffZ = 0.0f;
+float rightDiffZ = 0.0f;
+float shoulderZ = 0.0f;
+
 
 KinectFlyingController::KinectFlyingController(shared_ptr<Model> model)
 {
@@ -41,6 +45,11 @@ KinectFlyingController::~KinectFlyingController(void)
 void KinectFlyingController::Update(float timeDelta)
 {
 	this->timeDelta = timeDelta;
+
+	Game::Instance()->PrintFloat("Left Z", leftDiffZ);
+	Game::Instance()->PrintFloat("Right Z", rightDiffZ);
+	Game::Instance()->PrintFloat("Shoulder Z", shoulderPos.z);
+
 	if (connected)
 	{
 		SetStatusMessage("Kinect is connected");
@@ -114,17 +123,7 @@ bool KinectFlyingController::Initialise()
 
 	this->steerable->worldMode = world_modes::from_self;
 	this->steerable->position = position;
-	game->camFollower = make_shared<GameComponent>();
-	shared_ptr<SteeringController> camController = make_shared<SteeringController>();
-	camController->offset = glm::vec3(0,0,50);
-	camController->leader = this->steerable;
-	camController->position = game->camFollower->position = this->steerable->position + camController->offset;
-
-	camController->TurnOffAll();
-	camController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
-	game->Attach(game->camFollower);
-	game->camFollower->Attach(camController);
-
+	
 	steerable->position = position;
 	steerable->look = look;
 	steerable->up = up;
@@ -190,7 +189,6 @@ HRESULT KinectFlyingController::CreateFirstConnected()
 }
 
 
-
 void KinectFlyingController::SetStatusMessage( std::string message )
 {
 	Game::Instance()->PrintText(message);
@@ -201,6 +199,15 @@ void KinectFlyingController::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 {
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
 	static bool lastPressed = false;
+
+	VRGame * game = (VRGame *) Game::Instance();
+
+	if (!game->high)
+	{
+		return;
+	}
+
+
 	//if (footHeight == 0.0f)
 	{
 		footHeight = glm::min<float>(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_RIGHT].y, skeleton.SkeletonPositions[NUI_SKELETON_POSITION_FOOT_LEFT].y);
@@ -211,6 +218,9 @@ void KinectFlyingController::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	shoulderPos = NUIToGLVector(skeleton.SkeletonPositions[NUI_SKELETON_POSITION_SHOULDER_CENTER], false);
 
 	float forceScale = 1000.0f;
+
+
+
 
 	//SDL_Joystick *joy;
 	//if (SDL_NumJoysticks() > 0) {
@@ -241,23 +251,31 @@ void KinectFlyingController::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	float leftDiffY = leftHandPos.y - shoulderPos.y;
 	float rightDiffY = rightHandPos.y - shoulderPos.y;
 
-	float leftDiffZ = leftHandPos.z - shoulderPos.z;
-	float rightDiffZ = rightHandPos.z - shoulderPos.z;
-
-	Game::Instance()->PrintFloat("Left Z", leftDiffZ);
-	Game::Instance()->PrintFloat("Right Z", rightDiffZ);
+	leftDiffZ = leftHandPos.z;
+	rightDiffZ = rightHandPos.z;
 
 	if ((leftDiffY > 0.0f) && (rightDiffY > 0.0f))
 	{
 		float forceAmount = glm::max(leftDiffY, rightDiffY) * 20.0f;
 		steerable->AddForce(glm::vec3(0, forceAmount * forceScale * timeDelta, 0));
 		steerable->gravity = glm::vec3(0,0,0);
+
+		float threashhold = 0.5f;
+		leftDiffZ = shoulderPos.z - leftHandPos.z;
+		rightDiffZ = shoulderPos.z - rightHandPos.z;
+		if ((rightDiffZ > threashhold) )
+		{
+			float forceAmount = glm::max(leftDiffZ, rightDiffZ) * 100.0f;
+			Game::Instance()->PrintFloat("Force AMount", forceAmount);
+			steerable->AddForce(Game::Instance()->camera->combinedLook * forceAmount * forceScale * timeDelta);
+			steerable->gravity = glm::vec3(0,0,0);		
+		}
 		return;		
 	}
 	if ((leftDiffY > 0.0f))
 	{
 		float forceAmount = - (leftHandPos.y - rightHandPos.y);
-		steerable->AddTorque(up * forceAmount * forceScale * timeDelta * 0.5f);
+		steerable->AddTorque(up * forceAmount * forceScale * timeDelta * 0.50f);
 		steerable->gravity = glm::vec3(0,0,0);
 		return;
 	}
@@ -265,7 +283,7 @@ void KinectFlyingController::UpdateSkeleton(const NUI_SKELETON_DATA & skeleton)
 	{
 		float forceAmount = (rightHandPos.y - leftHandPos.y);
 		myRoll = forceAmount;
-		steerable->AddTorque(up * forceAmount * forceScale * timeDelta * 0.5f);
+		steerable->AddTorque(up * forceAmount * forceScale * timeDelta * 0.50f);
 		
 		return;
 	}

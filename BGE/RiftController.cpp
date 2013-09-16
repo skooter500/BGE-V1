@@ -23,6 +23,7 @@ void RiftController::AccumulateInputs()
 		xboxController->orientation = orientation;
 		xboxController->RecalculateVectors();
 		xboxController->orientation = tempQ;
+		position = xboxController->position;
 	}
 }
 

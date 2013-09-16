@@ -140,7 +140,7 @@ bool Game::Initialise() {
 	if (riftEnabled)
 	{
 		shared_ptr<RiftController> riftController = make_shared<RiftController>();
-		riftController->position = glm::vec3(0, 10, 10);
+		riftController->position = glm::vec3(0, 25, 10);
 		this->riftController = riftController;
 		camera->Attach(riftController);
 	}
@@ -333,7 +333,7 @@ void Game::Draw()
 		float projectionCenterOffset = 4.0f * eyeProjectionShift / hmd.HScreenSize;
 
 		// Projection matrix for the "center eye", which the left/right matrices are based on.
-		OVR::Matrix4f projCenter = OVR::Matrix4f::PerspectiveRH(yfov, aspectRatio, 0.3f, 1000.0f);
+		OVR::Matrix4f projCenter = OVR::Matrix4f::PerspectiveRH(yfov, aspectRatio, 0.3f, 100000.0f);
 		OVR::Matrix4f projLeft   = OVR::Matrix4f::Translation(projectionCenterOffset, 0, 0) * projCenter;
 		OVR::Matrix4f projRight  = OVR::Matrix4f::Translation(-projectionCenterOffset, 0, 0) * projCenter;
 
