@@ -321,7 +321,7 @@ void Game::Draw()
 
 		// Compute Vertical FOV based on distance.
 		float halfScreenDistance = (hmd.VScreenSize / 2);
-		float yfov = 2.0f * atan(halfScreenDistance/hmd.EyeToScreenDistance);
+		float yfov = 2.0f * glm::atan<float>(halfScreenDistance/hmd.EyeToScreenDistance);
 
 		// Post-projection viewport coordinates range from (-1.0, 1.0), with the
 		// center of the left viewport falling at (1/4) of horizontal screen size.

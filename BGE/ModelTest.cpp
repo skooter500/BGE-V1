@@ -9,14 +9,20 @@
 
 using namespace BGE;
 
-ModelTest::ModelTest(void) {
+ModelTest::ModelTest(void) 
+{
+	
 }
 
 
 ModelTest::~ModelTest(void) {
 }
 
-bool ModelTest::Initialise() {
+shared_ptr<GameComponent> rotTest;
+float theta = 0.0f;
+
+bool ModelTest::Initialise() 
+{
 	
 	std::shared_ptr<GameComponent> ground = make_shared<Ground>();
 	Attach(ground);	
@@ -36,19 +42,33 @@ bool ModelTest::Initialise() {
 	std::shared_ptr<GameComponent> sphere (new Sphere(1));
 	sphere->position = glm::vec3(10, 5, -20);
 	Attach(sphere);
+
+	rotTest = make_shared<GameComponent>();
+	rotTest->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
+	Attach(rotTest);
 	
-	
-	std::shared_ptr<GameComponent> ship = make_shared<GameComponent>();
-	std::shared_ptr<Model> model = Content::LoadModel("marimba");	
-	std::shared_ptr<GameComponent> steerable = make_shared<Steerable3DController>(model);
+	shared_ptr<GameComponent> ship = make_shared<GameComponent>();
+	shared_ptr<Model> model = Content::LoadModel("marimba");	
+	shared_ptr<GameComponent> steerable = make_shared<Steerable3DController>(model);
 	steerable->position = glm::vec3(20, 5, -20);
 	ship->Attach(steerable);
 	ship->Attach(model);
 	Attach(ship);
-	
+
+	fullscreen = false;
+	riftEnabled = false;
+
 	//Initialise OpenGL, GLEW and SDL and then initialize all my children!
 	if (!Game::Initialise()) {
 		return false;
 	}
 	return true;
+}
+
+void ModelTest::Update( float timeDelta )
+{
+	Game::Update(timeDelta);
+	glm::mat4 rotMatrix = glm::rotate(glm::mat4(1), theta, glm::vec3(0,1,0));
+	rotTest->world = rotMatrix;
+	theta += timeDelta * 10.0f;
 }

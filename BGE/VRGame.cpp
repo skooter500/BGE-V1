@@ -58,8 +58,8 @@ VRGame::VRGame(void)
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = false;
-	riftEnabled = false;
+	fullscreen = true;
+	riftEnabled = true;
 
 	tag = "VR Game";
 }
