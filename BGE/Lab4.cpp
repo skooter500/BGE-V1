@@ -46,88 +46,14 @@ bool Lab4::Initialise()
 
 void Lab4::Update(float timeDelta)
 {
-	static float timeToFire = 1.0f / 2.0f;
-
-	// Movement of ship1
-	if (keyState[SDL_SCANCODE_U])
-	{
-		ship1->position += ship1->look * speed * timeDelta;
-	}
-	if (keyState[SDL_SCANCODE_J])
-	{
-		ship1->position -= ship1->look * speed * timeDelta;
-	}
-	if (keyState[SDL_SCANCODE_H])
-	{
-		ship1->Yaw(timeDelta * speed * speed);
-	}
-	if (keyState[SDL_SCANCODE_K])
-	{
-		ship1->Yaw(-timeDelta * speed * speed);
-	}
-
 	// Movement of ship2
 	if (keyState[SDL_SCANCODE_UP])
 	{
 		ship2->position += ship2->look * speed * timeDelta;
 	}
-	if (keyState[SDL_SCANCODE_DOWN])
-	{
-		ship2->position -= ship2->look * speed * timeDelta;
-	}
 	if (keyState[SDL_SCANCODE_LEFT])
 	{
 		ship2->Yaw(timeDelta * speed * speed);
 	}
-	if (keyState[SDL_SCANCODE_RIGHT])
-	{
-		ship2->Yaw(-timeDelta * speed * speed);
-	}
-
-	// Check Distance to ship 2
-	glm::vec3 toShip2 = ship2->position - ship1->position;
-	if (glm::length(toShip2) < 5)
-	{
-		PrintText("In range");
-	}
-	else
-	{
-		PrintText("Not in range");
-	}
-	// Check in front of or behind
-	toShip2 = glm::normalize(toShip2);
-	float dot = glm::dot(toShip2, ship1->look);
-	if (dot < 0)
-	{
-		PrintText("Behind");
-	}
-	else
-	{
-		PrintText("In Front");
-	}
-
-	// Check in the FOV of half 45 degrees	
-	float angle = glm::acos(dot);
-	float halffov = glm::radians(45.0f) / 2.0f;
-	if (angle < halffov)
-	{
-		if (elapsed > timeToFire)
-		{
-			shared_ptr<LazerBeam> lazer = make_shared<LazerBeam>();
-			lazer->position = ship1->position;
-			lazer->look = ship1->look;
-			Attach(lazer);
-			elapsed = 0.0f;
-		}
-		
-		PrintText("In FOV");
-	}
-	else
-	{
-		PrintText("Not in FOV");
-	}
-	elapsed += timeDelta;
-
-
 	Game::Update(timeDelta);
 }
