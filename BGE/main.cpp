@@ -12,6 +12,7 @@
 #include "VRGame.h"
 #include "ModelTest.h"
 #include "SteeringGame.h"
+#include "Lab4.h"
 
 using namespace BGE;
 
@@ -22,8 +23,9 @@ int main(int argc, char *argv[])
 
 	// Uncomment this line to run the Rift/Connect/Physics demo as per 
 	// http://www.youtube.com/watch?v=EEbVHxOkTxw
-	SteeringGame game;
+	//SteeringGame game;
 
+	Lab4 game;
 
 	game.Run();
 

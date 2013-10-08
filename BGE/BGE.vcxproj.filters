@@ -170,6 +170,9 @@
     <ClCompile Include="LazerBeam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lab4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -310,6 +313,7 @@
     <ClInclude Include="LazerBeam.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lab4.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">

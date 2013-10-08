@@ -84,6 +84,7 @@
     <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="FlockingScenario.cpp" />
     <ClCompile Include="IdleState.cpp" />
+    <ClCompile Include="Lab4.cpp" />
     <ClCompile Include="LazerBeam.cpp" />
     <ClCompile Include="ObstacleAvoidanceScenario.cpp" />
     <ClCompile Include="PathFollowingScenario.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="AttackingState.h" />
     <ClInclude Include="FlockingScenario.h" />
     <ClInclude Include="IdleState.h" />
+    <ClInclude Include="Lab4.h" />
     <ClInclude Include="LazerBeam.h" />
     <ClInclude Include="ObstacleAvoidanceScenario.h" />
     <ClInclude Include="PathFollowingScenario.h" />
