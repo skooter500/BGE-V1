@@ -7,7 +7,7 @@ using namespace BGE;
 
 Lab4::Lab4(void)
 {
-	
+	elapsed = 10000;
 }
 
 
