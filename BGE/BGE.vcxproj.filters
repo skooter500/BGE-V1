@@ -378,5 +378,6 @@
     <None Include="Content\flocking.properties">
       <Filter>Content</Filter>
     </None>
+    <None Include="Classes.cd" />
   </ItemGroup>
 </Project>

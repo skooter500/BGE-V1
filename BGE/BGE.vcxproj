@@ -176,6 +176,7 @@
     <ClInclude Include="XBoxController.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Classes.cd" />
     <None Include="Content\CubeShader.fragmentshader" />
     <None Include="Content\CubeShader.vertexshader" />
     <None Include="Content\default.properties" />
