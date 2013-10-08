@@ -27,9 +27,6 @@
     <Filter Include="OVRKill">
       <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenarios">
-      <UniqueIdentifier>{82919e9f-6727-4dac-9428-1308d1d5e346}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States">
       <UniqueIdentifier>{e477bb02-ac64-447a-a4c0-9a1da63c6cf1}</UniqueIdentifier>
     </Filter>
@@ -80,28 +77,13 @@
     <ClCompile Include="MotionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsCamera.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Person.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Exception.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KinematicMotionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Steerable3DController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="FPSController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="FBO.cpp">
@@ -115,12 +97,6 @@
     </ClCompile>
     <ClCompile Include="XBoxController.cpp">
       <Filter>Controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsGame1.cpp">
-      <Filter>Games</Filter>
-    </ClCompile>
-    <ClCompile Include="VRGame.cpp">
-      <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Source Files</Filter>
@@ -142,21 +118,6 @@
     </ClCompile>
     <ClCompile Include="SteeringControler.cpp">
       <Filter>Controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="SteeringGame.cpp">
-      <Filter>Games</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenario.cpp">
-      <Filter>Scenarios</Filter>
-    </ClCompile>
-    <ClCompile Include="FlockingScenario.cpp">
-      <Filter>Scenarios</Filter>
-    </ClCompile>
-    <ClCompile Include="PathFollowingScenario.cpp">
-      <Filter>Scenarios</Filter>
-    </ClCompile>
-    <ClCompile Include="ObstacleAvoidanceScenario.cpp">
-      <Filter>Scenarios</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>States</Filter>
@@ -214,15 +175,6 @@
     <ClInclude Include="Cylinder.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsCamera.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Person.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsFactory.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="MotionState.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -234,12 +186,6 @@
     </ClInclude>
     <ClInclude Include="FPSController.h">
       <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsController.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="KinematicMotionState.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="OVR_Shaders.h">
       <Filter>OVRKill</Filter>
@@ -255,12 +201,6 @@
     </ClInclude>
     <ClInclude Include="XBoxController.h">
       <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsGame1.h">
-      <Filter>Games</Filter>
-    </ClInclude>
-    <ClInclude Include="VRGame.h">
-      <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="dirent.h">
       <Filter>Source Files</Filter>
@@ -286,21 +226,6 @@
     <ClInclude Include="SteeringControler.h">
       <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="SteeringGame.h">
-      <Filter>Games</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenario.h">
-      <Filter>Scenarios</Filter>
-    </ClInclude>
-    <ClInclude Include="FlockingScenario.h">
-      <Filter>Scenarios</Filter>
-    </ClInclude>
-    <ClInclude Include="PathFollowingScenario.h">
-      <Filter>Scenarios</Filter>
-    </ClInclude>
-    <ClInclude Include="ObstacleAvoidanceScenario.h">
-      <Filter>Scenarios</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>States</Filter>
     </ClInclude>
@@ -313,7 +238,9 @@
     <ClInclude Include="LazerBeam.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lab4.h" />
+    <ClInclude Include="Lab4.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
