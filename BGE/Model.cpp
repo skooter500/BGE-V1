@@ -15,6 +15,7 @@ Model::Model():GameComponent()
 	specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	localTransform = glm::mat4(1);
 	worldMode = GameComponent::from_parent; // Get the world transform from my parent
+	textureID = 0;
 }
 
 Model::~Model()
@@ -35,7 +36,24 @@ bool Model::Initialise()
 		return true;
 	}
 
-	programID = Content::LoadShaderPair( "standard_materials");
+	switch (drawMode)
+	{
+	case draw_modes::materials:
+	case draw_modes::single_material:
+		programID = Content::LoadShaderPair( "standard_materials");
+		glGenBuffers(1, &colourbuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, colourbuffer);
+		glBufferData(GL_ARRAY_BUFFER, colours.size() * sizeof(glm::vec3), &colours[0], GL_STATIC_DRAW);
+		break;
+	case draw_modes::textured:
+		programID = Content::LoadShaderPair( "standard_texture");
+		glGenBuffers(1, &texelbuffer); 
+		glBindBuffer(GL_ARRAY_BUFFER, texelbuffer);
+		glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), & uvs[0], GL_STATIC_DRAW);
+		textureID = Content::LoadTexture(textureName);
+		textureSampler  = glGetUniformLocation(programID, "myTextureSampler");
+		break;
+	}
 	
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -57,13 +75,7 @@ bool Model::Initialise()
 	specularID = glGetUniformLocation(programID,"specular");
 	diffuseID = glGetUniformLocation(programID,"diffuse");
 	diffusePerVertexID = glGetUniformLocation(programID,"diffusePerVertex");
-	if (drawMode == draw_modes::materials)
-	{
-		
-		glGenBuffers(1, &colourbuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, colourbuffer);
-		glBufferData(GL_ARRAY_BUFFER, colours.size() * sizeof(glm::vec3), &colours[0], GL_STATIC_DRAW);
-	}
+	
 	CalculateBounds();
 	glUseProgram(0);
 	initialised = true;
@@ -118,20 +130,52 @@ void Model::Draw()
 {	
 	world = world * localTransform;
 	glUseProgram(programID);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
 	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->camera->view[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->camera->projection[0][0]);
 
-	if (drawMode == draw_modes::single_material)
+	switch (drawMode)
 	{
+	case draw_modes::single_material:
 		glUniform3f(diffuseID, diffuse.r, diffuse.g, diffuse.b); 
 		glUniform1i(diffusePerVertexID, false);
-	}
-	else
-	{
+		break;
+	case draw_modes::materials:
 		glUniform1i(diffusePerVertexID, true);
+		// 2nd attribute buffer : colours
+		glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER, colourbuffer);
+		glVertexAttribPointer(
+			2,                                // attribute
+			3,                                // size
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+			);
+		break;
+	case draw_modes::textured:
+		glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER, texelbuffer);
+		glVertexAttribPointer(
+			2,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+			2,                                // size : U+V => 2
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+			);
+		// Bind our texture in Texture Unit 0
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureID);	// Set our "myTextureSampler" sampler to user Texture Unit 0
+		glUniform1i(textureSampler, 0);
+		break;		
 	}
+
 	glUniform3f(specularID, specular.r, specular.g, specular.b);
 	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
 
@@ -164,19 +208,6 @@ void Model::Draw()
 		(void*)0                          // array buffer offset
 	);
 
-	
-	// 2nd attribute buffer : colours
-	glEnableVertexAttribArray(2);
-	glBindBuffer(GL_ARRAY_BUFFER, colourbuffer);
-	glVertexAttribPointer(
-		2,                                // attribute
-		3,                                // size
-		GL_FLOAT,                         // type
-		GL_FALSE,                         // normalized?
-		0,                                // stride
-		(void*)0                          // array buffer offset
-	);
-	
 	// Draw the triangles !
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
