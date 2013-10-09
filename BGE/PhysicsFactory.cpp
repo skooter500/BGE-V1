@@ -171,7 +171,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCameraPhysics()
 	// Now add physics to the camera
 	btCollisionShape * cameraCyl = new btCylinderShape(btVector3(0.5f, 5.0f, 2.5f));
 	cameraCyl->calculateLocalInertia(1, inertia);
-	shared_ptr<PhysicsCamera> physicsCamera (new PhysicsCamera());
+	shared_ptr<PhysicsCamera> physicsCamera = make_shared<PhysicsCamera>(this);
 
 	shared_ptr<Camera> camera = Game::Instance()->camera;
 	camera->Attach(physicsCamera);

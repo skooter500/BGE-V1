@@ -7,12 +7,13 @@
 #include "Utils.h"
 using namespace BGE;
 
-PhysicsCamera::PhysicsCamera():PhysicsController()
+PhysicsCamera::PhysicsCamera(PhysicsFactory * physicsFactory):PhysicsController()
 {
 	elapsed = 10000.0f;
 	fireRate = 5.0f;
 	pickedUp = NULL;
 	tag = "Physics Camera";
+	this->physicsFactory = physicsFactory;
 }
 
 
@@ -37,7 +38,7 @@ void PhysicsCamera::Update(float timeDelta)
 	// WHich is what the one in the base class does...
 
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
-	PhysicsGame1 * game = (PhysicsGame1 * ) Game::Instance();
+	Game * game = Game::Instance();
 
 	float moveSpeed = speed;
 	float timeToPass = 1.0f / fireRate;
@@ -47,7 +48,7 @@ void PhysicsCamera::Update(float timeDelta)
 		glm::vec3 pos = parent->position + (parent->look * 5.0f);
 		glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
 		glm::normalize(q);
-		shared_ptr<PhysicsController> physicsComponent = game->physicsFactory->CreateBox(1,1,1, pos, q);
+		shared_ptr<PhysicsController> physicsComponent = physicsFactory->CreateBox(1,1,1, pos, q);
 		
 		float force = 5000.0f;
 		physicsComponent->rigidBody->applyCentralForce(GLToBtVector(parent->look) * force);
@@ -68,7 +69,7 @@ void PhysicsCamera::Update(float timeDelta)
 			btVector3 rayTo = GLToBtVector(parent->position + (parent->look * dist));
 
 			btCollisionWorld::ClosestRayResultCallback rayCallback(rayFrom, rayTo);
-			game->dynamicsWorld->rayTest(rayFrom, rayTo, rayCallback);
+			physicsFactory->dynamicsWorld->rayTest(rayFrom, rayTo, rayCallback);
 			
 			if (rayCallback.hasHit())
 			{

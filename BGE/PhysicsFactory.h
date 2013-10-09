@@ -10,7 +10,7 @@ namespace BGE
 	class PhysicsFactory
 	{
 	private:
-		btDiscreteDynamicsWorld * dynamicsWorld;
+		
 	public:
 		PhysicsFactory(btDiscreteDynamicsWorld * dynamicsWorld);
 		~PhysicsFactory(void);
@@ -25,5 +25,6 @@ namespace BGE
 		
 		void CreateWall(glm::vec3 startAt, float width, float height, float blockWidth = 5, float blockHeight = 5, float blockDepth = 5);
 		shared_ptr<PhysicsController> CreateRandomObject(glm::vec3 point, glm::quat q);
+		btDiscreteDynamicsWorld * dynamicsWorld;
 	};
 }
