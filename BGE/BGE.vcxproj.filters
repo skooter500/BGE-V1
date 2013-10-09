@@ -34,7 +34,7 @@
       <UniqueIdentifier>{e477bb02-ac64-447a-a4c0-9a1da63c6cf1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Particles">
-      <UniqueIdentifier>{b0184932-94af-459b-8bfc-317342f472cd}</UniqueIdentifier>
+      <UniqueIdentifier>{c07e9a46-b2f8-47c6-b741-32d99a8ccc19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +175,18 @@
     </ClCompile>
     <ClCompile Include="SceneGraphGame.cpp">
       <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="FountainEffect.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffect.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="SnowEffect.cpp">
+      <Filter>Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +330,18 @@
     </ClInclude>
     <ClInclude Include="SceneGraphGame.h">
       <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="FountainEffect.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffect.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SnowEffect.h">
+      <Filter>Particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
