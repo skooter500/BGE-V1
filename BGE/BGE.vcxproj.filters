@@ -5,6 +5,10 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{33720a02-d1b2-4718-aedc-a17fe65ecbf7}</UniqueIdentifier>
     </Filter>
@@ -23,14 +27,14 @@
     <Filter Include="OVRKill">
       <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenarios">
+      <UniqueIdentifier>{82919e9f-6727-4dac-9428-1308d1d5e346}</UniqueIdentifier>
+    </Filter>
     <Filter Include="States">
       <UniqueIdentifier>{e477bb02-ac64-447a-a4c0-9a1da63c6cf1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SteeringScenarios">
-      <UniqueIdentifier>{82919e9f-6727-4dac-9428-1308d1d5e346}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Particles">
-      <UniqueIdentifier>{8a44936f-8cf3-4fc3-b210-6f4d81ed3d8a}</UniqueIdentifier>
+      <UniqueIdentifier>{b0184932-94af-459b-8bfc-317342f472cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -146,16 +150,16 @@
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="Scenario.cpp">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClCompile>
     <ClCompile Include="FlockingScenario.cpp">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClCompile>
     <ClCompile Include="PathFollowingScenario.cpp">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClCompile>
     <ClCompile Include="ObstacleAvoidanceScenario.cpp">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>States</Filter>
@@ -169,20 +173,8 @@
     <ClCompile Include="LazerBeam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleEffect.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="FountainEffect.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="SnowEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KinectFlyingController.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SceneGraphGame.cpp">
+      <Filter>Games</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,16 +293,16 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="Scenario.h">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClInclude>
     <ClInclude Include="FlockingScenario.h">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClInclude>
     <ClInclude Include="PathFollowingScenario.h">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClInclude>
     <ClInclude Include="ObstacleAvoidanceScenario.h">
-      <Filter>SteeringScenarios</Filter>
+      <Filter>Scenarios</Filter>
     </ClInclude>
     <ClInclude Include="State.h">
       <Filter>States</Filter>
@@ -324,17 +316,9 @@
     <ClInclude Include="LazerBeam.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleEffect.h">
-      <Filter>Particles</Filter>
+    <ClInclude Include="SceneGraphGame.h">
+      <Filter>Games</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="FountainEffect.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="SnowEffect.h" />
-    <ClInclude Include="KinectFlyingController.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
@@ -403,11 +387,6 @@
     <None Include="Content\flocking.properties">
       <Filter>Content</Filter>
     </None>
-    <None Include="Content\Particles.fragmentshader">
-      <Filter>Content</Filter>
-    </None>
-    <None Include="Content\Particles.vertexshader">
-      <Filter>Content</Filter>
-    </None>
+    <None Include="Classes.cd" />
   </ItemGroup>
 </Project>
