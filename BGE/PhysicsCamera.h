@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "PhysicsController.h"
 #include <btBulletDynamicsCommon.h>
+#include "PhysicsFactory.h"
 
 namespace BGE
 
@@ -12,7 +13,7 @@ namespace BGE
 	private:
 		PhysicsController * pickedUp;
 	public:
-		PhysicsCamera();
+		PhysicsCamera(PhysicsFactory * physicsFactory);
 		~PhysicsCamera(void);
 
 		//bool Initialise();
@@ -20,6 +21,7 @@ namespace BGE
 
 		void getWorldTransform(btTransform &worldTrans) const;
 		void setWorldTransform(const btTransform &worldTrans);
+		PhysicsFactory * physicsFactory;
 		float elapsed;
 		float fireRate;
 	};

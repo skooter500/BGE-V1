@@ -15,13 +15,15 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
+#include <memory>
 #include "Exception.h"
 
 namespace BGE 
 {
 	float RandomFloat();
 
-	class GameComponent {
+	class GameComponent
+	{
 	private:		
 		void RotateVectors();
 	protected:
