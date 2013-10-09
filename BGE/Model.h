@@ -26,10 +26,14 @@ namespace BGE
 		GLuint ambientID;
 		GLuint specularID;
 		GLuint diffuseID;
+		GLuint uvID;
 		GLuint programID;
 		GLuint diffusePerVertexID;
 		GLuint mID, vID, pID, nID;
 		GLuint mvpID;
+		GLuint texelbuffer;
+		GLuint textureSampler;
+		GLuint textureID;
 
 		void CalculateBounds();
 		void UpdateFromParent();
@@ -42,11 +46,12 @@ namespace BGE
 
 		std::vector<glm::vec3> vertices; 	
 		std::vector<glm::vec3> normals;
-		std::vector<glm::vec3> uvs;
+		std::vector<glm::vec2> uvs;
 		std::vector<glm::vec3> colours;
+		
 		BoundingBox boundingBox;
 		glm::mat4 localTransform;
-
+		string textureName;
 	};
 }
 
