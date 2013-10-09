@@ -170,6 +170,9 @@
     <ClCompile Include="LazerBeam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SceneGraphGame.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -309,6 +312,9 @@
     </ClInclude>
     <ClInclude Include="LazerBeam.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraphGame.h">
+      <Filter>Games</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
