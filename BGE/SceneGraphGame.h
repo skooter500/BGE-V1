@@ -2,6 +2,9 @@
 #include "Game.h"
 #include "PhysicsFactory.h"
 #include <btBulletDynamicsCommon.h>
+#include <vector>
+
+using namespace std;
 
 namespace BGE
 {
@@ -17,7 +20,10 @@ namespace BGE
 
 		// The actual physics solver
 		btSequentialImpulseConstraintSolver * solver;
-
+		glm::vec3 NextPosition(float step, float steps);
+		vector<glm::vec3> waypoints;
+		shared_ptr<GameComponent> selfExample;
+		shared_ptr<GameComponent> station;
 	public:
 		SceneGraphGame(void);
 		~SceneGraphGame(void);
@@ -27,6 +33,7 @@ namespace BGE
 		
 		std::shared_ptr<PhysicsFactory> physicsFactory;
 		btDiscreteDynamicsWorld * dynamicsWorld;
+		
 	};
 }
 

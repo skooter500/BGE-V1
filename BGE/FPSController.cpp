@@ -9,6 +9,11 @@ FPSController::FPSController(void)
 	worldMode = world_modes::to_parent;
 }
 
+bool FPSController::Initialise()
+{
+	UpdateFromParent();
+	return GameComponent::Initialise();
+}
 
 FPSController::~FPSController(void)
 {
