@@ -17,7 +17,11 @@ using namespace std;
 
 namespace BGE
 {
-
+	struct Material
+	{
+		glm::vec3 diffuse;
+		string textureName;
+	};
 	struct RayGeom
 	{
 		glm::vec3 pos;
@@ -55,7 +59,7 @@ namespace BGE
 	void BlendIntoAccumulator(float smoothRate, glm::vec3 newValue, glm::vec3 & smoothedAccumulator);
 
 	glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest);
-	float RandomClamped();
+	float RandomClamped(float min = -1.0f, float max = 1.0f);
 	glm::vec3 RandomPosition(float range);
 
 	bool ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sphere, const glm::vec3 & point, glm::vec3 & intersection);

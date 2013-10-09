@@ -5,6 +5,7 @@
 #include "Steerable3DController.h"
 #include "SteeringControler.h"
 #include "Params.h"
+#include "FountainEffect.h"
 
 using namespace BGE;
 
@@ -121,7 +122,7 @@ bool SceneGraphGame::Initialise()
 
 	// Create some physics components using the factory
 	physicsFactory->CreateBox(5,5,5, NextPosition(current ++, componentCount), glm::quat());
-	physicsFactory->CreateFromModel("monkey", NextPosition(current ++, componentCount), glm::quat(), glm::vec3(5,5,5));
+	physicsFactory->CreateFromModel("monkey", NextPosition(current ++, componentCount), glm::quat(), glm::vec3(2,2,2));
 
 	// Create a physics car
 	physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
@@ -166,7 +167,10 @@ bool SceneGraphGame::Initialise()
 		ship6Controller->route->looped = true;
 	}
 	ship6->Attach(ship6Controller);
-	ship6->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	//ship6->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>();
+	fountain->worldMode = world_modes::from_parent;
+	ship6->Attach(fountain);
 	Attach(ship6);
 
 	return Game::Initialise();

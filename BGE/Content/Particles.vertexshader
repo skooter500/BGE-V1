@@ -1,0 +1,19 @@
+
+<!-- saved from url=(0082)https://raw.github.com/skooter500/BGE/gamecraft/BGE/Content/Particles.vertexshader -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#version 330 core
+
+layout (location = 0) in vec3 v_coord;
+layout (location = 1) in vec4 v_diffuse;
+layout (location = 2) in float point_size;
+
+uniform mat4 m, v, p; 
+out vec4 colour;
+
+void main(){
+ 
+	mat4 VP = p * v;
+	gl_Position = VP * vec4(v_coord,1);
+	colour = v_diffuse;
+	gl_PointSize = point_size;
+
+}</pre></body></html>

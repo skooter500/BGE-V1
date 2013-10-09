@@ -7,8 +7,8 @@ using namespace BGE;
 Sphere::Sphere(float radius)
 {
 	std::shared_ptr<GameComponent> model (Content::LoadModel("sphere"));
+	model->drawMode = Model::draw_modes::single_material;
 	model->Initialise();
-	drawMode = Model::draw_modes::single_material;
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	specular = glm::vec3(1.2f,1.2f, 1.2f);
 	tag = "Sphere";

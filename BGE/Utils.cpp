@@ -6,6 +6,13 @@ using namespace FMOD;
 using namespace OVR;
 using namespace std;
 
+float BGE::RandomClamped(float min, float max)
+{
+	float r = (float)rand()/(float)RAND_MAX;
+	float range = max - min;
+	return max - (r * range); 
+}   
+
 
 FMOD_VECTOR BGE::GLToFMODVector(glm::vec3 v)
 {
@@ -191,12 +198,6 @@ glm::quat BGE::RotationBetweenVectors(glm::vec3 start, glm::vec3 dest)
 		rotationAxis.z * invs
 		);
 }
-
-float BGE::RandomClamped()
-{
-	float r = (float)rand()/(float)RAND_MAX;
-	return 1.0f - (r * 2.0f); 
-}      
 
 glm::vec3 BGE::RandomPosition(float range)
 {

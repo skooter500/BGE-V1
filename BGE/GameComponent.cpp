@@ -64,7 +64,7 @@ void GameComponent::UpdateFromParent()
 		diffuse = parent->diffuse;
 		specular = parent->specular;
 		ambient = parent->ambient;
-		drawMode = parent->drawMode;
+		//drawMode = parent->drawMode;
 	}
 }
 
