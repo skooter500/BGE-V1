@@ -8,7 +8,8 @@ using namespace BGE;
 Box::Box(float width, float height, float depth):GameComponent()
 {
 	shared_ptr<Model> model = Content::LoadModel("cube");
-	drawMode = Model::draw_modes::single_material;
+	model->drawMode = Model::draw_modes::single_material;
+	model->Initialise();
 	diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	specular = glm::vec3(0,0,0);
 	tag = "Box";

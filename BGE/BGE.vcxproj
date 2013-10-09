@@ -83,13 +83,17 @@
   <ItemGroup>
     <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="FlockingScenario.cpp" />
+    <ClCompile Include="FountainEffect.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="LazerBeam.cpp" />
     <ClCompile Include="ObstacleAvoidanceScenario.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="PathFollowingScenario.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="SceneGraphGame.cpp" />
+    <ClCompile Include="SnowEffect.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="SteeringGame.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -131,13 +135,17 @@
   <ItemGroup>
     <ClInclude Include="AttackingState.h" />
     <ClInclude Include="FlockingScenario.h" />
+    <ClInclude Include="FountainEffect.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="LazerBeam.h" />
     <ClInclude Include="ObstacleAvoidanceScenario.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="PathFollowingScenario.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="SceneGraphGame.h" />
+    <ClInclude Include="SnowEffect.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="SteeringGame.h" />
     <ClInclude Include="Utils.h" />
