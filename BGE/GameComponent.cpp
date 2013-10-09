@@ -52,17 +52,20 @@ bool GameComponent::Initialise()
 
 void GameComponent::UpdateFromParent()
 {
-	world = parent->world;
-	scale = parent->scale * scale;
-	position = parent->position;
-	orientation = parent->orientation;
-	look = parent->look;
-	up = parent->up;
-	right = parent->right;
-	diffuse = parent->diffuse;
-	specular = parent->specular;
-	ambient = parent->ambient;
-	drawMode = parent->drawMode;
+	if (parent != nullptr)
+	{
+		world = parent->world;
+		scale = parent->scale;
+		position = parent->position;
+		orientation = parent->orientation;
+		look = parent->look;
+		up = parent->up;
+		right = parent->right;
+		diffuse = parent->diffuse;
+		specular = parent->specular;
+		ambient = parent->ambient;
+		drawMode = parent->drawMode;
+	}
 }
 
 void GameComponent::Draw()
