@@ -3,8 +3,14 @@
 
 using namespace BGE;
 
-FountainEffect::FountainEffect(void)
+FountainEffect::FountainEffect(void):numParticles(1000)
 {
+	
+}
+
+FountainEffect::FountainEffect(int numParticles)
+{
+	this->numParticles = numParticles;
 }
 
 
@@ -14,7 +20,7 @@ FountainEffect::~FountainEffect(void)
 
 bool FountainEffect::Initialise()
 {
-	for (int i = 0 ; i < 1000 ; i ++)
+	for (int i = 0 ; i < numParticles ; i ++)
 	{
 		Particle p;
 		InitParticle(p);
@@ -28,7 +34,7 @@ void FountainEffect::InitParticle(Particle & p)
 	float radius = 0.25f;
 	p.position = position;
 
-	p.velocity = glm::vec3(RandomClamped(-radius, radius), RandomClamped(), RandomClamped(-radius, radius)) * 20.0f;
+	p.velocity = glm::vec3(RandomClamped(-radius, radius), RandomClamped(), RandomClamped(-radius, radius)) * 10.0f;
 	p.velocity.y = glm::abs<float>(p.velocity.y);
 	p.colour = glm::vec4(0,0,RandomClamped(0, 1),1);
 	p.age = 0;
