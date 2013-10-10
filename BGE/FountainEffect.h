@@ -8,12 +8,15 @@ namespace BGE
 	{
 	public:
 		FountainEffect(void);
+		FountainEffect(int numParticles);
 		~FountainEffect(void);
 
 		bool Initialise();
 		void Update(float timeDelta);
 		void InitParticle(Particle & particle);
 		void UpdateParticle(float timeDelta, Particle & particle);
+
+		int numParticles;
 	};
 }
 

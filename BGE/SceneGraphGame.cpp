@@ -6,6 +6,7 @@
 #include "SteeringControler.h"
 #include "Params.h"
 #include "FountainEffect.h"
+#include "Box.h"
 
 using namespace BGE;
 
@@ -70,6 +71,9 @@ bool SceneGraphGame::Initialise()
 	width = 800;
 	height = 600;
 
+	shared_ptr<GameComponent> partFollower = make_shared<GameComponent>();
+	Attach(partFollower);
+
 	// from_self
 	selfExample = make_shared<GameComponent>();
 	selfExample->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
@@ -77,8 +81,8 @@ bool SceneGraphGame::Initialise()
 	selfExample->position = NextPosition(current ++, componentCount);
 	Attach(selfExample);
 
-	// from_self_with_parent
-	// Create a hierarchy
+	//// from_self_with_parent
+	//// Create a hierarchy
 	station = make_shared<GameComponent>();
 	station->worldMode = world_modes::from_self;
 	station->ambient = glm::vec3(0.2f, 0.2, 0.2f);
@@ -121,12 +125,12 @@ bool SceneGraphGame::Initialise()
 	Attach(ship3);
 
 	// Create some physics components using the factory
-	physicsFactory->CreateBox(5,5,5, NextPosition(current ++, componentCount), glm::quat());
-	physicsFactory->CreateFromModel("monkey", NextPosition(current ++, componentCount), glm::quat(), glm::vec3(2,2,2));
+	physicsFactory->CreateBox(5,5,5, NextPosition(current ++, componentCount), glm::quat());	
+	physicsFactory->CreateFromModel("monkey", NextPosition(current ++, componentCount), glm::quat(), glm::vec3(5,5,5));
 
 	// Create a physics car
 	physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
-
+	
 	// Create a physics component and attach a non-physics component to it
 	shared_ptr<PhysicsController> carController = physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
 	carController->Attach(Content::LoadModel("transporter", glm::translate(glm::mat4(1), glm::vec3(0,5,0))));
@@ -149,29 +153,33 @@ bool SceneGraphGame::Initialise()
 	ship4->Attach(Content::LoadModel("krait", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 	Attach(ship4);
 
+	// Load a textured model
+	shared_ptr<GameComponent> mushroom = make_shared<GameComponent>();
+	mushroom->position = NextPosition(current ++, componentCount);
+	mushroom->scale = glm::vec3(0.1f,0.1f,0.1f);
+	mushroom->Attach(Content::LoadModel("mushroom"));
+	Attach(mushroom);
+
 	// Create a component that follows a path from component to component
-	shared_ptr<GameComponent> ship6 = make_shared<GameComponent>();
-	ship6->tag = "Steerable";
-	ship6->scale = glm::vec3(2, 2, 2);
-	shared_ptr<SteeringController> ship6Controller = make_shared<SteeringController>();
-	ship6Controller->position = NextPosition(current ++, componentCount);
-	ship6Controller->TurnOffAll();
-	ship6Controller->TurnOn(SteeringController::behaviour_type::follow_path);
-	ship6Controller->route->diffuse = glm::vec3(0,0,1);
-	ship6Controller->route->draw = true;
+	partFollower->tag = "Steerable";
+	partFollower->scale = glm::vec3(2, 2, 2);
+	shared_ptr<SteeringController> pathFollowerController = make_shared<SteeringController>();
+	pathFollowerController->position = NextPosition(current, componentCount);
+	pathFollowerController->TurnOffAll();
+	pathFollowerController->TurnOn(SteeringController::behaviour_type::follow_path);
+	pathFollowerController->route->diffuse = glm::vec3(0,0,1);
+	pathFollowerController->route->draw = true;
 
 	// Add some waypoints
 	for (int i = 0 ; i < waypoints.size() ; i ++)
 	{
-		ship6Controller->route->waypoints.push_back(waypoints[i]);
-		ship6Controller->route->looped = true;
+		pathFollowerController->route->waypoints.push_back(waypoints[i]);
+		pathFollowerController->route->looped = true;
 	}
-	ship6->Attach(ship6Controller);
-	ship6->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
-	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>();
-	Attach(fountain);
-	//ship6->Attach(fountain);
-	Attach(ship6);
+	partFollower->Attach(pathFollowerController);
+	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(100);
+	fountain->worldMode = world_modes::from_parent;
+	partFollower->Attach(fountain);
 
 	return Game::Initialise();
 }
