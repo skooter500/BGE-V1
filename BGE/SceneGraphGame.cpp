@@ -167,10 +167,10 @@ bool SceneGraphGame::Initialise()
 		ship6Controller->route->looped = true;
 	}
 	ship6->Attach(ship6Controller);
-	//ship6->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	ship6->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
 	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>();
-	fountain->worldMode = world_modes::from_parent;
-	ship6->Attach(fountain);
+	Attach(fountain);
+	//ship6->Attach(fountain);
 	Attach(ship6);
 
 	return Game::Initialise();

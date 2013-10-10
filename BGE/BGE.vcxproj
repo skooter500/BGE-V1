@@ -195,6 +195,8 @@
     <None Include="Content\flocking.properties" />
     <None Include="Content\Lines.fragmentshader" />
     <None Include="Content\Lines.vertexshader" />
+    <None Include="Content\Particles.fragmentshader" />
+    <None Include="Content\Particles.vertexshader" />
     <None Include="Content\SimpleShader.fragmentshader" />
     <None Include="Content\SimpleShader.vertexshader" />
     <None Include="Content\standard_materials.fragmentshader" />

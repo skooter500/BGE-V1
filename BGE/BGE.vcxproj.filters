@@ -412,5 +412,11 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Classes.cd" />
+    <None Include="Content\Particles.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Particles.vertexshader">
+      <Filter>Content</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,6 +1,4 @@
-
-<!-- saved from url=(0084)https://raw.github.com/skooter500/BGE/gamecraft/BGE/Content/Particles.fragmentshader -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#version 330 core
+#version 330 core
  
 uniform sampler2D myTextureSampler;
 
@@ -10,4 +8,4 @@ void main(void)
 {
 	gl_FragColor = texture2D(myTextureSampler, gl_PointCoord) * colour;
 	//gl_FragColor = colour;
-}</pre></body></html>
+}
