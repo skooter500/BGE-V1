@@ -203,7 +203,7 @@ void GameComponent::Yaw(float angle)
 
 	/*
 	glm::mat4 yaw;
-	yaw = glm::rotate(yaw, angle, up); 
+	yaw = glm::rotate(yaw, angle, GameComponent::basisUp); 
 
 	glm::vec4 tlook = glm::vec4(look, 0);
 	tlook = yaw * tlook;

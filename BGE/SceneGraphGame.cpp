@@ -190,7 +190,7 @@ void SceneGraphGame::Update(float timeDelta)
 	dynamicsWorld->stepSimulation(timeDelta,100);
 
 	selfExample->Yaw(timeDelta * speed * speed);
-	//station->Yaw(timeDelta * speed * speed);
+	station->Yaw(timeDelta * speed * speed);
 	Game::Update(timeDelta);
 }
 
