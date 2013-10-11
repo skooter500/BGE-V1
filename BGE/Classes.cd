@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BGE::AttackingState" Collapsed="true">
-    <Position X="0.5" Y="7.75" Width="1.5" />
+    <Position X="16.25" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAIgAAAAAAAAAAAAAAAEQBAAIAAAAAAAAAI=</HashCode>
       <FileName>AttackingState.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Box" Collapsed="true">
-    <Position X="5.25" Y="1.75" Width="1.5" />
+    <Position X="12.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAAYAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Box.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Camera" Collapsed="true">
-    <Position X="12" Y="1.75" Width="1.5" />
+    <Position X="19.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABQCAAAAAAAAAwAAQAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Camera.h</FileName>
@@ -36,7 +36,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Cylinder" Collapsed="true">
-    <Position X="52.5" Y="1.75" Width="1.5" />
+    <Position X="45.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>Cylinder.h</FileName>
@@ -50,16 +50,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::FlockingScenario" Collapsed="true">
-    <Position X="3" Y="4.75" Width="1.5" />
+    <Position X="18.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAgAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FlockingScenario.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::FPSController" Collapsed="true">
-    <Position X="7.5" Y="1.75" Width="1.5" />
+    <Position X="14.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAEA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAQAAEA=</HashCode>
       <FileName>FPSController.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -71,21 +71,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::GameComponent" Collapsed="true">
-    <Position X="28.75" Y="0.5" Width="1.5" />
+    <Position X="23.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAQBMCAEEBAAiwXAACAAIAsCRIAAYQAAgARBAkBggAA=</HashCode>
       <FileName>GameComponent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Ground" Collapsed="true">
-    <Position X="41.25" Y="1.75" Width="1.5" />
+    <Position X="34" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIACEgAAABEQAxQAQAAAABAABQkQABgAAADAAEAAECA=</HashCode>
       <FileName>Ground.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::IdleState" Collapsed="true">
-    <Position X="2.75" Y="7.75" Width="1.5" />
+    <Position X="18.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAgAAAAAAAAgAAAAAAEAAAAIAAEBAAAAAI=</HashCode>
       <FileName>IdleState.h</FileName>
@@ -99,7 +99,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::LazerBeam" Collapsed="true">
-    <Position X="9.75" Y="1.75" Width="1.5" />
+    <Position X="17" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>LazerBeam.h</FileName>
@@ -113,9 +113,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Model" Collapsed="true">
-    <Position X="43.5" Y="1.75" Width="1.5" />
+    <Position X="36.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QYACEgACAAAAAxQACAAAABAQIAkQAAggAAjAAABAEgA=</HashCode>
+      <HashCode>SYACEgAiABAQAxQACAAAABAQIAkQABggAAjAAABAEgA=</HashCode>
       <FileName>Model.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -127,7 +127,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::ObstacleAvoidanceScenario" Collapsed="true">
-    <Position X="0.75" Y="4.75" Width="1.5" />
+    <Position X="16.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAQAAAAAAgAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>ObstacleAvoidanceScenario.h</FileName>
@@ -141,28 +141,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::PathFollowingScenario" Collapsed="true">
-    <Position X="5.25" Y="4.75" Width="1.5" />
+    <Position X="21" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAgASAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PathFollowingScenario.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Person" Collapsed="true">
-    <Position X="30" Y="1.75" Width="1.5" />
+    <Position X="22.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EIQABABAACARAQEgAAAAAAwCAQAAgIAgIAAAAAIAAAA=</HashCode>
       <FileName>Person.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::PhysicsCamera" Collapsed="true">
-    <Position X="45.75" Y="3.25" Width="1.5" />
+    <Position X="38.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAQCAAAAAgIAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <HashCode>CAQCAAAAAgIAAAIAAAQAAAgAAAAAAAAAAAAAAAAAAAE=</HashCode>
       <FileName>PhysicsCamera.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::PhysicsController" Collapsed="true">
-    <Position X="45.75" Y="1.75" Width="1.5" />
+    <Position X="38.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AASIAAAAAAAAAAQAAAAAAAAAAAAAAAAAIAAAAEAEBAA=</HashCode>
       <FileName>PhysicsController.h</FileName>
@@ -183,21 +183,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::RiftController" Collapsed="true">
-    <Position X="32.25" Y="1.75" Width="1.5" />
+    <Position X="25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CIQAgyAAAAABgZECgEgIAAYBAAADEgJAA0AAAAAAIiA=</HashCode>
       <FileName>RiftController.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Route" Collapsed="true">
-    <Position X="36.75" Y="1.75" Width="1.5" />
+    <Position X="29.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAEEIAAAAAASYQAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Route.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Scenario" Collapsed="true">
-    <Position X="3" Y="3.5" Width="1.5" />
+    <Position X="18.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAiAQAAAAAAAAABAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>Scenario.h</FileName>
@@ -211,35 +211,35 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Sphere" Collapsed="true">
-    <Position X="3" Y="1.75" Width="1.5" />
+    <Position X="10.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Sphere.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::State" Collapsed="true">
-    <Position X="1.75" Y="6.5" Width="1.5" />
+    <Position X="17.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAggAAAAAAAAAAAAAAEAAAAIAAABBAAAAA=</HashCode>
       <FileName>State.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::StateMachine" Collapsed="true">
-    <Position X="39" Y="1.75" Width="1.5" />
+    <Position X="31.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQQAIAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>State.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::Steerable3DController" Collapsed="true">
-    <Position X="48" Y="1.75" Width="1.5" />
+    <Position X="40.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIyAACQAAAAAAwAAAAAAAAABAAgAQQQEAAQAAAEIAAE=</HashCode>
       <FileName>Steerable3DController.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::SteeringController" Collapsed="true">
-    <Position X="54.75" Y="1.75" Width="1.5" />
+    <Position X="47.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BoyIBQAAIAAAAQQAKCggAABwATBgCKTAQFAQAgIAAIQ=</HashCode>
       <FileName>SteeringControler.h</FileName>
@@ -267,9 +267,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::VectorDrawer" Collapsed="true">
-    <Position X="34.5" Y="1.75" Width="1.5" />
+    <Position X="27.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAIAIAEAAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAwAAAAAAAAIAIAIAEAAgAAAAAAAAAAA=</HashCode>
       <FileName>VectorDrawer.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -281,7 +281,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BGE::XBoxController" Collapsed="true">
-    <Position X="50.25" Y="1.75" Width="1.5" />
+    <Position X="43" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAQACBAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XBoxController.h</FileName>
