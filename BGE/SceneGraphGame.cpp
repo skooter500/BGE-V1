@@ -179,6 +179,7 @@ bool SceneGraphGame::Initialise()
 	partFollower->Attach(pathFollowerController);
 	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(100);
 	fountain->worldMode = world_modes::from_parent;
+	
 	partFollower->Attach(fountain);
 
 	return Game::Initialise();
@@ -189,7 +190,7 @@ void SceneGraphGame::Update(float timeDelta)
 	dynamicsWorld->stepSimulation(timeDelta,100);
 
 	selfExample->Yaw(timeDelta * speed * speed);
-	station->Yaw(timeDelta * speed * speed);
+	//station->Yaw(timeDelta * speed * speed);
 	Game::Update(timeDelta);
 }
 
