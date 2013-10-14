@@ -36,6 +36,9 @@
     <Filter Include="Particles">
       <UniqueIdentifier>{61bc13fa-b49b-4bf6-8dce-6afe521f52a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Labs">
+      <UniqueIdentifier>{f09f20fd-b65f-4670-9e98-ec489fae4c53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
