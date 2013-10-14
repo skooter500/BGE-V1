@@ -38,28 +38,29 @@ bool Lab5::Initialise()
 	width = 800;
 	height = 600;
 
-	// make a circle of fountains
-	
-	
+	// 500 in the constructor indicates the number of particles in the effect. 
+	// You may need to compile in release mode or reduce the number of particles to get an acceptable framerate
+	shared_ptr<FountainEffect> centFountain = make_shared<FountainEffect>(500);
+	centFountain->position.x = centFountain->position.y = 0;
+	centFountain->position.y = FOUNTAIN_HEIGHT;
+	centFountain->diffuse = glm::vec3(1,1,0);
+	Attach(centFountain);
+
+	// make a circle of fountains		
 	fountainTheta = 0.0f; 
 	for (int i = 0 ; i < NUM_FOUNTAINS ; i ++)
 	{
-		fountainTheta = ((glm::pi<float>() * 2.0f) / NUM_FOUNTAINS) * i;
-		shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(500);
-		if (i % 2 == 0)
-		{
-			fountain->diffuse = glm::vec3(1,0,0);
-		}
-		else
-		{
-			fountain->diffuse = glm::vec3(0,1,0);
-		}
-		
-		fountain->position.x = glm::sin(fountainTheta) * FOUNTAIN_RADIUS;
-		fountain->position.z = - glm::cos(fountainTheta) * FOUNTAIN_RADIUS;
-		fountain->position.y = FOUNTAIN_HEIGHT;
-		fountains.push_back(fountain);
-		Attach(fountain);
+		// PART 2 of the lab
+		// Do something in here to create the circle of fountains.
+		// Check the header file for the following defines you can use:
+		// NUM_FOUNTAINS - The total number of fountains to create
+		// FOUNTAIN_RADIUS - The radius around which to place the fountains. 
+		// FOUNTAIN_HEIGHT - The initial Y value for the fountains
+		// When you create the fountain attach it to the scene
+		// And also add it to the fountains vector (member of the class)
+		// Se we can use it later in the Update
+		// You can set the colour using the "diffuse" member		
+		// Hint! Consider how we can use the Unit Circle to calculate the X and Y positions on circle
 	}
 	fountainTheta = 0.0f;
 	Game::Initialise();
@@ -88,34 +89,22 @@ void Lab5::Update(float timeDelta)
 		ship2->Yaw(-timeDelta * speed * speed);
 	}
 	
+	//Part 2
 	for (int i = 0 ; i < fountains.size() ; i ++)
-	{
-		if (i % 2 == 0)
-		{
-			fountains[i]->position.y = FOUNTAIN_HEIGHT + (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
-		}
-		else
-		{
-			fountains[i]->position.y = FOUNTAIN_HEIGHT - (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
-		}
-		
+	{		
+		// 	Update the fountain Y in here
 	}
 	fountainTheta += timeDelta;
-	if (fountainTheta >= glm::pi<float>() * 2.0f)
-	{
-		fountainTheta = 0.0f;
-	}
+	// Put code here to check to see if fountainTheta goes above 2 PI and if so reset to 0
+	// End Part 2
 
 	Game::Update(timeDelta);
 
-	float theta = 0.0f;
-	glm::vec3 toShip2 = ship2->position - ship1->position;
-	toShip2 = glm::normalize(toShip2);
-	theta = glm::acos(glm::dot(GameComponent::basisLook, toShip2));
-	if (toShip2.x > 0)
-	{
-		theta = - theta;
-	}
 
-	ship1->world = glm::translate(glm::mat4(1), ship1->position) * glm::rotate(glm::mat4(1), glm::degrees(theta), glm::vec3(0,1,0));
+	// Part 1
+	float theta = 0.0f;
+	// Calculate theta
+	// Make a rotation matrix, include it in the world transform of ship 1
+	ship1->world = glm::translate(glm::mat4(1), ship1->position);
+	// End Part 1
 }
