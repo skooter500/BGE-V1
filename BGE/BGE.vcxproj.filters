@@ -191,6 +191,9 @@
     <ClCompile Include="SnowEffect.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="Lab4.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -345,6 +348,9 @@
     </ClInclude>
     <ClInclude Include="SnowEffect.h">
       <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab4.h">
+      <Filter>Labs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
