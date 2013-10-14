@@ -12,7 +12,6 @@ using namespace std;
 Camera::Camera(void):GameComponent()
 {
 	projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);		
-	projection = glm::ortho(0.0f,800.0f, 400.0f, 0.0f, 0.1f, 10000.0f);		
 
 	worldMode = world_modes::from_child;
 }
