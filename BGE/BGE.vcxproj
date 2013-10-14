@@ -85,6 +85,7 @@
     <ClCompile Include="FlockingScenario.cpp" />
     <ClCompile Include="FountainEffect.cpp" />
     <ClCompile Include="IdleState.cpp" />
+    <ClCompile Include="Lab4.cpp" />
     <ClCompile Include="LazerBeam.cpp" />
     <ClCompile Include="ObstacleAvoidanceScenario.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="FlockingScenario.h" />
     <ClInclude Include="FountainEffect.h" />
     <ClInclude Include="IdleState.h" />
+    <ClInclude Include="Lab4.h" />
     <ClInclude Include="LazerBeam.h" />
     <ClInclude Include="ObstacleAvoidanceScenario.h" />
     <ClInclude Include="Particle.h" />
