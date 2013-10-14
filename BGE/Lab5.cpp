@@ -38,6 +38,14 @@ bool Lab5::Initialise()
 	width = 800;
 	height = 600;
 
+	// 500 in the constructor indicates the number of particles in the effect. 
+	// You may need to compile in release mode or reduce the number of particles to get an acceptable framerate
+	shared_ptr<FountainEffect> centFountain = make_shared<FountainEffect>(500);
+	centFountain->position.x = centFountain->position.y = 0;
+	centFountain->position.y = FOUNTAIN_HEIGHT;
+	centFountain->diffuse = glm::vec3(1,1,0);
+	Attach(centFountain);
+
 	// make a circle of fountains
 	
 	
