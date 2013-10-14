@@ -67,7 +67,7 @@ void BGE::ParticleEffect::Update( float timeDelta )
 			{
 				// The system remains alive so long as at least one of its particles is alive;
 				alive = true;
-				colours.push_back(it->colour);
+				colours.push_back(it->diffuse);
 				vertices.push_back(it->position);
 				sizes.push_back(it->size);
 			}			
@@ -81,8 +81,6 @@ void ParticleEffect::Draw()
 {
 	if (vertices.size() > 0)
 	{
-		Game::Instance()->PrintVector("Particle Position 0", vertices[0]);
-		Game::Instance()->PrintFloat("Vertices size: ", vertices.size());
 		glUseProgram(programID);
 
 		//Bind our texture in Texture Unit 0

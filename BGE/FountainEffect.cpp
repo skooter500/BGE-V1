@@ -11,6 +11,7 @@ FountainEffect::FountainEffect(void):numParticles(1000)
 FountainEffect::FountainEffect(int numParticles)
 {
 	this->numParticles = numParticles;
+	diffuse = glm::vec3(0,0,1);
 }
 
 
@@ -36,7 +37,9 @@ void FountainEffect::InitParticle(Particle & p)
 
 	p.velocity = glm::vec3(RandomClamped(-radius, radius), RandomClamped(), RandomClamped(-radius, radius)) * 10.0f;
 	p.velocity.y = glm::abs<float>(p.velocity.y);
-	p.colour = glm::vec4(0,0,RandomClamped(0, 1),1);
+	p.diffuse.r = diffuse.r * RandomClamped(0, 1);
+	p.diffuse.g = diffuse.g * RandomClamped(0, 1);
+	p.diffuse.b = diffuse.b * RandomClamped(0, 1);
 	p.age = 0;
 	p.alive = true;
 	p.size = RandomClamped(10, 50);
@@ -53,7 +56,7 @@ void FountainEffect::UpdateParticle(float timeDelta, Particle & p)
 	// Fade the alpha as we approach the ground
 	float fadeHeight = 5;
 	
-	p.colour.a = glm::clamp<float>(p.position.y / fadeHeight, 0.0f, 1.0f);
+	p.diffuse.a = glm::clamp<float>(p.position.y / fadeHeight, 0.0f, 1.0f);
 	if (p.position.y < 0)
 	{
 		InitParticle(p);

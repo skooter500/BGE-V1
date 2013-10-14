@@ -32,7 +32,7 @@ void SnowEffect::InitParticle(Particle & p)
 	p.position = glm::vec3(RandomClamped(-range, range), range, RandomClamped(-range, range));
 
 	p.velocity = glm::vec3(RandomClamped(-radius, radius), RandomClamped(- radius, -radius * 5.0f), RandomClamped(-radius, radius));
-	p.colour = glm::vec4(1,1,1,1);
+	p.diffuse = glm::vec4(1,1,1,1);
 	p.age = 0;
 	p.alive = true;
 	p.size = RandomClamped(10, 20);
@@ -49,7 +49,7 @@ void SnowEffect::UpdateParticle(float timeDelta, Particle & p)
 	// Fade the alpha as we approach the ground
 	float fadeHeight = 20;
 
-	p.colour.a = glm::clamp<float>(p.position.y / fadeHeight, 0.0f, 1.0f);
+	p.diffuse.a = glm::clamp<float>(p.position.y / fadeHeight, 0.0f, 1.0f);
 	if (p.position.y < 0)
 	{
 		InitParticle(p);

@@ -13,13 +13,14 @@
 #include "ModelTest.h"
 #include "SteeringGame.h"
 #include "SceneGraphGame.h"
+#include "Lab5.h"
 
 using namespace BGE;
 
 int main(int argc, char *argv[])
 {
 	
-	SceneGraphGame game;
+	Lab5 game;
 
 	// Uncomment this line to run the Rift/Connect/Physics demo as per 
 	// http://www.youtube.com/watch?v=EEbVHxOkTxw
