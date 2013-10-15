@@ -6,7 +6,6 @@
 #include "Cylinder.h"
 #include "Steerable3DController.h"
 #include "Ground.h"
-#include "Person.h"
 #include "Content.h"
 #include <btBulletDynamicsCommon.h>
 #include <gtc/quaternion.hpp>
@@ -53,9 +52,7 @@ bool PhysicsGame1::Initialise()
 
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
-	shared_ptr<Person> person = make_shared<Person>();
-	Attach(person);
-
+	
 	physicsFactory->CreateWall(glm::vec3(-20,0,20), 5, 5);
 	// Now some constraints
 	shared_ptr<PhysicsController> box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 0), glm::quat()); 

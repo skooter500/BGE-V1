@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,7 +77,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -117,7 +117,6 @@
     <ClCompile Include="ModelTest.cpp" />
     <ClCompile Include="MotionState.cpp" />
     <ClCompile Include="Params.cpp" />
-    <ClCompile Include="Person.cpp" />
     <ClCompile Include="PhysicsCamera.cpp" />
     <ClCompile Include="PhysicsFactory.cpp" />
     <ClCompile Include="PhysicsGame1.cpp" />
@@ -131,7 +130,6 @@
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="VectorDrawer.cpp" />
-    <ClCompile Include="VRGame.cpp" />
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,7 +170,6 @@
     <ClInclude Include="MotionState.h" />
     <ClInclude Include="OVR_Shaders.h" />
     <ClInclude Include="Params.h" />
-    <ClInclude Include="Person.h" />
     <ClInclude Include="PhysicsCamera.h" />
     <ClInclude Include="PhysicsFactory.h" />
     <ClInclude Include="PhysicsGame1.h" />
@@ -186,7 +183,6 @@
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="VectorDrawer.h" />
-    <ClInclude Include="VRGame.h" />
     <ClInclude Include="XBoxController.h" />
   </ItemGroup>
   <ItemGroup>
