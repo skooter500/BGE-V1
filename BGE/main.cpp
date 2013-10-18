@@ -15,6 +15,7 @@
 #include "SceneGraphGame.h"
 #include "Lab5.h"
 #include "Lab4.h"
+#include "Buddha.h"
 
 using namespace BGE;
 
@@ -25,7 +26,7 @@ int main(int argc, char *argv[])
 
 	// Uncomment this line to run the Rift/Connect/Physics demo as per 
 	// http://www.youtube.com/watch?v=EEbVHxOkTxw
-	Lab5 game;
+	Buddha game;
 
 
 	game.Run();
