@@ -163,10 +163,7 @@ void GameComponent::Fly(float units)
 
 void GameComponent::Pitch(float angle)
 {
-	// See http://math.stackexchange.com/questions/90081/quaternion-distance
-	
-	
-	
+
 	float invcosTheta1 = glm::dot(look, basisUp);
 	float threshold = 0.95f;
 	if ((angle < 0 && invcosTheta1 < (-threshold)) || (angle > 0 && invcosTheta1 > (threshold)))
@@ -226,6 +223,10 @@ void GameComponent::RotateVectors()
 
 void GameComponent::Roll(float angle)
 {
+	// A roll is a rotation around the look vector
+	glm::quat rot = glm::angleAxis(angle, look);
+
+	orientation = rot * orientation;
 	moved = true;
 }
 
