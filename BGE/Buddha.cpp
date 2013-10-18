@@ -66,6 +66,13 @@ bool Buddha::Initialise()
 	buddha->diffuse = glm::vec3(1.2f, 1.2f, 1.2f);
 	Attach(buddha);
 
+	shared_ptr<GameComponent> skySphere = make_shared<GameComponent>();
+	skySphere->drawMode = GameComponent::draw_modes::textured;
+	skySphere->Attach(Content::LoadModel("skysphere"));
+	skySphere->diffuse = glm::vec3(1,1,1);
+	skySphere->position = glm::vec3(0, 0, 0);
+	Attach(skySphere);
+
 	Game::Initialise();
 
 	camera->GetController()->position = glm::vec3(0, 4, 30);
