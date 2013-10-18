@@ -24,13 +24,12 @@ bool Lab5::Initialise()
 	ship1 = make_shared<GameComponent>();
 	ship1->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	ship1->position = glm::vec3(-10, 2, -10);
+	ship1->Attach(make_shared<VectorDrawer>());
 	Attach(ship1);
 
-	ship2 = make_shared<GameComponent>();
-	ship2->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
-	ship2->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
-	ship2->position = glm::vec3(10, 2, -10);
-	Attach(ship2);
+	
+	//ship2->drawMode = GameComponent::single_material;
+
 
 
 	riftEnabled = false;
@@ -44,6 +43,7 @@ bool Lab5::Initialise()
 	centFountain->position.x = centFountain->position.y = 0;
 	centFountain->position.y = FOUNTAIN_HEIGHT;
 	centFountain->diffuse = glm::vec3(1,1,0);
+
 	Attach(centFountain);
 
 	// make a circle of fountains
@@ -70,6 +70,17 @@ bool Lab5::Initialise()
 		Attach(fountain);
 	}
 	fountainTheta = 0.0f;
+	
+	ship2 = make_shared<GameComponent>();
+	ship2->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
+	ship2->Attach(make_shared<VectorDrawer>());
+	ship2->diffuse= glm::vec3(1.0f,0.0f,0.0f);
+	ship2->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+
+	ship2->position = glm::vec3(10, 2, -10);
+	Attach(ship2);
+
+
 	Game::Initialise();
 
 	camera->GetController()->position = glm::vec3(0, 4, 20);
