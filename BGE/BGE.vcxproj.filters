@@ -198,7 +198,7 @@
       <Filter>Labs</Filter>
     </ClCompile>
     <ClCompile Include="Buddha.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Games</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -361,7 +361,9 @@
     <ClInclude Include="Lab5.h">
       <Filter>Labs</Filter>
     </ClInclude>
-    <ClInclude Include="Buddha.h" />
+    <ClInclude Include="Buddha.h">
+      <Filter>Games</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
