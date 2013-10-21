@@ -88,9 +88,7 @@ void ParticleEffect::Draw()
 		glBindTexture(GL_TEXTURE_2D, textureID);	// Set our "myTextureSampler" sampler to user Texture Unit 0
 		glUniform1i(textureSampler, 0);
 
-		glEnable(GL_BLEND);
-		glDisable(GL_DEPTH_TEST);
-	
+		glEnable(GL_BLEND);	
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
 		glEnable(GL_POINT_SPRITE);
@@ -154,9 +152,7 @@ void ParticleEffect::Draw()
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 		glUseProgram(0);
-		glEnable(GL_DEPTH_TEST);
-		// Accept fragment if it closer to the camera than the former one
-		glDepthFunc(GL_LESS);
+
 
 		colours.clear();
 		vertices.clear();

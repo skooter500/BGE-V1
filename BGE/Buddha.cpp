@@ -9,6 +9,8 @@ using namespace BGE;
 Buddha::Buddha(void)
 {
 	elapsed = 10000;
+	riftEnabled = false;
+	fullscreen = false;
 }
 
 
@@ -19,12 +21,12 @@ Buddha::~Buddha(void)
 bool Buddha::Initialise()
 {	
 	
-
+	soundSystem->PlaySound("Buddha", glm::vec3(0,0,0));
 	riftEnabled = false;
-	fullscreen = false;
-	width = 800;
+	fullscreen = true;
+	/*width = 800;
 	height = 600;
-
+*/
 	// 500 in the constructor indicates the number of particles in the effect. 
 	// You may need to compile in release mode or reduce the number of particles to get an acceptable framerate
 	//shared_ptr<FountainEffect> centFountain = make_shared<FountainEffect>(500);
@@ -36,6 +38,22 @@ bool Buddha::Initialise()
 
 	// make a circle of fountains
 
+	buddha = make_shared<GameComponent>();
+	buddha->Attach(Content::LoadModel("buddha"));
+	buddha->position = glm::vec3(0,0,0);
+	buddha->scale = glm::vec3(10,10,10);
+	buddha->diffuse = glm::vec3(1.2f, 1.2f, 1.2f);
+	Attach(buddha);
+
+	buddhaFountain0 = make_shared<FountainEffect>(500);
+	buddhaFountain0->position = glm::vec3(-30, 0, 0);
+	buddhaFountain0->diffuse = glm::vec3(1,1, 0);
+	Attach(buddhaFountain0);
+
+	buddhaFountain1 = make_shared<FountainEffect>(500);
+	buddhaFountain1->position = glm::vec3(-30, 50, 0);
+	buddhaFountain1->diffuse = glm::vec3(1,1, 0);
+	Attach(buddhaFountain1);
 
 	fountainTheta = 0.0f; 
 	for (int i = 0 ; i < NUM_FOUNTAINS ; i ++)
@@ -59,25 +77,16 @@ bool Buddha::Initialise()
 	}
 	fountainTheta = 0.0f;
 
-	buddha = make_shared<GameComponent>();
-	buddha->Attach(Content::LoadModel("buddha"));
-	buddha->position = glm::vec3(0,0,0);
-	buddha->scale = glm::vec3(10,10,10);
-	buddha->diffuse = glm::vec3(1.2f, 1.2f, 1.2f);
-	Attach(buddha);
-
-	shared_ptr<GameComponent> skySphere = make_shared<GameComponent>();
-	skySphere->drawMode = GameComponent::draw_modes::textured;
-	skySphere->Attach(Content::LoadModel("skysphere"));
-	skySphere->diffuse = glm::vec3(1,1,1);
-	skySphere->position = glm::vec3(0, 0, 0);
-	Attach(skySphere);
+	hud = false;
+	
 
 	Game::Initialise();
 
-	camera->GetController()->position = glm::vec3(0, 4, 30);
+	camera->GetController()->position = glm::vec3(0, 4, 80);
 	return true;
 }
+
+float ySpeed = 5.0f;
 
 void Buddha::Update(float timeDelta)
 {		
@@ -91,13 +100,45 @@ void Buddha::Update(float timeDelta)
 		{
 			fountains[i]->position.y = FOUNTAIN_HEIGHT - (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
 		}
-
 	}
+	float scale = 30.0f + (glm::sin(fountainTheta) / 3.0f);
+	buddha->scale = glm::vec3(scale, scale, scale);
 	fountainTheta += timeDelta;
 	if (fountainTheta >= glm::pi<float>() * 2.0f)
 	{
 		fountainTheta = 0.0f;
 	}
+
+	buddhaFountain0->position.x = glm::sin(fountainTheta) * 30;
+	buddhaFountain0->position.z = - glm::cos(fountainTheta) * 30;
+	buddhaFountain0->position.y -= timeDelta * ySpeed;
+	if (buddhaFountain0->position.y > 50)
+	{
+		ySpeed = -ySpeed;
+		buddhaFountain0->position.y = 50;
+	}
+
+	if (buddhaFountain0->position.y < 0)
+	{
+		ySpeed = -ySpeed;
+		buddhaFountain0->position.y = 0;
+	}
+
+	buddhaFountain1->position.x = glm::sin(fountainTheta) * -30;
+	buddhaFountain1->position.z = glm::cos(fountainTheta) * 30;
+	buddhaFountain1->position.y += timeDelta * ySpeed;
+	if (buddhaFountain1->position.y > 50)
+	{
+		ySpeed = -ySpeed;
+		buddhaFountain1->position.y = 50;
+	}
+
+	if (buddhaFountain1->position.y < 0)
+	{
+		ySpeed = -ySpeed;
+		buddhaFountain1->position.y = 0;
+	}
+
 
 	Game::Update(timeDelta);
 }
