@@ -89,9 +89,6 @@
     <ClCompile Include="PhysicsCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Person.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -123,9 +120,6 @@
       <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsGame1.cpp">
-      <Filter>Games</Filter>
-    </ClCompile>
-    <ClCompile Include="VRGame.cpp">
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
@@ -200,6 +194,9 @@
     <ClCompile Include="Buddha.cpp">
       <Filter>Games</Filter>
     </ClCompile>
+    <ClCompile Include="Lab6.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -244,9 +241,6 @@
     <ClInclude Include="PhysicsCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsFactory.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -284,9 +278,6 @@
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsGame1.h">
-      <Filter>Games</Filter>
-    </ClInclude>
-    <ClInclude Include="VRGame.h">
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="dirent.h">
@@ -363,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="Buddha.h">
       <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab6.h">
+      <Filter>Labs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
