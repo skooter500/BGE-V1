@@ -34,25 +34,14 @@ bool Lab6::Initialise()
 
 	// make a circle of fountains
 
-	// Create a gamecomponent and attach the Buddha model
+	// Create a GameComponent and attach the Buddha model
 	// Look at Lab5 for an example of how to do this
-	buddha = make_shared<GameComponent>();
-	buddha->Attach(Content::LoadModel("buddha"));
-	buddha->position = glm::vec3(0,0,0);
-	buddha->scale = glm::vec3(10,10,10);
-	buddha->diffuse = glm::vec3(1.2f, 1.2f, 1.2f);
-	Attach(buddha);
+	// Use the buddha member variable to hold the GameComponent	
+	// Set the scale to be 10, 10,10
 
-	buddhaFountain0 = make_shared<FountainEffect>(500);
-	buddhaFountain0->position = glm::vec3(-30, 0, 0);
-	buddhaFountain0->diffuse = glm::vec3(1,1, 0);
-	Attach(buddhaFountain0);
-
-	buddhaFountain1 = make_shared<FountainEffect>(500);
-	buddhaFountain1->position = glm::vec3(-30, 50, 0);
-	buddhaFountain1->diffuse = glm::vec3(1,1, 0);
-	Attach(buddhaFountain1);
-
+	// Now create buddhaFountain0 and buddha fountain 1
+	// You can control the colour by changing the diffuse member
+	
 	fountainTheta = 0.0f; 
 	for (int i = 0 ; i < NUM_FOUNTAINS ; i ++)
 	{
@@ -99,43 +88,19 @@ void Lab6::Update(float timeDelta)
 			fountains[i]->position.y = FOUNTAIN_HEIGHT - (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
 		}
 	}
-	float scale = 30.0f + (glm::sin(fountainTheta) / 3.0f);
-	buddha->scale = glm::vec3(scale, scale, scale);
-	fountainTheta += timeDelta;
+
+	// Play with the scale using the sin function until you achieve the effect of Buddha breathing
+
+	
+	//
 	if (fountainTheta >= glm::pi<float>() * 2.0f)
 	{
 		fountainTheta = 0.0f;
 	}
 
-	buddhaFountain0->position.x = glm::sin(fountainTheta) * 30;
-	buddhaFountain0->position.z = - glm::cos(fountainTheta) * 30;
-	buddhaFountain0->position.y -= timeDelta * ySpeed;
-	if (buddhaFountain0->position.y > 50)
-	{
-		ySpeed = -ySpeed;
-		buddhaFountain0->position.y = 50;
-	}
-
-	if (buddhaFountain0->position.y < 0)
-	{
-		ySpeed = -ySpeed;
-		buddhaFountain0->position.y = 0;
-	}
-
-	buddhaFountain1->position.x = glm::sin(fountainTheta) * -30;
-	buddhaFountain1->position.z = glm::cos(fountainTheta) * 30;
-	buddhaFountain1->position.y += timeDelta * ySpeed;
-	if (buddhaFountain1->position.y > 50)
-	{
-		ySpeed = -ySpeed;
-		buddhaFountain1->position.y = 50;
-	}
-
-	if (buddhaFountain1->position.y < 0)
-	{
-		ySpeed = -ySpeed;
-		buddhaFountain1->position.y = 0;
-	}
+	// Update buddhaFountan0 and buddhaFountain1 so that they follow a circle around the outside the Buddha (use sin & cos)
+	// buddhaFountan0 needs to go upwards and buddhaFountan1 needs to go downwards
+	// When they reach the top or bottom they should reverse direction
 
 
 	Game::Update(timeDelta);
