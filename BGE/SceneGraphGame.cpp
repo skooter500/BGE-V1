@@ -56,7 +56,7 @@ bool SceneGraphGame::Initialise()
 	broadphase = new btAxisSweep3(worldMin,worldMax);
 	solver = new btSequentialImpulseConstraintSolver();
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0,0,0));
+	dynamicsWorld->setGravity(btVector3(0,-9,0));
 
 	camera->position = glm::vec3(0,10,0);
 	camera->look = glm::vec3(0, 0, 1);
