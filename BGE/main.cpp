@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 
 	// Uncomment this line to run the Rift/Connect/Physics demo as per 
 	// http://www.youtube.com/watch?v=EEbVHxOkTxw
-	SteeringGame game;
+	PhysicsGame1 game;
 
 
 	game.Run();
