@@ -36,6 +36,7 @@ std::shared_ptr<GameComponent> station;
 
 bool PhysicsGame1::Initialise() 
 {
+	riftEnabled = false;
 	// Set up the collision configuration and dispatcher
     collisionConfiguration = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collisionConfiguration);
@@ -53,7 +54,7 @@ bool PhysicsGame1::Initialise()
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
 	
-	physicsFactory->CreateWall(glm::vec3(-20,0,20), 5, 5);
+	physicsFactory->CreateWall(glm::vec3(-20,0,20), 50, 10);
 	// Now some constraints
 	shared_ptr<PhysicsController> box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 0), glm::quat()); 
 	shared_ptr<PhysicsController> box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 5), glm::quat()); 
@@ -102,10 +103,14 @@ bool PhysicsGame1::Initialise()
 	ship1->position = glm::vec3(0, 0, -10);
 	station->Attach(ship1);
 
+	
 	physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
 	if (!Game::Initialise()) {
 		return false;
 	}
+
+	camera->GetController()->position = glm::vec3(0,10, 0);
+
 
 	return true;
 }

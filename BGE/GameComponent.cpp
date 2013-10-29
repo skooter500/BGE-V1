@@ -163,7 +163,6 @@ void GameComponent::Fly(float units)
 
 void GameComponent::Pitch(float angle)
 {
-
 	float invcosTheta1 = glm::dot(look, basisUp);
 	float threshold = 0.95f;
 	if ((angle < 0 && invcosTheta1 < (-threshold)) || (angle > 0 && invcosTheta1 > (threshold)))
@@ -194,7 +193,7 @@ void GameComponent::Pitch(float angle)
 void GameComponent::Yaw(float angle)
 {
 	// A yaw is a rotation around the global up vector
-	glm::quat rot = glm::angleAxis(angle, GameComponent::basisUp);
+	glm::quat rot = glm::angleAxis(angle, up);
 
 	orientation = rot * orientation;
 
