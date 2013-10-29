@@ -80,41 +80,9 @@ void Lab7::Update(float timeDelta)
 		ship2->Fly(-timeDelta * speed);
 	}
 
-	if (keyState[SDL_SCANCODE_SPACE] && ! slerping)
-	{
-		slerping = true;
-		fromQuaternion = ship1->orientation;
-
-		glm::vec3 toShip2 = ship2->position - ship1->position;
-		toShip2 = glm::normalize(toShip2);
-		glm::vec3 axis = glm::cross(GameComponent::basisLook, toShip2);
-		axis = glm::normalize(axis);
-		float theta = glm::acos(glm::dot(toShip2, GameComponent::basisLook));
-		toQuaternion = glm::angleAxis(glm::degrees(theta), axis);
-	}
-
-	if (slerping)
-	{
-		ship1->orientation = glm::mix(fromQuaternion, toQuaternion, t);
-		t += timeDelta;
-		if (t > 1.0f)
-		{
-			t = 0.0f;
-			slerping = false;
-		}
-	}
-
-
 	// Put code for ship1 here!!!
-	/*
-	// Solution to part 1
-	glm::vec3 toShip2 = ship2->position - ship1->position;
-	toShip2 = glm::normalize(toShip2);
-	glm::vec3 axis = glm::cross(GameComponent::basisLook, toShip2);
-	axis = glm::normalize(axis);
-	float theta = glm::acos(glm::dot(toShip2, GameComponent::basisLook));
-	ship1->orientation = glm::angleAxis(glm::degrees(theta), axis);
-	*/
+
+
 	// End code for ship 1	
 	Game::Update(timeDelta);
 
