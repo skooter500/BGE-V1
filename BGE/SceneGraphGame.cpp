@@ -56,7 +56,7 @@ bool SceneGraphGame::Initialise()
 	broadphase = new btAxisSweep3(worldMin,worldMax);
 	solver = new btSequentialImpulseConstraintSolver();
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0,-9,0));
+	dynamicsWorld->setGravity(btVector3(0,0,0));
 
 	camera->position = glm::vec3(0,10,0);
 	camera->look = glm::vec3(0, 0, 1);
@@ -87,7 +87,7 @@ bool SceneGraphGame::Initialise()
 	station->worldMode = world_modes::from_self;
 	station->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	station->specular = glm::vec3(0,0,0);
-	station->scale = glm::vec3(1,1,1);
+	station->scale = glm::vec3(1,5,1);
 	std::shared_ptr<Model> cmodel = Content::LoadModel("coriolis", glm::rotate(glm::mat4(1), 90.0f, GameComponent::basisUp));	
 	station->Attach(cmodel);
 	station->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
@@ -178,6 +178,7 @@ bool SceneGraphGame::Initialise()
 	}
 	partFollower->Attach(pathFollowerController);
 	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(100);
+	partFollower->diffuse = glm::vec3(0,1,1);
 	fountain->worldMode = world_modes::from_parent;
 	
 	partFollower->Attach(fountain);

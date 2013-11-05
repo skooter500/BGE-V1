@@ -105,6 +105,7 @@ void GameComponent::Update(float timeDelta) {
 	
 	switch (worldMode)
 	{
+		
 		case world_modes::from_self:
 			world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
 			break;
