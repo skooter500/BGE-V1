@@ -45,8 +45,9 @@ bool Lab8::Initialise()
 
 void Lab8::Update(float timeDelta)
 {	
-	// Movement of ship2
+	// Forces on ship1
 	float newtons = 10.0f;
+	float epsilon = glm::epsilon<float>();
 	if (keyState[SDL_SCANCODE_UP])
 	{
 		force += ship1->look * newtons;
@@ -64,21 +65,27 @@ void Lab8::Update(float timeDelta)
 		force += ship1->right * newtons;
 	}
 
+	// Now calculate the acceleration, new velocity and new position
 	glm::vec3 accel = force / mass;
 	ship1->velocity += accel * timeDelta;
 	ship1->position += ship1->velocity * timeDelta;
-	if (glm::length(ship1->velocity) > 0.01f)
+	// Check if the velocity length is > epsilon and if so create the look vector from the velocity
+	if (glm::length(ship1->velocity) > epsilon)
 	{
 		ship1->look = glm::normalize(ship1->velocity);		
 	}
-	if (glm::length(ship1->look - GameComponent::basisLook) > 0.01f)
+	// Now check to see if the |look - basis| > epsilon
+	// And if so calculate the quaternion
+	if (glm::length(ship1->look - GameComponent::basisLook) > epsilon)
 	{
 		glm::vec3 axis = glm::cross(GameComponent::basisLook, ship1->look);
 		axis = glm::normalize(axis);
 		float theta = glm::acos(glm::dot(ship1->look, GameComponent::basisLook));
 		ship1->orientation = glm::angleAxis(glm::degrees(theta), axis);
 	}
+	// Apply damping
 	ship1->velocity *= 0.99f;
+	// Reset the force accumulator
 	force = glm::vec3(0,0,0);
 	Game::Update(timeDelta);
 
