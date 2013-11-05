@@ -200,6 +200,9 @@
     <ClCompile Include="Lab7.cpp">
       <Filter>Labs</Filter>
     </ClCompile>
+    <ClCompile Include="Lab8.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -362,6 +365,9 @@
       <Filter>Labs</Filter>
     </ClInclude>
     <ClInclude Include="Lab7.h">
+      <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab8.h">
       <Filter>Labs</Filter>
     </ClInclude>
   </ItemGroup>
