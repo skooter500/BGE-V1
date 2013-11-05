@@ -47,7 +47,7 @@ void Lab8::Update(float timeDelta)
 {	
 	// Forces on ship2
 	float newtons = 10.0f;
-	float epsilon = 0.01f;
+	float epsilon = glm::epsilon<float>();
 	if (keyState[SDL_SCANCODE_UP])
 	{
 		//
