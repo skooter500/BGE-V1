@@ -203,6 +203,12 @@
     <ClCompile Include="Lab8.cpp">
       <Filter>Labs</Filter>
     </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VRGame.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -369,6 +375,12 @@
     </ClInclude>
     <ClInclude Include="Lab8.h">
       <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VRGame.h">
+      <Filter>Games</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
