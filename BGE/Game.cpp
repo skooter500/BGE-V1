@@ -127,7 +127,7 @@ bool Game::Initialise() {
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
 
 	SDL_GL_SetSwapInterval(1);
 
