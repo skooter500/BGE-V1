@@ -7,6 +7,7 @@
 #include "Params.h"
 #include "FountainEffect.h"
 #include "Box.h"
+#include "SnowEffect.h"
 
 using namespace BGE;
 
@@ -177,10 +178,13 @@ bool SceneGraphGame::Initialise()
 		pathFollowerController->route->looped = true;
 	}
 	partFollower->Attach(pathFollowerController);
-	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(100);
+	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(1000);
 	partFollower->diffuse = glm::vec3(0,1,1);
 	fountain->worldMode = world_modes::from_parent;
-	
+
+	/*shared_ptr<SnowEffect> snow = make_shared<SnowEffect>();
+	Attach(snow);*/
+
 	partFollower->Attach(fountain);
 
 	return Game::Initialise();

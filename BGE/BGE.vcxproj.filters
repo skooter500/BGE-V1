@@ -24,9 +24,6 @@
     <Filter Include="Controllers">
       <UniqueIdentifier>{b8283cc0-8725-4a13-a2c1-fc02e47c494e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OVRKill">
-      <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenarios">
       <UniqueIdentifier>{82919e9f-6727-4dac-9428-1308d1d5e346}</UniqueIdentifier>
     </Filter>
@@ -38,6 +35,9 @@
     </Filter>
     <Filter Include="Labs">
       <UniqueIdentifier>{f09f20fd-b65f-4670-9e98-ec489fae4c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Labs\OVRKill">
+      <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,10 +108,10 @@
       <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="FBO.cpp">
-      <Filter>OVRKill</Filter>
+      <Filter>Labs\OVRKill</Filter>
     </ClCompile>
     <ClCompile Include="ShaderFunctions.cpp">
-      <Filter>OVRKill</Filter>
+      <Filter>Labs\OVRKill</Filter>
     </ClCompile>
     <ClCompile Include="RiftController.cpp">
       <Filter>Controllers</Filter>
@@ -269,13 +269,13 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="OVR_Shaders.h">
-      <Filter>OVRKill</Filter>
+      <Filter>Labs\OVRKill</Filter>
     </ClInclude>
     <ClInclude Include="FBO.h">
-      <Filter>OVRKill</Filter>
+      <Filter>Labs\OVRKill</Filter>
     </ClInclude>
     <ClInclude Include="ShaderFunctions.h">
-      <Filter>OVRKill</Filter>
+      <Filter>Labs\OVRKill</Filter>
     </ClInclude>
     <ClInclude Include="RiftController.h">
       <Filter>Controllers</Filter>
@@ -445,5 +445,6 @@
     <None Include="Content\Particles.vertexshader">
       <Filter>Content</Filter>
     </None>
+    <None Include="Particles.cd" />
   </ItemGroup>
 </Project>
