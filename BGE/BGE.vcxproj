@@ -219,6 +219,7 @@
     <None Include="Content\TextShader.vertexshader" />
     <None Include="Content\TriangleShader.fragmentshader" />
     <None Include="Content\TriangleShader.vertexshader" />
+    <None Include="Particles.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dependancies\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj">
