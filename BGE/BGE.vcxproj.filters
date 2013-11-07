@@ -197,6 +197,9 @@
     <ClCompile Include="Lab6.cpp">
       <Filter>Labs</Filter>
     </ClCompile>
+    <ClCompile Include="Lab7.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -356,6 +359,9 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="Lab6.h">
+      <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab7.h">
       <Filter>Labs</Filter>
     </ClInclude>
   </ItemGroup>
