@@ -121,6 +121,8 @@ void Steerable3DController::Update(float timeDelta)
     velocity += acceleration * timeDelta;
     position += velocity * timeDelta;
 	
+	// Normalise the velocity into the look
+	// Probably not necessary as we recalculate these anyway later
     if (glm::length(velocity) > 0.0001f)
     {
 		look = glm::normalize(velocity);
@@ -136,7 +138,9 @@ void Steerable3DController::Update(float timeDelta)
 
 	orientation = orientation + ((w * (timeDelta / 2.0f)) * orientation);
 	orientation = glm::normalize(orientation);
-    torque = glm::vec3(0);
+    
+	// Reset the accumulators
+	torque = glm::vec3(0);
 	force = glm::vec3(0);
 
 	look = RotateVector(basisLook, orientation);
