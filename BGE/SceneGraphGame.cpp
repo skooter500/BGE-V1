@@ -20,7 +20,7 @@ SceneGraphGame::SceneGraphGame(void)
 	broadphase = NULL;
 	dispatcher = NULL;
 	solver = NULL;
-	
+		
 }
 
 SceneGraphGame::~SceneGraphGame(void)
@@ -67,10 +67,10 @@ bool SceneGraphGame::Initialise()
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
 
-	fullscreen = false;
-	riftEnabled = false;
-	width = 800;
-	height = 600;
+	fullscreen = true;
+	riftEnabled = true;
+	width = 1280;
+	height = 800;
 
 	shared_ptr<GameComponent> partFollower = make_shared<GameComponent>();
 	Attach(partFollower);
@@ -182,8 +182,8 @@ bool SceneGraphGame::Initialise()
 	partFollower->diffuse = glm::vec3(0,1,1);
 	fountain->worldMode = world_modes::from_parent;
 
-	/*shared_ptr<SnowEffect> snow = make_shared<SnowEffect>();
-	Attach(snow);*/
+	shared_ptr<SnowEffect> snow = make_shared<SnowEffect>();
+	Attach(snow);
 
 	partFollower->Attach(fountain);
 
