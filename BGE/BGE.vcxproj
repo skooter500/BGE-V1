@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Kinect10.lib;fmodex_vc.lib;winmm.lib;libovrd.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

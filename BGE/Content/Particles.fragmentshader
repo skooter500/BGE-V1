@@ -5,5 +5,5 @@ in vec4 colour;
 
 void main(void) 
 {
-	gl_FragColor = texture2D(myTextureSampler, gl_PointCoord) * colour;
+	gl_FragColor = texture2D(myTextureSampler, gl_PointCoord);
 }
