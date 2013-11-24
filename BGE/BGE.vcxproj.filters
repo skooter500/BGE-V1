@@ -209,6 +209,9 @@
     <ClCompile Include="VRGame.cpp">
       <Filter>Games</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -382,6 +385,7 @@
     <ClInclude Include="VRGame.h">
       <Filter>Games</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsDrawer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">
