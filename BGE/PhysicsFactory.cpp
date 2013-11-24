@@ -107,7 +107,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::ve
 shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float height, float depth, glm::vec3 pos, glm::quat quat)
 {
 	// Create the shape
-	btCollisionShape * boxShape = new btBoxShape(btVector3(width, height, depth) * 0.5);
+	btCollisionShape * boxShape = new btBoxShape(btVector3(width, height, depth) * 0.50);
 	btScalar mass = 1;
 	btVector3 boxInertia(0,0,0);
 	boxShape->calculateLocalInertia(mass,boxInertia);

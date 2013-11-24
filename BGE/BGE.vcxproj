@@ -97,6 +97,7 @@
     <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="PathFollowingScenario.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="PhysicsDrawer.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="SceneGraphGame.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="PathFollowingScenario.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="PhysicsDrawer.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="SceneGraphGame.h" />

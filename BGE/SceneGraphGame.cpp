@@ -67,8 +67,8 @@ bool SceneGraphGame::Initialise()
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
 
-	fullscreen = true;
-	riftEnabled = true;
+	fullscreen = false;
+	riftEnabled = false;
 	width = 1280;
 	height = 800;
 
@@ -88,7 +88,7 @@ bool SceneGraphGame::Initialise()
 	station->worldMode = world_modes::from_self;
 	station->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	station->specular = glm::vec3(0,0,0);
-	station->scale = glm::vec3(1,5,1);
+	station->scale = glm::vec3(1,1,1);
 	std::shared_ptr<Model> cmodel = Content::LoadModel("coriolis", glm::rotate(glm::mat4(1), 90.0f, GameComponent::basisUp));	
 	station->Attach(cmodel);
 	station->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));

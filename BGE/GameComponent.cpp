@@ -194,7 +194,7 @@ void GameComponent::Pitch(float angle)
 void GameComponent::Yaw(float angle)
 {
 	// A yaw is a rotation around the global up vector
-	glm::quat rot = glm::angleAxis(angle, up);
+	glm::quat rot = glm::angleAxis(angle, GameComponent::basisUp);
 
 	orientation = rot * orientation;
 
