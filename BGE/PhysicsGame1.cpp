@@ -116,6 +116,27 @@ void BGE::PhysicsGame1::Update(float timeDelta)
 	cyl->rigidBody->applyTorque(GLToBtVector(glm::vec3(0.0f,0.0f,1.0f)));
 
 	dynamicsWorld->stepSimulation(timeDelta,100);
+
+	// Collision checks
+	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+	for (int i=0;i<numManifolds;i++)
+	{
+		btPersistentManifold* contactManifold =  dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
+		btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
+		btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
+		PhysicsController * pcA = reinterpret_cast<PhysicsController*>(obA->getUserPointer());
+		PhysicsController * pcB = reinterpret_cast<PhysicsController*>(obA->getUserPointer());
+
+		int numContacts = contactManifold->getNumContacts();
+		if (numContacts > 0)
+		{
+			if ((pcA != nullptr) && (pcB != nullptr))
+			{
+				PrintText("Collision between " + pcA->tag + " and " + pcB->tag);
+			}
+		}
+	}
+
 	Game::Update(timeDelta);
 }
 
