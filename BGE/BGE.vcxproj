@@ -92,6 +92,7 @@
     <ClCompile Include="Lab7.cpp" />
     <ClCompile Include="Lab8.cpp" />
     <ClCompile Include="LazerBeam.cpp" />
+    <ClCompile Include="MyLittleScene.cpp" />
     <ClCompile Include="ObstacleAvoidanceScenario.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Lab7.h" />
     <ClInclude Include="Lab8.h" />
     <ClInclude Include="LazerBeam.h" />
+    <ClInclude Include="MyLittleScene.h" />
     <ClInclude Include="ObstacleAvoidanceScenario.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleEffect.h" />
