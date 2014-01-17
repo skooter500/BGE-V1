@@ -31,9 +31,9 @@ bool SteeringGame::Initialise()
 {
 	Params::Load("default");
 
-	width = 1280;
-	height = 800;
-	riftEnabled = true;
+	width = 800;
+	height = 600;
+	riftEnabled = false;
 	fullscreen = false;
 
 	scenarios[currentScenario]->Initialise();
