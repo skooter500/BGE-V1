@@ -3,6 +3,11 @@
 
 using namespace BGE;
 
+const glm::vec3 Transform::basisUp = glm::vec3(0, 1, 0);
+const glm::vec3 Transform::basisLook = glm::vec3(0, 0, -1);
+const glm::vec3 Transform::basisRight = glm::vec3(1, 0, 0);
+
+
 Transform::Transform(void)
 {
 	position = glm::vec3(0, 0, 0); 
