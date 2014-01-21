@@ -34,28 +34,28 @@ void PathFollowingScenario::Initialise()
 	// Create the fighter
 	shared_ptr<GameComponent> fighter = make_shared<GameComponent>();
 	fighter->tag = "Steerable";
-	fighter->scale = glm::vec3(4, 4, 4);
+	fighter->transform->scale = glm::vec3(4, 4, 4);
 	shared_ptr<SteeringController> fighterController = make_shared<SteeringController>();
-	fighterController->position = fighter->position = glm::vec3(-20, 50, 50);
+	fighterController->transform->position = fighter->transform->position = glm::vec3(-20, 50, 50);
 	fighterController->TurnOffAll();
 	fighterController->Initialise();
 
 	fighter->Attach(fighterController);
-	fighter->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	fighter->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 	game->Attach(fighter);
 
 	// Now create the enemy
 	shared_ptr<GameComponent> enemy = make_shared<GameComponent>();
 	enemy->tag = "Steerable";
-	enemy->scale = glm::vec3(4, 4, 4);
+	enemy->transform->scale = glm::vec3(4, 4, 4);
 	shared_ptr<SteeringController> enemyController = make_shared<SteeringController>();
-	enemyController->position = enemy->position = glm::vec3(10, 50, 0);
-	enemyController->targetPos = fighterController->position + glm::vec3(-50, 0, -80);
+	enemyController->transform->position = enemy->transform->position = glm::vec3(10, 50, 0);
+	enemyController->targetPos = fighterController->transform->position + glm::vec3(-50, 0, -80);
 	enemyController->TurnOffAll();
 	enemyController->TurnOn(SteeringController::behaviour_type::arrive);
 	this->leaderController = enemyController;
 	enemy->Attach(enemyController);
-	enemy->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	enemy->Attach(Content::LoadModel("python", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 
 	game->Attach(enemy);
 
@@ -70,7 +70,7 @@ void PathFollowingScenario::Initialise()
 	shared_ptr<SteeringController> camController = make_shared<SteeringController>();
 	camController->offset = glm::vec3(0, 4, 4);
 	camController->leader = fighterController;
-	camController->position = game->camFollower->position = fighter->position + camController->offset;
+	camController->transform->position = game->camFollower->transform->position = fighter->transform->position + camController->offset;
 	camController->TurnOffAll();
 	camController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
 	camController->TurnOn(SteeringController::behaviour_type::sphere_constrain);
@@ -79,5 +79,5 @@ void PathFollowingScenario::Initialise()
 	game->Attach(game->camFollower);
 	game->camFollower->Attach(camController);
 	
-	game->camera->position = camController->position;
+	game->camera->transform->position = camController->transform->position;
 }

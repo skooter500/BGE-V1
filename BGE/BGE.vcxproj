@@ -104,6 +104,7 @@
     <ClCompile Include="SnowEffect.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="SteeringGame.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Box.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="SnowEffect.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="SteeringGame.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="Exception.h" />

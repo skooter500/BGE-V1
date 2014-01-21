@@ -17,13 +17,13 @@ void RiftController::AccumulateInputs()
 		OVR::Quatf hmdOrient = m_SFusion.GetOrientation();
 		glm::quat headOrientation = OVRToGLQuat(hmdOrient);
 		// Combine the orientation of the head with the yaw from the XBOX controller...
-		orientation = xboxController->orientation * headOrientation;
+		transform->orientation = xboxController->transform->orientation * headOrientation;
 		//position = xboxController->position;
 		// Now update the XBOX Controller Look vectors
-		glm::quat tempQ = xboxController->orientation;
-		xboxController->orientation = orientation;
-		xboxController->RecalculateVectors();
-		xboxController->orientation = tempQ;
+		glm::quat tempQ = xboxController->transform->orientation;
+		xboxController->transform->orientation = transform->orientation;
+		xboxController->transform->RecalculateVectors();
+		xboxController->transform->orientation = tempQ;
 	}
 }
 
@@ -68,7 +68,7 @@ bool RiftController::Initialise()
 	SetDisplayMode(StereoWithDistortion);
 	CreateShaders();
 	CreateRenderBuffer();
-	xboxController->position = position;
+	xboxController->transform->position = transform->position;
 	return GameComponent::Initialise();
 }
 

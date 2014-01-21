@@ -48,7 +48,7 @@ void XBoxController::Update(float timeDelta)
 			if (glm::abs<int>(strafeAxis) > 8000)
 			{
 				float strafe = ((float) strafeAxis / (float) numeric_limits<short int>::max()) * range;
-				Strafe(strafe);
+				transform->Strafe(strafe);
 			}
 			
 			int walkAxis = SDL_JoystickGetAxis(joy, 1);
@@ -57,20 +57,20 @@ void XBoxController::Update(float timeDelta)
 			{
 				float walk = ((float) walkAxis / (float) numeric_limits<short int>::max()) * range;
 				
-				Walk(-walk);
+				transform->Walk(-walk);
 			}
 			
 			range = 3; 
 			int x = SDL_JoystickGetAxis(joy, 2);	
 			float yaw = ((float) x / (float) numeric_limits<short int>::max()) * range;
-			Yaw((int) -yaw);
+			transform->Yaw((int) -yaw);
 
 			if (!disablePitch)
 			{
 				int y = SDL_JoystickGetAxis(joy, 3);	
 				CheckOverflow(y);
 				float pitch = ((float) y / (float) numeric_limits<short int>::max()) * range;
-				Pitch((int) -pitch);
+				transform->Pitch((int) -pitch);
 			}
 		} else {
 			Game::Instance()->PrintText("Could not get controller!!");
@@ -87,11 +87,11 @@ void XBoxController::Update(float timeDelta)
 	}
 
 	stringstream ss;
-	ss << "Gamepad Pos: " << position.x << " " << position.y << " " << position.z;
+	ss << "Gamepad Pos: " << transform->position.x << " " << transform->position.y << " " << transform->position.z;
 	Game::Instance()->PrintText(ss.str());
 
 	ss.str("");
-	ss << "Gamepad Look: " << look.x << " " << look.y << " " << look.z;
+	ss << "Gamepad Look: " << transform->look.x << " " << transform->look.y << " " << transform->look.z;
 	Game::Instance()->PrintText(ss.str());
 
 	GameComponent::Update(timeDelta);

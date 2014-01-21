@@ -59,8 +59,8 @@ bool SceneGraphGame::Initialise()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,0,0));
 
-	camera->position = glm::vec3(0,10,0);
-	camera->look = glm::vec3(0, 0, 1);
+	camera->transform->position = glm::vec3(0,10,0);
+	camera->transform->look = glm::vec3(0, 0, 1);
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
@@ -79,30 +79,30 @@ bool SceneGraphGame::Initialise()
 	selfExample = make_shared<GameComponent>();
 	selfExample->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	selfExample->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
-	selfExample->position = NextPosition(current ++, componentCount);
+	selfExample->transform->position = NextPosition(current ++, componentCount);
 	Attach(selfExample);
 
 	//// from_self_with_parent
 	//// Create a hierarchy
 	station = make_shared<GameComponent>();
 	station->worldMode = world_modes::from_self;
-	station->ambient = glm::vec3(0.2f, 0.2, 0.2f);
-	station->specular = glm::vec3(0,0,0);
-	station->scale = glm::vec3(1,1,1);
-	std::shared_ptr<Model> cmodel = Content::LoadModel("coriolis", glm::rotate(glm::mat4(1), 90.0f, GameComponent::basisUp));	
+	station->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
+	station->transform->specular = glm::vec3(0,0,0);
+	station->transform->scale = glm::vec3(1,1,1);
+	std::shared_ptr<Model> cmodel = Content::LoadModel("coriolis", glm::rotate(glm::mat4(1), 90.0f, Transform::basisUp));	
 	station->Attach(cmodel);
 	station->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
-	station->position = NextPosition(current ++, componentCount);
+	station->transform->position = NextPosition(current ++, componentCount);
 	Attach(station);
 
 	// Add a child to the station and update by including the parent's world transform
 	std::shared_ptr<GameComponent> ship1 = make_shared<GameComponent>();
 	ship1->worldMode = world_modes::from_self_with_parent;
-	ship1->ambient = glm::vec3(0.2f, 0.2, 0.2f);
-	ship1->specular = glm::vec3(1.2f, 1.2f, 1.2f);
-	std::shared_ptr<Model> ana = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp));	
+	ship1->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
+	ship1->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	std::shared_ptr<Model> ana = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp));	
 	ship1->Attach(ana);
-	ship1->position = glm::vec3(0, 0, -10);
+	ship1->transform->position = glm::vec3(0, 0, -10);
 	station->Attach(ship1); // NOTE the ship is attached to the station at an offset of 10.
 	
 	// Create a component  with an XBOX Controller attached
@@ -111,18 +111,18 @@ bool SceneGraphGame::Initialise()
 	ship2->Attach(make_shared<XBoxController>());
 	ship2->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	ship2->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
-	ship2->GetController()->position = NextPosition(current ++, componentCount);
+	ship2->GetController()->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship2);
 
 	// Create a component with a steerable 3D controller attached
 	shared_ptr<GameComponent> ship3 = make_shared<GameComponent>();
 	ship3->worldMode = world_modes::from_child;
-	ship3->scale = glm::vec3(3,3,3);
+	ship3->transform->scale = glm::vec3(3,3,3);
 	shared_ptr<Model> s3Model = Content::LoadModel("moray", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0)));
 	ship3->Attach(make_shared<Steerable3DController>(s3Model));
 	ship3->Attach(s3Model);
 	ship3->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
-	ship3->GetController()->position = NextPosition(current ++, componentCount);
+	ship3->GetController()->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship3);
 
 	// Create some physics components using the factory
@@ -139,36 +139,36 @@ bool SceneGraphGame::Initialise()
 	// Create some steering components to chase each other
 	shared_ptr<GameComponent> ship4 = make_shared<GameComponent>();
 	ship4->tag = "Steerable";
-	ship4->scale = glm::vec3(2, 2, 2);
+	ship4->transform->scale = glm::vec3(2, 2, 2);
 	shared_ptr<SteeringController> ship4Controller = make_shared<SteeringController>();
-	ship4Controller->position = NextPosition(current ++, componentCount);
+	ship4Controller->transform->position = NextPosition(current ++, componentCount);
 	ship4Controller->TurnOffAll();
 	ship4Controller->TurnOn(SteeringController::behaviour_type::follow_path);
-	ship4Controller->route->waypoints.push_back(ship4Controller->position);
-	ship4Controller->route->waypoints.push_back(ship4Controller->position + glm::vec3(15, 0, 0));
-	ship4Controller->route->waypoints.push_back(ship4Controller->position + glm::vec3(15, 0, -15));
-	ship4Controller->route->waypoints.push_back(ship4Controller->position + glm::vec3(0, 0, -15));
+	ship4Controller->route->waypoints.push_back(ship4Controller->transform->position);
+	ship4Controller->route->waypoints.push_back(ship4Controller->transform->position + glm::vec3(15, 0, 0));
+	ship4Controller->route->waypoints.push_back(ship4Controller->transform->position + glm::vec3(15, 0, -15));
+	ship4Controller->route->waypoints.push_back(ship4Controller->transform->position + glm::vec3(0, 0, -15));
 	ship4Controller->route->looped = true;
 	ship4Controller->route->draw = true;
 	ship4->Attach(ship4Controller);
-	ship4->Attach(Content::LoadModel("krait", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	ship4->Attach(Content::LoadModel("krait", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 	Attach(ship4);
 
 	// Load a textured model
 	shared_ptr<GameComponent> mushroom = make_shared<GameComponent>();
-	mushroom->position = NextPosition(current ++, componentCount);
-	mushroom->scale = glm::vec3(0.1f,0.1f,0.1f);
+	mushroom->transform->position = NextPosition(current ++, componentCount);
+	mushroom->transform->scale = glm::vec3(0.1f,0.1f,0.1f);
 	mushroom->Attach(Content::LoadModel("mushroom"));
 	Attach(mushroom);
 
 	// Create a component that follows a path from component to component
 	partFollower->tag = "Steerable";
-	partFollower->scale = glm::vec3(2, 2, 2);
+	partFollower->transform->scale = glm::vec3(2, 2, 2);
 	shared_ptr<SteeringController> pathFollowerController = make_shared<SteeringController>();
-	pathFollowerController->position = NextPosition(current, componentCount);
+	pathFollowerController->transform->position = NextPosition(current, componentCount);
 	pathFollowerController->TurnOffAll();
 	pathFollowerController->TurnOn(SteeringController::behaviour_type::follow_path);
-	pathFollowerController->route->diffuse = glm::vec3(0,0,1);
+	pathFollowerController->route->transform->diffuse = glm::vec3(0,0,1);
 	pathFollowerController->route->draw = true;
 
 	// Add some waypoints
@@ -179,7 +179,7 @@ bool SceneGraphGame::Initialise()
 	}
 	partFollower->Attach(pathFollowerController);
 	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(1000);
-	partFollower->diffuse = glm::vec3(0,1,1);
+	partFollower->transform->diffuse = glm::vec3(0,1,1);
 	fountain->worldMode = world_modes::from_parent;
 
 	shared_ptr<SnowEffect> snow = make_shared<SnowEffect>();
@@ -194,8 +194,8 @@ void SceneGraphGame::Update(float timeDelta)
 {
 	dynamicsWorld->stepSimulation(timeDelta,100);
 
-	selfExample->Yaw(timeDelta * speed * speed);
-	station->Yaw(timeDelta * speed * speed);
+	selfExample->transform->Yaw(timeDelta * speed * speed);
+	station->transform->Yaw(timeDelta * speed * speed);
 	Game::Update(timeDelta);
 }
 

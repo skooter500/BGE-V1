@@ -28,19 +28,19 @@ bool ModelTest::Initialise()
 	Attach(ground);	
 
 	std::shared_ptr<GameComponent> box = make_shared<Box>(1, 1, 1);
-	box->position = glm::vec3(0, 5, -20);
+	box->transform->position = glm::vec3(0, 5, -20);
 	Attach(box);
 
 	std::shared_ptr<GameComponent> cyl = make_shared<Cylinder>(2, 1);
-	cyl->position = glm::vec3(15, 5, -20);
+	cyl->transform->position = glm::vec3(15, 5, -20);
 	Attach(cyl);
 
 	std::shared_ptr<GameComponent> box1 (new Box(1, 2, 1));
-	box1->position = glm::vec3(5, 2, 0);
+	box1->transform->position = glm::vec3(5, 2, 0);
 	box->Attach(box1);
 
 	std::shared_ptr<GameComponent> sphere (new Sphere(1));
-	sphere->position = glm::vec3(10, 5, -20);
+	sphere->transform->position = glm::vec3(10, 5, -20);
 	Attach(sphere);
 
 	rotTest = make_shared<GameComponent>();
@@ -50,7 +50,7 @@ bool ModelTest::Initialise()
 	shared_ptr<GameComponent> ship = make_shared<GameComponent>();
 	shared_ptr<Model> model = Content::LoadModel("marimba");	
 	shared_ptr<GameComponent> steerable = make_shared<Steerable3DController>(model);
-	steerable->position = glm::vec3(20, 5, -20);
+	steerable->transform->position = glm::vec3(20, 5, -20);
 	ship->Attach(steerable);
 	ship->Attach(model);
 	Attach(ship);
@@ -69,6 +69,6 @@ void ModelTest::Update( float timeDelta )
 {
 	Game::Update(timeDelta);
 	glm::mat4 rotMatrix = glm::rotate(glm::mat4(1), theta, glm::vec3(0,1,0));
-	rotTest->world = rotMatrix;
+	rotTest->transform->world = rotMatrix;
 	theta += timeDelta * 10.0f;
 }

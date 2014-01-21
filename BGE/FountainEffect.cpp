@@ -11,7 +11,7 @@ FountainEffect::FountainEffect(void):numParticles(1000)
 FountainEffect::FountainEffect(int numParticles)
 {
 	this->numParticles = numParticles;
-	diffuse = glm::vec3(0,0,1);
+	transform->diffuse = glm::vec3(0,0,1);
 }
 
 
@@ -33,7 +33,7 @@ bool FountainEffect::Initialise()
 void FountainEffect::InitParticle(Particle & p)
 {
 	float radius = 0.25f;
-	p.position = position; // Start the particle at the ParticleSystem position
+	p.position = transform->position; // Start the particle at the ParticleSystem position
 	// Give the particle a clamped random velocity
 	p.velocity = glm::vec3(RandomClamped(-radius, radius), RandomClamped(), RandomClamped(-radius, radius)) * 10.0f;
 	
@@ -41,9 +41,9 @@ void FountainEffect::InitParticle(Particle & p)
 	p.velocity.y = glm::abs<float>(p.velocity.y);
 	
 	// Give the particle a random colour
-	p.diffuse.r = diffuse.r * RandomClamped(0, 1);
-	p.diffuse.g = diffuse.g * RandomClamped(0, 1);
-	p.diffuse.b = diffuse.b * RandomClamped(0, 1);
+	p.diffuse.r = transform->diffuse.r * RandomClamped(0, 1);
+	p.diffuse.g = transform->diffuse.g * RandomClamped(0, 1);
+	p.diffuse.b = transform->diffuse.b * RandomClamped(0, 1);
 	p.age = 0;
 	p.alive = true;
 	// Random sizes also

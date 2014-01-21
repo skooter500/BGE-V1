@@ -41,10 +41,10 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 {
 	shared_ptr<GameComponent> component = make_shared<GameComponent>();
 	component->tag = name;
-	component->scale = scale;
+	component->transform->scale = scale;
 	Game::Instance()->Attach(component);
 	shared_ptr<Model> model = Content::LoadModel(name);
-	component->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	component->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	model->Initialise();
 	component->Attach(model);
 
@@ -115,7 +115,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	// This is a container for the box model
 	shared_ptr<Box> box = make_shared<Box>(width, height, depth);
 	box->worldMode = GameComponent::from_child;
-	box->position = pos;
+	box->transform->position = pos;
 	Game::Instance()->Attach(box);
 
 	// Create the rigid body
@@ -146,7 +146,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 
 	// This is a container for the box model
 	shared_ptr<GameComponent> cyl = make_shared<GameComponent>(Cylinder(radius, height));
-	cyl->position = pos;
+	cyl->transform->position = pos;
 	Game::Instance()->Attach(cyl);
 
 	// Create the rigid body

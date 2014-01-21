@@ -21,14 +21,7 @@ using namespace BGE;
 
 BGE::Game * Game::instance = NULL;
 
-glm::vec3 BGE::RotateVector(glm::vec3 v, glm::quat q)
-{
-	glm::quat qinv = glm::inverse(q);
-	glm::quat w = glm::quat(0, v.x, v.y, v.z);
-	w = q * w * qinv;
 
-	return glm::vec3(w.x, w.y, w.z);
-}
 
 
 
@@ -140,14 +133,14 @@ bool Game::Initialise() {
 	if (riftEnabled)
 	{
 		shared_ptr<RiftController> riftController = make_shared<RiftController>();
-		riftController->position = glm::vec3(0, 10, 10);
+		riftController->transform->position = glm::vec3(0, 10, 10);
 		this->riftController = riftController;
 		camera->Attach(riftController);
 	}
 	else
 	{
 		shared_ptr<GameComponent> controller = make_shared<FPSController>();
-		controller->position = glm::vec3(0, 10, 10);
+		controller->transform->position = glm::vec3(0, 10, 10);
 		camera->Attach(controller);
 	}
 
@@ -421,8 +414,8 @@ void Game::Print(string message, glm::vec2 position)
 	float width = surface->w;
 	float height = surface->h;
 
-	x = position.x;
-	y = (this->height - height) - position.y;
+	x = transform->position.x;
+	y = (this->height - height) - transform->position.y;
 	
 	
 	vertices.push_back(glm::vec2(x + width,y));

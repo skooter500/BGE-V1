@@ -9,14 +9,14 @@ Ground::Ground(void):GameComponent()
 	width = 5000;
 	height = 5000;
 	// Diffuse will come from the texture
-	ambient = glm::vec3(0.2f, 0.2, 0.2f);
+	transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 }
 
 bool Ground::rayIntersectsWorldPlane(glm::vec3 origin, glm::vec3 look, glm::vec3 & point)
 {
 	// Calculate t
 	float t;
-	glm::vec3 planeNormal = GameComponent::basisUp;
+	glm::vec3 planeNormal = Transform::basisUp;
 	float d = 0.0f;
 
 
@@ -49,27 +49,27 @@ bool Ground::Initialise()
 
 
 	vertices.push_back(glm::vec3(width, 0, -height));
-	normals.push_back(GameComponent::basisUp);
+	normals.push_back(Transform::basisUp);
 	texels.push_back(glm::vec2(twidth, 0));
 
 	vertices.push_back(glm::vec3(-width, 0, -height));
-	normals.push_back(GameComponent::basisUp);
+	normals.push_back(Transform::basisUp);
 	texels.push_back(glm::vec2(0, 0));
 
 	vertices.push_back(glm::vec3(width, 0, height));
-	normals.push_back(GameComponent::basisUp);
+	normals.push_back(Transform::basisUp);
 	texels.push_back(glm::vec2(twidth, theight));
     
 	vertices.push_back(glm::vec3(width, 0, height));
-	normals.push_back(GameComponent::basisUp);
+	normals.push_back(Transform::basisUp);
 	texels.push_back(glm::vec2(twidth, theight));
 	
 	vertices.push_back(glm::vec3(-width, 0, -height));
-	normals.push_back(GameComponent::basisUp);
+	normals.push_back(Transform::basisUp);
 	texels.push_back(glm::vec2(0,0));
 	
 	vertices.push_back(glm::vec3(-width, 0, height));
-	normals.push_back(GameComponent::basisUp);
+	normals.push_back(Transform::basisUp);
 	texels.push_back(glm::vec2(0, theight)); 
     
 	programID = Content::LoadShaderPair("standard_texture");
@@ -106,14 +106,14 @@ void Ground::Draw()
 {
 	glUseProgram(programID);
 
-	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
+	glUniformMatrix4fv(mID, 1, GL_FALSE, & transform->world[0][0]);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->camera->view[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->camera->projection[0][0]);
-	glUniform3f(specularID, specular.r, specular.g, specular.b);
-	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
+	glUniform3f(specularID, transform->specular.r, transform->specular.g, transform->specular.b);
+	glUniform3f(ambientID, transform->ambient.r, transform->ambient.g, transform->ambient.b);
 
 
-	glm::mat4 MV = world;
+	glm::mat4 MV = transform->world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));
 	glUniformMatrix3fv(nID, 1, GL_FALSE, & gl_NormalMatrix[0][0]);
 	

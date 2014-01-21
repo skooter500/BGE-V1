@@ -257,3 +257,12 @@ bool BGE::ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sph
     }
     return false;
 }
+
+glm::vec3 BGE::RotateVector(glm::vec3 v, glm::quat q)
+{
+	glm::quat qinv = glm::inverse(q);
+	glm::quat w = glm::quat(0, v.x, v.y, v.z);
+	w = q * w * qinv;
+
+	return glm::vec3(w.x, w.y, w.z);
+}

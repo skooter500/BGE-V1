@@ -22,7 +22,7 @@ void IdleState::Enter()
 	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
 	if (initialPos == glm::vec3(0))
 	{
-		initialPos = fighterController->position;
+		initialPos = fighterController->transform->position;
 	}
 	fighterController->route->waypoints.push_back(initialPos);
 	fighterController->route->waypoints.push_back(initialPos + glm::vec3(-50, 0, -80));
@@ -46,7 +46,7 @@ void IdleState::Update(float timeDelta)
 	shared_ptr<SteeringController> fighter = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
 
 	// Can I see the leader?
-	if (glm::length(enemy->position - fighter->position) < range)
+	if (glm::length(enemy->transform->position - fighter->transform->position) < range)
 	{
 		owner->SwicthState(make_shared<AttackingState>(owner, enemy));
 	}

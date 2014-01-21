@@ -140,7 +140,7 @@ void ParticleEffect::Draw()
 
 		// The particles are already in world space, so we wont be using this anyway
 		
-		glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
+		glUniformMatrix4fv(mID, 1, GL_FALSE, & transform->world[0][0]);
 		glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->camera->view[0][0]);
 		glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->camera->projection[0][0]);
 		

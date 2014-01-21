@@ -1,6 +1,7 @@
 #include "LineDrawer.h"
 #include "Content.h"
 #include "Game.h"
+#include "Utils.h"
 
 using namespace BGE;
 

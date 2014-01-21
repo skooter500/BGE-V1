@@ -32,14 +32,14 @@ void FlockingScenario::Initialise()
 	bigFighter->tag = "Steerable";
 	glm::vec3 pos = RandomPosition(range);
 	shared_ptr<SteeringController> bigFighterController = make_shared<SteeringController>();
-	bigFighterController->position = bigFighter->position = pos;
+	bigFighterController->transform->position = bigFighter->transform->position = pos;
 	bigFighterController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
 	bigFighterController->TurnOn(SteeringController::behaviour_type::pursuit);
 	bigFighterController->TurnOn(SteeringController::behaviour_type::wander);
 	bigFighterController->TurnOn(SteeringController::behaviour_type::sphere_constrain);
-	bigFighter->scale = glm::vec3(10, 10, 10);
+	bigFighter->transform->scale = glm::vec3(10, 10, 10);
 	bigFighter->Attach(bigFighterController);
-	bigFighter->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
+	bigFighter->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 	game->Attach(bigFighter);
 	bigFighterController->Initialise();
 
@@ -52,7 +52,7 @@ void FlockingScenario::Initialise()
 		fighter = make_shared<GameComponent>();
 		fighter->tag = "Steerable";
 		fighterController = make_shared<SteeringController>();
-		fighterController->position = fighter->position = pos;
+		fighterController->transform->position = fighter->transform->position = pos;
 		fighterController->target = bigFighter;
 		fighterController->TurnOffAll();
 		fighterController->TurnOn(SteeringController::behaviour_type::separation);
@@ -62,8 +62,8 @@ void FlockingScenario::Initialise()
 		fighterController->TurnOn(SteeringController::behaviour_type::evade);
 		fighterController->TurnOn(SteeringController::behaviour_type::sphere_constrain);
 		fighterController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
-		fighter->Attach(Content::LoadModel("adder", glm::rotate(glm::mat4(1), 180.0f, GameComponent::basisUp)));
-		fighter->scale = glm::vec3(5,5, 5);
+		fighter->Attach(Content::LoadModel("adder", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
+		fighter->transform->scale = glm::vec3(5,5, 5);
 		fighter->Attach(fighterController);
 		fighterController->Initialise();
 		game->Attach(fighter);
@@ -79,7 +79,7 @@ void FlockingScenario::Initialise()
 		{
 			shared_ptr<Sphere> obstacle = make_shared<Sphere>(10);
 			obstacle->tag = "Obstacle";
-			obstacle->position = glm::vec3(x, 0, z);
+			obstacle->transform->position = glm::vec3(x, 0, z);
 			game->Attach(obstacle);
 		}
 	}
@@ -90,7 +90,7 @@ void FlockingScenario::Initialise()
 	shared_ptr<SteeringController> camController = make_shared<SteeringController>();
 	camController->offset = glm::vec3(0,0,3);
 	camController->leader = bigFighter;
-	camController->position = game->camFollower->position = bigFighter->position + camController->offset;
+	camController->transform->position = game->camFollower->transform->position = bigFighter->transform->position + camController->offset;
 	
 	camController->TurnOffAll();
 	camController->TurnOn(SteeringController::behaviour_type::offset_pursuit);

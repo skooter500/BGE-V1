@@ -104,8 +104,8 @@ bool VRGame::Initialise()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,-9,0));
 
-	camera->position = glm::vec3(-1,20,46);
-	camera->look = glm::vec3(0, 0, 1);
+	camera->transform->position = glm::vec3(-1,20,46);
+	camera->transform->look = glm::vec3(0, 0, 1);
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
@@ -124,8 +124,8 @@ bool VRGame::Initialise()
 		return false;
 	}
 
-	camera->GetController()->position = camera->position;
-	camera->GetController()->look = camera->look;
+	camera->GetController()->transform->position = camera->transform->position;
+	camera->GetController()->transform->look = camera->transform->look;
 
 	return true;
 }
@@ -138,7 +138,7 @@ void VRGame::FireProjectile(glm::vec3 pos, glm::vec3 look)
 	soundSystem->PlaySound("Fire", pos);
 	//soundSystem->Vibrate(200, 1.0f);
 	float force = 3000.0f;
-	physicsComponent->rigidBody->applyCentralForce(GLToBtVector(look) * force);
+	physicsComponent->rigidBody->applyCentralForce(GLToBtVector(transform->look) * force);
 }
 
 // Note that pickedUp is passed by reference and so can be changed!!
@@ -182,7 +182,7 @@ void VRGame::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pick
 			// Calculate the hold point in front of the camera
 			glm::vec3 holdPos = hand.pos + (hand.look * holdDist);
 
-			glm::vec3 v = holdPos - pickedUp->position; // direction to move the Target
+			glm::vec3 v = holdPos - pickedUp->transform->position; // direction to move the Target
 			v *= powerfactor; // powerfactor of the GravityGun
 
 			if (v.length() > maxVel)
@@ -264,7 +264,7 @@ void VRGame::Update(float timeDelta)
 			if (ab && (elapsed > timeToPass))
 			{
 				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
+				bool hit = ground->rayIntersectsWorldPlane(camera->transform->position, camera->transform->look, point);
 				if (hit)
 				{
 					point.y = 5;
@@ -279,7 +279,7 @@ void VRGame::Update(float timeDelta)
 			if (bb && (elapsed > timeToPass))
 			{
 				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
+				bool hit = ground->rayIntersectsWorldPlane(camera->transform->position, camera->transform->look, point);
 				if (hit)
 				{
 					point.y = 5;
@@ -293,7 +293,7 @@ void VRGame::Update(float timeDelta)
 			if (xb && (elapsed > timeToPass))
 			{
 				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->position, camera->look, point);
+				bool hit = ground->rayIntersectsWorldPlane(camera->transform->position, camera->transform->look, point);
 				if (hit)
 				{
 					point.y = 5;

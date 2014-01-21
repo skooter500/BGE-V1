@@ -193,9 +193,9 @@ void Person::UpdateHand(
 	float boneLength = glm::length(boneVector);
 	boneVector = glm::normalize(boneVector);
 	glm::vec3 centrePos = end + ((boneVector) * 2.0f);
-	glm::vec3 axis = glm::cross(GameComponent::basisUp, boneVector);
+	glm::vec3 axis = glm::cross(Transform::basisUp, boneVector);
 	axis = glm::normalize(axis);
-	float theta = (float) glm::acos<float>(glm::dot<float>(GameComponent::basisUp, boneVector));
+	float theta = (float) glm::acos<float>(glm::dot<float>(Transform::basisUp, boneVector));
 	glm::quat q = glm::angleAxis(glm::degrees(theta), axis);
 
 	stringstream ss;
@@ -207,7 +207,7 @@ void Person::UpdateHand(
 	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
 	if (it == boneComponents.end())
 	{
-		cylController = game->physicsFactory->CreateCylinder(2.0f, 0.5f, centrePos, orientation);
+		cylController = game->physicsFactory->CreateCylinder(2.0f, 0.5f, centrePos, transform->orientation);
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
@@ -221,8 +221,8 @@ void Person::UpdateHand(
 
 	hands[handIndex].pos = centrePos;
 	hands[handIndex].look = boneVector;
-	cylController->parent->position = this->position + centrePos;
-	cylController->parent->orientation = q;
+	cylController->transform->position = this->transform->position + centrePos;
+	cylController->parent->transform->orientation = q;
 }
 
 
@@ -252,9 +252,9 @@ void Person::UpdateBone(
 	float boneLength = glm::length(boneVector);
 	glm::vec3 centrePos = start + ((boneVector) / 2.0f);
 	boneVector = glm::normalize(boneVector);
-	glm::vec3 axis = glm::cross(GameComponent::basisUp, boneVector);
+	glm::vec3 axis = glm::cross(Transform::basisUp, boneVector);
 	axis = glm::normalize(axis);
-	float theta = (float) glm::acos<float>(glm::dot<float>(GameComponent::basisUp, boneVector));
+	float theta = (float) glm::acos<float>(glm::dot<float>(Transform::basisUp, boneVector));
 	glm::quat q = glm::angleAxis(glm::degrees(theta), axis);
 
 	stringstream ss;
@@ -266,7 +266,7 @@ void Person::UpdateBone(
 	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
 	if (it == boneComponents.end())
 	{
-		cylController = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, orientation);
+		cylController = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, transform->orientation);
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
@@ -277,8 +277,8 @@ void Person::UpdateBone(
 	{
 		cylController = it->second;
 	}
-	cylController->parent->position = this->position + centrePos;
-	cylController->parent->orientation = q;
+	cylController->transform->position = this->transform->position + centrePos;
+	cylController->parent->transform->orientation = q;
 }
 
 void Person::UpdateHead(
@@ -309,7 +309,7 @@ void Person::UpdateHead(
 	shared_ptr<PhysicsController> boxController;
 	if (it == boneComponents.end())
 	{
-		boxController = game->physicsFactory->CreateBox(6.0f, 6.0f, 0.5f, boneVector, orientation);
+		boxController = game->physicsFactory->CreateBox(6.0f, 6.0f, 0.5f, boneVector, transform->orientation);
 		boxController->rigidBody->setCollisionFlags(boxController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		boxController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		boxController->rigidBody->setMotionState(new KinematicMotionState(boxController->parent));
@@ -324,14 +324,14 @@ void Person::UpdateHead(
 
 	if (headCamera)
 	{
-		game->camera->GetController()->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
-		boxController->parent->position = glm::vec3(100, -100, 100);
+		game->camera->GetController()->transform->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
+		boxController->transform->position = glm::vec3(100, -100, 100);
 	}
 	else
 	{
-		boxController->parent->position = this->position + boneVector;
+		boxController->transform->position = this->transform->position + boneVector;
 	}
-	boxController->parent->orientation = q;
+	boxController->parent->transform->orientation = q;
 	
 }
 

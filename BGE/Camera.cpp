@@ -41,24 +41,24 @@ void Camera::Update(float timeDelta) {
 	
 	GameComponent::Update(timeDelta);
 	view = glm::lookAt(
-		position
-		, position + look
-		, basisUp
+		transform->position
+		, transform->position + transform->look
+		, Transform::basisUp
 		);
 	stringstream ss;
-	ss << "Camera Pos: " << position.x << " " << position.y << " " << position.z;
+	ss << "Camera Pos: " << transform->position.x << " " << transform->position.y << " " << transform->position.z;
 	Game::Instance()->PrintText(ss.str());
 
 	ss.str("");
-	ss << "Camera Look: " << look.x << " " << look.y << " " << look.z;
+	ss << "Camera Look: " << transform->look.x << " " << transform->look.y << " " << transform->look.z;
 	Game::Instance()->PrintText(ss.str());
 
 	ss.str("");
-	ss << "Camera Up: " << up.x << " " << up.y << " " << up.z;
+	ss << "Camera Up: " << transform->up.x << " " << transform->up.y << " " << transform->up.z;
 	Game::Instance()->PrintText(ss.str());
 
 	ss.str("");
-	ss << "Camera Right: " << right.x << " " << right.y << " " << right.z;
+	ss << "Camera Right: " << transform->right.x << " " << transform->right.y << " " << transform->right.z;
 	Game::Instance()->PrintText(ss.str());
 
 }

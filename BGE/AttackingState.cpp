@@ -43,24 +43,24 @@ void AttackingState::Update(float timeDelta)
 	// Can I see the leader?
 	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
 
-	if (glm::length(enemy->position - fighterController->position) > range)
+	if (glm::length(enemy->transform->position - fighterController->transform->position) > range)
 	{
 		owner->SwicthState(make_shared<IdleState>(owner, enemy));
 	}
 	else
 	{
 		float angle;
-		glm::vec3 toEnemy = (enemy->position - fighterController->position);
+		glm::vec3 toEnemy = (enemy->transform->position - fighterController->transform->position);
 		toEnemy = glm::normalize(toEnemy);
-		angle = glm::acos(glm::dot(toEnemy, fighterController->look));
+		angle = glm::acos(glm::dot(toEnemy, fighterController->transform->look));
 		Game::Instance()->PrintFloat("Angle:", angle);
 		if (angle < fov)
 		{
 			if (timeShot >= 0.25f)
 			{
 				shared_ptr<LazerBeam> lazer = make_shared<LazerBeam>();
-				lazer->position = fighterController->position;
-				lazer->look = fighterController->look;
+				lazer->transform->position = fighterController->transform->position;
+				lazer->transform->look = fighterController->transform->look;
 				Game::Instance()->Attach(lazer);
 				timeShot = 0.0f;
 			}

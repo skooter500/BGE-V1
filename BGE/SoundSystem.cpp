@@ -107,7 +107,7 @@ void SoundSystem::PlayHitSoundIfReady(GameComponent * object, int interval)
 	{
 		if (isPlaying)
 		{
-			soundEvent.channel->set3DAttributes(& GLToFMODVector(object->position), & GLToFMODVector(glm::vec3(0)));
+			soundEvent.channel->set3DAttributes(& GLToFMODVector(object->transform->position), & GLToFMODVector(glm::vec3(0)));
 		}
 	}
 	soundEvent.last = now;
@@ -122,10 +122,10 @@ void BGE::SoundSystem::Update()
 	}
 	shared_ptr<Camera> camera = Game::Instance()->camera;
 	fmodSystem->set3DListenerAttributes(0,
-		& GLToFMODVector(camera->position)
+		& GLToFMODVector(camera->transform->position)
 		, & GLToFMODVector(glm::vec3(0))
-		, & GLToFMODVector(camera->look)
-		, & GLToFMODVector(camera->up)
+		, & GLToFMODVector(camera->transform->look)
+		, & GLToFMODVector(camera->transform->up)
 		);
 	fmodSystem->update();
 

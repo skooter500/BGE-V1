@@ -23,8 +23,8 @@ PhysicsCamera::~PhysicsCamera(void)
 
 void PhysicsCamera::getWorldTransform(btTransform &worldTrans) const
 {
-	worldTrans.setOrigin(GLToBtVector(parent->position));
-	worldTrans.setRotation(GLToBtQuat(parent->orientation));
+	worldTrans.setOrigin(GLToBtVector(transform->position));
+	worldTrans.setRotation(GLToBtQuat(transform->orientation));
 }
 
 void PhysicsCamera::setWorldTransform(const btTransform &worldTrans)
@@ -45,13 +45,13 @@ void PhysicsCamera::Update(float timeDelta)
 
 	if ((keyState[SDL_SCANCODE_SPACE]) && (elapsed > timeToPass))
 	{
-		glm::vec3 pos = parent->position + (parent->look * 5.0f);
+		glm::vec3 pos = transform->position + (transform->look * 5.0f);
 		glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
 		glm::normalize(q);
 		shared_ptr<PhysicsController> physicsComponent = physicsFactory->CreateBox(1,1,1, pos, q);
 		
 		float force = 5000.0f;
-		physicsComponent->rigidBody->applyCentralForce(GLToBtVector(parent->look) * force);
+		physicsComponent->rigidBody->applyCentralForce(GLToBtVector(transform->look) * force);
 		elapsed = 0.0f;
 	}
 	else
@@ -65,8 +65,8 @@ void PhysicsCamera::Update(float timeDelta)
 		float dist = 1000.0f;
 		if (pickedUp == NULL)
 		{		
-			btVector3 rayFrom = GLToBtVector(parent->position + (parent->look * 4.0f)); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
-			btVector3 rayTo = GLToBtVector(parent->position + (parent->look * dist));
+			btVector3 rayFrom = GLToBtVector(transform->position + (transform->look * 4.0f)); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
+			btVector3 rayTo = GLToBtVector(transform->position + (transform->look * dist));
 
 			btCollisionWorld::ClosestRayResultCallback rayCallback(rayFrom, rayTo);
 			physicsFactory->dynamicsWorld->rayTest(rayFrom, rayTo, rayCallback);
@@ -87,9 +87,9 @@ void PhysicsCamera::Update(float timeDelta)
 			float holdDist = 6.0f;
 
             // Calculate the hold point in front of the camera
-			glm::vec3 holdPos = parent->position + (parent->look * holdDist);
+			glm::vec3 holdPos = transform->position + (transform->look * holdDist);
 
-            glm::vec3 v = holdPos - pickedUp->position; // direction to move the Target
+            glm::vec3 v = holdPos - pickedUp->transform->position; // direction to move the Target
             v *= powerfactor; // powerfactor of the GravityGun
 
             if (v.length() > maxVel)

@@ -17,6 +17,7 @@
 #include <gtx/quaternion.hpp>
 #include <memory>
 #include "Exception.h"
+#include "Transform.h"
 
 namespace BGE 
 {
@@ -37,18 +38,6 @@ namespace BGE
 		virtual void Cleanup();
 
 		GameComponent * parent;
-		glm::vec3 position;
-		glm::vec3 look;
-		glm::vec3 up;
-		glm::vec3 right;
-		glm::vec3 scale;
-		glm::vec3 velocity;
-		glm::mat4 world;
-		glm::quat orientation;
-		glm::vec3 ambient;
-		glm::vec3 specular;
-		glm::vec3 diffuse; // Will use either this of the array of colours depending on the drawMode setting
-		bool initialised;	
 		std::string tag;
 
 		enum draw_modes {materials, textured, single_material};
@@ -58,24 +47,16 @@ namespace BGE
 		world_modes worldMode;
 		
 		std::list<std::shared_ptr<GameComponent>> children;
-		static const glm::vec3 basisUp;
-		static const glm::vec3 basisLook;
-		static const glm::vec3 basisRight;
-		bool moved;
+		
 		float speed;
 		bool alive;
+		bool initialised;	
 
-		void Strafe(float units); 
-		void Fly(float units);    
-		void Walk(float units);   		
+		std::shared_ptr<Transform> transform;
 
-		void Pitch(float angle); // rotate on right vector
-		void Yaw(float angle);   // rotate on up vector
-		void Roll(float angle);  // rotate on look vector
+
 		void Attach(std::shared_ptr<GameComponent> child);
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 		std::shared_ptr<GameComponent> GetController();
-		void RecalculateVectors();
-		void UpdateFromParent();
 	};
 }

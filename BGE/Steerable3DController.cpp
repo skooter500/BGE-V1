@@ -1,6 +1,7 @@
 #include "Steerable3DController.h"
 #include "Content.h"
 #include "Model.h"
+#include "Utils.h"
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
 #include <gtc/matrix_transform.hpp>
@@ -80,53 +81,53 @@ void Steerable3DController::Update(float timeDelta)
 	float scale = 10000.0f;
 	if (keyState[SDL_SCANCODE_SPACE])
     {
-        AddForce(look * scale * timeDelta);
+        AddForce(transform->look * scale * timeDelta);
     }
 
     // Yaw
 	if (keyState[SDL_SCANCODE_J])
     {
-		AddTorque(up * scale * timeDelta);
+		AddTorque(transform->up * scale * timeDelta);
     }
     if (keyState[SDL_SCANCODE_L])
     {
-        AddTorque(- up * scale * timeDelta);
+        AddTorque(- transform->up * scale * timeDelta);
     }
     // End of Yaw
 
     //Pitch
     if (keyState[SDL_SCANCODE_I])
     {
-        AddTorque(right * scale * timeDelta);
+        AddTorque(transform->right * scale * timeDelta);
     }
     if (keyState[SDL_SCANCODE_K])
     {
-        AddTorque(- right * scale * timeDelta);
+        AddTorque(- transform->right * scale * timeDelta);
     }
     // End of Pitch
 
 	// Roll
     if (keyState[SDL_SCANCODE_Y])
     {
-        AddTorque(look * scale * timeDelta);
+        AddTorque(transform->look * scale * timeDelta);
     }
 
     if (keyState[SDL_SCANCODE_H])
     {
-        AddTorque(- look * scale * timeDelta);
+        AddTorque(- transform->look * scale * timeDelta);
     }
 
     // Do the Newtonian integration
     acceleration = force / mass;
-    velocity += acceleration * timeDelta;
-    position += velocity * timeDelta;
+    transform->velocity += acceleration * timeDelta;
+    transform->position += velocity * timeDelta;
 	
 	// Normalise the velocity into the look
 	// Probably not necessary as we recalculate these anyway later
     if (glm::length(velocity) > 0.0001f)
     {
-		look = glm::normalize(velocity);
-        right = glm::cross(look, up);
+		transform->look = glm::normalize(velocity);
+        transform->right = glm::cross(transform->look, transform->up);
         velocity *= 0.99f;
     }
 
@@ -136,16 +137,16 @@ void Steerable3DController::Update(float timeDelta)
 
     glm::quat w = glm::quat(0, angularVelocity.x, angularVelocity.y, angularVelocity.z);
 
-	orientation = orientation + ((w * (timeDelta / 2.0f)) * orientation);
-	orientation = glm::normalize(orientation);
+	transform->orientation = transform->orientation + ((w * (timeDelta / 2.0f)) * transform->orientation);
+	transform->orientation = glm::normalize(transform->orientation);
     
 	// Reset the accumulators
 	torque = glm::vec3(0);
 	force = glm::vec3(0);
 
-	look = RotateVector(basisLook, orientation);
-	up = RotateVector(basisUp, orientation);
-	right = RotateVector(basisRight, orientation);
+	transform->look = RotateVector(Transform::basisLook, transform->orientation);
+	transform->up = RotateVector(Transform::basisUp, transform->orientation);
+	transform->right = RotateVector(Transform::basisRight, transform->orientation);
 
 	GameComponent::Update(timeDelta);
 }

@@ -38,19 +38,19 @@ bool Lab6::Initialise()
 	// Look at Lab5 for an example of how to do this
 	buddha = make_shared<GameComponent>();
 	buddha->Attach(Content::LoadModel("buddha"));
-	buddha->position = glm::vec3(0,0,0);
-	buddha->scale = glm::vec3(10,10,10);
-	buddha->diffuse = glm::vec3(1.2f, 1.2f, 1.2f);
+	buddha->transform->position = glm::vec3(0,0,0);
+	buddha->transform->scale = glm::vec3(10,10,10);
+	buddha->transform->diffuse = glm::vec3(1.2f, 1.2f, 1.2f);
 	Attach(buddha);
 
 	buddhaFountain0 = make_shared<FountainEffect>(500);
-	buddhaFountain0->position = glm::vec3(-30, 0, 0);
-	buddhaFountain0->diffuse = glm::vec3(1,1, 0);
+	buddhaFountain0->transform->position = glm::vec3(-30, 0, 0);
+	buddhaFountain0->transform->diffuse = glm::vec3(1,1, 0);
 	Attach(buddhaFountain0);
 
 	buddhaFountain1 = make_shared<FountainEffect>(500);
-	buddhaFountain1->position = glm::vec3(-30, 50, 0);
-	buddhaFountain1->diffuse = glm::vec3(1,1, 0);
+	buddhaFountain1->transform->position = glm::vec3(-30, 50, 0);
+	buddhaFountain1->transform->diffuse = glm::vec3(1,1, 0);
 	Attach(buddhaFountain1);
 
 	fountainTheta = 0.0f; 
@@ -60,16 +60,16 @@ bool Lab6::Initialise()
 		shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(500);
 		if (i % 2 == 0)
 		{
-			fountain->diffuse = glm::vec3(1,0,0);
+			fountain->transform->diffuse = glm::vec3(1,0,0);
 		}
 		else
 		{
-			fountain->diffuse = glm::vec3(0,1,0);
+			fountain->transform->diffuse = glm::vec3(0,1,0);
 		}
 
-		fountain->position.x = glm::sin(fountainTheta) * FOUNTAIN_RADIUS;
-		fountain->position.z = - glm::cos(fountainTheta) * FOUNTAIN_RADIUS;
-		fountain->position.y = FOUNTAIN_HEIGHT;
+		fountain->transform->position.x = glm::sin(fountainTheta) * FOUNTAIN_RADIUS;
+		fountain->transform->position.z = - glm::cos(fountainTheta) * FOUNTAIN_RADIUS;
+		fountain->transform->position.y = FOUNTAIN_HEIGHT;
 		fountains.push_back(fountain);
 		Attach(fountain);
 	}
@@ -80,7 +80,7 @@ bool Lab6::Initialise()
 
 	Game::Initialise();
 
-	camera->GetController()->position = glm::vec3(0, 4, 80);
+	camera->GetController()->transform->position = glm::vec3(0, 4, 80);
 	return true;
 }
 
@@ -92,49 +92,49 @@ void Lab6::Update(float timeDelta)
 	{
 		if (i % 2 == 0)
 		{
-			fountains[i]->position.y = FOUNTAIN_HEIGHT + (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
+			fountains[i]->transform->position.y = FOUNTAIN_HEIGHT + (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
 		}
 		else
 		{
-			fountains[i]->position.y = FOUNTAIN_HEIGHT - (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
+			fountains[i]->transform->position.y = FOUNTAIN_HEIGHT - (glm::sin(fountainTheta) * FOUNTAIN_HEIGHT);
 		}
 	}
 	float scale = 30.0f + (glm::sin(fountainTheta) / 3.0f);
-	buddha->scale = glm::vec3(scale, scale, scale);
+	buddha->transform->scale = glm::vec3(scale, scale, scale);
 	fountainTheta += timeDelta;
 	if (fountainTheta >= glm::pi<float>() * 2.0f)
 	{
 		fountainTheta = 0.0f;
 	}
 
-	buddhaFountain0->position.x = glm::sin(fountainTheta) * 30;
-	buddhaFountain0->position.z = - glm::cos(fountainTheta) * 30;
-	buddhaFountain0->position.y -= timeDelta * ySpeed;
-	if (buddhaFountain0->position.y > 50)
+	buddhaFountain0->transform->position.x = glm::sin(fountainTheta) * 30;
+	buddhaFountain0->transform->position.z = - glm::cos(fountainTheta) * 30;
+	buddhaFountain0->transform->position.y -= timeDelta * ySpeed;
+	if (buddhaFountain0->transform->position.y > 50)
 	{
 		ySpeed = -ySpeed;
-		buddhaFountain0->position.y = 50;
+		buddhaFountain0->transform->position.y = 50;
 	}
 
-	if (buddhaFountain0->position.y < 0)
+	if (buddhaFountain0->transform->position.y < 0)
 	{
 		ySpeed = -ySpeed;
-		buddhaFountain0->position.y = 0;
+		buddhaFountain0->transform->position.y = 0;
 	}
 
-	buddhaFountain1->position.x = glm::sin(fountainTheta) * -30;
-	buddhaFountain1->position.z = glm::cos(fountainTheta) * 30;
-	buddhaFountain1->position.y += timeDelta * ySpeed;
-	if (buddhaFountain1->position.y > 50)
+	buddhaFountain1->transform->position.x = glm::sin(fountainTheta) * -30;
+	buddhaFountain1->transform->position.z = glm::cos(fountainTheta) * 30;
+	buddhaFountain1->transform->position.y += timeDelta * ySpeed;
+	if (buddhaFountain1->transform->position.y > 50)
 	{
 		ySpeed = -ySpeed;
-		buddhaFountain1->position.y = 50;
+		buddhaFountain1->transform->position.y = 50;
 	}
 
-	if (buddhaFountain1->position.y < 0)
+	if (buddhaFountain1->transform->position.y < 0)
 	{
 		ySpeed = -ySpeed;
-		buddhaFountain1->position.y = 0;
+		buddhaFountain1->transform->position.y = 0;
 	}
 
 

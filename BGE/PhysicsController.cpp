@@ -40,8 +40,8 @@ void PhysicsController::Update(float timeDelta)
 
 	btTransform trans;
     rigidBody->getMotionState()->getWorldTransform(trans);
-	position = BtToGLVector(trans.getOrigin());
-	orientation = BtToGLQuat(trans.getRotation());
+	transform->position = BtToGLVector(trans.getOrigin());
+	transform->orientation = BtToGLQuat(trans.getRotation());
 	
 	// Calculate the world transform 
 	GameComponent::Update(timeDelta);

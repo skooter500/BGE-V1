@@ -39,7 +39,6 @@ namespace BGE
 		glm::vec2 position;
 	};
 
-	glm::vec3 RotateVector(glm::vec3, glm::quat);
 	
 
 	class Game:

@@ -11,8 +11,8 @@ using namespace std;
 Model::Model():GameComponent()
 {
 	drawMode = draw_modes::materials;
-	ambient = glm::vec3(0.5f, 0.5f, 0.5f);
-	specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	transform->ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+	transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	localTransform = glm::mat4(1);
 	worldMode = GameComponent::from_parent; // Get the world transform from my parent
 	textureID = 0;
@@ -128,20 +128,20 @@ void Model::CalculateBounds()
 
 void Model::Draw()
 {	
-	world = world * localTransform;
+	transform->world = transform->world * localTransform;
 	glUseProgram(programID);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
-	glUniformMatrix4fv(mID, 1, GL_FALSE, & world[0][0]);
+	glUniformMatrix4fv(mID, 1, GL_FALSE, & transform->world[0][0]);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->camera->view[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->camera->projection[0][0]);
 
 	switch (drawMode)
 	{
 	case draw_modes::single_material:
-		glUniform3f(diffuseID, diffuse.r, diffuse.g, diffuse.b); 
+		glUniform3f(diffuseID, transform->diffuse.r, transform->diffuse.g, transform->diffuse.b); 
 		glUniform1i(diffusePerVertexID, false);
 		break;
 	case draw_modes::materials:
@@ -176,10 +176,10 @@ void Model::Draw()
 		break;		
 	}
 
-	glUniform3f(specularID, specular.r, specular.g, specular.b);
-	glUniform3f(ambientID, ambient.r, ambient.g, ambient.b);
+	glUniform3f(specularID, transform->specular.r, transform->specular.g, transform->specular.b);
+	glUniform3f(ambientID, transform->ambient.r, transform->ambient.g, transform->ambient.b);
 
-	glm::mat4 MV = world;
+	glm::mat4 MV = transform->world;
 	glm::mat3 gl_NormalMatrix = glm::inverseTranspose(glm::mat3(MV));
 	glUniformMatrix3fv(nID, 1, GL_FALSE, & gl_NormalMatrix[0][0]);
 	

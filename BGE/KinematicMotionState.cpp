@@ -16,8 +16,8 @@ KinematicMotionState::~KinematicMotionState(void)
 
 void KinematicMotionState::getWorldTransform(btTransform &worldTrans) const
 {
-	worldTrans.setOrigin(GLToBtVector(owner->position));
-	worldTrans.setRotation(GLToBtQuat(owner->orientation));
+	worldTrans.setOrigin(GLToBtVector(owner->transform->position));
+	worldTrans.setRotation(GLToBtQuat(owner->transform->orientation));
 }
 
 void KinematicMotionState::setWorldTransform(const btTransform &worldTrans)

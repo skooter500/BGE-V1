@@ -17,16 +17,16 @@ void LazerBeam::Update( float timeDelta )
 	float width = 500;
 	float height = 500;
 	float speed = 5.0f;
-	if ((position.x < - (width / 2)) || (position.x > width / 2) || (position.z < - (height / 2)) || (position.z > height / 2) || (position.y < 0) || (position.y > 100))
+	if ((transform->position.x < - (width / 2)) || (transform->position.x > width / 2) || (transform->position.z < - (height / 2)) || (transform->position.z > height / 2) || (transform->position.y < 0) || (transform->position.y > 100))
 	{
 		alive = false;
 	}
-	position += look * speed;
+	transform->position += transform->look * speed;
 }
 
 void BGE::LazerBeam::Draw()
 {
-	LineDrawer::DrawLine(position, position + look * 10.0f, glm::vec3(1,0,0));
+	LineDrawer::DrawLine(transform->position, transform->position + transform->look * 10.0f, glm::vec3(1,0,0));
 }
 
 

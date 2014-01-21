@@ -63,4 +63,7 @@ namespace BGE
 	glm::vec3 RandomPosition(float range);
 
 	bool ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sphere, const glm::vec3 & point, glm::vec3 & intersection);
+
+	glm::vec3 RotateVector(glm::vec3, glm::quat);
+
 }

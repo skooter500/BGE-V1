@@ -10,7 +10,7 @@ Route::Route(void)
 	draw = true;
 	next = 0;
 	tag = "Route";
-	diffuse = glm::vec3(1,0,0);
+	transform->diffuse = glm::vec3(1,0,0);
 }
 
 Route::~Route(void)
@@ -23,11 +23,11 @@ void Route::Draw()
 	{
 		for (int i = 1 ; i < waypoints.size() ; i ++)
 		{
-			LineDrawer::DrawLine(waypoints[i - 1], waypoints[i], diffuse);
+			LineDrawer::DrawLine(waypoints[i - 1], waypoints[i], transform->diffuse);
 		}
 		if (looped)
 		{
-			LineDrawer::DrawLine(waypoints[0], waypoints[waypoints.size() - 1], diffuse);
+			LineDrawer::DrawLine(waypoints[0], waypoints[waypoints.size() - 1], transform->diffuse);
 		}
 	}
 

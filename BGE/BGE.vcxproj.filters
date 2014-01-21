@@ -212,6 +212,9 @@
     <ClCompile Include="PhysicsDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -386,6 +389,7 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsDrawer.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\CubeShader.fragmentshader">

@@ -5,13 +5,11 @@ using namespace BGE;
 
 FPSController::FPSController(void)
 {
-	position = glm::vec3(0.0f, 10.0f, 10.0f);
-	worldMode = world_modes::to_parent;
+	transform->position = glm::vec3(0.0f, 10.0f, 10.0f);
 }
 
 bool FPSController::Initialise()
 {
-	UpdateFromParent();
 	return GameComponent::Initialise();
 }
 
@@ -32,22 +30,22 @@ void FPSController::Update(float timeDelta)
 
 	if (keyState[SDL_SCANCODE_W])
 	{
-		Walk(moveSpeed * timeDelta);
+		transform->Walk(moveSpeed * timeDelta);
 	}
 
 	if (keyState[SDL_SCANCODE_S])
 	{
-		Walk(-moveSpeed * timeDelta);
+		transform->Walk(-moveSpeed * timeDelta);
 	}
 
 	if (keyState[SDL_SCANCODE_A])
 	{
-		Strafe(-moveSpeed * timeDelta);
+		transform->Strafe(-moveSpeed * timeDelta);
 	}
 
 	if (keyState[SDL_SCANCODE_D])
 	{
-		Strafe(moveSpeed * timeDelta);
+		transform->Strafe(moveSpeed * timeDelta);
 	}
 
 	int x, y;
@@ -62,11 +60,11 @@ void FPSController::Update(float timeDelta)
 	float scale = 0.1f;
 	if (yaw != 0)
 	{
-		Yaw(yaw * scale);
+		transform->Yaw(yaw * scale);
 	}
 	if (pitch != 0)
 	{
-		Pitch(pitch * scale);
+		transform->Pitch(pitch * scale);
 	}
 	SDL_WarpMouseInWindow(
 		Game::Instance()->GetMainWindow()
