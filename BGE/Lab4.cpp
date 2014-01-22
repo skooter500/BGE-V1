@@ -40,7 +40,7 @@ bool Lab4::Initialise()
 
 	Game::Initialise();
 
-	camera->GetController()->transform->position = glm::vec3(0, 4, 20);
+	camera->transform->position = glm::vec3(0, 4, 20);
 	return true;
 }
 

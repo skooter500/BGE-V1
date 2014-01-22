@@ -12,7 +12,6 @@ Model::Model():GameComponent(false)
 {
 	drawMode = draw_modes::materials;
 	localTransform = glm::mat4(1);
-	worldMode = GameComponent::from_parent; // Get the world transform from my parent
 	textureID = 0;
 }
 
@@ -20,10 +19,9 @@ Model::~Model()
 {
 }
 		
-
 bool Model::Initialise()
 {
-	transform->ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+	transform->ambient = glm::vec3(0.0f, 0.0f, 0.0f);
 	transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 
 	GameComponent::Initialise();

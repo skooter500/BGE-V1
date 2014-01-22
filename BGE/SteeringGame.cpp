@@ -120,8 +120,8 @@ void SteeringGame::Update(float timeDelta)
 
 	if (camFollowing)
 	{
-		camera->GetController()->transform->position = camFollower->transform->position;
-		camera->transform->orientation = camFollower->transform->orientation * camera->GetController()->transform->orientation;
+		camera->transform->position = camFollower->transform->position;
+		camera->transform->orientation = camFollower->transform->orientation * camera->transform->orientation;
 		camera->transform->RecalculateVectors();
 		camera->view = glm::lookAt(
 			camera->transform->position

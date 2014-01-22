@@ -21,7 +21,7 @@ AttackingState::~AttackingState(void)
 
 void AttackingState::Enter()
 {
-	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
+	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->FindComponent("SteeringController"));
 
 	fighterController->TurnOffAll();
 	fighterController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
@@ -41,7 +41,7 @@ void AttackingState::Update(float timeDelta)
 	timeShot += timeDelta;
 	float fov = glm::quarter_pi<float>();
 	// Can I see the leader?
-	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
+	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->FindComponent("SteeringController"));
 
 	if (glm::length(enemy->transform->position - fighterController->transform->position) > range)
 	{

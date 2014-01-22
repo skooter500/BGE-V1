@@ -111,7 +111,7 @@ void ObstacleAvoidanceScenario::Initialise()
 	camController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
 	game->Attach(game->camFollower);
 	game->camFollower->Attach(camController);
-	game->camera->GetController()->transform->position = camController->transform->position;
+	game->camera->transform->position = camController->transform->position;
 
 	shared_ptr<Ground> ground = make_shared<Ground>();
 	game->Attach(ground);

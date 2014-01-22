@@ -324,7 +324,7 @@ void Person::UpdateHead(
 
 	if (headCamera)
 	{
-		game->camera->GetController()->transform->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
+		game->camera->transform->position = boneVector + glm::vec3(0, scale * 0.2f, 0);
 		boxController->transform->position = glm::vec3(100, -100, 100);
 	}
 	else

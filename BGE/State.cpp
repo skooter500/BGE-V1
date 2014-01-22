@@ -22,7 +22,6 @@ std::string BGE::State::Description()
 StateMachine::StateMachine(void)
 {
 	currentState = nullptr;
-	worldMode = GameComponent::world_modes::from_self;
 }
 
 StateMachine::~StateMachine(void)

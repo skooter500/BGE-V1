@@ -19,6 +19,8 @@
 #include "Exception.h"
 #include "Transform.h"
 
+using namespace std;
+
 namespace BGE 
 {
 	float RandomFloat();
@@ -40,12 +42,6 @@ namespace BGE
 		GameComponent * parent;
 		std::string tag;
 
-		enum draw_modes {materials, textured, single_material};
-		enum world_modes {from_self, from_self_with_parent, from_child, to_parent, from_parent};
-
-		draw_modes drawMode;
-		world_modes worldMode;
-		
 		std::list<std::shared_ptr<GameComponent>> children;
 		
 		float speed;
@@ -54,9 +50,10 @@ namespace BGE
 
 		std::shared_ptr<Transform> transform;
 
-
 		void Attach(std::shared_ptr<GameComponent> child);
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
-		std::shared_ptr<GameComponent> GetController();
+
+		shared_ptr<GameComponent> GameComponent::FindComponent(string tag);
+
 	};
 }

@@ -41,9 +41,7 @@ RiftController::RiftController(): m_pManager(NULL)
 	, m_windowWidth(0)
 	, m_windowHeight(0)
 {
-	worldMode = world_modes::to_parent;
 	xboxController = make_shared<XBoxController>();
-	xboxController->worldMode = GameComponent::from_self;
 	xboxController->disablePitch = true;
 	Attach(xboxController);
 }

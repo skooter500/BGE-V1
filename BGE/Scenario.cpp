@@ -21,8 +21,7 @@ void Scenario::Update(float timeDelta)
 {
 	if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
 	{
-		shared_ptr<GameComponent> camController = Game::Instance()->camera->GetController();
-		glm::vec3 newEnemyPos = camController->transform->position + camController->transform->look * 100.0f;
+		glm::vec3 newEnemyPos = Game::Instance()->camera->transform->position + Game::Instance()->camera->transform->look * 100.0f;
 		if (leaderController != nullptr)
 		{
 			leaderController->targetPos = newEnemyPos;

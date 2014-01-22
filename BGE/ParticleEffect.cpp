@@ -3,7 +3,7 @@
 
 using namespace BGE;
 
-ParticleEffect::ParticleEffect(void)
+ParticleEffect::ParticleEffect(void):GameComponent()
 {
 	textureName = "flare";
 	tag = "ParticleEffect";

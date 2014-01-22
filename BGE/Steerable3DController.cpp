@@ -20,7 +20,6 @@ Steerable3DController::Steerable3DController(shared_ptr<Model> model):GameCompon
 	angularAcceleration = glm::vec3(0);
 	angularVelocity = glm::vec3(0);
 	torque = glm::vec3(0);
-	worldMode = world_modes::to_parent;
 	this->model = model;
 }
 

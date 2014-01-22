@@ -46,9 +46,6 @@ Game::Game(void):GameComponent(true) {
 	fontSize = 14;	
 
 	fps = 0;
-
-	worldMode = world_modes::from_self;
-
 	camera = make_shared<Camera>();
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();

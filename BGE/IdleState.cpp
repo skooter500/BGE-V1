@@ -19,7 +19,7 @@ IdleState::~IdleState(void)
 
 void IdleState::Enter()
 {
-	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
+	shared_ptr<SteeringController> fighterController = dynamic_pointer_cast<SteeringController> (owner->parent->FindComponent("SteeringController"));
 	if (initialPos == glm::vec3(0))
 	{
 		initialPos = fighterController->transform->position;
@@ -36,14 +36,14 @@ void IdleState::Enter()
 
 void IdleState::Exit()
 {
-	shared_ptr<SteeringController> fighter = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
+	shared_ptr<SteeringController> fighter = dynamic_pointer_cast<SteeringController> (owner->parent->FindComponent("SteeringController"));
 	fighter->route->waypoints.clear();
 }
 
 void IdleState::Update(float timeDelta)
 {
 	float range = 30.0f;           
-	shared_ptr<SteeringController> fighter = dynamic_pointer_cast<SteeringController> (owner->parent->GetController());
+	shared_ptr<SteeringController> fighter = dynamic_pointer_cast<SteeringController> (owner->parent->FindComponent("SteeringController"));
 
 	// Can I see the leader?
 	if (glm::length(enemy->transform->position - fighter->transform->position) < range)

@@ -10,8 +10,7 @@ VectorDrawer::VectorDrawer(glm::vec3 scale)
 {
 	float back = 0.2f;
 	float side = 0.1f;
-	this->transform->scale = scale;
-
+	myScale = scale;
 	// The lines
 	lines.push_back(glm::vec3(0));
 	lines.push_back(Transform::basisLook);
@@ -25,8 +24,6 @@ VectorDrawer::VectorDrawer(glm::vec3 scale)
 	colours.push_back(glm::vec3(1,1,1));
 	colours.push_back(glm::vec3(1,0,0));
 	colours.push_back(glm::vec3(0,1,0));
-
-	worldMode = GameComponent::from_parent;
 }
 
 
@@ -36,7 +33,6 @@ VectorDrawer::~VectorDrawer(void)
 
 bool VectorDrawer::Initialise()
 {
-	myScale = transform->scale;
 	return GameComponent::Initialise();
 }
 

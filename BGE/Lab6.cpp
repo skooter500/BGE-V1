@@ -80,7 +80,7 @@ bool Lab6::Initialise()
 
 	Game::Initialise();
 
-	camera->GetController()->transform->position = glm::vec3(0, 4, 80);
+	camera->transform->position = glm::vec3(0, 4, 80);
 	return true;
 }
 

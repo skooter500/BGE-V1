@@ -17,9 +17,8 @@ PhysicsController::PhysicsController(btCollisionShape * shape, btRigidBody * rig
 	{
 		this->rigidBody->setUserPointer(this);
 	}
-	this->tag = "Physics Component";
+	this->tag = "PhysicsController";
 	this->motionState = motionState;
-	worldMode = world_modes::to_parent;
 }
 
 void PhysicsController::SetPhysicsStuff(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
@@ -33,11 +32,8 @@ PhysicsController::~PhysicsController(void)
 {
 }
 
-
-
 void PhysicsController::Update(float timeDelta)
 {
-
 	btTransform trans;
     rigidBody->getMotionState()->getWorldTransform(trans);
 	transform->position = BtToGLVector(trans.getOrigin());

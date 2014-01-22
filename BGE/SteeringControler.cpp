@@ -13,14 +13,12 @@ bool SteeringController::counted = false;
 vector<shared_ptr<GameComponent>> SteeringController::obstacles;
 vector<shared_ptr<GameComponent>> SteeringController::steerables;
 
-
 SteeringController::SteeringController(void)
 {
 	force = glm::vec3(0);
 	acceleration = glm::vec3(0);
 	mass = 1.0f;
 	timeDelta = 0.0f;
-	worldMode = world_modes::to_parent;
 	calculationMethod = CalculationMethods::WeightedTruncatedRunningSumWithPrioritisation;
 	maxSpeed = Params::GetFloat("max_speed");
 	maxForce = Params::GetFloat("max_force");
@@ -29,6 +27,7 @@ SteeringController::SteeringController(void)
 	wanderTarget = glm::normalize(wanderTarget);
 	wanderTarget *= Params::GetFloat("wander_radius");
 	counted = false;
+	tag = "SteeringController";
 
 	route = make_shared<Route>();
 
@@ -690,6 +689,7 @@ glm::vec3 SteeringController::CalculateWeightedPrioritised()
     if (IsOn(behaviour_type::follow_path))
     {
         force = FollowPath() * Params::GetWeight("follow_path_weight");
+		Game::Instance()->PrintVector("Steering pos:", transform->position);
         if (!AccumulateForce(steeringForce, force))
         {
             return steeringForce;

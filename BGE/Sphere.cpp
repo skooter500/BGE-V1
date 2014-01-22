@@ -6,7 +6,7 @@ using namespace BGE;
 
 Sphere::Sphere(float radius):GameComponent(true)
 {
-	std::shared_ptr<GameComponent> model (Content::LoadModel("sphere"));
+	std::shared_ptr<Model> model (Content::LoadModel("sphere"));
 	model->drawMode = Model::draw_modes::single_material;
 	Attach(model);
 	model->Initialise();

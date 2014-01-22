@@ -107,16 +107,15 @@ std::list<std::shared_ptr<GameComponent>> * GameComponent::GetChildren()
 	return & children;
 }
 
-shared_ptr<GameComponent> GameComponent::GetController()
+shared_ptr<GameComponent> GameComponent::FindComponent(std::string tag)
 {
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{	
-		if ((*it)->worldMode == world_modes::to_parent)
+		if ((*it)->tag == tag)
 		{
 			return * it;
 		}
-		it ++;
 	}
-	throw new BGE::Exception("Tried to get a controller for a game component, but none exists");
+	return nullptr;
 }

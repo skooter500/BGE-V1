@@ -6,7 +6,6 @@ using namespace BGE;
 
 XBoxController::XBoxController(void)
 {
-	worldMode = GameComponent::world_modes::to_parent;
 	disablePitch = false;
 }
 

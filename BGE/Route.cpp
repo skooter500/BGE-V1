@@ -3,9 +3,8 @@
 
 using namespace BGE;
 
-Route::Route(void)
+Route::Route(void):GameComponent(true)
 {
-	worldMode = world_modes::from_self;
 	looped = false;
 	draw = true;
 	next = 0;

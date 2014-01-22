@@ -52,6 +52,9 @@ namespace BGE
 		BoundingBox boundingBox;
 		glm::mat4 localTransform;
 		string textureName;
+
+		enum draw_modes {materials, textured, single_material};
+		draw_modes drawMode;
 	};
 }
 

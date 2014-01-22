@@ -11,7 +11,7 @@ FountainEffect::FountainEffect(void):numParticles(1000)
 FountainEffect::FountainEffect(int numParticles)
 {
 	this->numParticles = numParticles;
-	transform->diffuse = glm::vec3(0,0,1);
+	
 }
 
 
@@ -21,6 +21,7 @@ FountainEffect::~FountainEffect(void)
 
 bool FountainEffect::Initialise()
 {
+	transform->diffuse = glm::vec3(0,0,1);
 	for (int i = 0 ; i < numParticles ; i ++)
 	{
 		Particle p;

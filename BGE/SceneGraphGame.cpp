@@ -11,8 +11,6 @@
 
 using namespace BGE;
 
-
-
 SceneGraphGame::SceneGraphGame(void)
 {
 	physicsFactory = NULL;
@@ -72,20 +70,16 @@ bool SceneGraphGame::Initialise()
 	width = 1280;
 	height = 800;
 
-	shared_ptr<GameComponent> partFollower = make_shared<GameComponent>();
+	shared_ptr<GameComponent> partFollower = make_shared<GameComponent>(true);
 	Attach(partFollower);
 
-	// from_self
-	selfExample = make_shared<GameComponent>();
+	selfExample = make_shared<GameComponent>(true);
 	selfExample->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	selfExample->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	selfExample->transform->position = NextPosition(current ++, componentCount);
 	Attach(selfExample);
 
-	//// from_self_with_parent
-	//// Create a hierarchy
-	station = make_shared<GameComponent>();
-	station->worldMode = world_modes::from_self;
+	station = make_shared<GameComponent>(true);
 	station->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	station->transform->specular = glm::vec3(0,0,0);
 	station->transform->scale = glm::vec3(1,1,1);
@@ -96,8 +90,7 @@ bool SceneGraphGame::Initialise()
 	Attach(station);
 
 	// Add a child to the station and update by including the parent's world transform
-	std::shared_ptr<GameComponent> ship1 = make_shared<GameComponent>();
-	ship1->worldMode = world_modes::from_self_with_parent;
+	std::shared_ptr<GameComponent> ship1 = make_shared<GameComponent>(true);
 	ship1->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	ship1->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	std::shared_ptr<Model> ana = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp));	
@@ -106,23 +99,21 @@ bool SceneGraphGame::Initialise()
 	station->Attach(ship1); // NOTE the ship is attached to the station at an offset of 10.
 	
 	// Create a component  with an XBOX Controller attached
-	shared_ptr<GameComponent> ship2 = make_shared<GameComponent>();
-	ship2->worldMode = world_modes::from_child;
+	shared_ptr<GameComponent> ship2 = make_shared<GameComponent>(true);
 	ship2->Attach(make_shared<XBoxController>());
 	ship2->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	ship2->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
-	ship2->GetController()->transform->position = NextPosition(current ++, componentCount);
+	ship2->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship2);
 
 	// Create a component with a steerable 3D controller attached
-	shared_ptr<GameComponent> ship3 = make_shared<GameComponent>();
-	ship3->worldMode = world_modes::from_child;
+	shared_ptr<GameComponent> ship3 = make_shared<GameComponent>(true);
 	ship3->transform->scale = glm::vec3(3,3,3);
 	shared_ptr<Model> s3Model = Content::LoadModel("moray", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0)));
 	ship3->Attach(make_shared<Steerable3DController>(s3Model));
 	ship3->Attach(s3Model);
 	ship3->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
-	ship3->GetController()->transform->position = NextPosition(current ++, componentCount);
+	ship3->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship3);
 
 	// Create some physics components using the factory
@@ -137,10 +128,11 @@ bool SceneGraphGame::Initialise()
 	carController->Attach(Content::LoadModel("transporter", glm::translate(glm::mat4(1), glm::vec3(0,5,0))));
 
 	// Create some steering components to chase each other
-	shared_ptr<GameComponent> ship4 = make_shared<GameComponent>();
+	/*shared_ptr<GameComponent> ship4 = make_shared<GameComponent>(true);
 	ship4->tag = "Steerable";
 	ship4->transform->scale = glm::vec3(2, 2, 2);
 	shared_ptr<SteeringController> ship4Controller = make_shared<SteeringController>();
+	ship4->Attach(ship4Controller);
 	ship4Controller->transform->position = NextPosition(current ++, componentCount);
 	ship4Controller->TurnOffAll();
 	ship4Controller->TurnOn(SteeringController::behaviour_type::follow_path);
@@ -149,13 +141,12 @@ bool SceneGraphGame::Initialise()
 	ship4Controller->route->waypoints.push_back(ship4Controller->transform->position + glm::vec3(15, 0, -15));
 	ship4Controller->route->waypoints.push_back(ship4Controller->transform->position + glm::vec3(0, 0, -15));
 	ship4Controller->route->looped = true;
-	ship4Controller->route->draw = true;
-	ship4->Attach(ship4Controller);
+	ship4Controller->route->draw = true;	
 	ship4->Attach(Content::LoadModel("krait", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
-	Attach(ship4);
+	Attach(ship4);*/
 
 	// Load a textured model
-	shared_ptr<GameComponent> mushroom = make_shared<GameComponent>();
+	shared_ptr<GameComponent> mushroom = make_shared<GameComponent>(true);
 	mushroom->transform->position = NextPosition(current ++, componentCount);
 	mushroom->transform->scale = glm::vec3(0.1f,0.1f,0.1f);
 	mushroom->Attach(Content::LoadModel("mushroom"));
@@ -163,9 +154,9 @@ bool SceneGraphGame::Initialise()
 
 	// Create a component that follows a path from component to component
 	partFollower->tag = "Steerable";
-	partFollower->transform->scale = glm::vec3(2, 2, 2);
 	shared_ptr<SteeringController> pathFollowerController = make_shared<SteeringController>();
-	pathFollowerController->transform->position = NextPosition(current, componentCount);
+	partFollower->Attach(pathFollowerController);
+	partFollower->transform->position = NextPosition(current, componentCount);
 	pathFollowerController->TurnOffAll();
 	pathFollowerController->TurnOn(SteeringController::behaviour_type::follow_path);
 	pathFollowerController->route->transform->diffuse = glm::vec3(0,0,1);
@@ -177,15 +168,15 @@ bool SceneGraphGame::Initialise()
 		pathFollowerController->route->waypoints.push_back(waypoints[i]);
 		pathFollowerController->route->looped = true;
 	}
-	partFollower->Attach(pathFollowerController);
+	
 	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(1000);
+	partFollower->Attach(fountain);
 	partFollower->transform->diffuse = glm::vec3(0,1,1);
-	fountain->worldMode = world_modes::from_parent;
 
 	shared_ptr<SnowEffect> snow = make_shared<SnowEffect>();
 	Attach(snow);
 
-	partFollower->Attach(fountain);
+	
 
 	return Game::Initialise();
 }

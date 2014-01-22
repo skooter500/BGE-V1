@@ -242,7 +242,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	}
 	else
 	{
-		model->drawMode = GameComponent::draw_modes::materials;
+		model->drawMode = Model::draw_modes::materials;
 	}
 	Content::models[name] = model;	
 	return model;

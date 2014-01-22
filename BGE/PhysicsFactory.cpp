@@ -39,14 +39,14 @@ void PhysicsFactory::CreateWall(glm::vec3 startAt, float width, float height, fl
 
 shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::vec3 pos, glm::quat quat, glm::vec3 scale)
 {
-	shared_ptr<GameComponent> component = make_shared<GameComponent>();
+	shared_ptr<GameComponent> component = make_shared<GameComponent>(true);
 	component->tag = name;
 	component->transform->scale = scale;
 	Game::Instance()->Attach(component);
 	shared_ptr<Model> model = Content::LoadModel(name);
 	component->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
-	model->Initialise();
 	component->Attach(model);
+	model->Initialise();
 
 	std::vector<glm::vec3>::iterator it = model->vertices.begin(); 	
 	btConvexHullShape * tetraShape = new btConvexHullShape();
@@ -80,7 +80,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 
 shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat)
 {
-	shared_ptr<GameComponent> sphere (new Sphere(radius));
+	shared_ptr<GameComponent> sphere = make_shared<Sphere>(radius);
 	Game::Instance()->Attach(sphere);
 
 	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
@@ -114,7 +114,6 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 
 	// This is a container for the box model
 	shared_ptr<Box> box = make_shared<Box>(width, height, depth);
-	box->worldMode = GameComponent::from_child;
 	box->transform->position = pos;
 	Game::Instance()->Attach(box);
 
@@ -242,8 +241,8 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	shared_ptr<PhysicsController> groundComponent (new PhysicsController(groundShape, body, groundMotionState));
 	groundComponent->tag = "Ground";
-	ground->Attach(groundComponent);	
 	Game::Instance()->SetGround(ground);
+	ground->Attach(groundComponent);	
 	return groundComponent;
 }
 
