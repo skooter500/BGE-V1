@@ -17,13 +17,21 @@ float BGE::RandomFloat()
 	return (float)rand()/(float)RAND_MAX;
 }
 
-GameComponent::GameComponent(void)
+GameComponent::GameComponent(bool hasTransform)
 {
 	speed = 10.0f;
-	worldMode = world_modes::from_self_with_parent;
 	parent = NULL;
 	tag = "Nothing";
+	if (hasTransform)
+	{
+		transform = make_shared<Transform>();
+	}
+	else
+	{
+		transform = nullptr;
+	}
 	alive = true;
+	initialised = false;
 }
 
 
@@ -85,6 +93,11 @@ void GameComponent::Update(float timeDelta) {
 void GameComponent::Attach(shared_ptr<GameComponent> child)
 {
 	child->parent = this;
+	// All my children share the same transform if they dont already have one...
+	if (child->transform == nullptr)
+	{
+		child->transform = transform; 
+	}
 	children.push_back(child);
 }
 

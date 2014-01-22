@@ -5,11 +5,11 @@ using namespace BGE;
 
 FPSController::FPSController(void)
 {
-	transform->position = glm::vec3(0.0f, 10.0f, 10.0f);
 }
 
 bool FPSController::Initialise()
 {
+	transform->position = glm::vec3(0.0f, 10.0f, 10.0f);
 	return GameComponent::Initialise();
 }
 

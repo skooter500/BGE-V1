@@ -8,11 +8,9 @@
 using namespace BGE;
 using namespace std;
 
-Model::Model():GameComponent()
+Model::Model():GameComponent(false)
 {
 	drawMode = draw_modes::materials;
-	transform->ambient = glm::vec3(0.5f, 0.5f, 0.5f);
-	transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	localTransform = glm::mat4(1);
 	worldMode = GameComponent::from_parent; // Get the world transform from my parent
 	textureID = 0;
@@ -25,6 +23,9 @@ Model::~Model()
 
 bool Model::Initialise()
 {
+	transform->ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+	transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+
 	GameComponent::Initialise();
 	if (!Game::Instance()->initialised)
 	{

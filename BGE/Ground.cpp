@@ -8,8 +8,6 @@ Ground::Ground(void):GameComponent()
 {
 	width = 5000;
 	height = 5000;
-	// Diffuse will come from the texture
-	transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 }
 
 bool Ground::rayIntersectsWorldPlane(glm::vec3 origin, glm::vec3 look, glm::vec3 & point)
@@ -40,6 +38,10 @@ bool Ground::Initialise()
 	{
 		return true;
 	}
+
+	// Diffuse will come from the texture
+	transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
+
 	const float twidth = 500;
     const float theight = 500;
 

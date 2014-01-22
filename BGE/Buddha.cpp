@@ -39,6 +39,7 @@ bool Buddha::Initialise()
 	// make a circle of fountains
 
 	buddha = make_shared<GameComponent>();
+	buddha->transform = make_shared<Transform>();
 	buddha->Attach(Content::LoadModel("buddha"));
 	buddha->transform->position = glm::vec3(0,0,0);
 	buddha->transform->scale = glm::vec3(10,10,10);

@@ -11,9 +11,10 @@ using namespace BGE;
 
 ModelTest::ModelTest(void) 
 {
-	
+	width = 800;
+	height = 600;
+	riftEnabled = false;
 }
-
 
 ModelTest::~ModelTest(void) {
 }
@@ -35,22 +36,22 @@ bool ModelTest::Initialise()
 	cyl->transform->position = glm::vec3(15, 5, -20);
 	Attach(cyl);
 
-	std::shared_ptr<GameComponent> box1 (new Box(1, 2, 1));
+	std::shared_ptr<GameComponent> box1 = make_shared<Box>(1, 2, 1);
 	box1->transform->position = glm::vec3(5, 2, 0);
 	box->Attach(box1);
 
-	std::shared_ptr<GameComponent> sphere (new Sphere(1));
+	std::shared_ptr<GameComponent> sphere = make_shared<Sphere>(1);
 	sphere->transform->position = glm::vec3(10, 5, -20);
 	Attach(sphere);
 
-	rotTest = make_shared<GameComponent>();
+	rotTest = make_shared<GameComponent>(true);
 	rotTest->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	Attach(rotTest);
 	
-	shared_ptr<GameComponent> ship = make_shared<GameComponent>();
+	shared_ptr<GameComponent> ship = make_shared<GameComponent>(true);
 	shared_ptr<Model> model = Content::LoadModel("marimba");	
 	shared_ptr<GameComponent> steerable = make_shared<Steerable3DController>(model);
-	steerable->transform->position = glm::vec3(20, 5, -20);
+	ship->transform->position = glm::vec3(20, 5, -20);
 	ship->Attach(steerable);
 	ship->Attach(model);
 	Attach(ship);

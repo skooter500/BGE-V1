@@ -5,15 +5,15 @@
 
 using namespace BGE;
 
-Box::Box(float width, float height, float depth):GameComponent()
+Box::Box(float width, float height, float depth):GameComponent(true)
 {
 	shared_ptr<Model> model = Content::LoadModel("cube");
 	model->drawMode = Model::draw_modes::single_material;
+	Attach(model);
 	model->Initialise();
 	transform->diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	transform->specular = glm::vec3(0,0,0);
 	tag = "Box";
-	Attach(model);
 	transform->scale = glm::vec3(width, height, depth);
 }
 

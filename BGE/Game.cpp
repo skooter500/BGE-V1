@@ -25,7 +25,7 @@ BGE::Game * Game::instance = NULL;
 
 
 
-Game::Game(void) {
+Game::Game(void):GameComponent(true) {
 	running = false;
 	console = true;
 	fullscreen = true;
@@ -53,7 +53,6 @@ Game::Game(void) {
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
 	Attach(camera);
-
 }
 
 Game::~Game(void) {
@@ -129,18 +128,17 @@ bool Game::Initialise() {
 		throw BGE::Exception("Could not init TTF");
 	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
+	camera->transform->position = glm::vec3(0, 10, 10);
 
 	if (riftEnabled)
 	{
 		shared_ptr<RiftController> riftController = make_shared<RiftController>();
-		riftController->transform->position = glm::vec3(0, 10, 10);
 		this->riftController = riftController;
 		camera->Attach(riftController);
 	}
 	else
 	{
 		shared_ptr<GameComponent> controller = make_shared<FPSController>();
-		controller->transform->position = glm::vec3(0, 10, 10);
 		camera->Attach(controller);
 	}
 
@@ -414,8 +412,8 @@ void Game::Print(string message, glm::vec2 position)
 	float width = surface->w;
 	float height = surface->h;
 
-	x = transform->position.x;
-	y = (this->height - height) - transform->position.y;
+	x = position.x;
+	y = (this->height - height) - position.y;
 	
 	
 	vertices.push_back(glm::vec2(x + width,y));

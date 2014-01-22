@@ -30,7 +30,7 @@ namespace BGE
 	protected:
 		
 	public:
-		GameComponent(void);
+		GameComponent(bool hasTransform = false);
 
 		virtual bool Initialise();
 		virtual void Update(float timeDelta);
