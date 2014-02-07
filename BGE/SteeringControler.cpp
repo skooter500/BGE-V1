@@ -118,6 +118,7 @@ void SteeringController::Update(float timeDelta)
 		if (look == right)
 		{
 			right = GameComponent::basisRight;
+
 		}
 		else
 		{
