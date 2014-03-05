@@ -1,15 +1,17 @@
-#include<sdl.h>
-#include <windows.h>
+//#include<sdl.h>
+#ifdef _WIN32
+ #include <windows.h>
+#endif 
 #include <GL/glew.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include<glm.hpp>
 #include "Game.h"
 #include "TriangleTest.h"
 #include "TexturedCube.h"
 #include "CubeTest.h"
 #include "PhysicsGame1.h"
-#include "VRGame.h"
+//#include "VRGame.h"
 #include "ModelTest.h"
 #include "SteeringGame.h"
 #include "SceneGraphGame.h"

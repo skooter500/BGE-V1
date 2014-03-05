@@ -28,11 +28,9 @@ bool LineDrawer::Initialise()
 {
 	programID = Content::LoadShaderPair( "Lines");
 	glUseProgram(programID);
-
 	glGenBuffers(1, &vertexBufferID);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
 	glBufferData(GL_ARRAY_BUFFER, MAX_LINES * sizeof(glm::vec3), NULL, GL_DYNAMIC_DRAW);	
-
 
 	vID = glGetUniformLocation(programID,"v");
 	pID = glGetUniformLocation(programID,"p");

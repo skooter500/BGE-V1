@@ -1,8 +1,8 @@
 #pragma once
 #include <glm.hpp>
 #include <GL/glew.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include<glm.hpp>
 #include <vector>
 #include <gtc/matrix_transform.hpp>

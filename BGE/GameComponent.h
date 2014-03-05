@@ -1,14 +1,15 @@
 #pragma once
 
 #include<glm.hpp>
-#include<glm.hpp>
-#include<sdl.h>
-#include <windows.h>
-#include <windowsx.h>
-#include <io.h>
+//#include<sdl.h>
+#ifdef _WIN32
+ #include <windows.h> 
+ #include <windowsx.h>
+ #include <io.h>
+#endif
 #include <GL/glew.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include<glm.hpp>
 #include<list>
 #include<string>

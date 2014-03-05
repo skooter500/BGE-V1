@@ -3,7 +3,9 @@
 #include "Utils.h"
 #include <gtx/norm.hpp>
 using namespace FMOD;
+#ifdef _WIN32
 using namespace OVR;
+#endif 
 using namespace std;
 
 float BGE::RandomClamped(float min, float max)
@@ -23,6 +25,7 @@ FMOD_VECTOR BGE::GLToFMODVector(glm::vec3 v)
 	return fv;
 }
 
+#ifdef _WIN32
 glm::quat BGE::OVRToGLQuat(Quatf q)
 {
 	return glm::quat(q.w, q.x, q.y, q.z);
@@ -33,13 +36,13 @@ OVR::Vector3f BGE::GLToOVRVector(glm::vec3 v)
 	return OVR::Vector3f(v.x, v.y, v.z);
 }
 
-
 OVR::Matrix4f BGE::GLToOVRMat4(glm::mat4 m)
 {
 	m = glm::transpose(m);
 	OVR::Matrix4f ret;
 	memcpy(& ret, & m, sizeof(OVR::Matrix4f));
 	return ret;
+
 }
 
 glm::mat4 BGE::OVRToGLMat4(OVR::Matrix4f m)
@@ -49,6 +52,7 @@ glm::mat4 BGE::OVRToGLMat4(OVR::Matrix4f m)
 	memcpy(& ret, & m, sizeof(OVR::Matrix4f));
 	return ret;
 }
+#endif 
 
 glm::vec3 BGE::BtToGLVector(const btVector3 & v)
 {

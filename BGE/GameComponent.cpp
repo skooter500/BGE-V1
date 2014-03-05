@@ -3,7 +3,7 @@
 #include "Game.h"
 #include <iostream>
 #include <cmath>
-#include <gtx\constants.hpp>
+//#include <glm/gtx/constants.hpp>
 #include <ctime>
 #include "VectorDrawer.h"
 
@@ -38,11 +38,15 @@ GameComponent::GameComponent(bool hasTransform)
 bool GameComponent::Initialise()
 {	
 	// Initialise all the children
+	
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	
 	while (it != children.end())
 	{
-		(*it ++)->initialised = (*it)->Initialise();	
+		(*it)->initialised = (*it)->Initialise();	
+		*it++; 
 	}
+	
 	return true;
 }
 

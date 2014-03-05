@@ -1,4 +1,5 @@
 #pragma once
+#include <GL/gl.h>
 
 GLint getUniLoc(const GLuint program, const GLchar *name);
 void  printShaderInfoLog(GLuint obj);

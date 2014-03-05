@@ -1,24 +1,29 @@
 #pragma once
-#include<sdl.h>
-#include <windows.h>
-#include <windowsx.h>
-#include <io.h>
+//#include<sdl.h>
+#ifdef _WIN32
+ #include <windows.h>
+ #include <windowsx.h>
+ #include <io.h>
+ #include <OVR.h>
+ #include "RiftController.h"
+#endif 
 #include <GL/glew.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include<glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include<vector>
 #include<sstream>
 #include <SDL_ttf.h>
-#include <OVR.h>
+#include <SDL.h>
 #include "Camera.h"
 #include "Ground.h"
 #include "SoundSystem.h"
-#include "RiftController.h"
 #include "LineDrawer.h"
 
+#ifdef _WIN32
 using namespace OVR;
+#endif 
 
 namespace BGE
 {
@@ -89,7 +94,9 @@ namespace BGE
 		bool console;
 		bool hud;
 
+#ifdef _WIN32 
 		shared_ptr<RiftController> riftController;
+#endif 
 		shared_ptr<SoundSystem> soundSystem;
 
 		string riftMessage;

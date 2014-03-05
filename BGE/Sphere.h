@@ -1,5 +1,5 @@
 #pragma once
-#include "gamecomponent.h"
+#include "GameComponent.h"
 
 
 namespace BGE
