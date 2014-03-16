@@ -22,6 +22,7 @@ SteeringController::SteeringController(void)
 	calculationMethod = CalculationMethods::WeightedTruncatedRunningSumWithPrioritisation;
 	maxSpeed = Params::GetFloat("max_speed");
 	maxForce = Params::GetFloat("max_force");
+	deleteMe = 0; 
 
 	wanderTarget = RandomPosition(1.0f);
 	wanderTarget = glm::normalize(wanderTarget);
@@ -74,7 +75,7 @@ void SteeringController::Update(float timeDelta)
 		SteeringController::counted = true;
 	}
 
-
+	
 	force = Calculate();
 	CheckNaN(force);
 	glm::vec3 newAcceleration = force / mass;
@@ -120,13 +121,13 @@ void SteeringController::Update(float timeDelta)
 		}
 		else
 		{
-			transform->right = glm::cross(transform->look, transform->up);
+			/*transform->right = glm::cross(transform->look, transform->up);
 			transform->position = glm::normalize(transform->right);
 
 			CheckNaN(transform->right, Transform::basisRight);
 			transform->up = glm::cross(transform->right, transform->look);
 			transform->up = glm::normalize(transform->up);
-			CheckNaN(transform->up, Transform::basisUp);
+			CheckNaN(transform->up, Transform::basisUp);*/
 		}
 		// Apply damping
 		transform->velocity *= 0.99f;
@@ -715,6 +716,7 @@ glm::vec3 SteeringController::FollowPath()
     if (dist < epsilon)
     {
         route->AdvanceToNext();
+	glm::vec3 v = route -> NextWaypoint(); 
     }
     if ((! route->looped) && route->IsLast())
     {

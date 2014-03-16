@@ -11,7 +11,6 @@
 #include "TexturedCube.h"
 #include "CubeTest.h"
 #include "PhysicsGame1.h"
-//#include "VRGame.h"
 #include "ModelTest.h"
 #include "SteeringGame.h"
 #include "SceneGraphGame.h"

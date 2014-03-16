@@ -1,13 +1,4 @@
 #include "SceneGraphGame.h"
-#include "Content.h"
-#include "VectorDrawer.h"
-#include "XBoxController.h"
-#include "Steerable3DController.h"
-#include "SteeringControler.h"
-#include "Params.h"
-#include "FountainEffect.h"
-#include "Box.h"
-#include "SnowEffect.h"
 
 using namespace BGE;
 
@@ -56,9 +47,9 @@ bool SceneGraphGame::Initialise()
 	solver = new btSequentialImpulseConstraintSolver();
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,0,0));
-
-	camera->transform->position = glm::vec3(0,10,0);
-	camera->transform->look = glm::vec3(0, 0, 1);
+	
+	//camera->transform->position = glm::vec3(0,10,-1000);
+	camera->transform->look = glm::vec3(0, 0, 1); 
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
@@ -115,13 +106,19 @@ bool SceneGraphGame::Initialise()
 	ship3->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	ship3->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship3);
+	
+	/*std::shared_ptr<GameComponent> anacon2 = make_shared<GameComponent>(true); 
+	anacon2 -> transform -> ambient = glm::vec3(.2f, .2f, .2f); anacon2 -> transform -> specular = glm::vec3(1.2f, 1.2f, 1.2f); 
+	std::shared_ptr<Model> anmod = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.f, Transform::basisUp)); 
+	anacon2 -> Attach(anmod); anacon2 -> transform -> position = glm::vec3(0, 0, -100); */
 
 	// Create some physics components using the factory
 	physicsFactory->CreateBox(5,5,5, NextPosition(current ++, componentCount), glm::quat());	
 	physicsFactory->CreateFromModel("monkey", NextPosition(current ++, componentCount), glm::quat(), glm::vec3(5,5,5));
-
+	
 	// Create a physics car
-	physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
+	shared_ptr<PhysicsController> car = physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
+	Attach(car); 
 	
 	// Create a physics component and attach a non-physics component to it
 	shared_ptr<PhysicsController> carController = physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
@@ -177,7 +174,7 @@ bool SceneGraphGame::Initialise()
 	Attach(snow);
 
 	
-
+	
 	return Game::Initialise();
 }
 

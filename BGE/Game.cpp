@@ -21,8 +21,6 @@ BGE::Game * Game::instance = NULL;
 
 
 
-
-
 Game::Game(void):GameComponent(true) {
 	running = false;
 	console = true;
@@ -44,7 +42,7 @@ Game::Game(void):GameComponent(true) {
 	fontSize = 14;	
 
 	fps = 0;
-	camera = make_shared<Camera>();
+	camera = make_shared<Camera>(); 
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
 	Attach(camera);
@@ -123,7 +121,7 @@ bool Game::Initialise() {
 		throw BGE::Exception("Could not init TTF");
 	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
-	camera->transform->position = glm::vec3(0, 10, 10);
+	//camera->transform->position = glm::vec3(0, 10, -1000);
 
 	if (riftEnabled)
 	{
@@ -175,8 +173,8 @@ void Game::PrintText(string message)
 bool Game::Run() {
 	
 	if(Initialise() == false) {
-        return false;
-    }
+        	return false;
+    	}
 	long last = SDL_GetTicks();
 	while(running) {
 		long now = SDL_GetTicks();
@@ -220,16 +218,16 @@ void Game::Update(float timeDelta) {
 	}	
 
 	SDL_Event event;
-    if (SDL_PollEvent(&event))
-    {
-        // Check for the quit message
-        if (event.type == SDL_QUIT)
-        {
-        // Quit the program
-        Cleanup();
-		exit(0);
-        }
-    }
+    	if (SDL_PollEvent(&event))
+    	{
+        	// Check for the quit message
+        	if (event.type == SDL_QUIT)
+        	{
+        	// Quit the program
+        		Cleanup();
+			exit(0);
+        	}
+    	}
 
 	if (keyState[SDL_SCANCODE_ESCAPE])
 	{

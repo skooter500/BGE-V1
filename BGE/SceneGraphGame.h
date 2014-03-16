@@ -3,6 +3,16 @@
 #include "PhysicsFactory.h"
 #include <btBulletDynamicsCommon.h>
 #include <vector>
+#include <iostream>
+#include "Content.h"
+#include "VectorDrawer.h"
+#include "XBoxController.h"
+#include "Steerable3DController.h"
+#include "SteeringControler.h"
+#include "Params.h"
+#include "FountainEffect.h"
+#include "Box.h"
+#include "SnowEffect.h"
 
 using namespace std;
 

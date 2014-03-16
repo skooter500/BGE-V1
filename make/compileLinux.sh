@@ -12,7 +12,7 @@ if [ "$UID" -ne 0 ]
 		exit 0 
 fi
 
-echo 'Preparing dependencies (this will quite a long time)' 
+echo 'Preparing dependencies (this will take quite a long time)' 
 mkdir /usr/lib/BGEForLinux
 here=$(pwd)
 cd /usr/lib/BGEForLinux
@@ -32,8 +32,10 @@ echo '/usr/lib/BGEForLinux/SDL2_ttf-2.0.12' >> '/etc/ld.so.conf'
 echo '/usr/lib/BGEForLinux/SDL2_ttf-2.0.12' >> '/etc/ld.so.conf'
 echo '/usr/lib/BGEForLinux/SDL-2.0.2-8236' >> '/etc/ld.so.conf'
 ldconfig -v
-exit 
 echo 'Compiling BGE'
 make 
 make clean
+cp ./bgedemo /usr/bin 
+echo 'Finished' 
+
 

@@ -42,7 +42,6 @@ void PhysicsCamera::Update(float timeDelta)
 
 	float moveSpeed = speed;
 	float timeToPass = 1.0f / fireRate;
-
 	if ((keyState[SDL_SCANCODE_SPACE]) && (elapsed > timeToPass))
 	{
 		glm::vec3 pos = transform->position + (transform->look * 5.0f);

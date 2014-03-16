@@ -6,7 +6,7 @@ OPTS=-fpermissive -w -std=gnu++0x
 START=$(CC) $(OPTS)
 DEPS=../Dependancies
 LDEPS=$(DEPS)/linux
-OBJ=-c -o
+OBJ=-c -pg -o
 PRIMARY=$(START) $(OBJ)
 
 # Include valid header files
@@ -86,7 +86,7 @@ FBO=fbo_cpp
 GROUND=ground_cpp 
 
 program: compile_0 compile_1 compile_2 compile_3 compile_4 compile_5 compile_6 compile_7 compile_8 compile_9 compile_10 compile_11 
-	$(CC) -fpermissive -std=gnu++0x -o bgedemo $(IGLM) *.o $(LSTLTTF) $(LSTL) $(LFMOD) $(LBUL) $(LLSTLTTF) $(LLSTL) $(LLFMOD) $(LLBUL) -lGL -lGLU -lGLEW 
+	$(CC) -fpermissive -std=gnu++0x -pg -o bgedemo $(IGLM) *.o $(LSTLTTF) $(LSTL) $(LFMOD) $(LBUL) $(LLSTLTTF) $(LLSTL) $(LLFMOD) $(LLBUL) -lGL -lGLU -lGLEW 
 
 compile_0: $(PHYSICSCAMERA) $(PHYSICSCONTROLLER) $(PHYSICSGAME1) $(TRANSFORM) $(CONTENT) 
 compile_1: $(STATE) $(CAMERA) $(BUDDHA) $(MOTIONSTATE) $(PARTICLEEFFECT) 
