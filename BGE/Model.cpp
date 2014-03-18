@@ -15,8 +15,30 @@ Model::Model():GameComponent(false)
 	textureID = 0;
 }
 
+Model::Model(shared_ptr<Model> other) : GameComponent(false) { 
+	drawMode = other -> drawMode; 
+	GLuint * privates = other -> dumpPrivateContents(); 
+	vertexbuffer = privates[0]; normalbuffer = privates[1]; uvbuffer = privates[2]; colourbuffer = privates[3]; ambientID = privates[4]; 
+	specularID = privates[5]; diffuseID = privates[6]; uvID = privates[7]; programID = privates[8]; diffusePerVertexID = privates[9]; 
+	mID = privates[10]; vID = privates[11]; pID = privates[12]; nID = privates[13]; mvpID = privates[14]; texelbuffer = privates[15]; 
+	textureSampler = privates[16]; textureID = privates[17]; 
+	vertices = other -> vertices; 
+	normals = other -> normals; 
+	uvs = other -> uvs; 
+	colours = other -> colours; 
+	boundingBox = other -> boundingBox; 
+	localTransform = other -> localTransform; 
+	textureName = other -> textureName; 
+}
+
 Model::~Model()
 {
+}
+
+GLuint * Model::dumpPrivateContents(void) { 
+	GLuint output[18] = {vertexbuffer, normalbuffer, uvbuffer, colourbuffer, ambientID, specularID, diffuseID, uvID, programID, diffusePerVertexID, 
+	                     mID, vID, pID, nID, mvpID, texelbuffer, textureSampler, textureID}; 
+	return output; 
 }
 		
 bool Model::Initialise()
@@ -133,7 +155,7 @@ void Model::Draw()
 	glCullFace(GL_BACK);
 
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
-	glUniformMatrix4fv(mID, 1, GL_FALSE, & transform->world[0][0]);
+	glUniformMatrix4fv(mID, 1, GL_FALSE, &parent -> transform -> world[0][0]/*& transform->world[0][0]*/);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->camera->view[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->camera->projection[0][0]);
 

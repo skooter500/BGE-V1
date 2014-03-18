@@ -41,9 +41,9 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	map<string, shared_ptr<Model>>::iterator mit = Content::models.find(name);
 	if (mit != Content::models.end())
 	{
-		shared_ptr<Model> output = mit -> second; 
+		shared_ptr<Model> output = shared_ptr<Model>(mit -> second); 
 		output -> localTransform = localTransform; 
-		//return output; 
+		return output; 
 	}
 
 	std::vector<unsigned int> vertexIndices, normalIndices, uvIndices;
@@ -212,6 +212,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	}
 	shared_ptr<Model> model = make_shared<Model>();
 	model->localTransform = localTransform;
+	
 	// For each vertex of each triangle
 	for( unsigned int i=0; i<vertexIndices.size(); i++ ){
 		// Get the indices of its attributes

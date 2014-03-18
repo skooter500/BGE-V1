@@ -118,7 +118,6 @@ bool SceneGraphGame::Initialise()
 	
 	// Create a physics car
 	shared_ptr<PhysicsController> car = physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
-	Attach(car); 
 	
 	// Create a physics component and attach a non-physics component to it
 	shared_ptr<PhysicsController> carController = physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));

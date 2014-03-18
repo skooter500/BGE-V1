@@ -121,13 +121,13 @@ void SteeringController::Update(float timeDelta)
 		}
 		else
 		{
-			/*transform->right = glm::cross(transform->look, transform->up);
-			transform->position = glm::normalize(transform->right);
+			transform->right = glm::cross(transform->look, transform->up);
+			//transform->position = glm::normalize(transform->right); // This looks like it's causing the path-following bug? 
 
 			CheckNaN(transform->right, Transform::basisRight);
 			transform->up = glm::cross(transform->right, transform->look);
 			transform->up = glm::normalize(transform->up);
-			CheckNaN(transform->up, Transform::basisUp);*/
+			CheckNaN(transform->up, Transform::basisUp);
 		}
 		// Apply damping
 		transform->velocity *= 0.99f;
