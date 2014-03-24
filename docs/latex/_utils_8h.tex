@@ -1,0 +1,87 @@
+\hypertarget{_utils_8h}{\section{B\-G\-E/\-Utils.h File Reference}
+\label{_utils_8h}\index{B\-G\-E/\-Utils.\-h@{B\-G\-E/\-Utils.\-h}}
+}
+{\ttfamily \#include $<$glm.\-hpp$>$}\\*
+{\ttfamily \#include $<$fmod.\-hpp$>$}\\*
+{\ttfamily \#include $<$gtc/quaternion.\-hpp$>$}\\*
+{\ttfamily \#include $<$gtx/quaternion.\-hpp$>$}\\*
+{\ttfamily \#include $<$bt\-Bullet\-Dynamics\-Common.\-h$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$functional$>$}\\*
+{\ttfamily \#include $<$cctype$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+Include dependency graph for Utils.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_utils_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_utils_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_b_g_e_1_1_material}{B\-G\-E\-::\-Material}
+\item 
+struct \hyperlink{struct_b_g_e_1_1_ray_geom}{B\-G\-E\-::\-Ray\-Geom}
+\item 
+struct \hyperlink{struct_b_g_e_1_1_sphere_geom}{B\-G\-E\-::\-Sphere\-Geom}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespace_b_g_e}{B\-G\-E}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+F\-M\-O\-D\-\_\-\-V\-E\-C\-T\-O\-R \hyperlink{namespace_b_g_e_a1176d21c3f2c245052b152aa77826f60}{B\-G\-E\-::\-G\-L\-To\-F\-M\-O\-D\-Vector} (glm\-::vec3 v)
+\item 
+glm\-::vec3 \hyperlink{namespace_b_g_e_a7164f364e9eec84829d0ea2206731895}{B\-G\-E\-::\-Bt\-To\-G\-L\-Vector} (const bt\-Vector3 \&v)
+\item 
+glm\-::quat \hyperlink{namespace_b_g_e_aa9f49a8e2cec4d7811398f243475abbf}{B\-G\-E\-::\-Bt\-To\-G\-L\-Quat} (const bt\-Quaternion \&q)
+\item 
+bt\-Vector3 \hyperlink{namespace_b_g_e_a721a46c8618bcd3b8a72138f45211e10}{B\-G\-E\-::\-G\-L\-To\-Bt\-Vector} (const glm\-::vec3 \&v)
+\item 
+bt\-Quaternion \hyperlink{namespace_b_g_e_a57f8f67a5520cfbe967e4f91f02138e9}{B\-G\-E\-::\-G\-L\-To\-Bt\-Quat} (const glm\-::quat \&q)
+\item 
+string \hyperlink{namespace_b_g_e_ab0424dbb7fe523b80f6b0263b1d2fe5f}{B\-G\-E\-::ltrim} (string s)
+\item 
+string \hyperlink{namespace_b_g_e_a2485e47315736fd27e76f03a0d3c66ec}{B\-G\-E\-::rtrim} (string s)
+\item 
+string \hyperlink{namespace_b_g_e_a65bfe22b3a4b03bf32837ac39a8a6aaf}{B\-G\-E\-::trim} (string s)
+\item 
+void \hyperlink{namespace_b_g_e_a04062588c9f02e8fda67f52bb349162d}{B\-G\-E\-::\-Log\-Message} (string message)
+\item 
+bool \hyperlink{namespace_b_g_e_a3e44220909ce0c540f52ec4eba240e10}{B\-G\-E\-::\-Check\-Na\-N} (glm\-::vec3 \&v)
+\item 
+bool \hyperlink{namespace_b_g_e_aca61b9423894ceed2b7ba003836ef673}{B\-G\-E\-::\-Check\-Na\-N} (glm\-::vec3 \&v, const glm\-::vec3 \&def)
+\item 
+float \hyperlink{namespace_b_g_e_ad302842b2584198d7cffd196c3cf3c15}{B\-G\-E\-::\-Clip} (float x, float min, float max)
+\item 
+float \hyperlink{namespace_b_g_e_ac7f736b1f8b80d3785ebaeae03ba4e26}{B\-G\-E\-::\-Interpolate} (float alpha, float x0, float x1)
+\item 
+glm\-::vec3 \hyperlink{namespace_b_g_e_a5264a82c63751d1c66f83f5c2d364b53}{B\-G\-E\-::\-Interpolate} (float alpha, glm\-::vec3 x0, glm\-::vec3 x1)
+\item 
+void \hyperlink{namespace_b_g_e_affd53cb7fa7e93de375eaf6da8bf58d5}{B\-G\-E\-::\-Blend\-Into\-Accumulator} (float smooth\-Rate, float new\-Value, float \&smoothed\-Accumulator)
+\item 
+void \hyperlink{namespace_b_g_e_a0eb03211d382d19da44cee5e9c196d7d}{B\-G\-E\-::\-Blend\-Into\-Accumulator} (float smooth\-Rate, glm\-::vec3 new\-Value, glm\-::vec3 \&smoothed\-Accumulator)
+\item 
+glm\-::quat \hyperlink{namespace_b_g_e_a4cc9440d4d2869e709ee12195af53103}{B\-G\-E\-::\-Rotation\-Between\-Vectors} (glm\-::vec3 start, glm\-::vec3 dest)
+\item 
+float \hyperlink{namespace_b_g_e_a44c1252ce516a92fb54a7719a0167d67}{B\-G\-E\-::\-Random\-Clamped} (float min=-\/1.\-0f, float max=1.\-0f)
+\item 
+glm\-::vec3 \hyperlink{namespace_b_g_e_aacbfdbe4261769b468ef4c03910f257b}{B\-G\-E\-::\-Random\-Position} (float range)
+\item 
+bool \hyperlink{namespace_b_g_e_ad0f5c06727be900e110f0c4e607df28a}{B\-G\-E\-::\-Closest\-Ray\-Intersects\-Sphere} (const Ray\-Geom \&ray, const Sphere\-Geom \&sphere, const glm\-::vec3 \&point, glm\-::vec3 \&intersection)
+\item 
+glm\-::vec3 \hyperlink{namespace_b_g_e_af45e6960a1d4f878560e974bc4890b68}{B\-G\-E\-::\-Rotate\-Vector} (glm\-::vec3, glm\-::quat)
+\end{DoxyCompactItemize}

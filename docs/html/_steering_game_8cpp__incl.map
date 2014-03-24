@@ -1,0 +1,21 @@
+<map id="BGE/SteeringGame.cpp" name="BGE/SteeringGame.cpp">
+<area shape="rect" id="node3" href="$_steering_game_8h.html" title="SteeringGame.h" alt="" coords="680,83,794,112"/>
+<area shape="rect" id="node77" href="$_steering_controler_8h.html" title="SteeringControler.h" alt="" coords="272,237,405,267"/>
+<area shape="rect" id="node88" href="$_scenario_8h.html" title="Scenario.h" alt="" coords="881,160,964,189"/>
+<area shape="rect" id="node92" href="$_params_8h.html" title="Params.h" alt="" coords="1829,315,1906,344"/>
+<area shape="rect" id="node97" href="$_content_8h.html" title="Content.h" alt="" coords="1489,83,1566,112"/>
+<area shape="rect" id="node111" href="$_vector_drawer_8h.html" title="VectorDrawer.h" alt="" coords="48,315,160,344"/>
+<area shape="rect" id="node116" href="$_flocking_scenario_8h.html" title="FlockingScenario.h" alt="" coords="1280,83,1413,112"/>
+<area shape="rect" id="node120" href="$_path_following_scenario_8h.html" title="PathFollowingScenario.h" alt="" coords="869,83,1034,112"/>
+<area shape="rect" id="node123" href="$_obstacle_avoidance_scenario_8h.html" title="ObstacleAvoidanceScenario.h" alt="" coords="1058,83,1256,112"/>
+<area shape="rect" id="node5" href="$_game_8h.html" title="Game.h" alt="" coords="773,237,840,267"/>
+<area shape="rect" id="node27" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="886,392,1020,421"/>
+<area shape="rect" id="node25" href="$_camera_8h.html" title="Camera.h" alt="" coords="906,315,984,344"/>
+<area shape="rect" id="node52" href="$_ground_8h.html" title="Ground.h" alt="" coords="573,315,648,344"/>
+<area shape="rect" id="node56" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="1232,315,1346,344"/>
+<area shape="rect" id="node64" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="1109,315,1208,344"/>
+<area shape="rect" id="node44" href="$_exception_8h.html" title="Exception.h" alt="" coords="724,469,814,499"/>
+<area shape="rect" id="node46" href="$_transform_8h.html" title="Transform.h" alt="" coords="1094,469,1185,499"/>
+<area shape="rect" id="node82" href="$_route_8h.html" title="Route.h" alt="" coords="184,315,250,344"/>
+<area shape="rect" id="node105" href="$_model_8h.html" title="Model.h" alt="" coords="1038,160,1105,189"/>
+</map>

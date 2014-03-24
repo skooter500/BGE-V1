@@ -1,0 +1,5 @@
+<map id="BGE::SteeringController::Cohesion" name="BGE::SteeringController::Cohesion">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_steering_controller.html#af21ca382fa09f039518c0ed740e84a1b" title="BGE::SteeringController\l::Seek" alt="" coords="216,5,379,51"/>
+<area shape="rect" id="node5" href="$namespace_b_g_e.html#a3e44220909ce0c540f52ec4eba240e10" title="BGE::CheckNaN" alt="" coords="236,75,359,104"/>
+<area shape="rect" id="node7" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="428,75,559,104"/>
+</map>

@@ -1,0 +1,755 @@
+\hypertarget{class_b_g_e_1_1_game}{\section{B\-G\-E\-:\-:Game Class Reference}
+\label{class_b_g_e_1_1_game}\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}}
+}
+
+
+{\ttfamily \#include $<$Game.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:Game\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for B\-G\-E\-:\-:Game\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{class_b_g_e_1_1_game__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_game_a3ae96cfdab80ddfed4e942b23c59cfd9}{Game} (void)
+\item 
+\hyperlink{class_b_g_e_1_1_game_a5132fe2c0d2a41ad6b613dc2baeca24c}{$\sim$\-Game} (void)
+\item 
+bool \hyperlink{class_b_g_e_1_1_game_a2973b50f49c7906ec0e642a8753fd995}{Initialise} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_game_a51ed573392d7bed791b67062e7c7a3d4}{Update} (float time\-Delta)
+\item 
+void \hyperlink{class_b_g_e_1_1_game_ab6d652246c56f49081f852557cfd0267}{Pre\-Draw} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_game_aad2c20e2c5529244095c50c238911e30}{Draw} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_game_ae11c57585d89d9540e6734eaee648b74}{Post\-Draw} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_game_ac649612429b2bf532851b7f0d5a9a57c}{Cleanup} ()
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_ground}{Ground} $>$ \hyperlink{class_b_g_e_1_1_game_a38fdc20b42b4cf50e2da8fdd879bcf56}{Get\-Ground} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_game_a6ac69a3795fe38dd4eccf4aa177d81ff}{Set\-Ground} (shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_ground}{Ground} $>$ \hyperlink{class_b_g_e_1_1_game_a116334f4ca84d0941072968b941b8c39}{ground})
+\item 
+const Uint8 $\ast$ \hyperlink{class_b_g_e_1_1_game_a4144146a4fd89b69d32b832cef707799}{Get\-Key\-State} ()
+\item 
+S\-D\-L\-\_\-\-Window $\ast$ \hyperlink{class_b_g_e_1_1_game_a264d7f8fb6f690cd701f21c462530b06}{Get\-Main\-Window} ()
+\item 
+int \hyperlink{class_b_g_e_1_1_game_a82cfe197dfaeeb2923f0705abf76eb5c}{Get\-Width} ()
+\item 
+int \hyperlink{class_b_g_e_1_1_game_a0a4d07a64d1e1437b52575a6de41beda}{Get\-Height} ()
+\item 
+bool \hyperlink{class_b_g_e_1_1_game_a712aad58012747c8e1f0387199594910}{Run} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_game_a68da8b79dc207e54433ae43512fbb26b}{Print\-Text} (string message, glm\-::vec2 position)
+\item 
+void \hyperlink{class_b_g_e_1_1_game_a5df71a1b96bf5fa2b5f4445f8ecd2145}{Print\-Text} (string message)
+\item 
+void \hyperlink{class_b_g_e_1_1_game_a76ccf13340bc05c787a32160eeed3a00}{Print\-Vector} (string message, glm\-::vec3 v)
+\item 
+void \hyperlink{class_b_g_e_1_1_game_a03e3aa6401b3e552aa4fb1f71f2852ff}{Print\-Float} (string message, float f)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_b_g_e_1_1_game}{Game} $\ast$ \hyperlink{class_b_g_e_1_1_game_aa5f23879cb825ddcfc1f5a3a64a9c70f}{Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_camera}{Camera} $>$ \hyperlink{class_b_g_e_1_1_game_a529f329238da26b1bc8199f46edb6754}{camera}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_ground}{Ground} $>$ \hyperlink{class_b_g_e_1_1_game_a116334f4ca84d0941072968b941b8c39}{ground}
+\item 
+S\-D\-L\-\_\-\-Window $\ast$ \hyperlink{class_b_g_e_1_1_game_a7d79db52e4ae135f72ac7d7e79b5fd89}{mainwindow}
+\item 
+bool \hyperlink{class_b_g_e_1_1_game_a6ccd351839e577cef28ffab9b64fb576}{fullscreen}
+\item 
+bool \hyperlink{class_b_g_e_1_1_game_ae6c23ffff29b83b65a253788e4e8a735}{console}
+\item 
+bool \hyperlink{class_b_g_e_1_1_game_aa7754d7d3f8b64ee1de1a540b32e83b1}{hud}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_sound_system}{Sound\-System} $>$ \hyperlink{class_b_g_e_1_1_game_a4b56583497df19ed415237cc457cb622}{sound\-System}
+\item 
+string \hyperlink{class_b_g_e_1_1_game_a736d9a0a78227f23a2afb62a9a5bed90}{rift\-Message}
+\item 
+bool \hyperlink{class_b_g_e_1_1_game_a9c97f2f28873bab23b8b295961cf6ac6}{rift\-Enabled}
+\item 
+int \hyperlink{class_b_g_e_1_1_game_a273be7b9be0947918bb9e8423aa03bfc}{width}
+\item 
+int \hyperlink{class_b_g_e_1_1_game_ac012b897d5a88993c5c77cd633338a0e}{height}
+\item 
+float \hyperlink{class_b_g_e_1_1_game_a6827ac220d27fc4be181235f39f148c2}{fps}
+\item 
+const Uint8 $\ast$ \hyperlink{class_b_g_e_1_1_game_a9e0095e531e23c2b3368d76ef341ddd9}{key\-State}
+\item 
+float \hyperlink{class_b_g_e_1_1_game_aedae810ac31a45184e38a24b643d1825}{elapsed}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 50 of file Game.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_game_a3ae96cfdab80ddfed4e942b23c59cfd9}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Game@{Game}}
+\index{Game@{Game}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a3ae96cfdab80ddfed4e942b23c59cfd9}
+
+
+Definition at line 24 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{class_b_g_e_1_1_game_a3ae96cfdab80ddfed4e942b23c59cfd9_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a5132fe2c0d2a41ad6b613dc2baeca24c}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!$\sim$\-Game@{$\sim$\-Game}}
+\index{$\sim$\-Game@{$\sim$\-Game}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{$\sim$\-Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::$\sim$\-Game (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a5132fe2c0d2a41ad6b613dc2baeca24c}
+
+
+Definition at line 51 of file Game.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_game_ac649612429b2bf532851b7f0d5a9a57c}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Cleanup@{Cleanup}}
+\index{Cleanup@{Cleanup}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Cleanup}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Cleanup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_game_ac649612429b2bf532851b7f0d5a9a57c}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_a901ea3686345268c40037c0786caa568}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Reimplemented in \hyperlink{class_b_g_e_1_1_scene_graph_game_a0fb4a9b70a6061c3827c98799b6b85fe}{B\-G\-E\-::\-Scene\-Graph\-Game}, \hyperlink{class_b_g_e_1_1_physics_game1_a6bb436ec50bdc5f6ac0597b47896965e}{B\-G\-E\-::\-Physics\-Game1}, \hyperlink{class_b_g_e_1_1_textured_cube_af11aea5e00410a51a03de46f124bce40}{B\-G\-E\-::\-Textured\-Cube}, and \hyperlink{class_b_g_e_1_1_cube_test_aa641a26e8c19e06c6977fdec2c832411}{B\-G\-E\-::\-Cube\-Test}.
+
+
+
+Definition at line 268 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_ac649612429b2bf532851b7f0d5a9a57c_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_aad2c20e2c5529244095c50c238911e30}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Draw@{Draw}}
+\index{Draw@{Draw}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_game_aad2c20e2c5529244095c50c238911e30}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_a697cd151f92fa23cbae10afb9130f291}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Reimplemented in \hyperlink{class_b_g_e_1_1_textured_cube_ae1cb1cdd084cc7cbb6f82d98dfdb0684}{B\-G\-E\-::\-Textured\-Cube}, \hyperlink{class_b_g_e_1_1_cube_test_ac559d15798c0718750d9cf0f38d3b1b5}{B\-G\-E\-::\-Cube\-Test}, and \hyperlink{class_b_g_e_1_1_triangle_test_ae4c9beed95f6770d8b72de2ba2174470}{B\-G\-E\-::\-Triangle\-Test}.
+
+
+
+Definition at line 290 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{class_b_g_e_1_1_game_aad2c20e2c5529244095c50c238911e30_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_aad2c20e2c5529244095c50c238911e30_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a38fdc20b42b4cf50e2da8fdd879bcf56}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Get\-Ground@{Get\-Ground}}
+\index{Get\-Ground@{Get\-Ground}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Get\-Ground}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Ground} $>$ Game\-::\-Get\-Ground (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a38fdc20b42b4cf50e2da8fdd879bcf56}
+
+
+Definition at line 54 of file Game.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_game_a0a4d07a64d1e1437b52575a6de41beda}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Get\-Height@{Get\-Height}}
+\index{Get\-Height@{Get\-Height}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Get\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Get\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a0a4d07a64d1e1437b52575a6de41beda}
+
+
+Definition at line 370 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{class_b_g_e_1_1_game_a0a4d07a64d1e1437b52575a6de41beda_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a4144146a4fd89b69d32b832cef707799}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Get\-Key\-State@{Get\-Key\-State}}
+\index{Get\-Key\-State@{Get\-Key\-State}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Get\-Key\-State}]{\setlength{\rightskip}{0pt plus 5cm}const Uint8 $\ast$ Game\-::\-Get\-Key\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a4144146a4fd89b69d32b832cef707799}
+
+
+Definition at line 280 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a4144146a4fd89b69d32b832cef707799_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a264d7f8fb6f690cd701f21c462530b06}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Get\-Main\-Window@{Get\-Main\-Window}}
+\index{Get\-Main\-Window@{Get\-Main\-Window}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Get\-Main\-Window}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Window $\ast$ Game\-::\-Get\-Main\-Window (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a264d7f8fb6f690cd701f21c462530b06}
+
+
+Definition at line 285 of file Game.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_game_a82cfe197dfaeeb2923f0705abf76eb5c}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Get\-Width@{Get\-Width}}
+\index{Get\-Width@{Get\-Width}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Get\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Get\-Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a82cfe197dfaeeb2923f0705abf76eb5c}
+
+
+Definition at line 364 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_b_g_e_1_1_game_a82cfe197dfaeeb2923f0705abf76eb5c_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a2973b50f49c7906ec0e642a8753fd995}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Initialise}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Initialise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_game_a2973b50f49c7906ec0e642a8753fd995}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_ae1c2340cdfb31d2cd372323d3f9a1ba4}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Reimplemented in \hyperlink{class_b_g_e_1_1_scene_graph_game_ae129b54e7ca57dcc6a8b821c569bebd7}{B\-G\-E\-::\-Scene\-Graph\-Game}, \hyperlink{class_b_g_e_1_1_lab6_a4c6c1fca3a0fce3be6be36896c84b1c8}{B\-G\-E\-::\-Lab6}, \hyperlink{class_b_g_e_1_1_buddha_a0b06f27687b1d94374bccec0de47c45c}{B\-G\-E\-::\-Buddha}, \hyperlink{class_b_g_e_1_1_physics_game1_a005afe565f5c60cd980493627b947802}{B\-G\-E\-::\-Physics\-Game1}, \hyperlink{class_b_g_e_1_1_lab5_a22e9d710c6270571a8f4aa9da3a2f59b}{B\-G\-E\-::\-Lab5}, \hyperlink{class_b_g_e_1_1_lab7_ac7d2597bb842edcf70174b436c8811fd}{B\-G\-E\-::\-Lab7}, \hyperlink{class_b_g_e_1_1_lab4_a3873eb644cbdeb20ab0f033e4e43e9a3}{B\-G\-E\-::\-Lab4}, \hyperlink{class_b_g_e_1_1_lab8_aec401d2069e9e5d6a6d3d71367a68ba8}{B\-G\-E\-::\-Lab8}, \hyperlink{class_b_g_e_1_1_steering_game_ae0536228be79c785e43bc7c4d841c5bc}{B\-G\-E\-::\-Steering\-Game}, \hyperlink{class_b_g_e_1_1_model_test_a0569efdab1ec10bab4299987b1563c14}{B\-G\-E\-::\-Model\-Test}, \hyperlink{class_b_g_e_1_1_textured_cube_a5f29f2fede1faaf76416adcb6591ed0c}{B\-G\-E\-::\-Textured\-Cube}, \hyperlink{class_b_g_e_1_1_cube_test_af286e7a88db522c6e4a4bfdd3a38990f}{B\-G\-E\-::\-Cube\-Test}, and \hyperlink{class_b_g_e_1_1_triangle_test_ab661d39ab6d4dbaf22c358d60a3a821c}{B\-G\-E\-::\-Triangle\-Test}.
+
+
+
+Definition at line 59 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{class_b_g_e_1_1_game_a2973b50f49c7906ec0e642a8753fd995_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a2973b50f49c7906ec0e642a8753fd995_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_aa5f23879cb825ddcfc1f5a3a64a9c70f}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Instance@{Instance}}
+\index{Instance@{Instance}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game} $\ast$ Game\-::\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_b_g_e_1_1_game_aa5f23879cb825ddcfc1f5a3a64a9c70f}
+
+
+Definition at line 276 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_b_g_e_1_1_game_aa5f23879cb825ddcfc1f5a3a64a9c70f_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_ae11c57585d89d9540e6734eaee648b74}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Post\-Draw@{Post\-Draw}}
+\index{Post\-Draw@{Post\-Draw}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Post\-Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Post\-Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_ae11c57585d89d9540e6734eaee648b74}
+
+
+Definition at line 251 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_ae11c57585d89d9540e6734eaee648b74_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_ab6d652246c56f49081f852557cfd0267}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Pre\-Draw@{Pre\-Draw}}
+\index{Pre\-Draw@{Pre\-Draw}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Pre\-Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Pre\-Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_ab6d652246c56f49081f852557cfd0267}
+
+
+Definition at line 242 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_ab6d652246c56f49081f852557cfd0267_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a03e3aa6401b3e552aa4fb1f71f2852ff}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Print\-Float@{Print\-Float}}
+\index{Print\-Float@{Print\-Float}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Print\-Float}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Print\-Float (
+\begin{DoxyParamCaption}
+\item[{string}]{message, }
+\item[{float}]{f}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a03e3aa6401b3e552aa4fb1f71f2852ff}
+
+
+Definition at line 159 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a03e3aa6401b3e552aa4fb1f71f2852ff_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{class_b_g_e_1_1_game_a03e3aa6401b3e552aa4fb1f71f2852ff_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a68da8b79dc207e54433ae43512fbb26b}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Print\-Text@{Print\-Text}}
+\index{Print\-Text@{Print\-Text}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Print\-Text}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Print\-Text (
+\begin{DoxyParamCaption}
+\item[{string}]{message, }
+\item[{glm\-::vec2}]{position}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a68da8b79dc207e54433ae43512fbb26b}
+
+
+Definition at line 147 of file Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a68da8b79dc207e54433ae43512fbb26b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a5df71a1b96bf5fa2b5f4445f8ecd2145}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Print\-Text@{Print\-Text}}
+\index{Print\-Text@{Print\-Text}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Print\-Text}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Print\-Text (
+\begin{DoxyParamCaption}
+\item[{string}]{message}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a5df71a1b96bf5fa2b5f4445f8ecd2145}
+
+
+Definition at line 167 of file Game.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_game_a76ccf13340bc05c787a32160eeed3a00}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Print\-Vector@{Print\-Vector}}
+\index{Print\-Vector@{Print\-Vector}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Print\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Print\-Vector (
+\begin{DoxyParamCaption}
+\item[{string}]{message, }
+\item[{glm\-::vec3}]{v}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a76ccf13340bc05c787a32160eeed3a00}
+
+
+Definition at line 152 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a76ccf13340bc05c787a32160eeed3a00_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a76ccf13340bc05c787a32160eeed3a00_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a712aad58012747c8e1f0387199594910}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Run@{Run}}
+\index{Run@{Run}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Run}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a712aad58012747c8e1f0387199594910}
+
+
+Definition at line 173 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a712aad58012747c8e1f0387199594910_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{class_b_g_e_1_1_game_a712aad58012747c8e1f0387199594910_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a6ac69a3795fe38dd4eccf4aa177d81ff}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Set\-Ground@{Set\-Ground}}
+\index{Set\-Ground@{Set\-Ground}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Set\-Ground}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Set\-Ground (
+\begin{DoxyParamCaption}
+\item[{shared\-\_\-ptr$<$ {\bf Ground} $>$}]{ground}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_game_a6ac69a3795fe38dd4eccf4aa177d81ff}
+
+
+Definition at line 193 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a6ac69a3795fe38dd4eccf4aa177d81ff_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a6ac69a3795fe38dd4eccf4aa177d81ff_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_game_a51ed573392d7bed791b67062e7c7a3d4}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!Update@{Update}}
+\index{Update@{Update}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{float}]{time\-Delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_game_a51ed573392d7bed791b67062e7c7a3d4}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_ac8e444827ee0be9ad654cdff4d15f071}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Reimplemented in \hyperlink{class_b_g_e_1_1_scene_graph_game_a0da77898a630ba53d2ca512f2992f7fb}{B\-G\-E\-::\-Scene\-Graph\-Game}, \hyperlink{class_b_g_e_1_1_lab6_ace5577edb1f9c38e007f20b843fe1030}{B\-G\-E\-::\-Lab6}, \hyperlink{class_b_g_e_1_1_buddha_a0723abeec23fa78f7d8c830e04c59746}{B\-G\-E\-::\-Buddha}, \hyperlink{class_b_g_e_1_1_physics_game1_ae67a81b2bd9fda6538266bb86b3e37f5}{B\-G\-E\-::\-Physics\-Game1}, \hyperlink{class_b_g_e_1_1_lab5_ae58b0a0640c84a48825a969f8e1396db}{B\-G\-E\-::\-Lab5}, \hyperlink{class_b_g_e_1_1_lab7_a0e9a409b00ca05c7eeff78cd5aef4f6e}{B\-G\-E\-::\-Lab7}, \hyperlink{class_b_g_e_1_1_lab4_a34fe4d66f91e194a4b129950b4966cfb}{B\-G\-E\-::\-Lab4}, \hyperlink{class_b_g_e_1_1_lab8_abc19add5c6e7fa56977f06c370393be1}{B\-G\-E\-::\-Lab8}, \hyperlink{class_b_g_e_1_1_steering_game_a09cc97712a026e87a229117021998153}{B\-G\-E\-::\-Steering\-Game}, and \hyperlink{class_b_g_e_1_1_model_test_a27dddd734ca2a9dfd49396707834571b}{B\-G\-E\-::\-Model\-Test}.
+
+
+
+Definition at line 200 of file Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_b_g_e_1_1_game_a51ed573392d7bed791b67062e7c7a3d4_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_game_a51ed573392d7bed791b67062e7c7a3d4_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_game_a529f329238da26b1bc8199f46edb6754}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!camera@{camera}}
+\index{camera@{camera}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{camera}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Camera}$>$ B\-G\-E\-::\-Game\-::camera}}\label{class_b_g_e_1_1_game_a529f329238da26b1bc8199f46edb6754}
+
+
+Definition at line 90 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_ae6c23ffff29b83b65a253788e4e8a735}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!console@{console}}
+\index{console@{console}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{console}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Game\-::console}}\label{class_b_g_e_1_1_game_ae6c23ffff29b83b65a253788e4e8a735}
+
+
+Definition at line 95 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_aedae810ac31a45184e38a24b643d1825}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!elapsed@{elapsed}}
+\index{elapsed@{elapsed}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{elapsed}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Game\-::elapsed}}\label{class_b_g_e_1_1_game_aedae810ac31a45184e38a24b643d1825}
+
+
+Definition at line 108 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a6827ac220d27fc4be181235f39f148c2}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!fps@{fps}}
+\index{fps@{fps}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{fps}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Game\-::fps}}\label{class_b_g_e_1_1_game_a6827ac220d27fc4be181235f39f148c2}
+
+
+Definition at line 106 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a6ccd351839e577cef28ffab9b64fb576}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!fullscreen@{fullscreen}}
+\index{fullscreen@{fullscreen}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{fullscreen}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Game\-::fullscreen}}\label{class_b_g_e_1_1_game_a6ccd351839e577cef28ffab9b64fb576}
+
+
+Definition at line 94 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a116334f4ca84d0941072968b941b8c39}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!ground@{ground}}
+\index{ground@{ground}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{ground}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Ground}$>$ B\-G\-E\-::\-Game\-::ground}}\label{class_b_g_e_1_1_game_a116334f4ca84d0941072968b941b8c39}
+
+
+Definition at line 91 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_ac012b897d5a88993c5c77cd633338a0e}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!height@{height}}
+\index{height@{height}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{height}]{\setlength{\rightskip}{0pt plus 5cm}int B\-G\-E\-::\-Game\-::height}}\label{class_b_g_e_1_1_game_ac012b897d5a88993c5c77cd633338a0e}
+
+
+Definition at line 105 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_aa7754d7d3f8b64ee1de1a540b32e83b1}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!hud@{hud}}
+\index{hud@{hud}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{hud}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Game\-::hud}}\label{class_b_g_e_1_1_game_aa7754d7d3f8b64ee1de1a540b32e83b1}
+
+
+Definition at line 96 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a9e0095e531e23c2b3368d76ef341ddd9}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!key\-State@{key\-State}}
+\index{key\-State@{key\-State}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{key\-State}]{\setlength{\rightskip}{0pt plus 5cm}const Uint8$\ast$ B\-G\-E\-::\-Game\-::key\-State}}\label{class_b_g_e_1_1_game_a9e0095e531e23c2b3368d76ef341ddd9}
+
+
+Definition at line 107 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a7d79db52e4ae135f72ac7d7e79b5fd89}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!mainwindow@{mainwindow}}
+\index{mainwindow@{mainwindow}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{mainwindow}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Window$\ast$ B\-G\-E\-::\-Game\-::mainwindow}}\label{class_b_g_e_1_1_game_a7d79db52e4ae135f72ac7d7e79b5fd89}
+
+
+Definition at line 93 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a9c97f2f28873bab23b8b295961cf6ac6}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!rift\-Enabled@{rift\-Enabled}}
+\index{rift\-Enabled@{rift\-Enabled}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{rift\-Enabled}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Game\-::rift\-Enabled}}\label{class_b_g_e_1_1_game_a9c97f2f28873bab23b8b295961cf6ac6}
+
+
+Definition at line 104 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a736d9a0a78227f23a2afb62a9a5bed90}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!rift\-Message@{rift\-Message}}
+\index{rift\-Message@{rift\-Message}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{rift\-Message}]{\setlength{\rightskip}{0pt plus 5cm}string B\-G\-E\-::\-Game\-::rift\-Message}}\label{class_b_g_e_1_1_game_a736d9a0a78227f23a2afb62a9a5bed90}
+
+
+Definition at line 103 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a4b56583497df19ed415237cc457cb622}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!sound\-System@{sound\-System}}
+\index{sound\-System@{sound\-System}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{sound\-System}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Sound\-System}$>$ B\-G\-E\-::\-Game\-::sound\-System}}\label{class_b_g_e_1_1_game_a4b56583497df19ed415237cc457cb622}
+
+
+Definition at line 101 of file Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_game_a273be7b9be0947918bb9e8423aa03bfc}{\index{B\-G\-E\-::\-Game@{B\-G\-E\-::\-Game}!width@{width}}
+\index{width@{width}!BGE::Game@{B\-G\-E\-::\-Game}}
+\subsubsection[{width}]{\setlength{\rightskip}{0pt plus 5cm}int B\-G\-E\-::\-Game\-::width}}\label{class_b_g_e_1_1_game_a273be7b9be0947918bb9e8423aa03bfc}
+
+
+Definition at line 105 of file Game.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_game_8h}{Game.\-h}\item 
+B\-G\-E/\hyperlink{_game_8cpp}{Game.\-cpp}\end{DoxyCompactItemize}

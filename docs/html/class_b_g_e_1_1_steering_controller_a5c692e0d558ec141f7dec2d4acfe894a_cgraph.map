@@ -1,0 +1,4 @@
+<map id="BGE::SteeringController::ObstacleAvoidance" name="BGE::SteeringController::ObstacleAvoidance">
+<area shape="rect" id="node3" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="244,5,375,35"/>
+<area shape="rect" id="node5" href="$namespace_b_g_e.html#ad0f5c06727be900e110f0c4e607df28a" title="BGE::ClosestRayIntersects\lSphere" alt="" coords="217,58,401,105"/>
+</map>

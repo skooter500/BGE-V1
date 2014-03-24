@@ -1,0 +1,176 @@
+\hypertarget{class_b_g_e_1_1_route}{\section{B\-G\-E\-:\-:Route Class Reference}
+\label{class_b_g_e_1_1_route}\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}}
+}
+
+
+{\ttfamily \#include $<$Route.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:Route\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{class_b_g_e_1_1_route__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for B\-G\-E\-:\-:Route\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{class_b_g_e_1_1_route__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_route_a49240e511601e5cf07d9041473698bcd}{Route} (void)
+\item 
+\hyperlink{class_b_g_e_1_1_route_a6c8cb0aaef581d3c14fff8ad99b3894f}{$\sim$\-Route} (void)
+\item 
+void \hyperlink{class_b_g_e_1_1_route_ae23447492bfe2a4d7e30a029e9b7584d}{Draw} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_route_ac9e34cb3daa16d46e8345c44765c6595}{Next\-Waypoint} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_route_a251cc80a83ecb2d067fe3e9c420e6771}{Advance\-To\-Next} ()
+\item 
+bool \hyperlink{class_b_g_e_1_1_route_a6984d51426e6f12199cc976bbbe3e07d}{Is\-Last} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_b_g_e_1_1_route_aceee6cb3e091c85142ebd416205d2dd5}{looped}
+\item 
+bool \hyperlink{class_b_g_e_1_1_route_a503ab27496b899c91058fbe3818ef39b}{draw}
+\item 
+vector$<$ glm\-::vec3 $>$ \hyperlink{class_b_g_e_1_1_route_a9d00bdb0705bf635b78774a84a9fc791}{waypoints}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 9 of file Route.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_route_a49240e511601e5cf07d9041473698bcd}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!Route@{Route}}
+\index{Route@{Route}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{Route}]{\setlength{\rightskip}{0pt plus 5cm}Route\-::\-Route (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_route_a49240e511601e5cf07d9041473698bcd}
+
+
+Definition at line 6 of file Route.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_route_a6c8cb0aaef581d3c14fff8ad99b3894f}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!$\sim$\-Route@{$\sim$\-Route}}
+\index{$\sim$\-Route@{$\sim$\-Route}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{$\sim$\-Route}]{\setlength{\rightskip}{0pt plus 5cm}Route\-::$\sim$\-Route (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_route_a6c8cb0aaef581d3c14fff8ad99b3894f}
+
+
+Definition at line 15 of file Route.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_route_a251cc80a83ecb2d067fe3e9c420e6771}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!Advance\-To\-Next@{Advance\-To\-Next}}
+\index{Advance\-To\-Next@{Advance\-To\-Next}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{Advance\-To\-Next}]{\setlength{\rightskip}{0pt plus 5cm}void Route\-::\-Advance\-To\-Next (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_route_a251cc80a83ecb2d067fe3e9c420e6771}
+
+
+Definition at line 46 of file Route.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_route_ae23447492bfe2a4d7e30a029e9b7584d}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!Draw@{Draw}}
+\index{Draw@{Draw}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Route\-::\-Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_route_ae23447492bfe2a4d7e30a029e9b7584d}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_a697cd151f92fa23cbae10afb9130f291}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Definition at line 19 of file Route.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_route_ae23447492bfe2a4d7e30a029e9b7584d_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_route_a6984d51426e6f12199cc976bbbe3e07d}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!Is\-Last@{Is\-Last}}
+\index{Is\-Last@{Is\-Last}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{Is\-Last}]{\setlength{\rightskip}{0pt plus 5cm}bool Route\-::\-Is\-Last (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_route_a6984d51426e6f12199cc976bbbe3e07d}
+
+
+Definition at line 40 of file Route.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_route_ac9e34cb3daa16d46e8345c44765c6595}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!Next\-Waypoint@{Next\-Waypoint}}
+\index{Next\-Waypoint@{Next\-Waypoint}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{Next\-Waypoint}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Route\-::\-Next\-Waypoint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_route_ac9e34cb3daa16d46e8345c44765c6595}
+
+
+Definition at line 35 of file Route.\-cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_route_a503ab27496b899c91058fbe3818ef39b}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!draw@{draw}}
+\index{draw@{draw}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Route\-::draw}}\label{class_b_g_e_1_1_route_a503ab27496b899c91058fbe3818ef39b}
+
+
+Definition at line 24 of file Route.\-h.
+
+\hypertarget{class_b_g_e_1_1_route_aceee6cb3e091c85142ebd416205d2dd5}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!looped@{looped}}
+\index{looped@{looped}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{looped}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Route\-::looped}}\label{class_b_g_e_1_1_route_aceee6cb3e091c85142ebd416205d2dd5}
+
+
+Definition at line 23 of file Route.\-h.
+
+\hypertarget{class_b_g_e_1_1_route_a9d00bdb0705bf635b78774a84a9fc791}{\index{B\-G\-E\-::\-Route@{B\-G\-E\-::\-Route}!waypoints@{waypoints}}
+\index{waypoints@{waypoints}!BGE::Route@{B\-G\-E\-::\-Route}}
+\subsubsection[{waypoints}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$glm\-::vec3$>$ B\-G\-E\-::\-Route\-::waypoints}}\label{class_b_g_e_1_1_route_a9d00bdb0705bf635b78774a84a9fc791}
+
+
+Definition at line 25 of file Route.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_route_8h}{Route.\-h}\item 
+B\-G\-E/\hyperlink{_route_8cpp}{Route.\-cpp}\end{DoxyCompactItemize}

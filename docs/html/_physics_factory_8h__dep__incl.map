@@ -1,0 +1,10 @@
+<map id="BGE/PhysicsFactory.h" name="BGE/PhysicsFactory.h">
+<area shape="rect" id="node3" href="$_physics_game1_8h.html" title="BGE/PhysicsGame1.h" alt="" coords="367,83,521,112"/>
+<area shape="rect" id="node11" href="$_scene_graph_game_8h.html" title="BGE/SceneGraphGame.h" alt="" coords="172,83,343,112"/>
+<area shape="rect" id="node16" href="$_physics_camera_8h.html" title="BGE/PhysicsCamera.h" alt="" coords="545,83,703,112"/>
+<area shape="rect" id="node19" href="$_physics_factory_8cpp.html" title="BGE/PhysicsFactory.cpp" alt="" coords="733,160,904,189"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="BGE/main.cpp" alt="" coords="216,160,323,189"/>
+<area shape="rect" id="node7" href="$_physics_camera_8cpp.html" title="BGE/PhysicsCamera.cpp" alt="" coords="539,160,709,189"/>
+<area shape="rect" id="node9" href="$_physics_game1_8cpp.html" title="BGE/PhysicsGame1.cpp" alt="" coords="347,160,515,189"/>
+<area shape="rect" id="node14" href="$_scene_graph_game_8cpp.html" title="BGE/SceneGraphGame.cpp" alt="" coords="5,160,192,189"/>
+</map>

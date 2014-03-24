@@ -32,6 +32,7 @@ GameComponent::GameComponent(bool hasTransform)
 	}
 	alive = true;
 	initialised = false;
+	isRelative = false; 
 }
 
 
@@ -54,8 +55,22 @@ void GameComponent::Draw()
 {
 	// Draw all the children
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	glm::vec3 parentPos; 
+	if (isRelative) { 
+		// No, I've no recollection how it works either :-P  Something to do with quaternions... 
+		float angle = glm::dot(transform -> look, Transform::basisLook); 
+		glm::vec3 rotationAxis = glm::cross(transform -> look, Transform::basisLook); 
+		glm::quat quaternion = glm::angleAxis(angle, rotationAxis); 
+		transform -> orientation = transform -> orientation * quaternion; 
+		transform -> Calculate(); 
+		//parentsLastLook = transform -> look; 
+	}
 	while (it != children.end())
 	{
+		if (isRelative && (*it)->tag == "Model") { 
+			shared_ptr<Model> im = static_pointer_cast<Model>(*it); 
+			im -> localTransform = glm::translate(glm::mat4(1), relativeTransform->position);
+		}
 		(*it)->parent = this;	
 		(*it ++)->Draw();		
 	}
@@ -84,9 +99,7 @@ void GameComponent::Update(float timeDelta) {
 		if (!(*it)->alive)
 		{
 			it = children.erase(it);
-		}
-		else
-		{
+		} else {
 			(*it ++)->Update(timeDelta);
 		}
 	}
@@ -96,13 +109,21 @@ void GameComponent::Update(float timeDelta) {
 
 void GameComponent::Attach(shared_ptr<GameComponent> child)
 {
-	child->parent = this;
+	child->parent = this; 
 	// All my children share the same transform if they dont already have one...
 	if (child->transform == nullptr)
 	{
 		child->transform = transform; 
-	}
+	} 
 	children.push_back(child);
+}
+
+void GameComponent::AttachWithRelativePositioning(shared_ptr<GameComponent> child) { 
+	shared_ptr<Transform> temp = child -> transform; 
+	child -> transform = nullptr; 
+	child -> relativeTransform = temp; 
+	child -> isRelative = true; 
+	Attach(child); 
 }
 
 

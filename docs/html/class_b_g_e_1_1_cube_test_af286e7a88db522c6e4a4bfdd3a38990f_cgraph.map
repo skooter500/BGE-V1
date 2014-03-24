@@ -1,0 +1,5 @@
+<map id="BGE::CubeTest::Initialise" name="BGE::CubeTest::Initialise">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a2973b50f49c7906ec0e642a8753fd995" title="BGE::Game::Initialise" alt="" coords="252,29,401,59"/>
+<area shape="rect" id="node8" href="$class_b_g_e_1_1_content.html#a449789b41e8d4c4b20cf3d53c55c5420" title="BGE::Content::LoadShaderPair" alt="" coords="225,83,428,112"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="479,29,628,59"/>
+</map>

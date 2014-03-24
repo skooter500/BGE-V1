@@ -13,6 +13,7 @@
 #include<glm.hpp>
 #include<list>
 #include<string>
+#include <iostream>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
@@ -48,10 +49,13 @@ namespace BGE
 		float speed;
 		bool alive;
 		bool initialised;	
+		bool isRelative; 
 
 		std::shared_ptr<Transform> transform;
+		std::shared_ptr<Transform> relativeTransform; 
 
 		void Attach(std::shared_ptr<GameComponent> child);
+		void AttachWithRelativePositioning(std::shared_ptr<GameComponent> child); 
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 
 		shared_ptr<GameComponent> GameComponent::FindComponent(string tag);

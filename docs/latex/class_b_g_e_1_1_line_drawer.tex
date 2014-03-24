@@ -1,0 +1,281 @@
+\hypertarget{class_b_g_e_1_1_line_drawer}{\section{B\-G\-E\-:\-:Line\-Drawer Class Reference}
+\label{class_b_g_e_1_1_line_drawer}\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}}
+}
+
+
+{\ttfamily \#include $<$Line\-Drawer.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_line_drawer_a059031817de66585c02026a116fc75f9}{$\sim$\-Line\-Drawer} (void)
+\item 
+bool \hyperlink{class_b_g_e_1_1_line_drawer_a1deaeb0b5b28a5a186eddbf9d6a17dc6}{Initialise} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_line_drawer_a094e63eddc455d1526d57a4a9b9159db}{Draw} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_line_drawer_ac4eb8f1a3f8240440340b9d2150e2bc4}{Clean\-Up} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_b_g_e_1_1_line_drawer}{Line\-Drawer} $\ast$ \hyperlink{class_b_g_e_1_1_line_drawer_aae06b335f9d123ccd8162c914d4461dc}{Instance} ()
+\item 
+static void \hyperlink{class_b_g_e_1_1_line_drawer_a5977d87252af515791f7da3e8ca9fed2}{Draw\-Line} (glm\-::vec3 start, glm\-::vec3 end, glm\-::vec3 colour)
+\item 
+static void \hyperlink{class_b_g_e_1_1_line_drawer_a41ed949bc20803482a8d5c100f4994ef}{Draw\-Arrow\-Line} (glm\-::vec3 start, glm\-::vec3 end, glm\-::vec3 colour, glm\-::quat arrow\-Quat=glm\-::quat())
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+G\-Luint \hyperlink{class_b_g_e_1_1_line_drawer_ae289a06507a5eb1d5a70f16ca2948dc1}{program\-I\-D}
+\item 
+G\-Luint \hyperlink{class_b_g_e_1_1_line_drawer_a46d0baf0ded68d67d4fce17664d4507c}{colour\-Buffer\-I\-D}
+\item 
+G\-Luint \hyperlink{class_b_g_e_1_1_line_drawer_a0fd71427171ad80175ab38353327d425}{vertex\-Buffer\-I\-D}
+\item 
+G\-Luint \hyperlink{class_b_g_e_1_1_line_drawer_ae18757246fe4eca042c2942f59dd153e}{v\-I\-D}
+\item 
+G\-Luint \hyperlink{class_b_g_e_1_1_line_drawer_a5f2071f6da0a96173105a0f3da00f2a8}{p\-I\-D}
+\item 
+std\-::vector$<$ glm\-::vec3 $>$ \hyperlink{class_b_g_e_1_1_line_drawer_a83f412c313dd0514762d1ef0d55ca7a7}{vertices}
+\item 
+std\-::vector$<$ glm\-::vec3 $>$ \hyperlink{class_b_g_e_1_1_line_drawer_ac5d36287f4b653d18900b7d933b3a690}{colours}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Line\-Drawer.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_line_drawer_a059031817de66585c02026a116fc75f9}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!$\sim$\-Line\-Drawer@{$\sim$\-Line\-Drawer}}
+\index{$\sim$\-Line\-Drawer@{$\sim$\-Line\-Drawer}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{$\sim$\-Line\-Drawer}]{\setlength{\rightskip}{0pt plus 5cm}Line\-Drawer\-::$\sim$\-Line\-Drawer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_line_drawer_a059031817de66585c02026a116fc75f9}
+
+
+Definition at line 23 of file Line\-Drawer.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_line_drawer_ac4eb8f1a3f8240440340b9d2150e2bc4}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!Clean\-Up@{Clean\-Up}}
+\index{Clean\-Up@{Clean\-Up}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{Clean\-Up}]{\setlength{\rightskip}{0pt plus 5cm}void Line\-Drawer\-::\-Clean\-Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_line_drawer_ac4eb8f1a3f8240440340b9d2150e2bc4}
+
+
+Definition at line 94 of file Line\-Drawer.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_line_drawer_a094e63eddc455d1526d57a4a9b9159db}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!Draw@{Draw}}
+\index{Draw@{Draw}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Line\-Drawer\-::\-Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_line_drawer_a094e63eddc455d1526d57a4a9b9159db}
+
+
+Definition at line 47 of file Line\-Drawer.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_line_drawer_a094e63eddc455d1526d57a4a9b9159db_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_line_drawer_a41ed949bc20803482a8d5c100f4994ef}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!Draw\-Arrow\-Line@{Draw\-Arrow\-Line}}
+\index{Draw\-Arrow\-Line@{Draw\-Arrow\-Line}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{Draw\-Arrow\-Line}]{\setlength{\rightskip}{0pt plus 5cm}void Line\-Drawer\-::\-Draw\-Arrow\-Line (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{start, }
+\item[{glm\-::vec3}]{end, }
+\item[{glm\-::vec3}]{colour, }
+\item[{glm\-::quat}]{arrow\-Quat = {\ttfamily glm\-:\-:quat()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_b_g_e_1_1_line_drawer_a41ed949bc20803482a8d5c100f4994ef}
+
+
+Definition at line 101 of file Line\-Drawer.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_line_drawer_a41ed949bc20803482a8d5c100f4994ef_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_line_drawer_a41ed949bc20803482a8d5c100f4994ef_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_line_drawer_a5977d87252af515791f7da3e8ca9fed2}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!Draw\-Line@{Draw\-Line}}
+\index{Draw\-Line@{Draw\-Line}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{Draw\-Line}]{\setlength{\rightskip}{0pt plus 5cm}void Line\-Drawer\-::\-Draw\-Line (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{start, }
+\item[{glm\-::vec3}]{end, }
+\item[{glm\-::vec3}]{colour}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_b_g_e_1_1_line_drawer_a5977d87252af515791f7da3e8ca9fed2}
+
+
+Definition at line 131 of file Line\-Drawer.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_line_drawer_a5977d87252af515791f7da3e8ca9fed2_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_line_drawer_a5977d87252af515791f7da3e8ca9fed2_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_line_drawer_a1deaeb0b5b28a5a186eddbf9d6a17dc6}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{Initialise}]{\setlength{\rightskip}{0pt plus 5cm}bool Line\-Drawer\-::\-Initialise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_line_drawer_a1deaeb0b5b28a5a186eddbf9d6a17dc6}
+
+
+Definition at line 27 of file Line\-Drawer.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_line_drawer_a1deaeb0b5b28a5a186eddbf9d6a17dc6_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_line_drawer_aae06b335f9d123ccd8162c914d4461dc}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!Instance@{Instance}}
+\index{Instance@{Instance}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Line\-Drawer} $\ast$ Line\-Drawer\-::\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_b_g_e_1_1_line_drawer_aae06b335f9d123ccd8162c914d4461dc}
+
+
+Definition at line 14 of file Line\-Drawer.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_line_drawer_aae06b335f9d123ccd8162c914d4461dc_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_line_drawer_a46d0baf0ded68d67d4fce17664d4507c}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!colour\-Buffer\-I\-D@{colour\-Buffer\-I\-D}}
+\index{colour\-Buffer\-I\-D@{colour\-Buffer\-I\-D}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{colour\-Buffer\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint B\-G\-E\-::\-Line\-Drawer\-::colour\-Buffer\-I\-D}}\label{class_b_g_e_1_1_line_drawer_a46d0baf0ded68d67d4fce17664d4507c}
+
+
+Definition at line 36 of file Line\-Drawer.\-h.
+
+\hypertarget{class_b_g_e_1_1_line_drawer_ac5d36287f4b653d18900b7d933b3a690}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!colours@{colours}}
+\index{colours@{colours}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{colours}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$glm\-::vec3$>$ B\-G\-E\-::\-Line\-Drawer\-::colours}}\label{class_b_g_e_1_1_line_drawer_ac5d36287f4b653d18900b7d933b3a690}
+
+
+Definition at line 41 of file Line\-Drawer.\-h.
+
+\hypertarget{class_b_g_e_1_1_line_drawer_a5f2071f6da0a96173105a0f3da00f2a8}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!p\-I\-D@{p\-I\-D}}
+\index{p\-I\-D@{p\-I\-D}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{p\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint B\-G\-E\-::\-Line\-Drawer\-::p\-I\-D}}\label{class_b_g_e_1_1_line_drawer_a5f2071f6da0a96173105a0f3da00f2a8}
+
+
+Definition at line 38 of file Line\-Drawer.\-h.
+
+\hypertarget{class_b_g_e_1_1_line_drawer_ae289a06507a5eb1d5a70f16ca2948dc1}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!program\-I\-D@{program\-I\-D}}
+\index{program\-I\-D@{program\-I\-D}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{program\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint B\-G\-E\-::\-Line\-Drawer\-::program\-I\-D}}\label{class_b_g_e_1_1_line_drawer_ae289a06507a5eb1d5a70f16ca2948dc1}
+
+
+Definition at line 35 of file Line\-Drawer.\-h.
+
+\hypertarget{class_b_g_e_1_1_line_drawer_a0fd71427171ad80175ab38353327d425}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!vertex\-Buffer\-I\-D@{vertex\-Buffer\-I\-D}}
+\index{vertex\-Buffer\-I\-D@{vertex\-Buffer\-I\-D}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{vertex\-Buffer\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint B\-G\-E\-::\-Line\-Drawer\-::vertex\-Buffer\-I\-D}}\label{class_b_g_e_1_1_line_drawer_a0fd71427171ad80175ab38353327d425}
+
+
+Definition at line 37 of file Line\-Drawer.\-h.
+
+\hypertarget{class_b_g_e_1_1_line_drawer_a83f412c313dd0514762d1ef0d55ca7a7}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!vertices@{vertices}}
+\index{vertices@{vertices}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{vertices}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$glm\-::vec3$>$ B\-G\-E\-::\-Line\-Drawer\-::vertices}}\label{class_b_g_e_1_1_line_drawer_a83f412c313dd0514762d1ef0d55ca7a7}
+
+
+Definition at line 40 of file Line\-Drawer.\-h.
+
+\hypertarget{class_b_g_e_1_1_line_drawer_ae18757246fe4eca042c2942f59dd153e}{\index{B\-G\-E\-::\-Line\-Drawer@{B\-G\-E\-::\-Line\-Drawer}!v\-I\-D@{v\-I\-D}}
+\index{v\-I\-D@{v\-I\-D}!BGE::LineDrawer@{B\-G\-E\-::\-Line\-Drawer}}
+\subsubsection[{v\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint B\-G\-E\-::\-Line\-Drawer\-::v\-I\-D}}\label{class_b_g_e_1_1_line_drawer_ae18757246fe4eca042c2942f59dd153e}
+
+
+Definition at line 38 of file Line\-Drawer.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_line_drawer_8h}{Line\-Drawer.\-h}\item 
+B\-G\-E/\hyperlink{_line_drawer_8cpp}{Line\-Drawer.\-cpp}\end{DoxyCompactItemize}

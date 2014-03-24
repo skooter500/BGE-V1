@@ -1,0 +1,4 @@
+<map id="BGE::FountainEffect::UpdateParticle" name="BGE::FountainEffect::UpdateParticle">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_fountain_effect.html#a6c43b5c290f7dda91562731d66ad26f4" title="BGE::FountainEffect\l::InitParticle" alt="" coords="199,5,340,51"/>
+<area shape="rect" id="node5" href="$namespace_b_g_e.html#a44c1252ce516a92fb54a7719a0167d67" title="BGE::RandomClamped" alt="" coords="391,13,548,43"/>
+</map>

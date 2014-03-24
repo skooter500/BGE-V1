@@ -1,0 +1,10 @@
+<map id="BGE::Game::Run" name="BGE::Game::Run">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a2973b50f49c7906ec0e642a8753fd995" title="BGE::Game::Initialise" alt="" coords="184,249,333,278"/>
+<area shape="rect" id="node8" href="$class_b_g_e_1_1_game.html#a51ed573392d7bed791b67062e7c7a3d4" title="BGE::Game::Update" alt="" coords="188,41,329,70"/>
+<area shape="rect" id="node12" href="$class_b_g_e_1_1_game.html#ac649612429b2bf532851b7f0d5a9a57c" title="BGE::Game::Cleanup" alt="" coords="389,16,539,45"/>
+<area shape="rect" id="node14" href="$class_b_g_e_1_1_game.html#ab6d652246c56f49081f852557cfd0267" title="BGE::Game::PreDraw" alt="" coords="183,172,335,201"/>
+<area shape="rect" id="node16" href="$class_b_g_e_1_1_game.html#aad2c20e2c5529244095c50c238911e30" title="BGE::Game::Draw" alt="" coords="193,118,324,148"/>
+<area shape="rect" id="node21" href="$class_b_g_e_1_1_game.html#ae11c57585d89d9540e6734eaee648b74" title="BGE::Game::PostDraw" alt="" coords="180,302,337,332"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="389,210,539,240"/>
+<area shape="rect" id="node10" href="$class_b_g_e_1_1_game.html#a68da8b79dc207e54433ae43512fbb26b" title="BGE::Game::PrintText" alt="" coords="387,106,541,136"/>
+</map>

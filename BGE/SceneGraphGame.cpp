@@ -79,15 +79,17 @@ bool SceneGraphGame::Initialise()
 	station->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	station->transform->position = NextPosition(current ++, componentCount);
 	Attach(station);
-
+	
 	// Add a child to the station and update by including the parent's world transform
 	std::shared_ptr<GameComponent> ship1 = make_shared<GameComponent>(true);
 	ship1->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	ship1->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	ship1 -> tag = "blah"; 
 	std::shared_ptr<Model> ana = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp));	
 	ship1->Attach(ana);
 	ship1->transform->position = glm::vec3(0, 0, -10);
-	station->Attach(ship1); // NOTE the ship is attached to the station at an offset of 10.
+	//station->Attach(ship1); // NOTE the ship is attached to the station at an offset of 10.
+	station -> AttachWithRelativePositioning(ship1); 
 	
 	// Create a component  with an XBOX Controller attached
 	shared_ptr<GameComponent> ship2 = make_shared<GameComponent>(true);
@@ -106,11 +108,6 @@ bool SceneGraphGame::Initialise()
 	ship3->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	ship3->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship3);
-	
-	/*std::shared_ptr<GameComponent> anacon2 = make_shared<GameComponent>(true); 
-	anacon2 -> transform -> ambient = glm::vec3(.2f, .2f, .2f); anacon2 -> transform -> specular = glm::vec3(1.2f, 1.2f, 1.2f); 
-	std::shared_ptr<Model> anmod = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.f, Transform::basisUp)); 
-	anacon2 -> Attach(anmod); anacon2 -> transform -> position = glm::vec3(0, 0, -100); */
 
 	// Create some physics components using the factory
 	physicsFactory->CreateBox(5,5,5, NextPosition(current ++, componentCount), glm::quat());	

@@ -1,0 +1,13 @@
+<map id="BGE/PhysicsController.h" name="BGE/PhysicsController.h">
+<area shape="rect" id="node3" href="$_kinematic_motion_state_8cpp.html" title="BGE/KinematicMotionState.cpp" alt="" coords="201,83,407,112"/>
+<area shape="rect" id="node5" href="$_physics_game1_8h.html" title="BGE/PhysicsGame1.h" alt="" coords="367,160,521,189"/>
+<area shape="rect" id="node11" href="$_physics_game1_8cpp.html" title="BGE/PhysicsGame1.cpp" alt="" coords="736,237,904,267"/>
+<area shape="rect" id="node13" href="$_physics_factory_8h.html" title="BGE/PhysicsFactory.h" alt="" coords="481,83,636,112"/>
+<area shape="rect" id="node21" href="$_physics_camera_8h.html" title="BGE/PhysicsCamera.h" alt="" coords="596,160,753,189"/>
+<area shape="rect" id="node29" href="$_physics_controller_8cpp.html" title="BGE/PhysicsController.cpp" alt="" coords="828,83,1009,112"/>
+<area shape="rect" id="node7" href="$main_8cpp.html" title="BGE/main.cpp" alt="" coords="216,237,323,267"/>
+<area shape="rect" id="node9" href="$_physics_camera_8cpp.html" title="BGE/PhysicsCamera.cpp" alt="" coords="347,237,517,267"/>
+<area shape="rect" id="node16" href="$_scene_graph_game_8h.html" title="BGE/SceneGraphGame.h" alt="" coords="172,160,343,189"/>
+<area shape="rect" id="node24" href="$_physics_factory_8cpp.html" title="BGE/PhysicsFactory.cpp" alt="" coords="541,237,712,267"/>
+<area shape="rect" id="node19" href="$_scene_graph_game_8cpp.html" title="BGE/SceneGraphGame.cpp" alt="" coords="5,237,192,267"/>
+</map>

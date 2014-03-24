@@ -1,0 +1,4 @@
+<map id="BGE::PhysicsFactory::CreateBox" name="BGE::PhysicsFactory::CreateBox">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_physics_factory.html#a0a1aef2a5769b29ef74654ea3665637b" title="BGE::PhysicsFactory\l::CreateWall" alt="" coords="203,5,352,51"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_physics_factory.html#a93b01c37fb6aafa5170219783d0afb2c" title="BGE::PhysicsFactory\l::CreateVehicle" alt="" coords="203,74,352,121"/>
+</map>

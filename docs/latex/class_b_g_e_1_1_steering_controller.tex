@@ -1,0 +1,1083 @@
+\hypertarget{class_b_g_e_1_1_steering_controller}{\section{B\-G\-E\-:\-:Steering\-Controller Class Reference}
+\label{class_b_g_e_1_1_steering_controller}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}
+}
+
+
+{\ttfamily \#include $<$Steering\-Controler.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:Steering\-Controller\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{class_b_g_e_1_1_steering_controller__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for B\-G\-E\-:\-:Steering\-Controller\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_b_g_e_1_1_steering_controller__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58}{Calculation\-Methods} \{ \hyperlink{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a73cc4a159e957a8d20e573a993e8b877}{Weighted\-Truncated\-Sum}, 
+\hyperlink{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a1058968934ceacde188aecb04eb49ae0}{Weighted\-Truncated\-Running\-Sum\-With\-Prioritisation}, 
+\hyperlink{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a3737b9f22ec95bb64c2a76b9cc54fa85}{Prioritised\-Dithering}
+ \}
+\item 
+enum \hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53}{behaviour\-\_\-type} \{ \\*
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a141ae976e26252211e68e1a5600ad71b}{none} =  0x00000, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a015553ef138aaae52c19555b84af8281}{seek} =  0x00002, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53adbd1ea49a4baf09d076a850ee35315d3}{flee} =  0x00004, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53ab057bad9cdf98222ecebace601d16028}{arrive} =  0x00008, 
+\\*
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a74dd2684f3a5fc53a8b938009b006c06}{wander} =  0x00010, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53ac2a422da4dba1c93e9bddf3b8a6847bf}{cohesion} =  0x00020, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a28d260bbde3e3bd7468c08fbbbd5fa26}{separation} =  0x00040, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a2540d39f10f55510dbbdcf4fbac4a1c5}{alignment} =  0x00080, 
+\\*
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53aa6ed23fc7975c97faecb42feb58190c9}{obstacle\-\_\-avoidance} =  0x00100, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a067f8cddba72e57c54b59062e2ee07fe}{wall\-\_\-avoidance} =  0x00200, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a9413c369eca37e099c51dd7d086c5274}{follow\-\_\-path} =  0x00400, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a08cb0712e982e0c1214188c4384c016a}{pursuit} =  0x00800, 
+\\*
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a665824eb81700355ff9218d5a1df5b74}{evade} =  0x01000, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a15b4f57835f84a5298754dc099ab61fb}{interpose} =  0x02000, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a906b773b956071623b7fc40086f998ff}{hide} =  0x04000, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53aca316fa9ce06eb20931281bf363b06fa}{flock} =  0x08000, 
+\\*
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a2dec1208cd41f13721f4f3e0f1e4fe94}{offset\-\_\-pursuit} =  0x10000, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a8563da75366eaeed7c9a0fc1c74d49a3}{sphere\-\_\-constrain} =  0x20000, 
+\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a9341e86c3f7ace9c9753f8a495f81c0e}{random\-\_\-walk} =  0x40000
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_steering_controller_a7510d7b82370619001ee140f28578cb8}{Steering\-Controller} (void)
+\item 
+\hyperlink{class_b_g_e_1_1_steering_controller_a4e7e26c5d658d948ad58bcc1965e933a}{$\sim$\-Steering\-Controller} (void)
+\item 
+void \hyperlink{class_b_g_e_1_1_steering_controller_aa0a6fdb7b154d020255e689bae13e592}{Update} (float \hyperlink{class_b_g_e_1_1_steering_controller_a2663615d3340930be34a999daa7f735b}{time\-Delta})
+\item 
+bool \hyperlink{class_b_g_e_1_1_steering_controller_ae301df857ee41719ec16cca2b2b28679}{Initialise} ()
+\item 
+int \hyperlink{class_b_g_e_1_1_steering_controller_a5ae58ceaa5f18ea630088ac58ccd4b88}{Tag\-Neighbours\-Simple} (float in\-Range)
+\item 
+bool \hyperlink{class_b_g_e_1_1_steering_controller_aaff1c52abd1ac49e78290dbb6ca56d22}{Is\-On} (\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53}{behaviour\-\_\-type} behaviour)
+\item 
+void \hyperlink{class_b_g_e_1_1_steering_controller_abcbf615812426ee099ea811990395201}{Turn\-On} (\hyperlink{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53}{behaviour\-\_\-type} behaviour)
+\item 
+void \hyperlink{class_b_g_e_1_1_steering_controller_af250dbbe972602fc150e3c2b5ec8d72b}{Turn\-Off\-All} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ab9e88d733741f192af1ac5ed4a919fc1}{Cohesion} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a68974d7ec67c5a08c85548f2ad976b17}{Alignment} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a66ff5fe4067c564e08dc24e9da8607fc}{Sphere\-Constrain} (float radius)
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a1e64a7cddc10acab2984540ae53abda7}{Separation} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_aeb0c96ab4bda50df835b22a1c750e998}{Evade} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a5c692e0d558ec141f7dec2d4acfe894a}{Obstacle\-Avoidance} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a4001a9088cbcb95669987f9c9224e68d}{Offset\-Pursuit} (glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ae105c8426aa2bf9856ea0e53d95a366c}{offset})
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a6c18ec372681941ca2dff0fa4d75b975}{Pursue} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a00ccbf697f03b6b02e0b028d30e0c6e5}{Flee} (glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a0484eb39c0aaf8b38caf6e2aa836fc05}{target\-Pos})
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a838ed1cc1b6b8d146af97ca0fad8edb9}{Random\-Walk} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_af21ca382fa09f039518c0ed740e84a1b}{Seek} (glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a0484eb39c0aaf8b38caf6e2aa836fc05}{target\-Pos})
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a0cb8b40f2baa4e7c5a2125da562757d1}{Wander} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a163a9e14005db77dcc744be2cc7fdf47}{Wall\-Avoidance} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ac58aacfac4e65a8fb7e9876100320663}{Arrive} (glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_aa692367fc05dd499a1cc55995147a76a}{target})
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a7c665ab03a5de88c8ed7d506a6353ede}{Follow\-Path} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a83fd612fb65fe1ef6be18c4dfd09ceed}{Calculate} ()
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ada60d4814e517f41810dc6e904e8e667}{Calculate\-Weighted\-Prioritised} ()
+\item 
+bool \hyperlink{class_b_g_e_1_1_steering_controller_a6d749c1ad78a1d7017ee5d4bce336515}{Accumulate\-Force} (glm\-::vec3 \&running\-Total, glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ad10b3de08abf1b1d18b72628012fd011}{force})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58}{Calculation\-Methods} \hyperlink{class_b_g_e_1_1_steering_controller_a29d6bda0a3029e2ab2e19f860dfe3cb4}{calculation\-Method}
+\item 
+vector$<$ shared\-\_\-ptr\\*
+$<$ \hyperlink{class_b_g_e_1_1_game_component}{Game\-Component} $>$ $>$ \hyperlink{class_b_g_e_1_1_steering_controller_a0bef7f9e4477fa9be8f9679b21aef252}{tagged}
+\item 
+vector$<$ glm\-::vec3 $>$ \hyperlink{class_b_g_e_1_1_steering_controller_a4bfeb793b7a81b378d3f81c5085b204e}{feelers}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_game_component}{Game\-Component} $>$ \hyperlink{class_b_g_e_1_1_steering_controller_aa692367fc05dd499a1cc55995147a76a}{target}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_game_component}{Game\-Component} $>$ \hyperlink{class_b_g_e_1_1_steering_controller_a903b58bdfc1ffa2da91a0cb4e86709cd}{leader}
+\item 
+float \hyperlink{class_b_g_e_1_1_steering_controller_abd6d971966780e0bcd3f8f8354cf816d}{max\-Speed}
+\item 
+float \hyperlink{class_b_g_e_1_1_steering_controller_ae5cdce26a0b042668ed31e89975bd9f4}{max\-Force}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ad10b3de08abf1b1d18b72628012fd011}{force}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ad213909130f9be8f16bb22b4ba18315c}{acceleration}
+\item 
+float \hyperlink{class_b_g_e_1_1_steering_controller_aef56ff8322c205106e1fda10a7a6163a}{mass}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a0484eb39c0aaf8b38caf6e2aa836fc05}{target\-Pos}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ab6afb73864e6da7472bc49a725257c67}{wander\-Target}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_a73ebb24f070f82ea198c6ee7d2713730}{random\-Walk\-Target}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_steering_controller_ae105c8426aa2bf9856ea0e53d95a366c}{offset}
+\item 
+float \hyperlink{class_b_g_e_1_1_steering_controller_a2663615d3340930be34a999daa7f735b}{time\-Delta}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_route}{Route} $>$ \hyperlink{class_b_g_e_1_1_steering_controller_a17816a6268bc4055a01c5c90eb505320}{route}
+\item 
+int \hyperlink{class_b_g_e_1_1_steering_controller_a8e3bba21f8c3f425b6a591b9c85d9c90}{flags}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 12 of file Steering\-Controler.\-h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!behaviour\-\_\-type@{behaviour\-\_\-type}}
+\index{behaviour\-\_\-type@{behaviour\-\_\-type}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{behaviour\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf B\-G\-E\-::\-Steering\-Controller\-::behaviour\-\_\-type}}}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53}
+\begin{Desc}
+\item[Enumerator\-: ]\par
+\begin{description}
+\index{none@{none}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!none@{none}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a141ae976e26252211e68e1a5600ad71b}{none}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a141ae976e26252211e68e1a5600ad71b}
+}]\index{seek@{seek}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!seek@{seek}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a015553ef138aaae52c19555b84af8281}{seek}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a015553ef138aaae52c19555b84af8281}
+}]\index{flee@{flee}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!flee@{flee}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53adbd1ea49a4baf09d076a850ee35315d3}{flee}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53adbd1ea49a4baf09d076a850ee35315d3}
+}]\index{arrive@{arrive}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!arrive@{arrive}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53ab057bad9cdf98222ecebace601d16028}{arrive}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53ab057bad9cdf98222ecebace601d16028}
+}]\index{wander@{wander}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!wander@{wander}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a74dd2684f3a5fc53a8b938009b006c06}{wander}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a74dd2684f3a5fc53a8b938009b006c06}
+}]\index{cohesion@{cohesion}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!cohesion@{cohesion}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53ac2a422da4dba1c93e9bddf3b8a6847bf}{cohesion}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53ac2a422da4dba1c93e9bddf3b8a6847bf}
+}]\index{separation@{separation}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!separation@{separation}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a28d260bbde3e3bd7468c08fbbbd5fa26}{separation}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a28d260bbde3e3bd7468c08fbbbd5fa26}
+}]\index{alignment@{alignment}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!alignment@{alignment}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a2540d39f10f55510dbbdcf4fbac4a1c5}{alignment}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a2540d39f10f55510dbbdcf4fbac4a1c5}
+}]\index{obstacle\-\_\-avoidance@{obstacle\-\_\-avoidance}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!obstacle\-\_\-avoidance@{obstacle\-\_\-avoidance}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53aa6ed23fc7975c97faecb42feb58190c9}{obstacle\-\_\-avoidance}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53aa6ed23fc7975c97faecb42feb58190c9}
+}]\index{wall\-\_\-avoidance@{wall\-\_\-avoidance}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!wall\-\_\-avoidance@{wall\-\_\-avoidance}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a067f8cddba72e57c54b59062e2ee07fe}{wall\-\_\-avoidance}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a067f8cddba72e57c54b59062e2ee07fe}
+}]\index{follow\-\_\-path@{follow\-\_\-path}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!follow\-\_\-path@{follow\-\_\-path}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a9413c369eca37e099c51dd7d086c5274}{follow\-\_\-path}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a9413c369eca37e099c51dd7d086c5274}
+}]\index{pursuit@{pursuit}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!pursuit@{pursuit}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a08cb0712e982e0c1214188c4384c016a}{pursuit}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a08cb0712e982e0c1214188c4384c016a}
+}]\index{evade@{evade}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!evade@{evade}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a665824eb81700355ff9218d5a1df5b74}{evade}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a665824eb81700355ff9218d5a1df5b74}
+}]\index{interpose@{interpose}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!interpose@{interpose}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a15b4f57835f84a5298754dc099ab61fb}{interpose}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a15b4f57835f84a5298754dc099ab61fb}
+}]\index{hide@{hide}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!hide@{hide}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a906b773b956071623b7fc40086f998ff}{hide}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a906b773b956071623b7fc40086f998ff}
+}]\index{flock@{flock}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!flock@{flock}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53aca316fa9ce06eb20931281bf363b06fa}{flock}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53aca316fa9ce06eb20931281bf363b06fa}
+}]\index{offset\-\_\-pursuit@{offset\-\_\-pursuit}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!offset\-\_\-pursuit@{offset\-\_\-pursuit}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a2dec1208cd41f13721f4f3e0f1e4fe94}{offset\-\_\-pursuit}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a2dec1208cd41f13721f4f3e0f1e4fe94}
+}]\index{sphere\-\_\-constrain@{sphere\-\_\-constrain}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!sphere\-\_\-constrain@{sphere\-\_\-constrain}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a8563da75366eaeed7c9a0fc1c74d49a3}{sphere\-\_\-constrain}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a8563da75366eaeed7c9a0fc1c74d49a3}
+}]\index{random\-\_\-walk@{random\-\_\-walk}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!random\-\_\-walk@{random\-\_\-walk}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a9341e86c3f7ace9c9753f8a495f81c0e}{random\-\_\-walk}\label{class_b_g_e_1_1_steering_controller_abebc62a28e58ef3c7fc189941629aa53a9341e86c3f7ace9c9753f8a495f81c0e}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 26 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Calculation\-Methods@{Calculation\-Methods}}
+\index{Calculation\-Methods@{Calculation\-Methods}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Calculation\-Methods}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf B\-G\-E\-::\-Steering\-Controller\-::\-Calculation\-Methods}}}\label{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58}
+\begin{Desc}
+\item[Enumerator\-: ]\par
+\begin{description}
+\index{Weighted\-Truncated\-Sum@{Weighted\-Truncated\-Sum}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Weighted\-Truncated\-Sum@{Weighted\-Truncated\-Sum}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a73cc4a159e957a8d20e573a993e8b877}{Weighted\-Truncated\-Sum}\label{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a73cc4a159e957a8d20e573a993e8b877}
+}]\index{Weighted\-Truncated\-Running\-Sum\-With\-Prioritisation@{Weighted\-Truncated\-Running\-Sum\-With\-Prioritisation}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Weighted\-Truncated\-Running\-Sum\-With\-Prioritisation@{Weighted\-Truncated\-Running\-Sum\-With\-Prioritisation}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a1058968934ceacde188aecb04eb49ae0}{Weighted\-Truncated\-Running\-Sum\-With\-Prioritisation}\label{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a1058968934ceacde188aecb04eb49ae0}
+}]\index{Prioritised\-Dithering@{Prioritised\-Dithering}!B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}}\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Prioritised\-Dithering@{Prioritised\-Dithering}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a3737b9f22ec95bb64c2a76b9cc54fa85}{Prioritised\-Dithering}\label{class_b_g_e_1_1_steering_controller_a4d8cb7205fd452a3f742622b6979cf58a3737b9f22ec95bb64c2a76b9cc54fa85}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 25 of file Steering\-Controler.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_steering_controller_a7510d7b82370619001ee140f28578cb8}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Steering\-Controller@{Steering\-Controller}}
+\index{Steering\-Controller@{Steering\-Controller}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Steering\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}Steering\-Controller\-::\-Steering\-Controller (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a7510d7b82370619001ee140f28578cb8}
+
+
+Definition at line 16 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a7510d7b82370619001ee140f28578cb8_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a4e7e26c5d658d948ad58bcc1965e933a}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!$\sim$\-Steering\-Controller@{$\sim$\-Steering\-Controller}}
+\index{$\sim$\-Steering\-Controller@{$\sim$\-Steering\-Controller}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{$\sim$\-Steering\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}Steering\-Controller\-::$\sim$\-Steering\-Controller (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a4e7e26c5d658d948ad58bcc1965e933a}
+
+
+Definition at line 51 of file Steering\-Controler.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_steering_controller_a6d749c1ad78a1d7017ee5d4bce336515}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Accumulate\-Force@{Accumulate\-Force}}
+\index{Accumulate\-Force@{Accumulate\-Force}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Accumulate\-Force}]{\setlength{\rightskip}{0pt plus 5cm}bool Steering\-Controller\-::\-Accumulate\-Force (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3 \&}]{running\-Total, }
+\item[{glm\-::vec3}]{force}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a6d749c1ad78a1d7017ee5d4bce336515}
+
+
+Definition at line 731 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a6d749c1ad78a1d7017ee5d4bce336515_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a68974d7ec67c5a08c85548f2ad976b17}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Alignment@{Alignment}}
+\index{Alignment@{Alignment}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Alignment}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Alignment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a68974d7ec67c5a08c85548f2ad976b17}
+
+
+Definition at line 212 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a68974d7ec67c5a08c85548f2ad976b17_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ac58aacfac4e65a8fb7e9876100320663}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Arrive@{Arrive}}
+\index{Arrive@{Arrive}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Arrive}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Arrive (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{target}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_ac58aacfac4e65a8fb7e9876100320663}
+
+
+Definition at line 539 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_ac58aacfac4e65a8fb7e9876100320663_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_ac58aacfac4e65a8fb7e9876100320663_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a83fd612fb65fe1ef6be18c4dfd09ceed}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Calculate@{Calculate}}
+\index{Calculate@{Calculate}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Calculate}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Calculate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a83fd612fb65fe1ef6be18c4dfd09ceed}
+
+
+Definition at line 560 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a83fd612fb65fe1ef6be18c4dfd09ceed_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a83fd612fb65fe1ef6be18c4dfd09ceed_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ada60d4814e517f41810dc6e904e8e667}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Calculate\-Weighted\-Prioritised@{Calculate\-Weighted\-Prioritised}}
+\index{Calculate\-Weighted\-Prioritised@{Calculate\-Weighted\-Prioritised}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Calculate\-Weighted\-Prioritised}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Calculate\-Weighted\-Prioritised (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_ada60d4814e517f41810dc6e904e8e667}
+
+
+Definition at line 570 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_ada60d4814e517f41810dc6e904e8e667_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_ada60d4814e517f41810dc6e904e8e667_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ab9e88d733741f192af1ac5ed4a919fc1}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Cohesion@{Cohesion}}
+\index{Cohesion@{Cohesion}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Cohesion}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Cohesion (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_ab9e88d733741f192af1ac5ed4a919fc1}
+
+
+Definition at line 181 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_ab9e88d733741f192af1ac5ed4a919fc1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_ab9e88d733741f192af1ac5ed4a919fc1_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_aeb0c96ab4bda50df835b22a1c750e998}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Evade@{Evade}}
+\index{Evade@{Evade}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Evade}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Evade (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_aeb0c96ab4bda50df835b22a1c750e998}
+
+
+Definition at line 265 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_aeb0c96ab4bda50df835b22a1c750e998_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_aeb0c96ab4bda50df835b22a1c750e998_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a00ccbf697f03b6b02e0b028d30e0c6e5}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Flee@{Flee}}
+\index{Flee@{Flee}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Flee}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Flee (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{target\-Pos}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a00ccbf697f03b6b02e0b028d30e0c6e5}
+
+
+Definition at line 418 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a00ccbf697f03b6b02e0b028d30e0c6e5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a7c665ab03a5de88c8ed7d506a6353ede}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Follow\-Path@{Follow\-Path}}
+\index{Follow\-Path@{Follow\-Path}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Follow\-Path}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Follow\-Path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a7c665ab03a5de88c8ed7d506a6353ede}
+
+
+Definition at line 712 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a7c665ab03a5de88c8ed7d506a6353ede_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a7c665ab03a5de88c8ed7d506a6353ede_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ae301df857ee41719ec16cca2b2b28679}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Initialise}]{\setlength{\rightskip}{0pt plus 5cm}bool Steering\-Controller\-::\-Initialise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_steering_controller_ae301df857ee41719ec16cca2b2b28679}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_ae1c2340cdfb31d2cd372323d3f9a1ba4}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Definition at line 39 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_ae301df857ee41719ec16cca2b2b28679_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_aaff1c52abd1ac49e78290dbb6ca56d22}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Is\-On@{Is\-On}}
+\index{Is\-On@{Is\-On}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Is\-On}]{\setlength{\rightskip}{0pt plus 5cm}bool Steering\-Controller\-::\-Is\-On (
+\begin{DoxyParamCaption}
+\item[{{\bf behaviour\-\_\-type}}]{behaviour}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_aaff1c52abd1ac49e78290dbb6ca56d22}
+
+
+Definition at line 166 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_aaff1c52abd1ac49e78290dbb6ca56d22_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a5c692e0d558ec141f7dec2d4acfe894a}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Obstacle\-Avoidance@{Obstacle\-Avoidance}}
+\index{Obstacle\-Avoidance@{Obstacle\-Avoidance}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Obstacle\-Avoidance}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Obstacle\-Avoidance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a5c692e0d558ec141f7dec2d4acfe894a}
+
+
+Definition at line 275 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a5c692e0d558ec141f7dec2d4acfe894a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a5c692e0d558ec141f7dec2d4acfe894a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a4001a9088cbcb95669987f9c9224e68d}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Offset\-Pursuit@{Offset\-Pursuit}}
+\index{Offset\-Pursuit@{Offset\-Pursuit}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Offset\-Pursuit}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Offset\-Pursuit (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{offset}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a4001a9088cbcb95669987f9c9224e68d}
+
+
+Definition at line 392 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a4001a9088cbcb95669987f9c9224e68d_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a4001a9088cbcb95669987f9c9224e68d_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a6c18ec372681941ca2dff0fa4d75b975}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Pursue@{Pursue}}
+\index{Pursue@{Pursue}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Pursue}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Pursue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a6c18ec372681941ca2dff0fa4d75b975}
+
+
+Definition at line 408 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a6c18ec372681941ca2dff0fa4d75b975_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a6c18ec372681941ca2dff0fa4d75b975_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a838ed1cc1b6b8d146af97ca0fad8edb9}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Random\-Walk@{Random\-Walk}}
+\index{Random\-Walk@{Random\-Walk}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Random\-Walk}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Random\-Walk (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a838ed1cc1b6b8d146af97ca0fad8edb9}
+
+
+Definition at line 434 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a838ed1cc1b6b8d146af97ca0fad8edb9_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a838ed1cc1b6b8d146af97ca0fad8edb9_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_af21ca382fa09f039518c0ed740e84a1b}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Seek@{Seek}}
+\index{Seek@{Seek}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Seek}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Seek (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{target\-Pos}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_af21ca382fa09f039518c0ed740e84a1b}
+
+
+Definition at line 446 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_af21ca382fa09f039518c0ed740e84a1b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a1e64a7cddc10acab2984540ae53abda7}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Separation@{Separation}}
+\index{Separation@{Separation}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Separation}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Separation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a1e64a7cddc10acab2984540ae53abda7}
+
+
+Definition at line 248 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a1e64a7cddc10acab2984540ae53abda7_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a66ff5fe4067c564e08dc24e9da8607fc}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Sphere\-Constrain@{Sphere\-Constrain}}
+\index{Sphere\-Constrain@{Sphere\-Constrain}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Sphere\-Constrain}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Sphere\-Constrain (
+\begin{DoxyParamCaption}
+\item[{float}]{radius}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a66ff5fe4067c564e08dc24e9da8607fc}
+
+
+Definition at line 236 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a66ff5fe4067c564e08dc24e9da8607fc_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a5ae58ceaa5f18ea630088ac58ccd4b88}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Tag\-Neighbours\-Simple@{Tag\-Neighbours\-Simple}}
+\index{Tag\-Neighbours\-Simple@{Tag\-Neighbours\-Simple}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Tag\-Neighbours\-Simple}]{\setlength{\rightskip}{0pt plus 5cm}int Steering\-Controller\-::\-Tag\-Neighbours\-Simple (
+\begin{DoxyParamCaption}
+\item[{float}]{in\-Range}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a5ae58ceaa5f18ea630088ac58ccd4b88}
+
+
+Definition at line 147 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a5ae58ceaa5f18ea630088ac58ccd4b88_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_af250dbbe972602fc150e3c2b5ec8d72b}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Turn\-Off\-All@{Turn\-Off\-All}}
+\index{Turn\-Off\-All@{Turn\-Off\-All}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Turn\-Off\-All}]{\setlength{\rightskip}{0pt plus 5cm}void Steering\-Controller\-::\-Turn\-Off\-All (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_af250dbbe972602fc150e3c2b5ec8d72b}
+
+
+Definition at line 176 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_af250dbbe972602fc150e3c2b5ec8d72b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_abcbf615812426ee099ea811990395201}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Turn\-On@{Turn\-On}}
+\index{Turn\-On@{Turn\-On}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Turn\-On}]{\setlength{\rightskip}{0pt plus 5cm}void Steering\-Controller\-::\-Turn\-On (
+\begin{DoxyParamCaption}
+\item[{{\bf behaviour\-\_\-type}}]{behaviour}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_abcbf615812426ee099ea811990395201}
+
+
+Definition at line 171 of file Steering\-Controler.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_aa0a6fdb7b154d020255e689bae13e592}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Update@{Update}}
+\index{Update@{Update}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Steering\-Controller\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{float}]{time\-Delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_steering_controller_aa0a6fdb7b154d020255e689bae13e592}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_ac8e444827ee0be9ad654cdff4d15f071}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Definition at line 55 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_aa0a6fdb7b154d020255e689bae13e592_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a163a9e14005db77dcc744be2cc7fdf47}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Wall\-Avoidance@{Wall\-Avoidance}}
+\index{Wall\-Avoidance@{Wall\-Avoidance}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Wall\-Avoidance}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Wall\-Avoidance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a163a9e14005db77dcc744be2cc7fdf47}
+
+
+Definition at line 474 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a163a9e14005db77dcc744be2cc7fdf47_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a0cb8b40f2baa4e7c5a2125da562757d1}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!Wander@{Wander}}
+\index{Wander@{Wander}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{Wander}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Steering\-Controller\-::\-Wander (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_controller_a0cb8b40f2baa4e7c5a2125da562757d1}
+
+
+Definition at line 459 of file Steering\-Controler.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a0cb8b40f2baa4e7c5a2125da562757d1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_controller_a0cb8b40f2baa4e7c5a2125da562757d1_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_steering_controller_ad213909130f9be8f16bb22b4ba18315c}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!acceleration@{acceleration}}
+\index{acceleration@{acceleration}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{acceleration}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Steering\-Controller\-::acceleration}}\label{class_b_g_e_1_1_steering_controller_ad213909130f9be8f16bb22b4ba18315c}
+
+
+Definition at line 68 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a29d6bda0a3029e2ab2e19f860dfe3cb4}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!calculation\-Method@{calculation\-Method}}
+\index{calculation\-Method@{calculation\-Method}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{calculation\-Method}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Calculation\-Methods} B\-G\-E\-::\-Steering\-Controller\-::calculation\-Method}}\label{class_b_g_e_1_1_steering_controller_a29d6bda0a3029e2ab2e19f860dfe3cb4}
+
+
+Definition at line 48 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a4bfeb793b7a81b378d3f81c5085b204e}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!feelers@{feelers}}
+\index{feelers@{feelers}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{feelers}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$glm\-::vec3$>$ B\-G\-E\-::\-Steering\-Controller\-::feelers}}\label{class_b_g_e_1_1_steering_controller_a4bfeb793b7a81b378d3f81c5085b204e}
+
+
+Definition at line 50 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a8e3bba21f8c3f425b6a591b9c85d9c90}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!flags@{flags}}
+\index{flags@{flags}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}int B\-G\-E\-::\-Steering\-Controller\-::flags}}\label{class_b_g_e_1_1_steering_controller_a8e3bba21f8c3f425b6a591b9c85d9c90}
+
+
+Definition at line 100 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ad10b3de08abf1b1d18b72628012fd011}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!force@{force}}
+\index{force@{force}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{force}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Steering\-Controller\-::force}}\label{class_b_g_e_1_1_steering_controller_ad10b3de08abf1b1d18b72628012fd011}
+
+
+Definition at line 67 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a903b58bdfc1ffa2da91a0cb4e86709cd}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!leader@{leader}}
+\index{leader@{leader}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{leader}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Game\-Component}$>$ B\-G\-E\-::\-Steering\-Controller\-::leader}}\label{class_b_g_e_1_1_steering_controller_a903b58bdfc1ffa2da91a0cb4e86709cd}
+
+
+Definition at line 64 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_aef56ff8322c205106e1fda10a7a6163a}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!mass@{mass}}
+\index{mass@{mass}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{mass}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Steering\-Controller\-::mass}}\label{class_b_g_e_1_1_steering_controller_aef56ff8322c205106e1fda10a7a6163a}
+
+
+Definition at line 69 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ae5cdce26a0b042668ed31e89975bd9f4}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!max\-Force@{max\-Force}}
+\index{max\-Force@{max\-Force}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{max\-Force}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Steering\-Controller\-::max\-Force}}\label{class_b_g_e_1_1_steering_controller_ae5cdce26a0b042668ed31e89975bd9f4}
+
+
+Definition at line 66 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_abd6d971966780e0bcd3f8f8354cf816d}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!max\-Speed@{max\-Speed}}
+\index{max\-Speed@{max\-Speed}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{max\-Speed}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Steering\-Controller\-::max\-Speed}}\label{class_b_g_e_1_1_steering_controller_abd6d971966780e0bcd3f8f8354cf816d}
+
+
+Definition at line 65 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ae105c8426aa2bf9856ea0e53d95a366c}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!offset@{offset}}
+\index{offset@{offset}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{offset}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Steering\-Controller\-::offset}}\label{class_b_g_e_1_1_steering_controller_ae105c8426aa2bf9856ea0e53d95a366c}
+
+
+Definition at line 73 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a73ebb24f070f82ea198c6ee7d2713730}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!random\-Walk\-Target@{random\-Walk\-Target}}
+\index{random\-Walk\-Target@{random\-Walk\-Target}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{random\-Walk\-Target}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Steering\-Controller\-::random\-Walk\-Target}}\label{class_b_g_e_1_1_steering_controller_a73ebb24f070f82ea198c6ee7d2713730}
+
+
+Definition at line 72 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a17816a6268bc4055a01c5c90eb505320}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!route@{route}}
+\index{route@{route}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{route}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Route}$>$ B\-G\-E\-::\-Steering\-Controller\-::route}}\label{class_b_g_e_1_1_steering_controller_a17816a6268bc4055a01c5c90eb505320}
+
+
+Definition at line 76 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a0bef7f9e4477fa9be8f9679b21aef252}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!tagged@{tagged}}
+\index{tagged@{tagged}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{tagged}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$shared\-\_\-ptr$<${\bf Game\-Component}$>$ $>$ B\-G\-E\-::\-Steering\-Controller\-::tagged}}\label{class_b_g_e_1_1_steering_controller_a0bef7f9e4477fa9be8f9679b21aef252}
+
+
+Definition at line 49 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_aa692367fc05dd499a1cc55995147a76a}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!target@{target}}
+\index{target@{target}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Game\-Component}$>$ B\-G\-E\-::\-Steering\-Controller\-::target}}\label{class_b_g_e_1_1_steering_controller_aa692367fc05dd499a1cc55995147a76a}
+
+
+Definition at line 63 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a0484eb39c0aaf8b38caf6e2aa836fc05}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!target\-Pos@{target\-Pos}}
+\index{target\-Pos@{target\-Pos}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{target\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Steering\-Controller\-::target\-Pos}}\label{class_b_g_e_1_1_steering_controller_a0484eb39c0aaf8b38caf6e2aa836fc05}
+
+
+Definition at line 70 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_a2663615d3340930be34a999daa7f735b}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!time\-Delta@{time\-Delta}}
+\index{time\-Delta@{time\-Delta}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{time\-Delta}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Steering\-Controller\-::time\-Delta}}\label{class_b_g_e_1_1_steering_controller_a2663615d3340930be34a999daa7f735b}
+
+
+Definition at line 74 of file Steering\-Controler.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_controller_ab6afb73864e6da7472bc49a725257c67}{\index{B\-G\-E\-::\-Steering\-Controller@{B\-G\-E\-::\-Steering\-Controller}!wander\-Target@{wander\-Target}}
+\index{wander\-Target@{wander\-Target}!BGE::SteeringController@{B\-G\-E\-::\-Steering\-Controller}}
+\subsubsection[{wander\-Target}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Steering\-Controller\-::wander\-Target}}\label{class_b_g_e_1_1_steering_controller_ab6afb73864e6da7472bc49a725257c67}
+
+
+Definition at line 71 of file Steering\-Controler.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_steering_controler_8h}{Steering\-Controler.\-h}\item 
+B\-G\-E/\hyperlink{_steering_controler_8cpp}{Steering\-Controler.\-cpp}\end{DoxyCompactItemize}

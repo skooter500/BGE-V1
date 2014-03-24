@@ -1,0 +1,132 @@
+\hypertarget{class_b_g_e_1_1_state_machine}{\section{B\-G\-E\-:\-:State\-Machine Class Reference}
+\label{class_b_g_e_1_1_state_machine}\index{B\-G\-E\-::\-State\-Machine@{B\-G\-E\-::\-State\-Machine}}
+}
+
+
+{\ttfamily \#include $<$State.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:State\-Machine\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{class_b_g_e_1_1_state_machine__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for B\-G\-E\-:\-:State\-Machine\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{class_b_g_e_1_1_state_machine__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_state_machine_ad04e720a963e34339a125c5ff064c09b}{State\-Machine} (void)
+\item 
+\hyperlink{class_b_g_e_1_1_state_machine_a88c47bc8b8ab361e46740a35a64ce795}{$\sim$\-State\-Machine} (void)
+\item 
+void \hyperlink{class_b_g_e_1_1_state_machine_a0bbd130dee59706b7d1a9422d922fcfc}{Update} (float time\-Delta)
+\item 
+void \hyperlink{class_b_g_e_1_1_state_machine_a8cc9a775fdc90429b6f47dbba7cd5a12}{Swicth\-State} (shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_state}{State} $>$ new\-State)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_state}{State} $>$ \hyperlink{class_b_g_e_1_1_state_machine_a5698ea2fa8f5a52cc8cdde09ba09c628}{current\-State}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 25 of file State.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_state_machine_ad04e720a963e34339a125c5ff064c09b}{\index{B\-G\-E\-::\-State\-Machine@{B\-G\-E\-::\-State\-Machine}!State\-Machine@{State\-Machine}}
+\index{State\-Machine@{State\-Machine}!BGE::StateMachine@{B\-G\-E\-::\-State\-Machine}}
+\subsubsection[{State\-Machine}]{\setlength{\rightskip}{0pt plus 5cm}State\-Machine\-::\-State\-Machine (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_state_machine_ad04e720a963e34339a125c5ff064c09b}
+
+
+Definition at line 22 of file State.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_state_machine_a88c47bc8b8ab361e46740a35a64ce795}{\index{B\-G\-E\-::\-State\-Machine@{B\-G\-E\-::\-State\-Machine}!$\sim$\-State\-Machine@{$\sim$\-State\-Machine}}
+\index{$\sim$\-State\-Machine@{$\sim$\-State\-Machine}!BGE::StateMachine@{B\-G\-E\-::\-State\-Machine}}
+\subsubsection[{$\sim$\-State\-Machine}]{\setlength{\rightskip}{0pt plus 5cm}State\-Machine\-::$\sim$\-State\-Machine (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_state_machine_a88c47bc8b8ab361e46740a35a64ce795}
+
+
+Definition at line 27 of file State.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_state_machine_a8cc9a775fdc90429b6f47dbba7cd5a12}{\index{B\-G\-E\-::\-State\-Machine@{B\-G\-E\-::\-State\-Machine}!Swicth\-State@{Swicth\-State}}
+\index{Swicth\-State@{Swicth\-State}!BGE::StateMachine@{B\-G\-E\-::\-State\-Machine}}
+\subsubsection[{Swicth\-State}]{\setlength{\rightskip}{0pt plus 5cm}void State\-Machine\-::\-Swicth\-State (
+\begin{DoxyParamCaption}
+\item[{shared\-\_\-ptr$<$ {\bf State} $>$}]{new\-State}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_state_machine_a8cc9a775fdc90429b6f47dbba7cd5a12}
+
+
+Definition at line 33 of file State.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_state_machine_a0bbd130dee59706b7d1a9422d922fcfc}{\index{B\-G\-E\-::\-State\-Machine@{B\-G\-E\-::\-State\-Machine}!Update@{Update}}
+\index{Update@{Update}!BGE::StateMachine@{B\-G\-E\-::\-State\-Machine}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void State\-Machine\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{float}]{time\-Delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_state_machine_a0bbd130dee59706b7d1a9422d922fcfc}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_ac8e444827ee0be9ad654cdff4d15f071}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Definition at line 47 of file State.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_b_g_e_1_1_state_machine_a0bbd130dee59706b7d1a9422d922fcfc_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_state_machine_a5698ea2fa8f5a52cc8cdde09ba09c628}{\index{B\-G\-E\-::\-State\-Machine@{B\-G\-E\-::\-State\-Machine}!current\-State@{current\-State}}
+\index{current\-State@{current\-State}!BGE::StateMachine@{B\-G\-E\-::\-State\-Machine}}
+\subsubsection[{current\-State}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf State}$>$ B\-G\-E\-::\-State\-Machine\-::current\-State}}\label{class_b_g_e_1_1_state_machine_a5698ea2fa8f5a52cc8cdde09ba09c628}
+
+
+Definition at line 32 of file State.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_state_8h}{State.\-h}\item 
+B\-G\-E/\hyperlink{_state_8cpp}{State.\-cpp}\end{DoxyCompactItemize}

@@ -32,7 +32,7 @@ namespace BGE
 
 		void Strafe(float units); 
 		void Fly(float units);    
-		void Walk(float units);   		
+		void Walk(float units);   
 
 		void Pitch(float angle); // rotate on right vector
 		void Yaw(float angle);   // rotate on up vector

@@ -1,0 +1,8 @@
+<map id="BGE::trim" name="BGE::trim">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_params.html#a2d35020b3044c27ff1b92d4f9d400d2f" title="BGE::Params::Load" alt="" coords="133,152,272,181"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_flocking_scenario.html#a18761ac65f511ee3d7f35a2a2662ca6b" title="BGE::FlockingScenario\l::Initialise" alt="" coords="353,5,511,51"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_obstacle_avoidance_scenario.html#a4973acf1e08d06c8fca58e06b151eae0" title="BGE::ObstacleAvoidanceScenario\l::Initialise" alt="" coords="321,74,543,121"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_path_following_scenario.html#a70856528dabba6eca4f2bb066d7dca4f" title="BGE::PathFollowingScenario\l::Initialise" alt="" coords="337,143,527,190"/>
+<area shape="rect" id="node11" href="$class_b_g_e_1_1_scene_graph_game.html#ae129b54e7ca57dcc6a8b821c569bebd7" title="BGE::SceneGraphGame\l::Initialise" alt="" coords="349,213,515,259"/>
+<area shape="rect" id="node13" href="$class_b_g_e_1_1_steering_game.html#ae0536228be79c785e43bc7c4d841c5bc" title="BGE::SteeringGame:\l:Initialise" alt="" coords="360,282,504,329"/>
+</map>

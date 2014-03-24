@@ -1,0 +1,6 @@
+<map id="BGE::PhysicsGame1::Update" name="BGE::PhysicsGame1::Update">
+<area shape="rect" id="node3" href="$namespace_b_g_e.html#a721a46c8618bcd3b8a72138f45211e10" title="BGE::GLToBtVector" alt="" coords="207,5,348,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#a51ed573392d7bed791b67062e7c7a3d4" title="BGE::Game::Update" alt="" coords="207,59,348,88"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_game.html#a68da8b79dc207e54433ae43512fbb26b" title="BGE::Game::PrintText" alt="" coords="397,32,552,61"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_game.html#ac649612429b2bf532851b7f0d5a9a57c" title="BGE::Game::Cleanup" alt="" coords="400,85,549,115"/>
+</map>

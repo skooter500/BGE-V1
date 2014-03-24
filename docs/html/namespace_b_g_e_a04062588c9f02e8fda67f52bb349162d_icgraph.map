@@ -1,0 +1,31 @@
+<map id="BGE::LogMessage" name="BGE::LogMessage">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_content.html#a593266376a259eacb7ebddfc71ee082a" title="BGE::Content::LoadModel" alt="" coords="188,405,361,435"/>
+<area shape="rect" id="node37" href="$class_b_g_e_1_1_params.html#a8d26bb42e272f4e46b77f01aa3d7096a" title="BGE::Params::GetFloat" alt="" coords="195,1052,355,1081"/>
+<area shape="rect" id="node40" href="$class_b_g_e_1_1_params.html#a944b91e80035693ee98c49231fb5e918" title="BGE::Params::GetWeight" alt="" coords="436,1264,609,1293"/>
+<area shape="rect" id="node58" href="$class_b_g_e_1_1_params.html#a2d35020b3044c27ff1b92d4f9d400d2f" title="BGE::Params::Load" alt="" coords="205,789,344,819"/>
+<area shape="rect" id="node66" href="$class_b_g_e_1_1_steering_controller.html#a5c692e0d558ec141f7dec2d4acfe894a" title="BGE::SteeringController\l::ObstacleAvoidance" alt="" coords="193,969,356,1015"/>
+<area shape="rect" id="node69" href="$namespace_b_g_e.html#aca61b9423894ceed2b7ba003836ef673" title="BGE::CheckNaN" alt="" coords="213,1156,336,1185"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_box.html#a3554491d9ea5f22c9094c3aebf9cb7a4" title="BGE::Box::Box" alt="" coords="467,5,579,35"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_buddha.html#a0b06f27687b1d94374bccec0de47c45c" title="BGE::Buddha::Initialise" alt="" coords="444,59,601,88"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_cylinder.html#a7fc7f1cbffd048f423f7c0194c972348" title="BGE::Cylinder::Cylinder" alt="" coords="441,112,604,141"/>
+<area shape="rect" id="node11" href="$class_b_g_e_1_1_flocking_scenario.html#a18761ac65f511ee3d7f35a2a2662ca6b" title="BGE::FlockingScenario\l::Initialise" alt="" coords="444,815,601,862"/>
+<area shape="rect" id="node13" href="$class_b_g_e_1_1_lab4.html#a3873eb644cbdeb20ab0f033e4e43e9a3" title="BGE::Lab4::Initialise" alt="" coords="452,165,593,195"/>
+<area shape="rect" id="node15" href="$class_b_g_e_1_1_lab5.html#a22e9d710c6270571a8f4aa9da3a2f59b" title="BGE::Lab5::Initialise" alt="" coords="452,219,593,248"/>
+<area shape="rect" id="node17" href="$class_b_g_e_1_1_lab6.html#a4c6c1fca3a0fce3be6be36896c84b1c8" title="BGE::Lab6::Initialise" alt="" coords="452,272,593,301"/>
+<area shape="rect" id="node19" href="$class_b_g_e_1_1_lab7.html#ac7d2597bb842edcf70174b436c8811fd" title="BGE::Lab7::Initialise" alt="" coords="452,325,593,355"/>
+<area shape="rect" id="node21" href="$class_b_g_e_1_1_lab8.html#aec401d2069e9e5d6a6d3d71367a68ba8" title="BGE::Lab8::Initialise" alt="" coords="452,379,593,408"/>
+<area shape="rect" id="node23" href="$class_b_g_e_1_1_model_test.html#a0569efdab1ec10bab4299987b1563c14" title="BGE::ModelTest::Initialise" alt="" coords="436,432,609,461"/>
+<area shape="rect" id="node25" href="$class_b_g_e_1_1_obstacle_avoidance_scenario.html#a4973acf1e08d06c8fca58e06b151eae0" title="BGE::ObstacleAvoidanceScenario\l::Initialise" alt="" coords="412,746,633,793"/>
+<area shape="rect" id="node27" href="$class_b_g_e_1_1_path_following_scenario.html#a70856528dabba6eca4f2bb066d7dca4f" title="BGE::PathFollowingScenario\l::Initialise" alt="" coords="428,607,617,654"/>
+<area shape="rect" id="node29" href="$class_b_g_e_1_1_physics_factory.html#ac5fa08dd51c64a364f08ddaebe2c1def" title="BGE::PhysicsFactory\l::CreateFromModel" alt="" coords="448,485,597,531"/>
+<area shape="rect" id="node33" href="$class_b_g_e_1_1_scene_graph_game.html#ae129b54e7ca57dcc6a8b821c569bebd7" title="BGE::SceneGraphGame\l::Initialise" alt="" coords="440,677,605,723"/>
+<area shape="rect" id="node35" href="$class_b_g_e_1_1_sphere.html#a066dd77d24d95f7cb2e16880b3a5ae6e" title="BGE::Sphere::Sphere" alt="" coords="449,555,596,584"/>
+<area shape="rect" id="node31" href="$class_b_g_e_1_1_physics_factory.html#a79e903b1d2f7cf1fa3d2a99bcdb45d4b" title="BGE::PhysicsFactory\l::CreateRandomObject" alt="" coords="705,485,860,531"/>
+<area shape="rect" id="node42" href="$class_b_g_e_1_1_steering_controller.html#ada60d4814e517f41810dc6e904e8e667" title="BGE::SteeringController\l::CalculateWeightedPrioritised" alt="" coords="684,1055,881,1102"/>
+<area shape="rect" id="node48" href="$class_b_g_e_1_1_steering_controller.html#a7510d7b82370619001ee140f28578cb8" title="BGE::SteeringController\l::SteeringController" alt="" coords="441,1194,604,1241"/>
+<area shape="rect" id="node50" href="$class_b_g_e_1_1_steering_controller.html#a838ed1cc1b6b8d146af97ca0fad8edb9" title="BGE::SteeringController\l::RandomWalk" alt="" coords="441,1055,604,1102"/>
+<area shape="rect" id="node53" href="$class_b_g_e_1_1_steering_controller.html#a0cb8b40f2baa4e7c5a2125da562757d1" title="BGE::SteeringController\l::Wander" alt="" coords="441,1125,604,1171"/>
+<area shape="rect" id="node44" href="$class_b_g_e_1_1_steering_controller.html#a83fd612fb65fe1ef6be18c4dfd09ceed" title="BGE::SteeringController\l::Calculate" alt="" coords="931,1055,1093,1102"/>
+<area shape="rect" id="node46" href="$class_b_g_e_1_1_steering_controller.html#aa0a6fdb7b154d020255e689bae13e592" title="BGE::SteeringController\l::Update" alt="" coords="1141,1055,1304,1102"/>
+<area shape="rect" id="node64" href="$class_b_g_e_1_1_steering_game.html#ae0536228be79c785e43bc7c4d841c5bc" title="BGE::SteeringGame:\l:Initialise" alt="" coords="451,885,595,931"/>
+</map>
