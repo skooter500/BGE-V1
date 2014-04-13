@@ -1,5 +1,14 @@
 #!/bin/bash
 
+mkdir ../removed
+mv ../BGE/dirent.h ../removed
+mv ../BGE/Person.h ../removed
+mv ../BGE/RiftController.h ../removed
+mv ../BGE/VRGame.h ../removed
+mv ../BGE/Person.cpp ../removed
+mv ../BGE/RiftController.cpp ../removed
+mv ../BGE/VRGame.cpp ../removed
+
 if [ "$UID" -ne 0 ] 
 	then
 		echo 'Compiling BGE' 

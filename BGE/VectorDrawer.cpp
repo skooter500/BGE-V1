@@ -55,3 +55,5 @@ void VectorDrawer::Draw()
 		LineDrawer::DrawArrowLine(glm::vec3(point0), glm::vec3(point1), colours[i / step], arrowOrientations[i / step]);
 	}
 }
+
+

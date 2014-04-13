@@ -81,15 +81,14 @@ bool SceneGraphGame::Initialise()
 	Attach(station);
 	
 	// Add a child to the station and update by including the parent's world transform
-	std::shared_ptr<GameComponent> ship1 = make_shared<GameComponent>(true);
+	ship1 = make_shared<GameComponent>(true);
 	ship1->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	ship1->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	ship1 -> tag = "blah"; 
 	std::shared_ptr<Model> ana = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp));	
 	ship1->Attach(ana);
 	ship1->transform->position = glm::vec3(0, 0, -10);
-	//station->Attach(ship1); // NOTE the ship is attached to the station at an offset of 10.
-	station -> AttachWithRelativePositioning(ship1); 
+	station->Attach(ship1); // NOTE the ship is attached to the station at an offset of 10.
 	
 	// Create a component  with an XBOX Controller attached
 	shared_ptr<GameComponent> ship2 = make_shared<GameComponent>(true);
@@ -119,7 +118,7 @@ bool SceneGraphGame::Initialise()
 	// Create a physics component and attach a non-physics component to it
 	shared_ptr<PhysicsController> carController = physicsFactory->CreateVehicle(NextPosition(current ++, componentCount));
 	carController->Attach(Content::LoadModel("transporter", glm::translate(glm::mat4(1), glm::vec3(0,5,0))));
-
+	
 	// Create some steering components to chase each other
 	/*shared_ptr<GameComponent> ship4 = make_shared<GameComponent>(true);
 	ship4->tag = "Steerable";

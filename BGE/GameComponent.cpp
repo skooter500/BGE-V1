@@ -56,21 +56,21 @@ void GameComponent::Draw()
 	// Draw all the children
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	glm::vec3 parentPos; 
-	if (isRelative) { 
-		// No, I've no recollection how it works either :-P  Something to do with quaternions... 
+	/*if (isRelative) { 
+		// If this is a relativly positioned child, transform it to be positoned in it's parent's local space 
 		float angle = glm::dot(transform -> look, Transform::basisLook); 
 		glm::vec3 rotationAxis = glm::cross(transform -> look, Transform::basisLook); 
 		glm::quat quaternion = glm::angleAxis(angle, rotationAxis); 
 		transform -> orientation = transform -> orientation * quaternion; 
 		transform -> Calculate(); 
-		//parentsLastLook = transform -> look; 
-	}
+		transform -> RotateVectors(); 
+	}*/
 	while (it != children.end())
 	{
-		if (isRelative && (*it)->tag == "Model") { 
+		/*if (isRelative && (*it)->tag == "Model") { 
 			shared_ptr<Model> im = static_pointer_cast<Model>(*it); 
-			im -> localTransform = glm::translate(glm::mat4(1), relativeTransform->position);
-		}
+			im -> localTransform = glm::translate(glm::mat4(1), relativeTransform->position); // Add new local transform to the model 
+		}*/
 		(*it)->parent = this;	
 		(*it ++)->Draw();		
 	}
@@ -115,15 +115,8 @@ void GameComponent::Attach(shared_ptr<GameComponent> child)
 	{
 		child->transform = transform; 
 	} 
+	child -> transform -> parent = transform.get(); 
 	children.push_back(child);
-}
-
-void GameComponent::AttachWithRelativePositioning(shared_ptr<GameComponent> child) { 
-	shared_ptr<Transform> temp = child -> transform; 
-	child -> transform = nullptr; 
-	child -> relativeTransform = temp; 
-	child -> isRelative = true; 
-	Attach(child); 
 }
 
 

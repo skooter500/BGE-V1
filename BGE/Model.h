@@ -38,8 +38,7 @@ namespace BGE
 		void CalculateBounds();
 		void UpdateFromParent();
 	public:
-		Model();
-		Model(shared_ptr<Model> other); 
+		Model(); 
 		~Model();
 
 		bool Initialise();

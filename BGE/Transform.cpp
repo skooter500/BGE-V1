@@ -21,6 +21,7 @@ Transform::Transform(void)
 	specular = glm::vec3(0.0f, 0.0f, 0.0f);
 	moved = true;
 	scale = glm::vec3(1.0, 1.0, 1.0);
+	parent = nullptr; 
 }
 
 
@@ -37,6 +38,15 @@ void Transform::RecalculateVectors()
 
 void Transform::Calculate()
 {
+	if (parent != nullptr) { 
+		backupPosition = position; 
+		backupOrientation = orientation; 
+		//backupWorld = world; 
+		
+		//world = world * parent -> world; 
+		orientation = parent -> orientation * orientation; 
+		position = parent -> position + position; 
+	}
 	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
 	RecalculateVectors();
 	/*if (parent != NULL)
@@ -44,6 +54,10 @@ void Transform::Calculate()
 		world = (glm::translate(glm::mat4(1), transform->position) * glm::mat4_cast(parent->orientation)) * world;
 	}
 	*/
+	if (parent != nullptr) { 
+		position = backupPosition; 
+		orientation = backupOrientation; 
+	} 
 }
 
 void Transform::Walk(float units)
@@ -64,11 +78,11 @@ void Transform::Fly(float units)
 	moved = true;
 }
 
-void Transform::Pitch(float angle)
+void Transform::Pitch(float angle, bool limitRotation)
 {
 	float invcosTheta1 = glm::dot(look, basisUp);
 	float threshold = 0.95f;
-	if ((angle < 0 && invcosTheta1 < (-threshold)) || (angle > 0 && invcosTheta1 > (threshold)))
+	if ((limitRotation) && ((angle < 0 && invcosTheta1 < (-threshold)) || (angle > 0 && invcosTheta1 > (threshold)))) 
 	{
 		return;
 	}

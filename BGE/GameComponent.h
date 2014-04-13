@@ -55,7 +55,6 @@ namespace BGE
 		std::shared_ptr<Transform> relativeTransform; 
 
 		void Attach(std::shared_ptr<GameComponent> child);
-		void AttachWithRelativePositioning(std::shared_ptr<GameComponent> child); 
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 
 		shared_ptr<GameComponent> GameComponent::FindComponent(string tag);

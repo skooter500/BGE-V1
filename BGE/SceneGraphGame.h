@@ -34,6 +34,7 @@ namespace BGE
 		vector<glm::vec3> waypoints;
 		shared_ptr<GameComponent> selfExample;
 		shared_ptr<GameComponent> station;
+		shared_ptr<GameComponent> ship1; 
 	public:
 		SceneGraphGame(void);
 		~SceneGraphGame(void);
