@@ -20,10 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="BGE_Logo_Small.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">BGE
-   &#160;<span id="projectnumber">1</span>
    </div>
+   <div id="projectbrief">BGE Game Engine</div>
   </td>
  </tr>
  </tbody>
@@ -37,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -73,6 +75,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -110,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -135,6 +138,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_b_g_e_1_1_path_following_scenario.html#a234d84442c76d975347ab76c7f101619">BGE::PathFollowingScenario</a>
 , <a class="el" href="class_b_g_e_1_1_scenario.html#a9332e7ebd4d127d17b808390baa3564b">BGE::Scenario</a>
 </li>
+<li>DestroyOVR()
+: <a class="el" href="class_b_g_e_1_1_rift_controller.html#ac911710e9e18a1ae6462b02e19b44ea2">BGE::RiftController</a>
+</li>
 <li>dictionary
 : <a class="el" href="class_b_g_e_1_1_params.html#ae9a80b263bbb021c083f034f9126cdbb">BGE::Params</a>
 </li>
@@ -147,26 +153,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>disablePitch
 : <a class="el" href="class_b_g_e_1_1_x_box_controller.html#a61aa6987fa9a694888425352da33cb1f">BGE::XBoxController</a>
 </li>
+<li>DisplayMode
+: <a class="el" href="class_b_g_e_1_1_rift_controller.html#aa838447581190009976c2fb8cde1735a">BGE::RiftController</a>
+</li>
 <li>Draw()
-: <a class="el" href="class_b_g_e_1_1_camera.html#a0d80a44404b91bc03be2c117d1f8185b">BGE::Camera</a>
-, <a class="el" href="class_b_g_e_1_1_model.html#a0c668c13fc79a86326f75ea231f3886f">BGE::Model</a>
-, <a class="el" href="class_b_g_e_1_1_cube_test.html#ac559d15798c0718750d9cf0f38d3b1b5">BGE::CubeTest</a>
-, <a class="el" href="class_b_g_e_1_1_lazer_beam.html#a15d17a33090a828077d962c6262e5d84">BGE::LazerBeam</a>
-, <a class="el" href="class_b_g_e_1_1_game.html#aad2c20e2c5529244095c50c238911e30">BGE::Game</a>
-, <a class="el" href="class_b_g_e_1_1_game_component.html#a697cd151f92fa23cbae10afb9130f291">BGE::GameComponent</a>
-, <a class="el" href="class_b_g_e_1_1_vector_drawer.html#a30395d40e2e3e9afab90abbb7949bcf7">BGE::VectorDrawer</a>
-, <a class="el" href="class_b_g_e_1_1_ground.html#a04f88aa7573b77ecb1ed103dd27ae190">BGE::Ground</a>
-, <a class="el" href="class_b_g_e_1_1_line_drawer.html#a094e63eddc455d1526d57a4a9b9159db">BGE::LineDrawer</a>
+: <a class="el" href="class_b_g_e_1_1_particle_effect.html#a03da78eeab938c06015894348e7256b1">BGE::ParticleEffect</a>
 </li>
 <li>draw
 : <a class="el" href="class_b_g_e_1_1_route.html#a503ab27496b899c91058fbe3818ef39b">BGE::Route</a>
 </li>
 <li>Draw()
-: <a class="el" href="class_b_g_e_1_1_route.html#ae23447492bfe2a4d7e30a029e9b7584d">BGE::Route</a>
+: <a class="el" href="class_b_g_e_1_1_line_drawer.html#a094e63eddc455d1526d57a4a9b9159db">BGE::LineDrawer</a>
+, <a class="el" href="class_b_g_e_1_1_camera.html#a0d80a44404b91bc03be2c117d1f8185b">BGE::Camera</a>
+, <a class="el" href="class_b_g_e_1_1_cube_test.html#ac559d15798c0718750d9cf0f38d3b1b5">BGE::CubeTest</a>
+, <a class="el" href="class_b_g_e_1_1_game.html#aad2c20e2c5529244095c50c238911e30">BGE::Game</a>
+, <a class="el" href="class_b_g_e_1_1_game_component.html#a697cd151f92fa23cbae10afb9130f291">BGE::GameComponent</a>
+, <a class="el" href="class_b_g_e_1_1_ground.html#a04f88aa7573b77ecb1ed103dd27ae190">BGE::Ground</a>
+, <a class="el" href="class_b_g_e_1_1_lazer_beam.html#a15d17a33090a828077d962c6262e5d84">BGE::LazerBeam</a>
 , <a class="el" href="class_b_g_e_1_1_steerable3_d_controller.html#af3fce1f3beda747d758315951f2764fe">BGE::Steerable3DController</a>
-, <a class="el" href="class_b_g_e_1_1_textured_cube.html#ae1cb1cdd084cc7cbb6f82d98dfdb0684">BGE::TexturedCube</a>
-, <a class="el" href="class_b_g_e_1_1_particle_effect.html#a03da78eeab938c06015894348e7256b1">BGE::ParticleEffect</a>
 , <a class="el" href="class_b_g_e_1_1_triangle_test.html#ae4c9beed95f6770d8b72de2ba2174470">BGE::TriangleTest</a>
+, <a class="el" href="class_b_g_e_1_1_vector_drawer.html#a30395d40e2e3e9afab90abbb7949bcf7">BGE::VectorDrawer</a>
+, <a class="el" href="class_b_g_e_1_1_model.html#a0c668c13fc79a86326f75ea231f3886f">BGE::Model</a>
+, <a class="el" href="class_b_g_e_1_1_route.html#ae23447492bfe2a4d7e30a029e9b7584d">BGE::Route</a>
+, <a class="el" href="class_b_g_e_1_1_textured_cube.html#ae1cb1cdd084cc7cbb6f82d98dfdb0684">BGE::TexturedCube</a>
 </li>
 <li>draw_modes
 : <a class="el" href="class_b_g_e_1_1_model.html#a0d55ea97da6ffbc3b82c2c1566d13a5e">BGE::Model</a>
@@ -185,14 +194,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>dynamicsWorld
 : <a class="el" href="class_b_g_e_1_1_physics_game1.html#a619e4ce5159417c88e112f224a6bce13">BGE::PhysicsGame1</a>
-, <a class="el" href="class_b_g_e_1_1_scene_graph_game.html#a45b47315f225ce7f276561108d6cb0e7">BGE::SceneGraphGame</a>
+, <a class="el" href="class_b_g_e_1_1_v_r_game.html#a05ae7062cc8fbb33f62dd75519445153">BGE::VRGame</a>
 , <a class="el" href="class_b_g_e_1_1_physics_factory.html#a46bbcd5b2abd9ec8f1ca8fd04bff9b61">BGE::PhysicsFactory</a>
+, <a class="el" href="class_b_g_e_1_1_scene_graph_game.html#a45b47315f225ce7f276561108d6cb0e7">BGE::SceneGraphGame</a>
 </li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 23 2014 02:53:12 for BGE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 29 2014 08:28:02 for BGE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

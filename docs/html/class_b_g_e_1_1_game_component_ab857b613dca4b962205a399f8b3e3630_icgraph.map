@@ -19,9 +19,10 @@
 <area shape="rect" id="node41" href="$class_b_g_e_1_1_physics_factory.html#a0c7dba14ad7b41710ab62c12a1a26ebe" title="BGE::PhysicsFactory\l::CreateSphere" alt="" coords="251,991,400,1038"/>
 <area shape="rect" id="node43" href="$class_b_g_e_1_1_physics_factory.html#a7e737e2cd283f9388e1c7691114790be" title="BGE::PhysicsFactory\l::CreateBox" alt="" coords="251,1061,400,1107"/>
 <area shape="rect" id="node49" href="$class_b_g_e_1_1_physics_factory.html#ace3dcd019b8100cb06d5bb42a9045d16" title="BGE::PhysicsFactory\l::CreateCylinder" alt="" coords="251,1130,400,1177"/>
-<area shape="rect" id="node52" href="$class_b_g_e_1_1_scene_graph_game.html#ae129b54e7ca57dcc6a8b821c569bebd7" title="BGE::SceneGraphGame\l::Initialise" alt="" coords="243,1199,408,1246"/>
-<area shape="rect" id="node54" href="$class_b_g_e_1_1_sphere.html#a066dd77d24d95f7cb2e16880b3a5ae6e" title="BGE::Sphere::Sphere" alt="" coords="252,1269,399,1299"/>
-<area shape="rect" id="node56" href="$class_b_g_e_1_1_steering_controller.html#ae301df857ee41719ec16cca2b2b28679" title="BGE::SteeringController\l::Initialise" alt="" coords="244,1322,407,1369"/>
+<area shape="rect" id="node52" href="$class_b_g_e_1_1_rift_controller.html#a16f6dc4bdbd1d87b93d589e0487089c0" title="BGE::RiftController\l::RiftController" alt="" coords="259,1199,392,1246"/>
+<area shape="rect" id="node54" href="$class_b_g_e_1_1_scene_graph_game.html#ae129b54e7ca57dcc6a8b821c569bebd7" title="BGE::SceneGraphGame\l::Initialise" alt="" coords="243,1269,408,1315"/>
+<area shape="rect" id="node56" href="$class_b_g_e_1_1_sphere.html#a066dd77d24d95f7cb2e16880b3a5ae6e" title="BGE::Sphere::Sphere" alt="" coords="252,1339,399,1368"/>
+<area shape="rect" id="node58" href="$class_b_g_e_1_1_steering_controller.html#ae301df857ee41719ec16cca2b2b28679" title="BGE::SteeringController\l::Initialise" alt="" coords="244,1391,407,1438"/>
 <area shape="rect" id="node17" href="$class_b_g_e_1_1_physics_factory.html#a0124b013dc3c7a51f506832bde0f87c4" title="BGE::PhysicsFactory\l::CreateGroundPhysics" alt="" coords="487,349,644,395"/>
 <area shape="rect" id="node39" href="$class_b_g_e_1_1_physics_factory.html#a79e903b1d2f7cf1fa3d2a99bcdb45d4b" title="BGE::PhysicsFactory\l::CreateRandomObject" alt="" coords="488,922,643,969"/>
 <area shape="rect" id="node45" href="$class_b_g_e_1_1_physics_factory.html#a0a1aef2a5769b29ef74654ea3665637b" title="BGE::PhysicsFactory\l::CreateWall" alt="" coords="491,1061,640,1107"/>

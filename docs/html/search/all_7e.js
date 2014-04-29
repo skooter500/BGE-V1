@@ -28,11 +28,13 @@ var searchData=
   ['_7eparticle',['~Particle',['../class_particle.html#aedbe5e541966e7799022665fdcb6ba66',1,'Particle']]],
   ['_7eparticleeffect',['~ParticleEffect',['../class_b_g_e_1_1_particle_effect.html#a556126ecdcdfb98bef0f555196b558ee',1,'BGE::ParticleEffect']]],
   ['_7epathfollowingscenario',['~PathFollowingScenario',['../class_b_g_e_1_1_path_following_scenario.html#ad2105c470e0980a29440fd48df967d19',1,'BGE::PathFollowingScenario']]],
+  ['_7eperson',['~Person',['../class_b_g_e_1_1_person.html#a8a536766d5e4fbe526bbe26ce9cff0b0',1,'BGE::Person']]],
   ['_7ephysicscamera',['~PhysicsCamera',['../class_b_g_e_1_1_physics_camera.html#a1ac76af9188c2b30050f91f9b8aeca22',1,'BGE::PhysicsCamera']]],
   ['_7ephysicscontroller',['~PhysicsController',['../class_b_g_e_1_1_physics_controller.html#a9cb99493c2151a702e56290052736ace',1,'BGE::PhysicsController']]],
   ['_7ephysicsdrawer',['~PhysicsDrawer',['../class_physics_drawer.html#a6ffcf5df08a32ad7787a2595129f161b',1,'PhysicsDrawer']]],
   ['_7ephysicsfactory',['~PhysicsFactory',['../class_b_g_e_1_1_physics_factory.html#adc21bb9f057aa507963e0a6e1168ee79',1,'BGE::PhysicsFactory']]],
   ['_7ephysicsgame1',['~PhysicsGame1',['../class_b_g_e_1_1_physics_game1.html#a2557f3c4f80f3b64d615cf30eaabc30a',1,'BGE::PhysicsGame1']]],
+  ['_7eriftcontroller',['~RiftController',['../class_b_g_e_1_1_rift_controller.html#a5dac2e77c810eb03d353cd41b6fdee72',1,'BGE::RiftController']]],
   ['_7eroute',['~Route',['../class_b_g_e_1_1_route.html#a6c8cb0aaef581d3c14fff8ad99b3894f',1,'BGE::Route']]],
   ['_7escenario',['~Scenario',['../class_b_g_e_1_1_scenario.html#a35792727e30f9d6e9b107a5c2acd789d',1,'BGE::Scenario']]],
   ['_7escenegraphgame',['~SceneGraphGame',['../class_b_g_e_1_1_scene_graph_game.html#ae13eb00ea3478bcab163e842047dcd0d',1,'BGE::SceneGraphGame']]],
@@ -48,5 +50,6 @@ var searchData=
   ['_7etransform',['~Transform',['../class_b_g_e_1_1_transform.html#a80286cc4143f89cb5f8bc8ec3f1dcb74',1,'BGE::Transform']]],
   ['_7etriangletest',['~TriangleTest',['../class_b_g_e_1_1_triangle_test.html#a4a2fa532d96defcdace082f24fc2d4b7',1,'BGE::TriangleTest']]],
   ['_7evectordrawer',['~VectorDrawer',['../class_b_g_e_1_1_vector_drawer.html#aa7de2caf824fd1708dfd90305b3fe51f',1,'BGE::VectorDrawer']]],
+  ['_7evrgame',['~VRGame',['../class_b_g_e_1_1_v_r_game.html#a480576207afa4c6c245cd92d41832279',1,'BGE::VRGame']]],
   ['_7exboxcontroller',['~XBoxController',['../class_b_g_e_1_1_x_box_controller.html#a4e2c5896a104fe95b2a6361c9f27c149',1,'BGE::XBoxController']]]
 ];

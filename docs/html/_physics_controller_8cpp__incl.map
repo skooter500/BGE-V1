@@ -1,7 +1,7 @@
 <map id="BGE/PhysicsController.cpp" name="BGE/PhysicsController.cpp">
-<area shape="rect" id="node3" href="$_physics_controller_8h.html" title="PhysicsController.h" alt="" coords="536,83,672,112"/>
-<area shape="rect" id="node37" href="$_utils_8h.html" title="Utils.h" alt="" coords="357,160,416,189"/>
-<area shape="rect" id="node5" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="1088,160,1221,189"/>
-<area shape="rect" id="node27" href="$_exception_8h.html" title="Exception.h" alt="" coords="995,237,1085,267"/>
-<area shape="rect" id="node29" href="$_transform_8h.html" title="Transform.h" alt="" coords="1109,237,1200,267"/>
+<area shape="rect" id="node3" href="$_physics_controller_8h.html" title="PhysicsController.h" alt="" coords="1032,83,1168,112"/>
+<area shape="rect" id="node40" href="$_utils_8h.html" title="Utils.h" alt="" coords="1279,160,1337,189"/>
+<area shape="rect" id="node5" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="409,160,543,189"/>
+<area shape="rect" id="node29" href="$_exception_8h.html" title="Exception.h" alt="" coords="571,237,661,267"/>
+<area shape="rect" id="node31" href="$_transform_8h.html" title="Transform.h" alt="" coords="312,237,403,267"/>
 </map>

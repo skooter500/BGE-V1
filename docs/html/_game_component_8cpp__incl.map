@@ -1,12 +1,12 @@
 <map id="BGE/GameComponent.cpp" name="BGE/GameComponent.cpp">
-<area shape="rect" id="node3" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="425,315,559,344"/>
-<area shape="rect" id="node33" href="$_model_8h.html" title="Model.h" alt="" coords="432,83,499,112"/>
-<area shape="rect" id="node36" href="$_game_8h.html" title="Game.h" alt="" coords="817,160,884,189"/>
-<area shape="rect" id="node86" href="$_vector_drawer_8h.html" title="VectorDrawer.h" alt="" coords="5,237,117,267"/>
-<area shape="rect" id="node25" href="$_exception_8h.html" title="Exception.h" alt="" coords="416,392,507,421"/>
-<area shape="rect" id="node27" href="$_transform_8h.html" title="Transform.h" alt="" coords="632,392,723,421"/>
-<area shape="rect" id="node51" href="$_camera_8h.html" title="Camera.h" alt="" coords="859,237,936,267"/>
-<area shape="rect" id="node54" href="$_ground_8h.html" title="Ground.h" alt="" coords="483,237,557,267"/>
-<area shape="rect" id="node58" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="243,237,357,267"/>
-<area shape="rect" id="node66" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="960,237,1059,267"/>
+<area shape="rect" id="node3" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="445,315,579,344"/>
+<area shape="rect" id="node36" href="$_model_8h.html" title="Model.h" alt="" coords="280,83,347,112"/>
+<area shape="rect" id="node39" href="$_game_8h.html" title="Game.h" alt="" coords="787,160,853,189"/>
+<area shape="rect" id="node88" href="$_vector_drawer_8h.html" title="VectorDrawer.h" alt="" coords="144,237,256,267"/>
+<area shape="rect" id="node27" href="$_exception_8h.html" title="Exception.h" alt="" coords="448,392,539,421"/>
+<area shape="rect" id="node29" href="$_transform_8h.html" title="Transform.h" alt="" coords="563,392,653,421"/>
+<area shape="rect" id="node54" href="$_camera_8h.html" title="Camera.h" alt="" coords="531,237,608,267"/>
+<area shape="rect" id="node57" href="$_ground_8h.html" title="Ground.h" alt="" coords="432,237,507,267"/>
+<area shape="rect" id="node61" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="632,237,747,267"/>
+<area shape="rect" id="node69" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="1099,237,1197,267"/>
 </map>

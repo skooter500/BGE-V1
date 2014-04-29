@@ -1,6 +1,6 @@
 <map id="BGE/ParticleEffect.h" name="BGE/ParticleEffect.h">
-<area shape="rect" id="node3" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="368,160,501,189"/>
-<area shape="rect" id="node33" href="$_particle_8h.html" title="Particle.h" alt="" coords="472,83,549,112"/>
-<area shape="rect" id="node25" href="$_exception_8h.html" title="Exception.h" alt="" coords="493,237,584,267"/>
-<area shape="rect" id="node27" href="$_transform_8h.html" title="Transform.h" alt="" coords="608,237,699,267"/>
+<area shape="rect" id="node3" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="444,160,577,189"/>
+<area shape="rect" id="node36" href="$_particle_8h.html" title="Particle.h" alt="" coords="548,83,625,112"/>
+<area shape="rect" id="node27" href="$_exception_8h.html" title="Exception.h" alt="" coords="612,237,703,267"/>
+<area shape="rect" id="node29" href="$_transform_8h.html" title="Transform.h" alt="" coords="727,237,817,267"/>
 </map>

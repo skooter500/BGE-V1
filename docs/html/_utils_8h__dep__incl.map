@@ -10,11 +10,13 @@
 <area shape="rect" id="node19" href="$_physics_controller_8cpp.html" title="BGE/PhysicsController.cpp" alt="" coords="1421,83,1603,112"/>
 <area shape="rect" id="node21" href="$_physics_factory_8cpp.html" title="BGE/PhysicsFactory.cpp" alt="" coords="1627,83,1797,112"/>
 <area shape="rect" id="node23" href="$_physics_game1_8cpp.html" title="BGE/PhysicsGame1.cpp" alt="" coords="1821,83,1989,112"/>
-<area shape="rect" id="node25" href="$_scenario_8cpp.html" title="BGE/Scenario.cpp" alt="" coords="2013,83,2144,112"/>
-<area shape="rect" id="node27" href="$_snow_effect_8cpp.html" title="BGE/SnowEffect.cpp" alt="" coords="2168,83,2315,112"/>
-<area shape="rect" id="node29" href="$_sound_system_8cpp.html" title="BGE/SoundSystem.cpp" alt="" coords="2339,83,2499,112"/>
-<area shape="rect" id="node31" href="$_steerable3_d_controller_8cpp.html" title="BGE/Steerable3DController.cpp" alt="" coords="2523,83,2728,112"/>
-<area shape="rect" id="node33" href="$_steering_controler_8cpp.html" title="BGE/SteeringControler.cpp" alt="" coords="2752,83,2931,112"/>
-<area shape="rect" id="node35" href="$_transform_8cpp.html" title="BGE/Transform.cpp" alt="" coords="2955,83,3093,112"/>
-<area shape="rect" id="node37" href="$_utils_8cpp.html" title="BGE/Utils.cpp" alt="" coords="3117,83,3224,112"/>
+<area shape="rect" id="node25" href="$_rift_controller_8cpp.html" title="BGE/RiftController.cpp" alt="" coords="2013,83,2168,112"/>
+<area shape="rect" id="node27" href="$_scenario_8cpp.html" title="BGE/Scenario.cpp" alt="" coords="2192,83,2323,112"/>
+<area shape="rect" id="node29" href="$_snow_effect_8cpp.html" title="BGE/SnowEffect.cpp" alt="" coords="2347,83,2493,112"/>
+<area shape="rect" id="node31" href="$_sound_system_8cpp.html" title="BGE/SoundSystem.cpp" alt="" coords="2517,83,2677,112"/>
+<area shape="rect" id="node33" href="$_steerable3_d_controller_8cpp.html" title="BGE/Steerable3DController.cpp" alt="" coords="2701,83,2907,112"/>
+<area shape="rect" id="node35" href="$_steering_controler_8cpp.html" title="BGE/SteeringControler.cpp" alt="" coords="2931,83,3109,112"/>
+<area shape="rect" id="node37" href="$_transform_8cpp.html" title="BGE/Transform.cpp" alt="" coords="3133,83,3272,112"/>
+<area shape="rect" id="node39" href="$_utils_8cpp.html" title="BGE/Utils.cpp" alt="" coords="3296,83,3403,112"/>
+<area shape="rect" id="node41" href="$_v_r_game_8cpp.html" title="BGE/VRGame.cpp" alt="" coords="3427,83,3560,112"/>
 </map>

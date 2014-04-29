@@ -1,8 +1,8 @@
 <map id="BGE/PathFollowingScenario.h" name="BGE/PathFollowingScenario.h">
-<area shape="rect" id="node3" href="$_scenario_8h.html" title="Scenario.h" alt="" coords="132,83,215,112"/>
-<area shape="rect" id="node7" href="$_steering_controler_8h.html" title="SteeringControler.h" alt="" coords="203,160,336,189"/>
-<area shape="rect" id="node9" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="344,315,477,344"/>
-<area shape="rect" id="node42" href="$_route_8h.html" title="Route.h" alt="" coords="307,237,373,267"/>
-<area shape="rect" id="node30" href="$_exception_8h.html" title="Exception.h" alt="" coords="624,392,715,421"/>
-<area shape="rect" id="node32" href="$_transform_8h.html" title="Transform.h" alt="" coords="739,392,829,421"/>
+<area shape="rect" id="node3" href="$_scenario_8h.html" title="Scenario.h" alt="" coords="380,83,463,112"/>
+<area shape="rect" id="node7" href="$_steering_controler_8h.html" title="SteeringControler.h" alt="" coords="420,160,553,189"/>
+<area shape="rect" id="node9" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="480,315,613,344"/>
+<area shape="rect" id="node44" href="$_route_8h.html" title="Route.h" alt="" coords="453,237,520,267"/>
+<area shape="rect" id="node32" href="$_exception_8h.html" title="Exception.h" alt="" coords="419,392,509,421"/>
+<area shape="rect" id="node34" href="$_transform_8h.html" title="Transform.h" alt="" coords="635,392,725,421"/>
 </map>

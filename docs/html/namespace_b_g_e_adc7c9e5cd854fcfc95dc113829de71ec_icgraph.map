@@ -1,5 +1,6 @@
 <map id="BGE::RandomFloat" name="BGE::RandomFloat">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_box.html#a3554491d9ea5f22c9094c3aebf9cb7a4" title="BGE::Box::Box" alt="" coords="215,5,327,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_cylinder.html#a7fc7f1cbffd048f423f7c0194c972348" title="BGE::Cylinder::Cylinder" alt="" coords="189,59,352,88"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_sphere.html#a066dd77d24d95f7cb2e16880b3a5ae6e" title="BGE::Sphere::Sphere" alt="" coords="197,112,344,141"/>
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_box.html#a3554491d9ea5f22c9094c3aebf9cb7a4" title="BGE::Box::Box" alt="" coords="232,5,344,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_cylinder.html#a7fc7f1cbffd048f423f7c0194c972348" title="BGE::Cylinder::Cylinder" alt="" coords="207,59,369,88"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_sphere.html#a066dd77d24d95f7cb2e16880b3a5ae6e" title="BGE::Sphere::Sphere" alt="" coords="215,112,361,141"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_v_r_game.html#a381366381bd612e62acf70ed651fd61f" title="BGE::VRGame::FireProjectile" alt="" coords="191,165,385,195"/>
 </map>

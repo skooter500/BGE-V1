@@ -1,13 +1,13 @@
 <map id="BGE/SteeringGame.h" name="BGE/SteeringGame.h">
-<area shape="rect" id="node3" href="$_game_8h.html" title="Game.h" alt="" coords="412,160,478,189"/>
-<area shape="rect" id="node25" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="810,315,944,344"/>
-<area shape="rect" id="node75" href="$_steering_controler_8h.html" title="SteeringControler.h" alt="" coords="1108,160,1241,189"/>
-<area shape="rect" id="node86" href="$_scenario_8h.html" title="Scenario.h" alt="" coords="1172,83,1254,112"/>
-<area shape="rect" id="node23" href="$_camera_8h.html" title="Camera.h" alt="" coords="406,237,484,267"/>
-<area shape="rect" id="node50" href="$_ground_8h.html" title="Ground.h" alt="" coords="881,237,956,267"/>
-<area shape="rect" id="node54" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="692,237,806,267"/>
-<area shape="rect" id="node62" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="284,237,382,267"/>
-<area shape="rect" id="node42" href="$_exception_8h.html" title="Exception.h" alt="" coords="936,392,1026,421"/>
-<area shape="rect" id="node44" href="$_transform_8h.html" title="Transform.h" alt="" coords="514,392,605,421"/>
-<area shape="rect" id="node80" href="$_route_8h.html" title="Route.h" alt="" coords="1177,237,1244,267"/>
+<area shape="rect" id="node3" href="$_game_8h.html" title="Game.h" alt="" coords="585,160,652,189"/>
+<area shape="rect" id="node25" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="976,315,1109,344"/>
+<area shape="rect" id="node77" href="$_steering_controler_8h.html" title="SteeringControler.h" alt="" coords="1269,160,1403,189"/>
+<area shape="rect" id="node88" href="$_scenario_8h.html" title="Scenario.h" alt="" coords="1336,83,1419,112"/>
+<area shape="rect" id="node23" href="$_camera_8h.html" title="Camera.h" alt="" coords="947,237,1024,267"/>
+<area shape="rect" id="node53" href="$_ground_8h.html" title="Ground.h" alt="" coords="1048,237,1123,267"/>
+<area shape="rect" id="node57" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="808,237,923,267"/>
+<area shape="rect" id="node65" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="569,237,668,267"/>
+<area shape="rect" id="node44" href="$_exception_8h.html" title="Exception.h" alt="" coords="1107,392,1197,421"/>
+<area shape="rect" id="node46" href="$_transform_8h.html" title="Transform.h" alt="" coords="1221,392,1312,421"/>
+<area shape="rect" id="node82" href="$_route_8h.html" title="Route.h" alt="" coords="1299,237,1365,267"/>
 </map>

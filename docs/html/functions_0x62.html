@@ -20,10 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="BGE_Logo_Small.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">BGE
-   &#160;<span id="projectnumber">1</span>
    </div>
+   <div id="projectbrief">BGE Game Engine</div>
   </td>
  </tr>
  </tbody>
@@ -37,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -73,6 +75,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -110,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -123,6 +126,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
+<li>backupOrientation
+: <a class="el" href="class_b_g_e_1_1_transform.html#ac1305552e0635ed07cf3e43ad898f038">BGE::Transform</a>
+</li>
+<li>backupPosition
+: <a class="el" href="class_b_g_e_1_1_transform.html#add53307b7b17e3f2003d23b0cd859408">BGE::Transform</a>
+</li>
+<li>backupWorld
+: <a class="el" href="class_b_g_e_1_1_transform.html#a9eb76804ec98e5f22a3512a7c0393a8e">BGE::Transform</a>
+</li>
 <li>basisLook
 : <a class="el" href="class_b_g_e_1_1_transform.html#a00e3d00aedfea161e5c1354e5fe80a54">BGE::Transform</a>
 </li>
@@ -135,32 +147,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>behaviour_type
 : <a class="el" href="class_b_g_e_1_1_steering_controller.html#abebc62a28e58ef3c7fc189941629aa53">BGE::SteeringController</a>
 </li>
+<li>BindRenderBuffer()
+: <a class="el" href="class_b_g_e_1_1_rift_controller.html#ab28a3401a8255753b4fff4b6a5be3335">BGE::RiftController</a>
+</li>
 <li>boundingBox
 : <a class="el" href="class_b_g_e_1_1_model.html#a44723a79125d28e2cec5d70d4a4363d1">BGE::Model</a>
 </li>
 <li>Box()
-: <a class="el" href="class_b_g_e_1_1_box.html#a3554491d9ea5f22c9094c3aebf9cb7a4">BGE::Box</a>
-</li>
-<li>Buddha()
-: <a class="el" href="class_b_g_e_1_1_buddha.html#a5c52971275b852deedc6dd3f73e54069">BGE::Buddha</a>
+: <a class="el" href="class_b_g_e_1_1_box.html#a5e13449deb2e663911c5fd394374290d">BGE::Box</a>
 </li>
 <li>buddha
 : <a class="el" href="class_b_g_e_1_1_buddha.html#a03f41c9910ff549ab793a0e27c9ed6b8">BGE::Buddha</a>
 , <a class="el" href="class_b_g_e_1_1_lab6.html#a53343e346cb79486f9a298257e838eb7">BGE::Lab6</a>
 </li>
+<li>Buddha()
+: <a class="el" href="class_b_g_e_1_1_buddha.html#a5c52971275b852deedc6dd3f73e54069">BGE::Buddha</a>
+</li>
 <li>buddhaFountain0
-: <a class="el" href="class_b_g_e_1_1_lab6.html#a444f347fd43e8bc345d99f034d8db05a">BGE::Lab6</a>
-, <a class="el" href="class_b_g_e_1_1_buddha.html#accce50bbdd57a213a4bc4037d5d0fc63">BGE::Buddha</a>
+: <a class="el" href="class_b_g_e_1_1_buddha.html#accce50bbdd57a213a4bc4037d5d0fc63">BGE::Buddha</a>
+, <a class="el" href="class_b_g_e_1_1_lab6.html#a444f347fd43e8bc345d99f034d8db05a">BGE::Lab6</a>
 </li>
 <li>buddhaFountain1
-: <a class="el" href="class_b_g_e_1_1_lab6.html#a178f618b743064b6f742cd73315d1e40">BGE::Lab6</a>
-, <a class="el" href="class_b_g_e_1_1_buddha.html#ad489543277af0eea9477cfd1fc51f688">BGE::Buddha</a>
+: <a class="el" href="class_b_g_e_1_1_buddha.html#ad489543277af0eea9477cfd1fc51f688">BGE::Buddha</a>
+, <a class="el" href="class_b_g_e_1_1_lab6.html#a178f618b743064b6f742cd73315d1e40">BGE::Lab6</a>
 </li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 23 2014 02:53:12 for BGE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 29 2014 08:28:02 for BGE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -1,16 +1,16 @@
 <map id="BGE/PhysicsCamera.cpp" name="BGE/PhysicsCamera.cpp">
-<area shape="rect" id="node3" href="$_physics_camera_8h.html" title="PhysicsCamera.h" alt="" coords="153,83,279,112"/>
-<area shape="rect" id="node48" href="$_game_8h.html" title="Game.h" alt="" coords="919,160,985,189"/>
-<area shape="rect" id="node89" href="$_physics_game1_8h.html" title="PhysicsGame1.h" alt="" coords="303,83,425,112"/>
-<area shape="rect" id="node95" href="$_box_8h.html" title="Box.h" alt="" coords="503,160,559,189"/>
-<area shape="rect" id="node100" href="$_utils_8h.html" title="Utils.h" alt="" coords="1552,237,1611,267"/>
-<area shape="rect" id="node5" href="$_camera_8h.html" title="Camera.h" alt="" coords="565,237,643,267"/>
-<area shape="rect" id="node37" href="$_physics_controller_8h.html" title="PhysicsController.h" alt="" coords="116,237,252,267"/>
-<area shape="rect" id="node43" href="$_physics_factory_8h.html" title="PhysicsFactory.h" alt="" coords="228,160,351,189"/>
-<area shape="rect" id="node7" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="585,315,719,344"/>
-<area shape="rect" id="node29" href="$_exception_8h.html" title="Exception.h" alt="" coords="647,392,737,421"/>
-<area shape="rect" id="node31" href="$_transform_8h.html" title="Transform.h" alt="" coords="812,392,903,421"/>
-<area shape="rect" id="node64" href="$_ground_8h.html" title="Ground.h" alt="" coords="789,237,864,267"/>
-<area shape="rect" id="node68" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="1224,237,1339,267"/>
-<area shape="rect" id="node76" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="667,237,765,267"/>
+<area shape="rect" id="node3" href="$_physics_camera_8h.html" title="PhysicsCamera.h" alt="" coords="676,83,801,112"/>
+<area shape="rect" id="node51" href="$_game_8h.html" title="Game.h" alt="" coords="1445,160,1512,189"/>
+<area shape="rect" id="node91" href="$_physics_game1_8h.html" title="PhysicsGame1.h" alt="" coords="825,83,948,112"/>
+<area shape="rect" id="node97" href="$_box_8h.html" title="Box.h" alt="" coords="1012,160,1068,189"/>
+<area shape="rect" id="node102" href="$_utils_8h.html" title="Utils.h" alt="" coords="306,237,365,267"/>
+<area shape="rect" id="node5" href="$_camera_8h.html" title="Camera.h" alt="" coords="925,237,1002,267"/>
+<area shape="rect" id="node40" href="$_physics_controller_8h.html" title="PhysicsController.h" alt="" coords="613,237,749,267"/>
+<area shape="rect" id="node46" href="$_physics_factory_8h.html" title="PhysicsFactory.h" alt="" coords="769,160,892,189"/>
+<area shape="rect" id="node7" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="985,315,1118,344"/>
+<area shape="rect" id="node31" href="$_exception_8h.html" title="Exception.h" alt="" coords="1037,392,1128,421"/>
+<area shape="rect" id="node33" href="$_transform_8h.html" title="Transform.h" alt="" coords="1253,392,1344,421"/>
+<area shape="rect" id="node67" href="$_ground_8h.html" title="Ground.h" alt="" coords="1216,237,1290,267"/>
+<area shape="rect" id="node71" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="1077,237,1192,267"/>
+<area shape="rect" id="node79" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="1549,237,1648,267"/>
 </map>

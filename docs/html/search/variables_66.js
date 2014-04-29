@@ -2,7 +2,7 @@ var searchData=
 [
   ['feelers',['feelers',['../class_b_g_e_1_1_steering_controller.html#a4bfeb793b7a81b378d3f81c5085b204e',1,'BGE::SteeringController']]],
   ['fid',['fid',['../namespacegmk.html#a29c54310ed5d6c9d85f4ed018c7cc07c',1,'gmk']]],
-  ['firerate',['fireRate',['../class_b_g_e_1_1_physics_camera.html#aa57b37765c35f6e1e00b790b4292e719',1,'BGE::PhysicsCamera']]],
+  ['firerate',['fireRate',['../class_b_g_e_1_1_physics_camera.html#aa57b37765c35f6e1e00b790b4292e719',1,'BGE::PhysicsCamera::fireRate()'],['../class_b_g_e_1_1_v_r_game.html#a596c5ed67ea924b37874197b96a3e445',1,'BGE::VRGame::fireRate()']]],
   ['flags',['flags',['../class_b_g_e_1_1_steering_controller.html#a8e3bba21f8c3f425b6a591b9c85d9c90',1,'BGE::SteeringController']]],
   ['fmodsystem',['fmodSystem',['../class_b_g_e_1_1_sound_system.html#a28ab640f1afd14293ee5849f49cc31c4',1,'BGE::SoundSystem']]],
   ['force',['force',['../class_b_g_e_1_1_lab8.html#a4a61b13d7fd9022371e564a0768afe86',1,'BGE::Lab8::force()'],['../class_b_g_e_1_1_steerable3_d_controller.html#ac74b43bbe6a99800595a4091ed34102d',1,'BGE::Steerable3DController::force()'],['../class_b_g_e_1_1_steering_controller.html#ad10b3de08abf1b1d18b72628012fd011',1,'BGE::SteeringController::force()']]],

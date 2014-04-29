@@ -1,13 +1,13 @@
 <map id="BGE/Lab7.h" name="BGE/Lab7.h">
-<area shape="rect" id="node3" href="$_game_8h.html" title="Game.h" alt="" coords="505,160,572,189"/>
-<area shape="rect" id="node25" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="706,315,840,344"/>
-<area shape="rect" id="node76" href="$_fountain_effect_8h.html" title="FountainEffect.h" alt="" coords="793,83,910,112"/>
-<area shape="rect" id="node23" href="$_camera_8h.html" title="Camera.h" alt="" coords="734,237,812,267"/>
-<area shape="rect" id="node50" href="$_ground_8h.html" title="Ground.h" alt="" coords="836,237,910,267"/>
-<area shape="rect" id="node54" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="1137,237,1252,267"/>
-<area shape="rect" id="node62" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="137,237,236,267"/>
-<area shape="rect" id="node42" href="$_exception_8h.html" title="Exception.h" alt="" coords="578,392,669,421"/>
-<area shape="rect" id="node44" href="$_transform_8h.html" title="Transform.h" alt="" coords="693,392,784,421"/>
-<area shape="rect" id="node78" href="$_particle_effect_8h.html" title="ParticleEffect.h" alt="" coords="968,160,1080,189"/>
-<area shape="rect" id="node81" href="$_particle_8h.html" title="Particle.h" alt="" coords="985,237,1062,267"/>
+<area shape="rect" id="node3" href="$_game_8h.html" title="Game.h" alt="" coords="558,160,624,189"/>
+<area shape="rect" id="node25" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="704,315,838,344"/>
+<area shape="rect" id="node78" href="$_fountain_effect_8h.html" title="FountainEffect.h" alt="" coords="820,83,938,112"/>
+<area shape="rect" id="node23" href="$_camera_8h.html" title="Camera.h" alt="" coords="407,237,484,267"/>
+<area shape="rect" id="node53" href="$_ground_8h.html" title="Ground.h" alt="" coords="786,237,860,267"/>
+<area shape="rect" id="node57" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="1087,237,1202,267"/>
+<area shape="rect" id="node65" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="234,237,332,267"/>
+<area shape="rect" id="node44" href="$_exception_8h.html" title="Exception.h" alt="" coords="747,392,838,421"/>
+<area shape="rect" id="node46" href="$_transform_8h.html" title="Transform.h" alt="" coords="531,392,622,421"/>
+<area shape="rect" id="node80" href="$_particle_effect_8h.html" title="ParticleEffect.h" alt="" coords="968,160,1080,189"/>
+<area shape="rect" id="node83" href="$_particle_8h.html" title="Particle.h" alt="" coords="986,237,1063,267"/>
 </map>

@@ -1,5 +1,6 @@
 <map id="BGE::Game::Update" name="BGE::Game::Update">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a712aad58012747c8e1f0387199594910" title="BGE::Game::Run" alt="" coords="211,5,336,35"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_physics_game1.html#ae67a81b2bd9fda6538266bb86b3e37f5" title="BGE::PhysicsGame1:\l:Update" alt="" coords="199,58,348,105"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="397,5,448,35"/>
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a712aad58012747c8e1f0387199594910" title="BGE::Game::Run" alt="" coords="216,5,341,35"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_physics_game1.html#ae67a81b2bd9fda6538266bb86b3e37f5" title="BGE::PhysicsGame1:\l:Update" alt="" coords="204,58,353,105"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_v_r_game.html#a1883e546b4e2741354ba5abd9a14da08" title="BGE::VRGame::Update" alt="" coords="197,128,360,157"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="408,5,459,35"/>
 </map>

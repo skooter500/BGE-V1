@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['backuporientation',['backupOrientation',['../class_b_g_e_1_1_transform.html#ac1305552e0635ed07cf3e43ad898f038',1,'BGE::Transform']]],
+  ['backupposition',['backupPosition',['../class_b_g_e_1_1_transform.html#add53307b7b17e3f2003d23b0cd859408',1,'BGE::Transform']]],
+  ['backupworld',['backupWorld',['../class_b_g_e_1_1_transform.html#a9eb76804ec98e5f22a3512a7c0393a8e',1,'BGE::Transform']]],
   ['basislook',['basisLook',['../class_b_g_e_1_1_transform.html#a00e3d00aedfea161e5c1354e5fe80a54',1,'BGE::Transform']]],
   ['basisright',['basisRight',['../class_b_g_e_1_1_transform.html#ab1f6463365cef7fdba189e99b519b7a5',1,'BGE::Transform']]],
   ['basisup',['basisUp',['../class_b_g_e_1_1_transform.html#a4138712e358f3407c2e581a577bba923',1,'BGE::Transform']]],

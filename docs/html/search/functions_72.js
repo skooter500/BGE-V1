@@ -1,11 +1,14 @@
 var searchData=
 [
+  ['initialise',['Initialise',['../class_b_g_e_1_1_rift_controller.html#aeb745dc67dbbe1a3e353957349012605',1,'BGE::RiftController']]],
   ['randomclamped',['RandomClamped',['../namespace_b_g_e.html#a44c1252ce516a92fb54a7719a0167d67',1,'BGE']]],
   ['randomfloat',['RandomFloat',['../namespace_b_g_e.html#adc7c9e5cd854fcfc95dc113829de71ec',1,'BGE']]],
   ['randomposition',['RandomPosition',['../namespace_b_g_e.html#aacbfdbe4261769b468ef4c03910f257b',1,'BGE']]],
   ['randomwalk',['RandomWalk',['../class_b_g_e_1_1_steering_controller.html#a838ed1cc1b6b8d146af97ca0fad8edb9',1,'BGE::SteeringController']]],
   ['recalculatevectors',['RecalculateVectors',['../class_b_g_e_1_1_transform.html#ae0f8cd2f1ddaa196ef67b43d01725086',1,'BGE::Transform']]],
   ['reset',['Reset',['../class_b_g_e_1_1_steering_game.html#a516711f65d11ecb9a694f0139859d1c8',1,'BGE::SteeringGame']]],
+  ['resetscene',['ResetScene',['../class_b_g_e_1_1_v_r_game.html#a16393286727104ce32d6f253bdd7fa9a',1,'BGE::VRGame']]],
+  ['riftcontroller',['RiftController',['../class_b_g_e_1_1_rift_controller.html#a16f6dc4bdbd1d87b93d589e0487089c0',1,'BGE::RiftController']]],
   ['roll',['Roll',['../class_b_g_e_1_1_transform.html#a77b194efd21538b95470bf9a84de5834',1,'BGE::Transform']]],
   ['rotatevector',['RotateVector',['../namespace_b_g_e.html#af45e6960a1d4f878560e974bc4890b68',1,'BGE']]],
   ['rotatevectors',['RotateVectors',['../class_b_g_e_1_1_transform.html#a42bc887033106184fcaa282a8a88950c',1,'BGE::Transform']]],
