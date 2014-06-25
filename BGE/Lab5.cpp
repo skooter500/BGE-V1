@@ -22,7 +22,7 @@ bool Lab5::Initialise()
 	Attach(ground);	
 
 	ship1 = make_shared<GameComponent>();
-	ship1->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
+	//ship1->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	ship1->position = glm::vec3(-10, 2, -10);
 	ship1->Attach(make_shared<VectorDrawer>());
 	Attach(ship1);
