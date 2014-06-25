@@ -19,6 +19,7 @@
 #include "Lab7.h"
 #include "Lab8.h"
 #include "Buddha.h"
+#include "MyLittleScene.h"
 
 using namespace BGE;
 
@@ -29,7 +30,11 @@ int main(int argc, char *argv[])
 
 	// Uncomment this line to run the Rift/Connect/Physics demo as per 
 	// http://www.youtube.com/watch?v=EEbVHxOkTxw
+<<<<<<< HEAD
 	//SceneGraphGame  game;
+=======
+	MyLittleScene  game;
+>>>>>>> c5ba519d561c9832ebb405869f881200138fc89c
 	game.Run();
 
 	return 0;
