@@ -60,7 +60,7 @@ void PhysicsCamera::Update(float timeDelta)
 	}
 	string what = "Nothing";
 	// Handle the gravity gun
-	if (SDL_GetMouseState(NULL, NULL) && SDL_BUTTON(3))
+	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
 	{
 		float dist = 1000.0f;
 		if (pickedUp == NULL)

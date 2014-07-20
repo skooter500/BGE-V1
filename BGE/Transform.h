@@ -3,6 +3,7 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
+#include <memory>
 
 namespace BGE
 {
@@ -27,6 +28,8 @@ namespace BGE
 		static const glm::vec3 basisUp;
 		static const glm::vec3 basisLook;
 		static const glm::vec3 basisRight;
+
+		std::shared_ptr<Transform> parent;
 
 		bool moved;
 

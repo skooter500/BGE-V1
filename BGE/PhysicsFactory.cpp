@@ -231,7 +231,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 	shared_ptr<Ground> ground = make_shared<Ground>();
 
 	btCollisionShape * groundShape = new btStaticPlaneShape(btVector3(0,1,0),1);
-	btDefaultMotionState * groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,-1,0)));
+	btDefaultMotionState * groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0,0)));
 
 	btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0,groundMotionState,groundShape,btVector3(0,0,0));
 	btRigidBody* body = new btRigidBody(groundRigidBodyCI);

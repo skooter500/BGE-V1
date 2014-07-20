@@ -41,6 +41,7 @@ namespace BGE
 
 		GameComponent * parent;
 		std::string tag;
+		bool transformOwner;
 
 		std::list<std::shared_ptr<GameComponent>> children;
 		

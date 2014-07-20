@@ -10,8 +10,6 @@
 using namespace BGE;
 using namespace std;
 
-
-
 float BGE::RandomFloat()
 {	
 	return (float)rand()/(float)RAND_MAX;
@@ -30,6 +28,7 @@ GameComponent::GameComponent(bool hasTransform)
 	{
 		transform = nullptr;
 	}
+	transformOwner = hasTransform;
 	alive = true;
 	initialised = false;
 }
@@ -52,7 +51,13 @@ void GameComponent::Draw()
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{
-		(*it)->parent = this;	
+		// This is necessary for models etc that are instanced
+		// As they may be attached to several different parents
+		(*it)->parent = this;
+		if (!(*it)->transformOwner)
+		{
+			(*it)->transform = transform;
+		}
 		(*it ++)->Draw();		
 	}
 }
@@ -70,9 +75,7 @@ void GameComponent::Cleanup()
 
 
 
-void GameComponent::Update(float timeDelta) {
-	
-	transform->Calculate();
+void GameComponent::Update(float timeDelta) {	
 	// Update all the children
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
@@ -83,8 +86,16 @@ void GameComponent::Update(float timeDelta) {
 		}
 		else
 		{
+			(*it)->parent = this;
 			(*it ++)->Update(timeDelta);
 		}
+	}
+
+	// Only the transforms owner will calculate the transform. ALl the other components should 
+	// just update the position and the quaternion
+	if (transformOwner)
+	{
+		transform->Calculate();
 	}
 }
 
@@ -98,6 +109,12 @@ void GameComponent::Attach(shared_ptr<GameComponent> child)
 	{
 		child->transform = transform; 
 	}
+	// Set up transform parenting
+	if (transformOwner && child->transformOwner)
+	{
+		child->transform->parent = transform;
+	}
+
 	children.push_back(child);
 }
 

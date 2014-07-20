@@ -13,6 +13,7 @@ Box::Box(float width, float height, float depth):GameComponent(true)
 	model->Initialise();
 	transform->diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	transform->specular = glm::vec3(0,0,0);
+	transform->ambient = glm::vec3(0.1f, 0.1f, 0.1f);
 	tag = "Box";
 	transform->scale = glm::vec3(width, height, depth);
 }

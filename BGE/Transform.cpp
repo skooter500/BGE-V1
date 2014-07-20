@@ -26,6 +26,7 @@ Transform::Transform(void)
 
 Transform::~Transform(void)
 {
+	parent = nullptr;
 }
 
 void Transform::RecalculateVectors()
@@ -39,11 +40,10 @@ void Transform::Calculate()
 {
 	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
 	RecalculateVectors();
-	/*if (parent != NULL)
+	if (parent != nullptr)
 	{
-		world = (glm::translate(glm::mat4(1), transform->position) * glm::mat4_cast(parent->orientation)) * world;
+		world = (glm::translate(glm::mat4(1), parent->position) * glm::mat4_cast(parent->orientation)) * world;
 	}
-	*/
 }
 
 void Transform::Walk(float units)

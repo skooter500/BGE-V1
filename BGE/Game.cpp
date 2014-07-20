@@ -155,7 +155,7 @@ void Game::PrintText(string message, glm::vec2 position)
 void Game::PrintVector(string message, glm::vec3 v)
 {
 	stringstream ss;
-	ss << message << v.x << " " << v.y << " " << v.z;
+	ss << message << "(" << v.x << ", " << v.y << ", " << v.z << ")";
 	PrintText(ss.str());
 }
 
