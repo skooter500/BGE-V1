@@ -12,6 +12,8 @@ Sphere::Sphere(float radius):GameComponent(true)
 	model->Initialise();
 	transform->diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	transform->specular = glm::vec3(1.2f,1.2f, 1.2f);
+	transform->ambient = glm::vec3(0.1f, 0.1f, 0.1f);
+
 	tag = "Sphere";
 	transform->scale = glm::vec3(radius, radius, radius);
 }

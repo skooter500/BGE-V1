@@ -38,9 +38,10 @@ void ObstacleAvoidanceScenario::Initialise()
 	Params::Load("default");
 	SteeringGame * game = (SteeringGame *) Game::Instance();
 
-	shared_ptr<GameComponent> leader = make_shared<GameComponent>();
+	shared_ptr<GameComponent> leader = make_shared<GameComponent>(true);
 	leader->tag = "Steerable";
 	shared_ptr<SteeringController> leaderController = make_shared<SteeringController>();
+	leader->Attach(leaderController);
 	leaderController->transform->position = glm::vec3(10, 120, 20);            
 	leaderController->TurnOn(SteeringController::behaviour_type::arrive);
 	leaderController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
@@ -48,7 +49,7 @@ void ObstacleAvoidanceScenario::Initialise()
 	leaderController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
 	leaderController->targetPos = glm::vec3(0, 100, -550);
 	this->leaderController = leaderController;
-	leader->Attach(leaderController);
+	
 	leader->Attach(Content::LoadModel("viper", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 	leader->transform->scale = glm::vec3(2,2,2);
 	game->Attach(leader);
@@ -81,25 +82,26 @@ void ObstacleAvoidanceScenario::Initialise()
 		for (int j = 0; j < i; j++)
 		{
 			float z = (i - 1) * +zOff;
-			shared_ptr<GameComponent> fleet = make_shared<GameComponent>();
+			shared_ptr<GameComponent> fleet = make_shared<GameComponent>(true);
 			fleet->tag = "Steerable";
 			shared_ptr<SteeringController> fleetController = make_shared<SteeringController>();
+			fleet->Attach(fleetController);
 			fleetController->leader = leaderController;
 			fleetController->offset = glm::vec3((xOff * (-i / 2.0f)) + (j * xOff), 0, z);
 			fleetController->transform->position = leaderController->transform->position + fleetController->offset;
 			fleetController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
 			fleetController->TurnOn(SteeringController::behaviour_type::separation);
 			fleetController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
-			fleetController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
-			fleet->Attach(fleetController);
+			fleetController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);			
 			fleet->transform->scale = glm::vec3(2,2,2);
 			fleet->Attach(Content::LoadModel("cobramk1", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 			game->Attach(fleet);
 		}
 	}
 
-	game->camFollower = make_shared<GameComponent>();
+	game->camFollower = make_shared<GameComponent>(true);
 	shared_ptr<SteeringController> camController = make_shared<SteeringController>();
+	game->camFollower->Attach(camController);
 	camController->offset = glm::vec3(0,0,3);
 	camController->tag = "Steerable";
 	camController->leader = leader;
@@ -109,10 +111,8 @@ void ObstacleAvoidanceScenario::Initialise()
 	camController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
 	camController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
 	camController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
-	game->Attach(game->camFollower);
-	game->camFollower->Attach(camController);
+	game->Attach(game->camFollower);	
 	game->camera->transform->position = camController->transform->position;
-
 	shared_ptr<Ground> ground = make_shared<Ground>();
 	game->Attach(ground);
 	game->ground= ground;

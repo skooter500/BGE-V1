@@ -3,7 +3,7 @@
 
 using namespace BGE;
 
-LazerBeam::LazerBeam(void)
+LazerBeam::LazerBeam(void) :GameComponent(true)
 {
 }
 

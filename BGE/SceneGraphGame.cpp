@@ -68,13 +68,15 @@ bool SceneGraphGame::Initialise()
 
 	selfExample = make_shared<GameComponent>(true);
 	selfExample->Attach(Content::LoadModel("ferdelance", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
+	selfExample->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+
 	selfExample->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	selfExample->transform->position = NextPosition(current ++, componentCount);
 	Attach(selfExample);
 
 	station = make_shared<GameComponent>(true);
 	station->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
-	station->transform->specular = glm::vec3(0,0,0);
+	station->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	station->transform->scale = glm::vec3(1,1,1);
 	std::shared_ptr<Model> cmodel = Content::LoadModel("coriolis", glm::rotate(glm::mat4(1), 90.0f, Transform::basisUp));	
 	station->Attach(cmodel);
@@ -97,6 +99,7 @@ bool SceneGraphGame::Initialise()
 	ship2->Attach(make_shared<XBoxController>());
 	ship2->Attach(Content::LoadModel("cobramk3", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0))));
 	ship2->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
+	ship2->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	ship2->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship2);
 
@@ -106,6 +109,7 @@ bool SceneGraphGame::Initialise()
 	shared_ptr<Model> s3Model = Content::LoadModel("moray", glm::rotate(glm::mat4(1), 180.0f, glm::vec3(0,1,0)));
 	ship3->Attach(make_shared<Steerable3DController>(s3Model));
 	ship3->Attach(s3Model);
+	ship3->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	ship3->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	ship3->transform->position = NextPosition(current ++, componentCount);
 	Attach(ship3);
@@ -131,6 +135,7 @@ bool SceneGraphGame::Initialise()
 	ship4->tag = "Steerable";
 	ship4->transform->scale = glm::vec3(2, 2, 2);
 	ship4->Attach(Content::LoadModel("krait", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
+	ship4->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
 	shared_ptr<SteeringController> ship4Controller = make_shared<SteeringController>();
 
 	ship4->Attach(ship4Controller);

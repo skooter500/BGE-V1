@@ -28,9 +28,6 @@ GLuint * Model::dumpPrivateContents(void) {
 		
 bool Model::Initialise()
 {
-	transform->ambient = glm::vec3(0.0f, 0.0f, 0.0f);
-	transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
-
 	GameComponent::Initialise();
 	if (!Game::Instance()->initialised)
 	{

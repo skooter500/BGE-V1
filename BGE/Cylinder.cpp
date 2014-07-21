@@ -13,6 +13,7 @@ Cylinder::Cylinder(float radius, float height):GameComponent(true)
 	transform->diffuse = glm::vec3(RandomFloat(),RandomFloat(),RandomFloat());
 	transform->ambient = glm::vec3(0, 0, 0);
 	transform->specular = glm::vec3(1, 1, 1);
+	transform->ambient = glm::vec3(0.1f, 0.1f, 0.1f);
 	tag = "Cylinder";
 	
 	transform->scale = glm::vec3(radius, height, radius);
