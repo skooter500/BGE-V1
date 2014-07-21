@@ -2,8 +2,8 @@
 #ifndef _FBO_H_
 #define _FBO_H_
 
-#if defined(_WIN32)
-#include <windows.h>
+#ifdef _WIN32
+ #include <windows.h>
 #endif
 
 #include <GL/glu.h>

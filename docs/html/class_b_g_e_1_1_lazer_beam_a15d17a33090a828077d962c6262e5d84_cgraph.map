@@ -1,0 +1,4 @@
+<map id="BGE::LazerBeam::Draw" name="BGE::LazerBeam::Draw">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_line_drawer.html#a5977d87252af515791f7da3e8ca9fed2" title="BGE::LineDrawer::DrawLine" alt="" coords="216,5,403,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_line_drawer.html#aae06b335f9d123ccd8162c914d4461dc" title="BGE::LineDrawer::Instance" alt="" coords="452,5,633,35"/>
+</map>

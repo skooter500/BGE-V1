@@ -1,0 +1,30 @@
+<map id="BGE::GameComponent::Attach" name="BGE::GameComponent::Attach">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_attacking_state.html#a554f1e612938daae811a7caa146e117c" title="BGE::AttackingState\l::Update" alt="" coords="253,5,397,51"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_box.html#a3554491d9ea5f22c9094c3aebf9cb7a4" title="BGE::Box::Box" alt="" coords="269,75,381,104"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_buddha.html#a0b06f27687b1d94374bccec0de47c45c" title="BGE::Buddha::Initialise" alt="" coords="247,128,404,157"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_cylinder.html#a7fc7f1cbffd048f423f7c0194c972348" title="BGE::Cylinder::Cylinder" alt="" coords="244,181,407,211"/>
+<area shape="rect" id="node11" href="$class_b_g_e_1_1_flocking_scenario.html#a18761ac65f511ee3d7f35a2a2662ca6b" title="BGE::FlockingScenario\l::Initialise" alt="" coords="247,234,404,281"/>
+<area shape="rect" id="node13" href="$class_b_g_e_1_1_game.html#a3ae96cfdab80ddfed4e942b23c59cfd9" title="BGE::Game::Game" alt="" coords="257,304,393,333"/>
+<area shape="rect" id="node15" href="$class_b_g_e_1_1_game.html#a6ac69a3795fe38dd4eccf4aa177d81ff" title="BGE::Game::SetGround" alt="" coords="244,357,407,387"/>
+<area shape="rect" id="node19" href="$class_b_g_e_1_1_lab4.html#a3873eb644cbdeb20ab0f033e4e43e9a3" title="BGE::Lab4::Initialise" alt="" coords="255,411,396,440"/>
+<area shape="rect" id="node21" href="$class_b_g_e_1_1_lab4.html#a34fe4d66f91e194a4b129950b4966cfb" title="BGE::Lab4::Update" alt="" coords="257,464,393,493"/>
+<area shape="rect" id="node23" href="$class_b_g_e_1_1_lab5.html#a22e9d710c6270571a8f4aa9da3a2f59b" title="BGE::Lab5::Initialise" alt="" coords="255,517,396,547"/>
+<area shape="rect" id="node25" href="$class_b_g_e_1_1_lab6.html#a4c6c1fca3a0fce3be6be36896c84b1c8" title="BGE::Lab6::Initialise" alt="" coords="255,571,396,600"/>
+<area shape="rect" id="node27" href="$class_b_g_e_1_1_lab7.html#ac7d2597bb842edcf70174b436c8811fd" title="BGE::Lab7::Initialise" alt="" coords="255,624,396,653"/>
+<area shape="rect" id="node29" href="$class_b_g_e_1_1_lab8.html#aec401d2069e9e5d6a6d3d71367a68ba8" title="BGE::Lab8::Initialise" alt="" coords="255,677,396,707"/>
+<area shape="rect" id="node31" href="$class_b_g_e_1_1_model_test.html#a0569efdab1ec10bab4299987b1563c14" title="BGE::ModelTest::Initialise" alt="" coords="239,731,412,760"/>
+<area shape="rect" id="node33" href="$class_b_g_e_1_1_obstacle_avoidance_scenario.html#a4973acf1e08d06c8fca58e06b151eae0" title="BGE::ObstacleAvoidanceScenario\l::Initialise" alt="" coords="215,783,436,830"/>
+<area shape="rect" id="node35" href="$class_b_g_e_1_1_path_following_scenario.html#a70856528dabba6eca4f2bb066d7dca4f" title="BGE::PathFollowingScenario\l::Initialise" alt="" coords="231,853,420,899"/>
+<area shape="rect" id="node37" href="$class_b_g_e_1_1_physics_factory.html#ac5fa08dd51c64a364f08ddaebe2c1def" title="BGE::PhysicsFactory\l::CreateFromModel" alt="" coords="251,922,400,969"/>
+<area shape="rect" id="node41" href="$class_b_g_e_1_1_physics_factory.html#a0c7dba14ad7b41710ab62c12a1a26ebe" title="BGE::PhysicsFactory\l::CreateSphere" alt="" coords="251,991,400,1038"/>
+<area shape="rect" id="node43" href="$class_b_g_e_1_1_physics_factory.html#a7e737e2cd283f9388e1c7691114790be" title="BGE::PhysicsFactory\l::CreateBox" alt="" coords="251,1061,400,1107"/>
+<area shape="rect" id="node49" href="$class_b_g_e_1_1_physics_factory.html#ace3dcd019b8100cb06d5bb42a9045d16" title="BGE::PhysicsFactory\l::CreateCylinder" alt="" coords="251,1130,400,1177"/>
+<area shape="rect" id="node52" href="$class_b_g_e_1_1_rift_controller.html#a16f6dc4bdbd1d87b93d589e0487089c0" title="BGE::RiftController\l::RiftController" alt="" coords="259,1199,392,1246"/>
+<area shape="rect" id="node54" href="$class_b_g_e_1_1_scene_graph_game.html#ae129b54e7ca57dcc6a8b821c569bebd7" title="BGE::SceneGraphGame\l::Initialise" alt="" coords="243,1269,408,1315"/>
+<area shape="rect" id="node56" href="$class_b_g_e_1_1_sphere.html#a066dd77d24d95f7cb2e16880b3a5ae6e" title="BGE::Sphere::Sphere" alt="" coords="252,1339,399,1368"/>
+<area shape="rect" id="node58" href="$class_b_g_e_1_1_steering_controller.html#ae301df857ee41719ec16cca2b2b28679" title="BGE::SteeringController\l::Initialise" alt="" coords="244,1391,407,1438"/>
+<area shape="rect" id="node17" href="$class_b_g_e_1_1_physics_factory.html#a0124b013dc3c7a51f506832bde0f87c4" title="BGE::PhysicsFactory\l::CreateGroundPhysics" alt="" coords="487,349,644,395"/>
+<area shape="rect" id="node39" href="$class_b_g_e_1_1_physics_factory.html#a79e903b1d2f7cf1fa3d2a99bcdb45d4b" title="BGE::PhysicsFactory\l::CreateRandomObject" alt="" coords="488,922,643,969"/>
+<area shape="rect" id="node45" href="$class_b_g_e_1_1_physics_factory.html#a0a1aef2a5769b29ef74654ea3665637b" title="BGE::PhysicsFactory\l::CreateWall" alt="" coords="491,1061,640,1107"/>
+<area shape="rect" id="node47" href="$class_b_g_e_1_1_physics_factory.html#a93b01c37fb6aafa5170219783d0afb2c" title="BGE::PhysicsFactory\l::CreateVehicle" alt="" coords="491,1130,640,1177"/>
+</map>

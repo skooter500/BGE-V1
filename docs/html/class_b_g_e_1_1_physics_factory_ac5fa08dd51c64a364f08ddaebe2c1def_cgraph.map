@@ -1,0 +1,8 @@
+<map id="BGE::PhysicsFactory::CreateFromModel" name="BGE::PhysicsFactory::CreateFromModel">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="216,5,365,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="211,58,371,105"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_content.html#a593266376a259eacb7ebddfc71ee082a" title="BGE::Content::LoadModel" alt="" coords="204,128,377,157"/>
+<area shape="rect" id="node11" href="$namespace_b_g_e.html#a721a46c8618bcd3b8a72138f45211e10" title="BGE::GLToBtVector" alt="" coords="220,181,361,211"/>
+<area shape="rect" id="node13" href="$namespace_b_g_e.html#a57f8f67a5520cfbe967e4f91f02138e9" title="BGE::GLToBtQuat" alt="" coords="225,235,356,264"/>
+<area shape="rect" id="node9" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="428,128,559,157"/>
+</map>

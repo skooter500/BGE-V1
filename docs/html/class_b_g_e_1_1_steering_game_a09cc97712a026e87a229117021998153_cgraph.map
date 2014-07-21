@@ -1,0 +1,5 @@
+<map id="BGE::SteeringGame::Update" name="BGE::SteeringGame::Update">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a68da8b79dc207e54433ae43512fbb26b" title="BGE::Game::PrintText" alt="" coords="203,5,357,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_steering_game.html#a516711f65d11ecb9a694f0139859d1c8" title="BGE::SteeringGame:\l:Reset" alt="" coords="208,58,352,105"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_content.html#a7af4c8882dba7ee671947e6f269b70bf" title="BGE::Content::Initialise\lModels" alt="" coords="200,127,360,174"/>
+</map>

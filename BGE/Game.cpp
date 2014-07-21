@@ -9,10 +9,8 @@
 #include <stdlib.h>
 #include <ctime>
 
-#include <SDL_ttf.h>
 #include "Content.h"
 #include "FPSController.h"
-#include "RiftController.h"
 #include "XBoxController.h"
 #include "Steerable3DController.h"
 #include "Utils.h"
@@ -20,8 +18,6 @@
 using namespace BGE;
 
 BGE::Game * Game::instance = NULL;
-
-
 
 
 
@@ -46,7 +42,7 @@ Game::Game(void):GameComponent(true) {
 	fontSize = 14;	
 
 	fps = 0;
-	camera = make_shared<Camera>();
+	camera = make_shared<Camera>(); 
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
 	Attach(camera);
@@ -62,14 +58,14 @@ shared_ptr<Ground> Game::GetGround()
 
 bool Game::Initialise() {
 	// Set up a console for debugging		
-	if (console) 
+	/*if (console) 
 	{
 		AllocConsole();
 		int fd = _open_osfhandle( (long)GetStdHandle( STD_OUTPUT_HANDLE ), 0); 
 		FILE * fp = _fdopen( fd, "w" ); 
 		*stdout = *fp; 
 		setvbuf( stdout, NULL, _IONBF, 0 );
-	}
+	}*/ 
 
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return false;
@@ -125,22 +121,23 @@ bool Game::Initialise() {
 		throw BGE::Exception("Could not init TTF");
 	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
-	camera->transform->position = glm::vec3(0, 10, 10);
+	//camera->transform->position = glm::vec3(0, 10, -1000);
 
 	if (riftEnabled)
 	{
+#ifdef _WIN32
 		shared_ptr<RiftController> riftController = make_shared<RiftController>();
 		this->riftController = riftController;
 		camera->Attach(riftController);
+#endif 
 	}
 	else
 	{
 		shared_ptr<GameComponent> controller = make_shared<FPSController>();
 		camera->Attach(controller);
 	}
-
-	LineDrawer::Instance()->Initialise();
 	
+	LineDrawer::Instance()->Initialise();
 	running = true;
 	initialised = true;
 	
@@ -176,8 +173,8 @@ void Game::PrintText(string message)
 bool Game::Run() {
 	
 	if(Initialise() == false) {
-        return false;
-    }
+        	return false;
+    	}
 	long last = SDL_GetTicks();
 	while(running) {
 		long now = SDL_GetTicks();
@@ -221,16 +218,16 @@ void Game::Update(float timeDelta) {
 	}	
 
 	SDL_Event event;
-    if (SDL_PollEvent(&event))
-    {
-        // Check for the quit message
-        if (event.type == SDL_QUIT)
-        {
-        // Quit the program
-        Cleanup();
-		exit(0);
-        }
-    }
+    	if (SDL_PollEvent(&event))
+    	{
+        	// Check for the quit message
+        	if (event.type == SDL_QUIT)
+        	{
+        	// Quit the program
+        		Cleanup();
+			exit(0);
+        	}
+    	}
 
 	if (keyState[SDL_SCANCODE_ESCAPE])
 	{
@@ -295,6 +292,7 @@ void Game::Draw()
 	PrintText("Press I to toggle info");
 	if (riftEnabled)
 	{
+#ifdef _WIN32
 		glEnable(GL_DEPTH_TEST);
 		//glDisable(GL_CULL_FACE);
 		
@@ -352,6 +350,7 @@ void Game::Draw()
 		glDisable(GL_DEPTH_TEST);
 		riftController->PresentFbo();
 		camera->view = cameraCentreView;
+#endif 
 	}
 	else
 	{

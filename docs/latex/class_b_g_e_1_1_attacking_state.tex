@@ -1,0 +1,192 @@
+\hypertarget{class_b_g_e_1_1_attacking_state}{\section{B\-G\-E\-:\-:Attacking\-State Class Reference}
+\label{class_b_g_e_1_1_attacking_state}\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}}
+}
+
+
+{\ttfamily \#include $<$Attacking\-State.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:Attacking\-State\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{class_b_g_e_1_1_attacking_state__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for B\-G\-E\-:\-:Attacking\-State\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{class_b_g_e_1_1_attacking_state__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_attacking_state_abba1ed4d3c5ae9e7015bc2e2ef9f4fea}{Attacking\-State} (shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_state_machine}{State\-Machine} $>$ \hyperlink{class_b_g_e_1_1_state_aa1a572a6e24067716eab1f110381bee8}{owner}, shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_game_component}{Game\-Component} $>$ \hyperlink{class_b_g_e_1_1_attacking_state_aa6055274f8431a6f2bfeae8e7b47f46f}{enemy})
+\item 
+\hyperlink{class_b_g_e_1_1_attacking_state_aa086280976088c856cf7bcb212ee2aea}{$\sim$\-Attacking\-State} (void)
+\item 
+virtual void \hyperlink{class_b_g_e_1_1_attacking_state_a644f616bb9949c869efc77ce18523449}{Enter} ()
+\item 
+virtual void \hyperlink{class_b_g_e_1_1_attacking_state_aa2c7fa13ad9e88a390372e293bfff330}{Exit} ()
+\item 
+virtual void \hyperlink{class_b_g_e_1_1_attacking_state_a554f1e612938daae811a7caa146e117c}{Update} (float time\-Delta)
+\item 
+virtual string \hyperlink{class_b_g_e_1_1_attacking_state_a81c2b6ed9f85dc4b99e22c57989fcc6c}{Description} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_game_component}{Game\-Component} $>$ \hyperlink{class_b_g_e_1_1_attacking_state_aa6055274f8431a6f2bfeae8e7b47f46f}{enemy}
+\item 
+float \hyperlink{class_b_g_e_1_1_attacking_state_ab886e975d65afe0bcfdfe2a50d7d6d6d}{time\-Shot}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 6 of file Attacking\-State.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_attacking_state_abba1ed4d3c5ae9e7015bc2e2ef9f4fea}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!Attacking\-State@{Attacking\-State}}
+\index{Attacking\-State@{Attacking\-State}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{Attacking\-State}]{\setlength{\rightskip}{0pt plus 5cm}Attacking\-State\-::\-Attacking\-State (
+\begin{DoxyParamCaption}
+\item[{shared\-\_\-ptr$<$ {\bf State\-Machine} $>$}]{owner, }
+\item[{shared\-\_\-ptr$<$ {\bf Game\-Component} $>$}]{enemy}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_attacking_state_abba1ed4d3c5ae9e7015bc2e2ef9f4fea}
+
+
+Definition at line 11 of file Attacking\-State.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_attacking_state_aa086280976088c856cf7bcb212ee2aea}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!$\sim$\-Attacking\-State@{$\sim$\-Attacking\-State}}
+\index{$\sim$\-Attacking\-State@{$\sim$\-Attacking\-State}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{$\sim$\-Attacking\-State}]{\setlength{\rightskip}{0pt plus 5cm}Attacking\-State\-::$\sim$\-Attacking\-State (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_attacking_state_aa086280976088c856cf7bcb212ee2aea}
+
+
+Definition at line 18 of file Attacking\-State.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_attacking_state_a81c2b6ed9f85dc4b99e22c57989fcc6c}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!Description@{Description}}
+\index{Description@{Description}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{Description}]{\setlength{\rightskip}{0pt plus 5cm}string Attacking\-State\-::\-Description (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_attacking_state_a81c2b6ed9f85dc4b99e22c57989fcc6c}
+
+
+Implements \hyperlink{class_b_g_e_1_1_state_a5823daa8624877cb3113033f03d51558}{B\-G\-E\-::\-State}.
+
+
+
+Definition at line 71 of file Attacking\-State.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_attacking_state_a644f616bb9949c869efc77ce18523449}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!Enter@{Enter}}
+\index{Enter@{Enter}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{Enter}]{\setlength{\rightskip}{0pt plus 5cm}void Attacking\-State\-::\-Enter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_attacking_state_a644f616bb9949c869efc77ce18523449}
+
+
+Implements \hyperlink{class_b_g_e_1_1_state_aba53736a51aaaa40dc291ca11f1bf898}{B\-G\-E\-::\-State}.
+
+
+
+Definition at line 22 of file Attacking\-State.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_b_g_e_1_1_attacking_state_a644f616bb9949c869efc77ce18523449_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_attacking_state_aa2c7fa13ad9e88a390372e293bfff330}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!Exit@{Exit}}
+\index{Exit@{Exit}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{Exit}]{\setlength{\rightskip}{0pt plus 5cm}void Attacking\-State\-::\-Exit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_attacking_state_aa2c7fa13ad9e88a390372e293bfff330}
+
+
+Implements \hyperlink{class_b_g_e_1_1_state_abb88facc6da96e36d4f8d791d81bf321}{B\-G\-E\-::\-State}.
+
+
+
+Definition at line 33 of file Attacking\-State.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_attacking_state_a554f1e612938daae811a7caa146e117c}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!Update@{Update}}
+\index{Update@{Update}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Attacking\-State\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{float}]{time\-Delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_attacking_state_a554f1e612938daae811a7caa146e117c}
+
+
+Implements \hyperlink{class_b_g_e_1_1_state_a75100a8a3efed7336de7bbf910d48fe9}{B\-G\-E\-::\-State}.
+
+
+
+Definition at line 38 of file Attacking\-State.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_attacking_state_a554f1e612938daae811a7caa146e117c_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_attacking_state_aa6055274f8431a6f2bfeae8e7b47f46f}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!enemy@{enemy}}
+\index{enemy@{enemy}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{enemy}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Game\-Component}$>$ B\-G\-E\-::\-Attacking\-State\-::enemy}}\label{class_b_g_e_1_1_attacking_state_aa6055274f8431a6f2bfeae8e7b47f46f}
+
+
+Definition at line 19 of file Attacking\-State.\-h.
+
+\hypertarget{class_b_g_e_1_1_attacking_state_ab886e975d65afe0bcfdfe2a50d7d6d6d}{\index{B\-G\-E\-::\-Attacking\-State@{B\-G\-E\-::\-Attacking\-State}!time\-Shot@{time\-Shot}}
+\index{time\-Shot@{time\-Shot}!BGE::AttackingState@{B\-G\-E\-::\-Attacking\-State}}
+\subsubsection[{time\-Shot}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Attacking\-State\-::time\-Shot}}\label{class_b_g_e_1_1_attacking_state_ab886e975d65afe0bcfdfe2a50d7d6d6d}
+
+
+Definition at line 20 of file Attacking\-State.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_attacking_state_8h}{Attacking\-State.\-h}\item 
+B\-G\-E/\hyperlink{_attacking_state_8cpp}{Attacking\-State.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,4 @@
+<map id="BGE::Game::Draw" name="BGE::Game::Draw">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a68da8b79dc207e54433ae43512fbb26b" title="BGE::Game::PrintText" alt="" coords="187,5,341,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="189,59,339,88"/>
+</map>

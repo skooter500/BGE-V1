@@ -1,0 +1,5 @@
+<map id="BGE::ParticleEffect::Initialise" name="BGE::ParticleEffect::Initialise">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_content.html#a449789b41e8d4c4b20cf3d53c55c5420" title="BGE::Content::LoadShaderPair" alt="" coords="193,5,396,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_content.html#a05b995e5b7946e7d2b1bbd5da0b8a654" title="BGE::Content::LoadTexture" alt="" coords="203,59,387,88"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_game_component.html#ae1c2340cdfb31d2cd372323d3f9a1ba4" title="BGE::GameComponent\l::Initialise" alt="" coords="215,111,375,158"/>
+</map>

@@ -115,6 +115,8 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	// This is a container for the box model
 	shared_ptr<Box> box = make_shared<Box>(width, height, depth);
 	box->transform->position = pos;
+	cout << "CreateBox(): " << box -> transform -> position.x << ", " << box -> transform -> position.y << ", " << box -> transform -> position.z << endl; 
+	box -> transform -> Calculate(); 
 	Game::Instance()->Attach(box);
 
 	// Create the rigid body

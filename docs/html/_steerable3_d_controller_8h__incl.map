@@ -1,0 +1,11 @@
+<map id="BGE/Steerable3DController.h" name="BGE/Steerable3DController.h">
+<area shape="rect" id="node3" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="649,315,783,344"/>
+<area shape="rect" id="node36" href="$_model_8h.html" title="Model.h" alt="" coords="719,83,785,112"/>
+<area shape="rect" id="node27" href="$_exception_8h.html" title="Exception.h" alt="" coords="793,392,884,421"/>
+<area shape="rect" id="node29" href="$_transform_8h.html" title="Transform.h" alt="" coords="433,392,524,421"/>
+<area shape="rect" id="node39" href="$_game_8h.html" title="Game.h" alt="" coords="681,160,748,189"/>
+<area shape="rect" id="node54" href="$_camera_8h.html" title="Camera.h" alt="" coords="676,237,753,267"/>
+<area shape="rect" id="node57" href="$_ground_8h.html" title="Ground.h" alt="" coords="879,237,953,267"/>
+<area shape="rect" id="node61" href="$_sound_system_8h.html" title="SoundSystem.h" alt="" coords="1079,237,1193,267"/>
+<area shape="rect" id="node69" href="$_line_drawer_8h.html" title="LineDrawer.h" alt="" coords="225,237,324,267"/>
+</map>

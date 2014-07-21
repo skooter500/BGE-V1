@@ -1,0 +1,202 @@
+\hypertarget{_shader_functions_8h}{\section{B\-G\-E/\-Shader\-Functions.h File Reference}
+\label{_shader_functions_8h}\index{B\-G\-E/\-Shader\-Functions.\-h@{B\-G\-E/\-Shader\-Functions.\-h}}
+}
+{\ttfamily \#include $<$G\-L/gl.\-h$>$}\\*
+Include dependency graph for Shader\-Functions.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{_shader_functions_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{_shader_functions_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+G\-Lint \hyperlink{_shader_functions_8h_a221b87237ed5b81bc7ad5c0299684532}{get\-Uni\-Loc} (const G\-Luint program, const G\-Lchar $\ast$name)
+\item 
+void \hyperlink{_shader_functions_8h_a776b9402dbf22819c675dcd214f8bc90}{print\-Shader\-Info\-Log} (G\-Luint obj)
+\item 
+void \hyperlink{_shader_functions_8h_a5012d81306e629e18157e5dd570163e1}{print\-Program\-Info\-Log} (G\-Luint obj)
+\item 
+const G\-Lchar $\ast$ \hyperlink{_shader_functions_8h_a50c42913de68b96d58770a13f0189de1}{Get\-Shader\-Source} (const char $\ast$filename)
+\item 
+G\-Luint \hyperlink{_shader_functions_8h_a253e1d3f8e0005ac7a2ca9f6b04f9dfc}{load\-Shader\-File} (const char $\ast$filename, const unsigned long Type)
+\item 
+G\-Luint \hyperlink{_shader_functions_8h_a6dca752382231451f80f0bca75dba32b}{make\-Shader\-By\-Name} (const char $\ast$name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{_shader_functions_8h_a50c42913de68b96d58770a13f0189de1}{\index{Shader\-Functions.\-h@{Shader\-Functions.\-h}!Get\-Shader\-Source@{Get\-Shader\-Source}}
+\index{Get\-Shader\-Source@{Get\-Shader\-Source}!ShaderFunctions.h@{Shader\-Functions.\-h}}
+\subsubsection[{Get\-Shader\-Source}]{\setlength{\rightskip}{0pt plus 5cm}const G\-Lchar$\ast$ Get\-Shader\-Source (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}\label{_shader_functions_8h_a50c42913de68b96d58770a13f0189de1}
+Return shader source from filename, if it can be retrieved. If not, fall back to the hard-\/coded array in our global std\-::map. 
+
+Definition at line 132 of file Shader\-Functions.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_shader_functions_8h_a50c42913de68b96d58770a13f0189de1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_shader_functions_8h_a50c42913de68b96d58770a13f0189de1_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_shader_functions_8h_a221b87237ed5b81bc7ad5c0299684532}{\index{Shader\-Functions.\-h@{Shader\-Functions.\-h}!get\-Uni\-Loc@{get\-Uni\-Loc}}
+\index{get\-Uni\-Loc@{get\-Uni\-Loc}!ShaderFunctions.h@{Shader\-Functions.\-h}}
+\subsubsection[{get\-Uni\-Loc}]{\setlength{\rightskip}{0pt plus 5cm}G\-Lint get\-Uni\-Loc (
+\begin{DoxyParamCaption}
+\item[{const G\-Luint}]{program, }
+\item[{const G\-Lchar $\ast$}]{name}
+\end{DoxyParamCaption}
+)}}\label{_shader_functions_8h_a221b87237ed5b81bc7ad5c0299684532}
+
+
+Definition at line 27 of file Shader\-Functions.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_shader_functions_8h_a221b87237ed5b81bc7ad5c0299684532_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_shader_functions_8h_a253e1d3f8e0005ac7a2ca9f6b04f9dfc}{\index{Shader\-Functions.\-h@{Shader\-Functions.\-h}!load\-Shader\-File@{load\-Shader\-File}}
+\index{load\-Shader\-File@{load\-Shader\-File}!ShaderFunctions.h@{Shader\-Functions.\-h}}
+\subsubsection[{load\-Shader\-File}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint load\-Shader\-File (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename, }
+\item[{const unsigned long}]{Type}
+\end{DoxyParamCaption}
+)}}\label{_shader_functions_8h_a253e1d3f8e0005ac7a2ca9f6b04f9dfc}
+Once source is obtained from either file or hard-\/coded map, compile the shader, release the string memory and return the I\-D. 
+
+Definition at line 149 of file Shader\-Functions.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_shader_functions_8h_a253e1d3f8e0005ac7a2ca9f6b04f9dfc_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{_shader_functions_8h_a253e1d3f8e0005ac7a2ca9f6b04f9dfc_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_shader_functions_8h_a6dca752382231451f80f0bca75dba32b}{\index{Shader\-Functions.\-h@{Shader\-Functions.\-h}!make\-Shader\-By\-Name@{make\-Shader\-By\-Name}}
+\index{make\-Shader\-By\-Name@{make\-Shader\-By\-Name}!ShaderFunctions.h@{Shader\-Functions.\-h}}
+\subsubsection[{make\-Shader\-By\-Name}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint make\-Shader\-By\-Name (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}}\label{_shader_functions_8h_a6dca752382231451f80f0bca75dba32b}
+Append any applicable suffixes to the name given and attempt to find vertex, fragment and (optionally) geometry shader source. 
+
+Definition at line 168 of file Shader\-Functions.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_shader_functions_8h_a6dca752382231451f80f0bca75dba32b_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_shader_functions_8h_a5012d81306e629e18157e5dd570163e1}{\index{Shader\-Functions.\-h@{Shader\-Functions.\-h}!print\-Program\-Info\-Log@{print\-Program\-Info\-Log}}
+\index{print\-Program\-Info\-Log@{print\-Program\-Info\-Log}!ShaderFunctions.h@{Shader\-Functions.\-h}}
+\subsubsection[{print\-Program\-Info\-Log}]{\setlength{\rightskip}{0pt plus 5cm}void print\-Program\-Info\-Log (
+\begin{DoxyParamCaption}
+\item[{G\-Luint}]{obj}
+\end{DoxyParamCaption}
+)}}\label{_shader_functions_8h_a5012d81306e629e18157e5dd570163e1}
+
+
+Definition at line 56 of file Shader\-Functions.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_shader_functions_8h_a5012d81306e629e18157e5dd570163e1_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_shader_functions_8h_a776b9402dbf22819c675dcd214f8bc90}{\index{Shader\-Functions.\-h@{Shader\-Functions.\-h}!print\-Shader\-Info\-Log@{print\-Shader\-Info\-Log}}
+\index{print\-Shader\-Info\-Log@{print\-Shader\-Info\-Log}!ShaderFunctions.h@{Shader\-Functions.\-h}}
+\subsubsection[{print\-Shader\-Info\-Log}]{\setlength{\rightskip}{0pt plus 5cm}void print\-Shader\-Info\-Log (
+\begin{DoxyParamCaption}
+\item[{G\-Luint}]{obj}
+\end{DoxyParamCaption}
+)}}\label{_shader_functions_8h_a776b9402dbf22819c675dcd214f8bc90}
+
+
+Definition at line 38 of file Shader\-Functions.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_shader_functions_8h_a776b9402dbf22819c675dcd214f8bc90_icgraph}
+\end{center}
+\end{figure}
+
+

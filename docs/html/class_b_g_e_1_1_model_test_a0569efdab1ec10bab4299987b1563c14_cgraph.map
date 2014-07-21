@@ -1,0 +1,7 @@
+<map id="BGE::ModelTest::Initialise" name="BGE::ModelTest::Initialise">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="237,5,397,51"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_content.html#a593266376a259eacb7ebddfc71ee082a" title="BGE::Content::LoadModel" alt="" coords="231,75,404,104"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_game.html#a2973b50f49c7906ec0e642a8753fd995" title="BGE::Game::Initialise" alt="" coords="243,152,392,181"/>
+<area shape="rect" id="node7" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="464,75,595,104"/>
+<area shape="rect" id="node11" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="455,152,604,181"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="BGE::Model" name="BGE::Model">
+<area shape="rect" id="node2" href="$class_b_g_e_1_1_game_component.html" title="BGE::GameComponent" alt="" coords="5,5,165,35"/>
+<area shape="rect" id="node5" href="$struct_b_g_e_1_1_bounding_box.html" title="BGE::BoundingBox" alt="" coords="255,5,388,35"/>
+</map>

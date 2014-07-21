@@ -1,13 +1,4 @@
 #include "SceneGraphGame.h"
-#include "Content.h"
-#include "VectorDrawer.h"
-#include "XBoxController.h"
-#include "Steerable3DController.h"
-#include "SteeringControler.h"
-#include "Params.h"
-#include "FountainEffect.h"
-#include "Box.h"
-#include "SnowEffect.h"
 
 using namespace BGE;
 
@@ -58,9 +49,9 @@ bool SceneGraphGame::Initialise()
 	solver = new btSequentialImpulseConstraintSolver();
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,0,0));
-
-	camera->transform->position = glm::vec3(0,10,0);
-	camera->transform->look = glm::vec3(0, 0, 1);
+	
+	//camera->transform->position = glm::vec3(0,10,-1000);
+	camera->transform->look = glm::vec3(0, 0, 1); 
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
@@ -90,11 +81,12 @@ bool SceneGraphGame::Initialise()
 	station->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	station->transform->position = NextPosition(current ++, componentCount);
 	Attach(station);
-
+	
 	// Add a child to the station and update by including the parent's world transform
-	std::shared_ptr<GameComponent> ship1 = make_shared<GameComponent>(true);
+	ship1 = make_shared<GameComponent>(true);
 	ship1->transform->ambient = glm::vec3(0.2f, 0.2, 0.2f);
 	ship1->transform->specular = glm::vec3(1.2f, 1.2f, 1.2f);
+	ship1 -> tag = "blah"; 
 	std::shared_ptr<Model> ana = Content::LoadModel("anaconda", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp));	
 	ship1->Attach(ana);
 	ship1->transform->position = glm::vec3(0, 0, -10);
@@ -134,7 +126,8 @@ bool SceneGraphGame::Initialise()
 	carController->parent->Attach(transporter);
 
 	//// Create some steering components to chase each other
-	ship4 = make_shared<GameComponent>(true);
+	ship4 = make_shared<GameComponent>(true);	
+	// Create some steering components to chase each other
 	ship4->tag = "Steerable";
 	ship4->transform->scale = glm::vec3(2, 2, 2);
 	ship4->Attach(Content::LoadModel("krait", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
@@ -153,37 +146,37 @@ bool SceneGraphGame::Initialise()
 	
 	Attach(ship4);
 
-	//// Load a textured model
-	//shared_ptr<GameComponent> mushroom = make_shared<GameComponent>(true);
-	//mushroom->transform->position = NextPosition(current ++, componentCount);
-	//mushroom->transform->scale = glm::vec3(0.1f,0.1f,0.1f);
-	//mushroom->Attach(Content::LoadModel("mushroom"));
-	//Attach(mushroom);
+	// Load a textured model
+	shared_ptr<GameComponent> mushroom = make_shared<GameComponent>(true);
+	mushroom->transform->position = NextPosition(current ++, componentCount);
+	mushroom->transform->scale = glm::vec3(0.1f,0.1f,0.1f);
+	mushroom->Attach(Content::LoadModel("mushroom"));
+	Attach(mushroom);
 
-	//// Create a component that follows a path from component to component
-	//partFollower->tag = "Steerable";
-	//shared_ptr<SteeringController> pathFollowerController = make_shared<SteeringController>();
-	//partFollower->Attach(pathFollowerController);
-	//partFollower->transform->position = NextPosition(current, componentCount);
-	//pathFollowerController->TurnOffAll();
-	//pathFollowerController->TurnOn(SteeringController::behaviour_type::follow_path);
-	//pathFollowerController->route->transform->diffuse = glm::vec3(0,0,1);
-	//pathFollowerController->route->draw = true;
+	// Create a component that follows a path from component to component
+	partFollower->tag = "Steerable";
+	shared_ptr<SteeringController> pathFollowerController = make_shared<SteeringController>();
+	partFollower->Attach(pathFollowerController);
+	partFollower->transform->position = NextPosition(current, componentCount);
+	pathFollowerController->TurnOffAll();
+	pathFollowerController->TurnOn(SteeringController::behaviour_type::follow_path);
+	pathFollowerController->route->transform->diffuse = glm::vec3(0,0,1);
+	pathFollowerController->route->draw = true;
 
-	//// Add some waypoints
-	//for (int i = 0 ; i < waypoints.size() ; i ++)
-	//{
-	//	pathFollowerController->route->waypoints.push_back(waypoints[i]);
-	//	pathFollowerController->route->looped = true;
-	//}
-	//
-	//shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(1000);
-	//partFollower->Attach(fountain);
-	//partFollower->transform->diffuse = glm::vec3(0,1,1);
+	// Add some waypoints
+	for (int i = 0 ; i < waypoints.size() ; i ++)
+	{
+		pathFollowerController->route->waypoints.push_back(waypoints[i]);
+		pathFollowerController->route->looped = true;
+	}
+	
+	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(1000);
+	partFollower->Attach(fountain);
+	partFollower->transform->diffuse = glm::vec3(0,1,1);
 
 
 	
-
+	
 	return Game::Initialise();
 }
 

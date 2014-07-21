@@ -1,0 +1,9 @@
+#version 330 core
+ 
+uniform sampler2D myTextureSampler;
+in vec4 colour;
+
+void main(void) 
+{
+	gl_FragColor = texture2D(myTextureSampler, gl_PointCoord);
+}

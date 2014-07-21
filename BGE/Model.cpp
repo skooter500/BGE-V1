@@ -13,10 +13,17 @@ Model::Model():GameComponent(false)
 	drawMode = draw_modes::materials;
 	localTransform = glm::mat4(1);
 	textureID = 0;
+	tag = "Model"; // Do not delete! 
 }
 
 Model::~Model()
 {
+}
+
+GLuint * Model::dumpPrivateContents(void) { 
+	GLuint output[18] = {vertexbuffer, normalbuffer, uvbuffer, colourbuffer, ambientID, specularID, diffuseID, uvID, programID, diffusePerVertexID, 
+	                     mID, vID, pID, nID, mvpID, texelbuffer, textureSampler, textureID}; 
+	return output; 
 }
 		
 bool Model::Initialise()
@@ -127,13 +134,13 @@ void Model::CalculateBounds()
 
 void Model::Draw()
 {	
-	transform->world = transform->world * localTransform;
+	transform->world = parent->transform->world * localTransform;
 	glUseProgram(programID);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
-	glUniformMatrix4fv(mID, 1, GL_FALSE, & transform->world[0][0]);
+	glUniformMatrix4fv(mID, 1, GL_FALSE, &transform -> world[0][0]/*& transform->world[0][0]*/);
 	glUniformMatrix4fv(vID, 1, GL_FALSE, & Game::Instance()->camera->view[0][0]);
 	glUniformMatrix4fv(pID, 1, GL_FALSE, & Game::Instance()->camera->projection[0][0]);
 

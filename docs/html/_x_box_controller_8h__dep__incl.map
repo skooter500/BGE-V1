@@ -1,0 +1,9 @@
+<map id="BGE/XBoxController.h" name="BGE/XBoxController.h">
+<area shape="rect" id="node3" href="$_game_8cpp.html" title="BGE/Game.cpp" alt="" coords="5,83,120,112"/>
+<area shape="rect" id="node5" href="$_scene_graph_game_8h.html" title="BGE/SceneGraphGame.h" alt="" coords="144,83,315,112"/>
+<area shape="rect" id="node11" href="$_rift_controller_8h.html" title="BGE/RiftController.h" alt="" coords="339,83,480,112"/>
+<area shape="rect" id="node15" href="$_x_box_controller_8cpp.html" title="BGE/XBoxController.cpp" alt="" coords="504,83,669,112"/>
+<area shape="rect" id="node7" href="$main_8cpp.html" title="BGE/main.cpp" alt="" coords="5,160,112,189"/>
+<area shape="rect" id="node9" href="$_scene_graph_game_8cpp.html" title="BGE/SceneGraphGame.cpp" alt="" coords="136,160,323,189"/>
+<area shape="rect" id="node13" href="$_rift_controller_8cpp.html" title="BGE/RiftController.cpp" alt="" coords="347,160,501,189"/>
+</map>

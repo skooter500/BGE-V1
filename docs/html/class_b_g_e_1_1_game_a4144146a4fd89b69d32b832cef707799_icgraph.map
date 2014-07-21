@@ -1,0 +1,5 @@
+<map id="BGE::Game::GetKeyState" name="BGE::Game::GetKeyState">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_f_p_s_controller.html#aeb3dc9b60c65a3f36fbd8c88e2257de3" title="BGE::FPSController\l::Update" alt="" coords="253,5,392,51"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_steerable3_d_controller.html#a2bb51b669aa98dbed7a5afcc49ed33aa" title="BGE::Steerable3DController\l::Update" alt="" coords="229,74,416,121"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_v_r_game.html#a1883e546b4e2741354ba5abd9a14da08" title="BGE::VRGame::Update" alt="" coords="241,144,404,173"/>
+</map>

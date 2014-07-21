@@ -1,0 +1,219 @@
+\hypertarget{class_b_g_e_1_1_steering_game}{\section{B\-G\-E\-:\-:Steering\-Game Class Reference}
+\label{class_b_g_e_1_1_steering_game}\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}}
+}
+
+
+{\ttfamily \#include $<$Steering\-Game.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:Steering\-Game\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{class_b_g_e_1_1_steering_game__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for B\-G\-E\-:\-:Steering\-Game\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{class_b_g_e_1_1_steering_game__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_steering_game_a063076d55116b880495a0f7f4e995b21}{Steering\-Game} (void)
+\item 
+\hyperlink{class_b_g_e_1_1_steering_game_a30bd64861bac498160ef7631040d7e79}{$\sim$\-Steering\-Game} (void)
+\item 
+bool \hyperlink{class_b_g_e_1_1_steering_game_ae0536228be79c785e43bc7c4d841c5bc}{Initialise} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_steering_game_a09cc97712a026e87a229117021998153}{Update} (float time\-Delta)
+\item 
+void \hyperlink{class_b_g_e_1_1_steering_game_a516711f65d11ecb9a694f0139859d1c8}{Reset} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_game_component}{Game\-Component} $>$ \hyperlink{class_b_g_e_1_1_steering_game_a35af13959fa40a2ddea87f2128f36db0}{cam\-Follower}
+\item 
+bool \hyperlink{class_b_g_e_1_1_steering_game_ad721abc4f835ee7a164e6ce8ed72f88b}{last\-Pressed}
+\item 
+bool \hyperlink{class_b_g_e_1_1_steering_game_a7aad64bdb402cbb6a37c74d2f7aed290}{cam\-Following}
+\item 
+vector$<$ shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_scenario}{Scenario} $>$ $>$ \hyperlink{class_b_g_e_1_1_steering_game_a974e16b0d6fee03ac5d0e5cef9fc8643}{scenarios}
+\item 
+int \hyperlink{class_b_g_e_1_1_steering_game_aa84a9a6d13bc47b1ee1fd933678735f9}{current\-Scenario}
+\item 
+float \hyperlink{class_b_g_e_1_1_steering_game_aface673df656d6c4c1483e50d87cc263}{elapsed}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 12 of file Steering\-Game.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_steering_game_a063076d55116b880495a0f7f4e995b21}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!Steering\-Game@{Steering\-Game}}
+\index{Steering\-Game@{Steering\-Game}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{Steering\-Game}]{\setlength{\rightskip}{0pt plus 5cm}Steering\-Game\-::\-Steering\-Game (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_game_a063076d55116b880495a0f7f4e995b21}
+
+
+Definition at line 13 of file Steering\-Game.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_steering_game_a30bd64861bac498160ef7631040d7e79}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!$\sim$\-Steering\-Game@{$\sim$\-Steering\-Game}}
+\index{$\sim$\-Steering\-Game@{$\sim$\-Steering\-Game}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{$\sim$\-Steering\-Game}]{\setlength{\rightskip}{0pt plus 5cm}Steering\-Game\-::$\sim$\-Steering\-Game (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_game_a30bd64861bac498160ef7631040d7e79}
+
+
+Definition at line 26 of file Steering\-Game.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_steering_game_ae0536228be79c785e43bc7c4d841c5bc}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{Initialise}]{\setlength{\rightskip}{0pt plus 5cm}bool Steering\-Game\-::\-Initialise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_steering_game_ae0536228be79c785e43bc7c4d841c5bc}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_a2973b50f49c7906ec0e642a8753fd995}{B\-G\-E\-::\-Game}.
+
+
+
+Definition at line 30 of file Steering\-Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_steering_game_ae0536228be79c785e43bc7c4d841c5bc_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_game_a516711f65d11ecb9a694f0139859d1c8}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!Reset@{Reset}}
+\index{Reset@{Reset}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Steering\-Game\-::\-Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_steering_game_a516711f65d11ecb9a694f0139859d1c8}
+
+
+Definition at line 44 of file Steering\-Game.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_b_g_e_1_1_steering_game_a516711f65d11ecb9a694f0139859d1c8_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_steering_game_a09cc97712a026e87a229117021998153}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!Update@{Update}}
+\index{Update@{Update}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Steering\-Game\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{float}]{time\-Delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_steering_game_a09cc97712a026e87a229117021998153}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_a51ed573392d7bed791b67062e7c7a3d4}{B\-G\-E\-::\-Game}.
+
+
+
+Definition at line 65 of file Steering\-Game.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_b_g_e_1_1_steering_game_a09cc97712a026e87a229117021998153_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_steering_game_a35af13959fa40a2ddea87f2128f36db0}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!cam\-Follower@{cam\-Follower}}
+\index{cam\-Follower@{cam\-Follower}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{cam\-Follower}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Game\-Component}$>$ B\-G\-E\-::\-Steering\-Game\-::cam\-Follower}}\label{class_b_g_e_1_1_steering_game_a35af13959fa40a2ddea87f2128f36db0}
+
+
+Definition at line 23 of file Steering\-Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_game_a7aad64bdb402cbb6a37c74d2f7aed290}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!cam\-Following@{cam\-Following}}
+\index{cam\-Following@{cam\-Following}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{cam\-Following}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Steering\-Game\-::cam\-Following}}\label{class_b_g_e_1_1_steering_game_a7aad64bdb402cbb6a37c74d2f7aed290}
+
+
+Definition at line 26 of file Steering\-Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_game_aa84a9a6d13bc47b1ee1fd933678735f9}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!current\-Scenario@{current\-Scenario}}
+\index{current\-Scenario@{current\-Scenario}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{current\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}int B\-G\-E\-::\-Steering\-Game\-::current\-Scenario}}\label{class_b_g_e_1_1_steering_game_aa84a9a6d13bc47b1ee1fd933678735f9}
+
+
+Definition at line 29 of file Steering\-Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_game_aface673df656d6c4c1483e50d87cc263}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!elapsed@{elapsed}}
+\index{elapsed@{elapsed}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{elapsed}]{\setlength{\rightskip}{0pt plus 5cm}float B\-G\-E\-::\-Steering\-Game\-::elapsed}}\label{class_b_g_e_1_1_steering_game_aface673df656d6c4c1483e50d87cc263}
+
+
+Definition at line 31 of file Steering\-Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_game_ad721abc4f835ee7a164e6ce8ed72f88b}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!last\-Pressed@{last\-Pressed}}
+\index{last\-Pressed@{last\-Pressed}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{last\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Steering\-Game\-::last\-Pressed}}\label{class_b_g_e_1_1_steering_game_ad721abc4f835ee7a164e6ce8ed72f88b}
+
+
+Definition at line 25 of file Steering\-Game.\-h.
+
+\hypertarget{class_b_g_e_1_1_steering_game_a974e16b0d6fee03ac5d0e5cef9fc8643}{\index{B\-G\-E\-::\-Steering\-Game@{B\-G\-E\-::\-Steering\-Game}!scenarios@{scenarios}}
+\index{scenarios@{scenarios}!BGE::SteeringGame@{B\-G\-E\-::\-Steering\-Game}}
+\subsubsection[{scenarios}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$shared\-\_\-ptr$<${\bf Scenario}$>$ $>$ B\-G\-E\-::\-Steering\-Game\-::scenarios}}\label{class_b_g_e_1_1_steering_game_a974e16b0d6fee03ac5d0e5cef9fc8643}
+
+
+Definition at line 28 of file Steering\-Game.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_steering_game_8h}{Steering\-Game.\-h}\item 
+B\-G\-E/\hyperlink{_steering_game_8cpp}{Steering\-Game.\-cpp}\end{DoxyCompactItemize}

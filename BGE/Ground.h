@@ -1,5 +1,5 @@
 #pragma once
-#include "gamecomponent.h"
+#include "GameComponent.h"
 #include <vector>
 
 using namespace std;

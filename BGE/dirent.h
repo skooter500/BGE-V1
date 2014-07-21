@@ -89,6 +89,7 @@
  * May 28 1998, Toni Ronkko
  * First version.
  *****************************************************************************/
+#ifdef _WIN32
 #ifndef DIRENT_H
 #define DIRENT_H
 
@@ -886,4 +887,4 @@ dirent_set_errno(
 }
 #endif
 #endif /*DIRENT_H*/
-
+#endif 

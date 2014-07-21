@@ -1,0 +1,7 @@
+<map id="BGE::RotateVector" name="BGE::RotateVector">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_line_drawer.html#a41ed949bc20803482a8d5c100f4994ef" title="BGE::LineDrawer::DrawArrowLine" alt="" coords="189,5,411,35"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_steerable3_d_controller.html#a2bb51b669aa98dbed7a5afcc49ed33aa" title="BGE::Steerable3DController\l::Update" alt="" coords="207,58,393,105"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_transform.html#ae0f8cd2f1ddaa196ef67b43d01725086" title="BGE::Transform::Recalculate\lVectors" alt="" coords="203,127,397,174"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_vector_drawer.html#a30395d40e2e3e9afab90abbb7949bcf7" title="BGE::VectorDrawer::Draw" alt="" coords="461,5,637,35"/>
+<area shape="rect" id="node11" href="$class_b_g_e_1_1_transform.html#a8f697d8c4ea4f6c4e24a79354bcc7070" title="BGE::Transform::Calculate" alt="" coords="460,136,639,165"/>
+</map>

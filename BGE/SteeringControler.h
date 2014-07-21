@@ -1,6 +1,7 @@
 #pragma once
 #include "GameComponent.h"
 #include <vector>
+#include <iostream>
 #include "Route.h"
 
 using namespace std;
@@ -16,6 +17,7 @@ namespace BGE
 		static vector<shared_ptr<GameComponent>> steerables;
 		static vector<shared_ptr<GameComponent>> obstacles;
 		static bool counted;
+		int deleteMe; 
 	public:
 		SteeringController(void);
 		~SteeringController(void);

@@ -1,0 +1,136 @@
+\hypertarget{class_b_g_e_1_1_state}{\section{B\-G\-E\-:\-:State Class Reference}
+\label{class_b_g_e_1_1_state}\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}}
+}
+
+
+{\ttfamily \#include $<$State.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:State\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_b_g_e_1_1_state__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_state_a9ffc708ee016a83fca587e1b73bc51f6}{State} (shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_state_machine}{State\-Machine} $>$ \hyperlink{class_b_g_e_1_1_state_aa1a572a6e24067716eab1f110381bee8}{owner})
+\item 
+\hyperlink{class_b_g_e_1_1_state_a42d951e307f5b6d1966e15f417cc4101}{$\sim$\-State} (void)
+\item 
+virtual void \hyperlink{class_b_g_e_1_1_state_aba53736a51aaaa40dc291ca11f1bf898}{Enter} ()=0
+\item 
+virtual void \hyperlink{class_b_g_e_1_1_state_abb88facc6da96e36d4f8d791d81bf321}{Exit} ()=0
+\item 
+virtual void \hyperlink{class_b_g_e_1_1_state_a75100a8a3efed7336de7bbf910d48fe9}{Update} (float time\-Delta)=0
+\item 
+virtual string \hyperlink{class_b_g_e_1_1_state_a5823daa8624877cb3113033f03d51558}{Description} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_state_machine}{State\-Machine} $>$ \hyperlink{class_b_g_e_1_1_state_aa1a572a6e24067716eab1f110381bee8}{owner}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 12 of file State.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_state_a9ffc708ee016a83fca587e1b73bc51f6}{\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}!State@{State}}
+\index{State@{State}!BGE::State@{B\-G\-E\-::\-State}}
+\subsubsection[{State}]{\setlength{\rightskip}{0pt plus 5cm}State\-::\-State (
+\begin{DoxyParamCaption}
+\item[{shared\-\_\-ptr$<$ {\bf State\-Machine} $>$}]{owner}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_state_a9ffc708ee016a83fca587e1b73bc51f6}
+
+
+Definition at line 7 of file State.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_state_a42d951e307f5b6d1966e15f417cc4101}{\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}!$\sim$\-State@{$\sim$\-State}}
+\index{$\sim$\-State@{$\sim$\-State}!BGE::State@{B\-G\-E\-::\-State}}
+\subsubsection[{$\sim$\-State}]{\setlength{\rightskip}{0pt plus 5cm}State\-::$\sim$\-State (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_state_a42d951e307f5b6d1966e15f417cc4101}
+
+
+Definition at line 13 of file State.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_state_a5823daa8624877cb3113033f03d51558}{\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}!Description@{Description}}
+\index{Description@{Description}!BGE::State@{B\-G\-E\-::\-State}}
+\subsubsection[{Description}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string B\-G\-E\-::\-State\-::\-Description (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_b_g_e_1_1_state_a5823daa8624877cb3113033f03d51558}
+
+
+Implemented in \hyperlink{class_b_g_e_1_1_attacking_state_a81c2b6ed9f85dc4b99e22c57989fcc6c}{B\-G\-E\-::\-Attacking\-State}, and \hyperlink{class_b_g_e_1_1_idle_state_af7ae1f91789b380815b8a6be06bef9f2}{B\-G\-E\-::\-Idle\-State}.
+
+
+
+Definition at line 17 of file State.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_state_aba53736a51aaaa40dc291ca11f1bf898}{\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}!Enter@{Enter}}
+\index{Enter@{Enter}!BGE::State@{B\-G\-E\-::\-State}}
+\subsubsection[{Enter}]{\setlength{\rightskip}{0pt plus 5cm}virtual void B\-G\-E\-::\-State\-::\-Enter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_b_g_e_1_1_state_aba53736a51aaaa40dc291ca11f1bf898}
+
+
+Implemented in \hyperlink{class_b_g_e_1_1_attacking_state_a644f616bb9949c869efc77ce18523449}{B\-G\-E\-::\-Attacking\-State}, and \hyperlink{class_b_g_e_1_1_idle_state_a06cd96045d1567017833f954dc2fd775}{B\-G\-E\-::\-Idle\-State}.
+
+\hypertarget{class_b_g_e_1_1_state_abb88facc6da96e36d4f8d791d81bf321}{\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}!Exit@{Exit}}
+\index{Exit@{Exit}!BGE::State@{B\-G\-E\-::\-State}}
+\subsubsection[{Exit}]{\setlength{\rightskip}{0pt plus 5cm}virtual void B\-G\-E\-::\-State\-::\-Exit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_b_g_e_1_1_state_abb88facc6da96e36d4f8d791d81bf321}
+
+
+Implemented in \hyperlink{class_b_g_e_1_1_attacking_state_aa2c7fa13ad9e88a390372e293bfff330}{B\-G\-E\-::\-Attacking\-State}, and \hyperlink{class_b_g_e_1_1_idle_state_aa2fee24b3a1d4ea875d9025af7c6b912}{B\-G\-E\-::\-Idle\-State}.
+
+\hypertarget{class_b_g_e_1_1_state_a75100a8a3efed7336de7bbf910d48fe9}{\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}!Update@{Update}}
+\index{Update@{Update}!BGE::State@{B\-G\-E\-::\-State}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void B\-G\-E\-::\-State\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{float}]{time\-Delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_b_g_e_1_1_state_a75100a8a3efed7336de7bbf910d48fe9}
+
+
+Implemented in \hyperlink{class_b_g_e_1_1_attacking_state_a554f1e612938daae811a7caa146e117c}{B\-G\-E\-::\-Attacking\-State}, and \hyperlink{class_b_g_e_1_1_idle_state_addc181465d396f8ab69ec40a465cc1ea}{B\-G\-E\-::\-Idle\-State}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_state_aa1a572a6e24067716eab1f110381bee8}{\index{B\-G\-E\-::\-State@{B\-G\-E\-::\-State}!owner@{owner}}
+\index{owner@{owner}!BGE::State@{B\-G\-E\-::\-State}}
+\subsubsection[{owner}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf State\-Machine}$>$ B\-G\-E\-::\-State\-::owner}}\label{class_b_g_e_1_1_state_aa1a572a6e24067716eab1f110381bee8}
+
+
+Definition at line 22 of file State.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_state_8h}{State.\-h}\item 
+B\-G\-E/\hyperlink{_state_8cpp}{State.\-cpp}\end{DoxyCompactItemize}

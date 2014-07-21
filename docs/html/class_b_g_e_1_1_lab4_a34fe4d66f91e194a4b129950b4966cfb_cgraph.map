@@ -1,0 +1,4 @@
+<map id="BGE::Lab4::Update" name="BGE::Lab4::Update">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a68da8b79dc207e54433ae43512fbb26b" title="BGE::Game::PrintText" alt="" coords="192,5,347,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="189,58,349,105"/>
+</map>

@@ -9,7 +9,7 @@ FPSController::FPSController(void)
 
 bool FPSController::Initialise()
 {
-	transform->position = glm::vec3(0.0f, 10.0f, 10.0f);
+	transform->position = glm::vec3(0.0f, 100.0f, 100.0f);
 	return GameComponent::Initialise();
 }
 

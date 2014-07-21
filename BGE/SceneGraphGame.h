@@ -3,6 +3,16 @@
 #include "PhysicsFactory.h"
 #include <btBulletDynamicsCommon.h>
 #include <vector>
+#include <iostream>
+#include "Content.h"
+#include "VectorDrawer.h"
+#include "XBoxController.h"
+#include "Steerable3DController.h"
+#include "SteeringControler.h"
+#include "Params.h"
+#include "FountainEffect.h"
+#include "Box.h"
+#include "SnowEffect.h"
 
 using namespace std;
 
@@ -24,6 +34,7 @@ namespace BGE
 		vector<glm::vec3> waypoints;
 		shared_ptr<GameComponent> selfExample;
 		shared_ptr<GameComponent> station;
+		shared_ptr<GameComponent> ship1; 
 	public:
 		SceneGraphGame(void);
 		~SceneGraphGame(void);

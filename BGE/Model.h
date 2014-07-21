@@ -38,11 +38,13 @@ namespace BGE
 		void CalculateBounds();
 		void UpdateFromParent();
 	public:
-		Model();
+		Model(); 
 		~Model();
 
 		bool Initialise();
 		void Draw();
+		
+		GLuint * dumpPrivateContents(void); 
 
 		std::vector<glm::vec3> vertices; 	
 		std::vector<glm::vec3> normals;

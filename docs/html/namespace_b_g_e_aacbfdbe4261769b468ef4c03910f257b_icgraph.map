@@ -1,0 +1,4 @@
+<map id="BGE::RandomPosition" name="BGE::RandomPosition">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_flocking_scenario.html#a18761ac65f511ee3d7f35a2a2662ca6b" title="BGE::FlockingScenario\l::Initialise" alt="" coords="211,5,368,51"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_steering_controller.html#a7510d7b82370619001ee140f28578cb8" title="BGE::SteeringController\l::SteeringController" alt="" coords="208,74,371,121"/>
+</map>

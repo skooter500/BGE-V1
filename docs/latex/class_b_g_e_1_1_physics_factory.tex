@@ -1,0 +1,349 @@
+\hypertarget{class_b_g_e_1_1_physics_factory}{\section{B\-G\-E\-:\-:Physics\-Factory Class Reference}
+\label{class_b_g_e_1_1_physics_factory}\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}}
+}
+
+
+{\ttfamily \#include $<$Physics\-Factory.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_physics_factory_a9372cb374eb24e897916835ce630edef}{Physics\-Factory} (bt\-Discrete\-Dynamics\-World $\ast$\hyperlink{class_b_g_e_1_1_physics_factory_a46bbcd5b2abd9ec8f1ca8fd04bff9b61}{dynamics\-World})
+\item 
+\hyperlink{class_b_g_e_1_1_physics_factory_adc21bb9f057aa507963e0a6e1168ee79}{$\sim$\-Physics\-Factory} (void)
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_a7e737e2cd283f9388e1c7691114790be}{Create\-Box} (float width, float height, float depth, glm\-::vec3 pos, glm\-::quat quat)
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_a0c7dba14ad7b41710ab62c12a1a26ebe}{Create\-Sphere} (float radius, glm\-::vec3 pos, glm\-::quat quat)
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_ace3dcd019b8100cb06d5bb42a9045d16}{Create\-Cylinder} (float radius, float height, glm\-::vec3 pos, glm\-::quat quat)
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_a93b01c37fb6aafa5170219783d0afb2c}{Create\-Vehicle} (glm\-::vec3 pos)
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_ac1960cd5fd77138386104e2a9fceac66}{Create\-Camera\-Physics} ()
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_a0124b013dc3c7a51f506832bde0f87c4}{Create\-Ground\-Physics} ()
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_ac5fa08dd51c64a364f08ddaebe2c1def}{Create\-From\-Model} (string name, glm\-::vec3 pos, glm\-::quat quat, glm\-::vec3 scale=glm\-::vec3(1))
+\item 
+void \hyperlink{class_b_g_e_1_1_physics_factory_a0a1aef2a5769b29ef74654ea3665637b}{Create\-Wall} (glm\-::vec3 start\-At, float width, float height, float block\-Width=5, float block\-Height=5, float block\-Depth=5)
+\item 
+shared\-\_\-ptr$<$ \hyperlink{class_b_g_e_1_1_physics_controller}{Physics\-Controller} $>$ \hyperlink{class_b_g_e_1_1_physics_factory_a79e903b1d2f7cf1fa3d2a99bcdb45d4b}{Create\-Random\-Object} (glm\-::vec3 point, glm\-::quat q)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bt\-Discrete\-Dynamics\-World $\ast$ \hyperlink{class_b_g_e_1_1_physics_factory_a46bbcd5b2abd9ec8f1ca8fd04bff9b61}{dynamics\-World}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file Physics\-Factory.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_physics_factory_a9372cb374eb24e897916835ce630edef}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Physics\-Factory@{Physics\-Factory}}
+\index{Physics\-Factory@{Physics\-Factory}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Physics\-Factory}]{\setlength{\rightskip}{0pt plus 5cm}Physics\-Factory\-::\-Physics\-Factory (
+\begin{DoxyParamCaption}
+\item[{bt\-Discrete\-Dynamics\-World $\ast$}]{dynamics\-World}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_a9372cb374eb24e897916835ce630edef}
+
+
+Definition at line 14 of file Physics\-Factory.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_physics_factory_adc21bb9f057aa507963e0a6e1168ee79}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!$\sim$\-Physics\-Factory@{$\sim$\-Physics\-Factory}}
+\index{$\sim$\-Physics\-Factory@{$\sim$\-Physics\-Factory}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{$\sim$\-Physics\-Factory}]{\setlength{\rightskip}{0pt plus 5cm}Physics\-Factory\-::$\sim$\-Physics\-Factory (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_adc21bb9f057aa507963e0a6e1168ee79}
+
+
+Definition at line 20 of file Physics\-Factory.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_physics_factory_a7e737e2cd283f9388e1c7691114790be}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Box@{Create\-Box}}
+\index{Create\-Box@{Create\-Box}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Box}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-Box (
+\begin{DoxyParamCaption}
+\item[{float}]{width, }
+\item[{float}]{height, }
+\item[{float}]{depth, }
+\item[{glm\-::vec3}]{pos, }
+\item[{glm\-::quat}]{quat}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_a7e737e2cd283f9388e1c7691114790be}
+
+
+Definition at line 107 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_b_g_e_1_1_physics_factory_a7e737e2cd283f9388e1c7691114790be_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_b_g_e_1_1_physics_factory_a7e737e2cd283f9388e1c7691114790be_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_ac1960cd5fd77138386104e2a9fceac66}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Camera\-Physics@{Create\-Camera\-Physics}}
+\index{Create\-Camera\-Physics@{Create\-Camera\-Physics}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Camera\-Physics}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-Camera\-Physics (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_ac1960cd5fd77138386104e2a9fceac66}
+
+
+Definition at line 170 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_physics_factory_ac1960cd5fd77138386104e2a9fceac66_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_ace3dcd019b8100cb06d5bb42a9045d16}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Cylinder@{Create\-Cylinder}}
+\index{Create\-Cylinder@{Create\-Cylinder}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Cylinder}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-Cylinder (
+\begin{DoxyParamCaption}
+\item[{float}]{radius, }
+\item[{float}]{height, }
+\item[{glm\-::vec3}]{pos, }
+\item[{glm\-::quat}]{quat}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_ace3dcd019b8100cb06d5bb42a9045d16}
+
+
+Definition at line 140 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_b_g_e_1_1_physics_factory_ace3dcd019b8100cb06d5bb42a9045d16_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_b_g_e_1_1_physics_factory_ace3dcd019b8100cb06d5bb42a9045d16_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_ac5fa08dd51c64a364f08ddaebe2c1def}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-From\-Model@{Create\-From\-Model}}
+\index{Create\-From\-Model@{Create\-From\-Model}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-From\-Model}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-From\-Model (
+\begin{DoxyParamCaption}
+\item[{string}]{name, }
+\item[{glm\-::vec3}]{pos, }
+\item[{glm\-::quat}]{quat, }
+\item[{glm\-::vec3}]{scale = {\ttfamily glm\-:\-:vec3(1)}}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_ac5fa08dd51c64a364f08ddaebe2c1def}
+
+
+Definition at line 40 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_physics_factory_ac5fa08dd51c64a364f08ddaebe2c1def_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_b_g_e_1_1_physics_factory_ac5fa08dd51c64a364f08ddaebe2c1def_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_a0124b013dc3c7a51f506832bde0f87c4}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Ground\-Physics@{Create\-Ground\-Physics}}
+\index{Create\-Ground\-Physics@{Create\-Ground\-Physics}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Ground\-Physics}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-Ground\-Physics (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_a0124b013dc3c7a51f506832bde0f87c4}
+
+
+Definition at line 231 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_physics_factory_a0124b013dc3c7a51f506832bde0f87c4_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_a79e903b1d2f7cf1fa3d2a99bcdb45d4b}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Random\-Object@{Create\-Random\-Object}}
+\index{Create\-Random\-Object@{Create\-Random\-Object}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Random\-Object}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-Random\-Object (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{point, }
+\item[{glm\-::quat}]{q}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_a79e903b1d2f7cf1fa3d2a99bcdb45d4b}
+
+
+Definition at line 251 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_physics_factory_a79e903b1d2f7cf1fa3d2a99bcdb45d4b_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_a0c7dba14ad7b41710ab62c12a1a26ebe}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Sphere@{Create\-Sphere}}
+\index{Create\-Sphere@{Create\-Sphere}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Sphere}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-Sphere (
+\begin{DoxyParamCaption}
+\item[{float}]{radius, }
+\item[{glm\-::vec3}]{pos, }
+\item[{glm\-::quat}]{quat}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_a0c7dba14ad7b41710ab62c12a1a26ebe}
+
+
+Definition at line 81 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_b_g_e_1_1_physics_factory_a0c7dba14ad7b41710ab62c12a1a26ebe_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_a93b01c37fb6aafa5170219783d0afb2c}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Vehicle@{Create\-Vehicle}}
+\index{Create\-Vehicle@{Create\-Vehicle}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Vehicle}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<$ {\bf Physics\-Controller} $>$ Physics\-Factory\-::\-Create\-Vehicle (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_a93b01c37fb6aafa5170219783d0afb2c}
+
+
+Definition at line 191 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_physics_factory_a93b01c37fb6aafa5170219783d0afb2c_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_physics_factory_a0a1aef2a5769b29ef74654ea3665637b}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!Create\-Wall@{Create\-Wall}}
+\index{Create\-Wall@{Create\-Wall}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{Create\-Wall}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\-Factory\-::\-Create\-Wall (
+\begin{DoxyParamCaption}
+\item[{glm\-::vec3}]{start\-At, }
+\item[{float}]{width, }
+\item[{float}]{height, }
+\item[{float}]{block\-Width = {\ttfamily 5}, }
+\item[{float}]{block\-Height = {\ttfamily 5}, }
+\item[{float}]{block\-Depth = {\ttfamily 5}}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_physics_factory_a0a1aef2a5769b29ef74654ea3665637b}
+
+
+Definition at line 24 of file Physics\-Factory.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_physics_factory_a0a1aef2a5769b29ef74654ea3665637b_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_physics_factory_a46bbcd5b2abd9ec8f1ca8fd04bff9b61}{\index{B\-G\-E\-::\-Physics\-Factory@{B\-G\-E\-::\-Physics\-Factory}!dynamics\-World@{dynamics\-World}}
+\index{dynamics\-World@{dynamics\-World}!BGE::PhysicsFactory@{B\-G\-E\-::\-Physics\-Factory}}
+\subsubsection[{dynamics\-World}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Discrete\-Dynamics\-World$\ast$ B\-G\-E\-::\-Physics\-Factory\-::dynamics\-World}}\label{class_b_g_e_1_1_physics_factory_a46bbcd5b2abd9ec8f1ca8fd04bff9b61}
+
+
+Definition at line 28 of file Physics\-Factory.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_physics_factory_8h}{Physics\-Factory.\-h}\item 
+B\-G\-E/\hyperlink{_physics_factory_8cpp}{Physics\-Factory.\-cpp}\end{DoxyCompactItemize}

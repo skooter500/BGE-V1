@@ -1,0 +1,5 @@
+<map id="BGE::Scenario" name="BGE::Scenario">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_flocking_scenario.html" title="BGE::FlockingScenario" alt="" coords="5,83,163,112"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_obstacle_avoidance_scenario.html" title="BGE::ObstacleAvoidanceScenario" alt="" coords="187,83,408,112"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_path_following_scenario.html" title="BGE::PathFollowingScenario" alt="" coords="432,83,621,112"/>
+</map>

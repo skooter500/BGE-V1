@@ -1,0 +1,254 @@
+\hypertarget{class_b_g_e_1_1_model}{\section{B\-G\-E\-:\-:Model Class Reference}
+\label{class_b_g_e_1_1_model}\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}}
+}
+
+
+{\ttfamily \#include $<$Model.\-h$>$}
+
+
+
+Inheritance diagram for B\-G\-E\-:\-:Model\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{class_b_g_e_1_1_model__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for B\-G\-E\-:\-:Model\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_model__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5e}{draw\-\_\-modes} \{ \hyperlink{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea76d2d1812f4c53ef4fac0df0f10e620a}{materials}, 
+\hyperlink{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea109596b0ad8209d41db5daffc24b96e5}{textured}, 
+\hyperlink{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea2bf58f97a3875b3b5621b6e7ca968ba5}{single\-\_\-material}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_model_ae3b375de5f6df4faf74a95d64748e048}{Model} ()
+\item 
+\hyperlink{class_b_g_e_1_1_model_ad6ebd2062a0b823db841a0b88baac4c0}{$\sim$\-Model} ()
+\item 
+bool \hyperlink{class_b_g_e_1_1_model_abaa883a7def8ea1957a211bbf7b4f399}{Initialise} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_model_a0c668c13fc79a86326f75ea231f3886f}{Draw} ()
+\item 
+G\-Luint $\ast$ \hyperlink{class_b_g_e_1_1_model_aec27837693fa25f621a79d9534e23536}{dump\-Private\-Contents} (void)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector$<$ glm\-::vec3 $>$ \hyperlink{class_b_g_e_1_1_model_a4cea848aab716e40b9bde28cd922720d}{vertices}
+\item 
+std\-::vector$<$ glm\-::vec3 $>$ \hyperlink{class_b_g_e_1_1_model_ac2e15ec05b6327a4a93c87d487e51c60}{normals}
+\item 
+std\-::vector$<$ glm\-::vec2 $>$ \hyperlink{class_b_g_e_1_1_model_ab87b9ba4866781f4db316507f0391e00}{uvs}
+\item 
+std\-::vector$<$ glm\-::vec3 $>$ \hyperlink{class_b_g_e_1_1_model_a823f2c370081fbc2438da2de700271fd}{colours}
+\item 
+\hyperlink{struct_b_g_e_1_1_bounding_box}{Bounding\-Box} \hyperlink{class_b_g_e_1_1_model_a44723a79125d28e2cec5d70d4a4363d1}{bounding\-Box}
+\item 
+glm\-::mat4 \hyperlink{class_b_g_e_1_1_model_acfafbb8464feb0aa8695c9ec53407601}{local\-Transform}
+\item 
+string \hyperlink{class_b_g_e_1_1_model_acaed7dd09ab85e191e342d96e54793e9}{texture\-Name}
+\item 
+\hyperlink{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5e}{draw\-\_\-modes} \hyperlink{class_b_g_e_1_1_model_a7ff9d0fadd85be1fcbd0cd254c3e23ee}{draw\-Mode}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file Model.\-h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5e}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!draw\-\_\-modes@{draw\-\_\-modes}}
+\index{draw\-\_\-modes@{draw\-\_\-modes}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{draw\-\_\-modes}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf B\-G\-E\-::\-Model\-::draw\-\_\-modes}}}\label{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5e}
+\begin{Desc}
+\item[Enumerator\-: ]\par
+\begin{description}
+\index{materials@{materials}!B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}}\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!materials@{materials}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea76d2d1812f4c53ef4fac0df0f10e620a}{materials}\label{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea76d2d1812f4c53ef4fac0df0f10e620a}
+}]\index{textured@{textured}!B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}}\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!textured@{textured}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea109596b0ad8209d41db5daffc24b96e5}{textured}\label{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea109596b0ad8209d41db5daffc24b96e5}
+}]\index{single\-\_\-material@{single\-\_\-material}!B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}}\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!single\-\_\-material@{single\-\_\-material}}\item[{\em 
+\hypertarget{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea2bf58f97a3875b3b5621b6e7ca968ba5}{single\-\_\-material}\label{class_b_g_e_1_1_model_a0d55ea97da6ffbc3b82c2c1566d13a5ea2bf58f97a3875b3b5621b6e7ca968ba5}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 58 of file Model.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_model_ae3b375de5f6df4faf74a95d64748e048}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!Model@{Model}}
+\index{Model@{Model}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{Model}]{\setlength{\rightskip}{0pt plus 5cm}Model\-::\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_model_ae3b375de5f6df4faf74a95d64748e048}
+
+
+Definition at line 11 of file Model.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_model_ad6ebd2062a0b823db841a0b88baac4c0}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!$\sim$\-Model@{$\sim$\-Model}}
+\index{$\sim$\-Model@{$\sim$\-Model}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{$\sim$\-Model}]{\setlength{\rightskip}{0pt plus 5cm}Model\-::$\sim$\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_model_ad6ebd2062a0b823db841a0b88baac4c0}
+
+
+Definition at line 19 of file Model.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_model_a0c668c13fc79a86326f75ea231f3886f}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!Draw@{Draw}}
+\index{Draw@{Draw}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Model\-::\-Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_model_a0c668c13fc79a86326f75ea231f3886f}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_a697cd151f92fa23cbae10afb9130f291}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Definition at line 135 of file Model.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{class_b_g_e_1_1_model_a0c668c13fc79a86326f75ea231f3886f_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_model_aec27837693fa25f621a79d9534e23536}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!dump\-Private\-Contents@{dump\-Private\-Contents}}
+\index{dump\-Private\-Contents@{dump\-Private\-Contents}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{dump\-Private\-Contents}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint $\ast$ Model\-::dump\-Private\-Contents (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_model_aec27837693fa25f621a79d9534e23536}
+
+
+Definition at line 23 of file Model.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_model_abaa883a7def8ea1957a211bbf7b4f399}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{Initialise}]{\setlength{\rightskip}{0pt plus 5cm}bool Model\-::\-Initialise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_b_g_e_1_1_model_abaa883a7def8ea1957a211bbf7b4f399}
+
+
+Reimplemented from \hyperlink{class_b_g_e_1_1_game_component_ae1c2340cdfb31d2cd372323d3f9a1ba4}{B\-G\-E\-::\-Game\-Component}.
+
+
+
+Definition at line 29 of file Model.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_model_abaa883a7def8ea1957a211bbf7b4f399_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_model_a44723a79125d28e2cec5d70d4a4363d1}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!bounding\-Box@{bounding\-Box}}
+\index{bounding\-Box@{bounding\-Box}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{bounding\-Box}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bounding\-Box} B\-G\-E\-::\-Model\-::bounding\-Box}}\label{class_b_g_e_1_1_model_a44723a79125d28e2cec5d70d4a4363d1}
+
+
+Definition at line 54 of file Model.\-h.
+
+\hypertarget{class_b_g_e_1_1_model_a823f2c370081fbc2438da2de700271fd}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!colours@{colours}}
+\index{colours@{colours}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{colours}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$glm\-::vec3$>$ B\-G\-E\-::\-Model\-::colours}}\label{class_b_g_e_1_1_model_a823f2c370081fbc2438da2de700271fd}
+
+
+Definition at line 52 of file Model.\-h.
+
+\hypertarget{class_b_g_e_1_1_model_a7ff9d0fadd85be1fcbd0cd254c3e23ee}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!draw\-Mode@{draw\-Mode}}
+\index{draw\-Mode@{draw\-Mode}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{draw\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf draw\-\_\-modes} B\-G\-E\-::\-Model\-::draw\-Mode}}\label{class_b_g_e_1_1_model_a7ff9d0fadd85be1fcbd0cd254c3e23ee}
+
+
+Definition at line 59 of file Model.\-h.
+
+\hypertarget{class_b_g_e_1_1_model_acfafbb8464feb0aa8695c9ec53407601}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!local\-Transform@{local\-Transform}}
+\index{local\-Transform@{local\-Transform}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{local\-Transform}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::mat4 B\-G\-E\-::\-Model\-::local\-Transform}}\label{class_b_g_e_1_1_model_acfafbb8464feb0aa8695c9ec53407601}
+
+
+Definition at line 55 of file Model.\-h.
+
+\hypertarget{class_b_g_e_1_1_model_ac2e15ec05b6327a4a93c87d487e51c60}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!normals@{normals}}
+\index{normals@{normals}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{normals}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$glm\-::vec3$>$ B\-G\-E\-::\-Model\-::normals}}\label{class_b_g_e_1_1_model_ac2e15ec05b6327a4a93c87d487e51c60}
+
+
+Definition at line 50 of file Model.\-h.
+
+\hypertarget{class_b_g_e_1_1_model_acaed7dd09ab85e191e342d96e54793e9}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!texture\-Name@{texture\-Name}}
+\index{texture\-Name@{texture\-Name}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{texture\-Name}]{\setlength{\rightskip}{0pt plus 5cm}string B\-G\-E\-::\-Model\-::texture\-Name}}\label{class_b_g_e_1_1_model_acaed7dd09ab85e191e342d96e54793e9}
+
+
+Definition at line 56 of file Model.\-h.
+
+\hypertarget{class_b_g_e_1_1_model_ab87b9ba4866781f4db316507f0391e00}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!uvs@{uvs}}
+\index{uvs@{uvs}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{uvs}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$glm\-::vec2$>$ B\-G\-E\-::\-Model\-::uvs}}\label{class_b_g_e_1_1_model_ab87b9ba4866781f4db316507f0391e00}
+
+
+Definition at line 51 of file Model.\-h.
+
+\hypertarget{class_b_g_e_1_1_model_a4cea848aab716e40b9bde28cd922720d}{\index{B\-G\-E\-::\-Model@{B\-G\-E\-::\-Model}!vertices@{vertices}}
+\index{vertices@{vertices}!BGE::Model@{B\-G\-E\-::\-Model}}
+\subsubsection[{vertices}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$glm\-::vec3$>$ B\-G\-E\-::\-Model\-::vertices}}\label{class_b_g_e_1_1_model_a4cea848aab716e40b9bde28cd922720d}
+
+
+Definition at line 49 of file Model.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_model_8h}{Model.\-h}\item 
+B\-G\-E/\hyperlink{_model_8cpp}{Model.\-cpp}\end{DoxyCompactItemize}

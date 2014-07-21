@@ -1,0 +1,5 @@
+<map id="BGE::SteeringController::IsOn" name="BGE::SteeringController::IsOn">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_steering_controller.html#ada60d4814e517f41810dc6e904e8e667" title="BGE::SteeringController\l::CalculateWeightedPrioritised" alt="" coords="217,5,415,51"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_steering_controller.html#a83fd612fb65fe1ef6be18c4dfd09ceed" title="BGE::SteeringController\l::Calculate" alt="" coords="464,5,627,51"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_steering_controller.html#aa0a6fdb7b154d020255e689bae13e592" title="BGE::SteeringController\l::Update" alt="" coords="675,5,837,51"/>
+</map>

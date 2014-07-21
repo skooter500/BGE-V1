@@ -1,0 +1,7 @@
+<map id="BGE::VRGame::Update" name="BGE::VRGame::Update">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="229,5,379,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#a4144146a4fd89b69d32b832cef707799" title="BGE::Game::GetKeyState" alt="" coords="216,59,392,88"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_game.html#a51ed573392d7bed791b67062e7c7a3d4" title="BGE::Game::Update" alt="" coords="233,112,375,141"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_game.html#a68da8b79dc207e54433ae43512fbb26b" title="BGE::Game::PrintText" alt="" coords="440,85,595,115"/>
+<area shape="rect" id="node11" href="$class_b_g_e_1_1_game.html#ac649612429b2bf532851b7f0d5a9a57c" title="BGE::Game::Cleanup" alt="" coords="443,139,592,168"/>
+</map>

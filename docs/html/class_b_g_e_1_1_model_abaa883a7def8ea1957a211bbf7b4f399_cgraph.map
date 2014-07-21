@@ -1,0 +1,5 @@
+<map id="BGE::Model::Initialise" name="BGE::Model::Initialise">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="231,5,380,35"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_content.html#a449789b41e8d4c4b20cf3d53c55c5420" title="BGE::Content::LoadShaderPair" alt="" coords="204,59,407,88"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_content.html#a05b995e5b7946e7d2b1bbd5da0b8a654" title="BGE::Content::LoadTexture" alt="" coords="213,112,397,141"/>
+</map>

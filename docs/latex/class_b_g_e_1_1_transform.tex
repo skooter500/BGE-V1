@@ -1,0 +1,399 @@
+\hypertarget{class_b_g_e_1_1_transform}{\section{B\-G\-E\-:\-:Transform Class Reference}
+\label{class_b_g_e_1_1_transform}\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}}
+}
+
+
+{\ttfamily \#include $<$Transform.\-h$>$}
+
+
+
+Collaboration diagram for B\-G\-E\-:\-:Transform\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{class_b_g_e_1_1_transform__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_b_g_e_1_1_transform_a2bd04f8338d86c793d3e2dea51a097d0}{Transform} (void)
+\item 
+\hyperlink{class_b_g_e_1_1_transform_a80286cc4143f89cb5f8bc8ec3f1dcb74}{$\sim$\-Transform} (void)
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_a0f196f5a284360e93d89a6c3682d35c3}{Strafe} (float units)
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_aaa452fdfbdb3969155b6f1bd47a927ad}{Fly} (float units)
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_a4896ce57bb9a095e4c0c7d1e516c9794}{Walk} (float units)
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_af2cd5879cc84f18f569dabb4e5bcda36}{Pitch} (float angle, bool limit\-Rotation=true)
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_a392eb09dfdeae0f8f0b67a6477ac28f5}{Yaw} (float angle)
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_a77b194efd21538b95470bf9a84de5834}{Roll} (float angle)
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_ae0f8cd2f1ddaa196ef67b43d01725086}{Recalculate\-Vectors} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_a42bc887033106184fcaa282a8a88950c}{Rotate\-Vectors} ()
+\item 
+void \hyperlink{class_b_g_e_1_1_transform_a8f697d8c4ea4f6c4e24a79354bcc7070}{Calculate} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a6ed8b5c863f8194874bb7f67050ad733}{position}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a26a45bbb5d264d4a6c1dce74c25e4b01}{look}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_ad728f83369928a7409b3c889113651b4}{up}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a33fed54241b66010041f63193b920dd0}{right}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_ad788c54156f11fcfcd00946b7617a4ae}{scale}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a202d73d14f1c9c756645cb75acfb72de}{velocity}
+\item 
+glm\-::mat4 \hyperlink{class_b_g_e_1_1_transform_a1111c3693593c94d9d559dab14070b8d}{world}
+\item 
+glm\-::quat \hyperlink{class_b_g_e_1_1_transform_a34cb89e882e27db3bc4b42364f9209d7}{orientation}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a62b72900cf41dbeeebcc115c9ffba8e2}{ambient}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a3b4fe0e657be15a4b9a4e768a5bd35d9}{specular}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_ae7028b3d27235e33ae62f36256e0d8ff}{diffuse}
+\item 
+\hyperlink{class_b_g_e_1_1_transform}{Transform} $\ast$ \hyperlink{class_b_g_e_1_1_transform_a37c5a64f2875db65e0af83ee507f547a}{parent}
+\item 
+glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_add53307b7b17e3f2003d23b0cd859408}{backup\-Position}
+\item 
+glm\-::quat \hyperlink{class_b_g_e_1_1_transform_ac1305552e0635ed07cf3e43ad898f038}{backup\-Orientation}
+\item 
+glm\-::mat4 \hyperlink{class_b_g_e_1_1_transform_a9eb76804ec98e5f22a3512a7c0393a8e}{backup\-World}
+\item 
+bool \hyperlink{class_b_g_e_1_1_transform_a7898a1ec8e3133d07f8961cb117697d9}{moved}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a4138712e358f3407c2e581a577bba923}{basis\-Up} = glm\-::vec3(0, 1, 0)
+\item 
+static const glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_a00e3d00aedfea161e5c1354e5fe80a54}{basis\-Look} = glm\-::vec3(0, 0, -\/1)
+\item 
+static const glm\-::vec3 \hyperlink{class_b_g_e_1_1_transform_ab1f6463365cef7fdba189e99b519b7a5}{basis\-Right} = glm\-::vec3(1, 0, 0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file Transform.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_b_g_e_1_1_transform_a2bd04f8338d86c793d3e2dea51a097d0}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Transform@{Transform}}
+\index{Transform@{Transform}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Transform}]{\setlength{\rightskip}{0pt plus 5cm}Transform\-::\-Transform (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a2bd04f8338d86c793d3e2dea51a097d0}
+
+
+Definition at line 11 of file Transform.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_transform_a80286cc4143f89cb5f8bc8ec3f1dcb74}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!$\sim$\-Transform@{$\sim$\-Transform}}
+\index{$\sim$\-Transform@{$\sim$\-Transform}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{$\sim$\-Transform}]{\setlength{\rightskip}{0pt plus 5cm}Transform\-::$\sim$\-Transform (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a80286cc4143f89cb5f8bc8ec3f1dcb74}
+
+
+Definition at line 28 of file Transform.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_b_g_e_1_1_transform_a8f697d8c4ea4f6c4e24a79354bcc7070}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Calculate@{Calculate}}
+\index{Calculate@{Calculate}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Calculate}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Calculate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a8f697d8c4ea4f6c4e24a79354bcc7070}
+
+
+Definition at line 39 of file Transform.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_transform_a8f697d8c4ea4f6c4e24a79354bcc7070_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_transform_aaa452fdfbdb3969155b6f1bd47a927ad}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Fly@{Fly}}
+\index{Fly@{Fly}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Fly}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Fly (
+\begin{DoxyParamCaption}
+\item[{float}]{units}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_aaa452fdfbdb3969155b6f1bd47a927ad}
+
+
+Definition at line 75 of file Transform.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_transform_af2cd5879cc84f18f569dabb4e5bcda36}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Pitch@{Pitch}}
+\index{Pitch@{Pitch}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Pitch}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Pitch (
+\begin{DoxyParamCaption}
+\item[{float}]{angle, }
+\item[{bool}]{limit\-Rotation = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_af2cd5879cc84f18f569dabb4e5bcda36}
+
+
+Definition at line 81 of file Transform.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_transform_ae0f8cd2f1ddaa196ef67b43d01725086}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Recalculate\-Vectors@{Recalculate\-Vectors}}
+\index{Recalculate\-Vectors@{Recalculate\-Vectors}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Recalculate\-Vectors}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Recalculate\-Vectors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_ae0f8cd2f1ddaa196ef67b43d01725086}
+
+
+Definition at line 32 of file Transform.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_transform_ae0f8cd2f1ddaa196ef67b43d01725086_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_b_g_e_1_1_transform_ae0f8cd2f1ddaa196ef67b43d01725086_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_b_g_e_1_1_transform_a77b194efd21538b95470bf9a84de5834}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Roll@{Roll}}
+\index{Roll@{Roll}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Roll}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Roll (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a77b194efd21538b95470bf9a84de5834}
+
+
+Definition at line 140 of file Transform.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_transform_a42bc887033106184fcaa282a8a88950c}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Rotate\-Vectors@{Rotate\-Vectors}}
+\index{Rotate\-Vectors@{Rotate\-Vectors}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Rotate\-Vectors}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Rotate\-Vectors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a42bc887033106184fcaa282a8a88950c}
+
+
+Definition at line 132 of file Transform.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_transform_a0f196f5a284360e93d89a6c3682d35c3}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Strafe@{Strafe}}
+\index{Strafe@{Strafe}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Strafe}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Strafe (
+\begin{DoxyParamCaption}
+\item[{float}]{units}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a0f196f5a284360e93d89a6c3682d35c3}
+
+
+Definition at line 69 of file Transform.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_transform_a4896ce57bb9a095e4c0c7d1e516c9794}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Walk@{Walk}}
+\index{Walk@{Walk}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Walk}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Walk (
+\begin{DoxyParamCaption}
+\item[{float}]{units}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a4896ce57bb9a095e4c0c7d1e516c9794}
+
+
+Definition at line 63 of file Transform.\-cpp.
+
+\hypertarget{class_b_g_e_1_1_transform_a392eb09dfdeae0f8f0b67a6477ac28f5}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!Yaw@{Yaw}}
+\index{Yaw@{Yaw}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{Yaw}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\-::\-Yaw (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}\label{class_b_g_e_1_1_transform_a392eb09dfdeae0f8f0b67a6477ac28f5}
+
+
+Definition at line 110 of file Transform.\-cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_b_g_e_1_1_transform_a62b72900cf41dbeeebcc115c9ffba8e2}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!ambient@{ambient}}
+\index{ambient@{ambient}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{ambient}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::ambient}}\label{class_b_g_e_1_1_transform_a62b72900cf41dbeeebcc115c9ffba8e2}
+
+
+Definition at line 24 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_ac1305552e0635ed07cf3e43ad898f038}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!backup\-Orientation@{backup\-Orientation}}
+\index{backup\-Orientation@{backup\-Orientation}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{backup\-Orientation}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::quat B\-G\-E\-::\-Transform\-::backup\-Orientation}}\label{class_b_g_e_1_1_transform_ac1305552e0635ed07cf3e43ad898f038}
+
+
+Definition at line 30 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_add53307b7b17e3f2003d23b0cd859408}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!backup\-Position@{backup\-Position}}
+\index{backup\-Position@{backup\-Position}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{backup\-Position}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::backup\-Position}}\label{class_b_g_e_1_1_transform_add53307b7b17e3f2003d23b0cd859408}
+
+
+Definition at line 29 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a9eb76804ec98e5f22a3512a7c0393a8e}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!backup\-World@{backup\-World}}
+\index{backup\-World@{backup\-World}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{backup\-World}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::mat4 B\-G\-E\-::\-Transform\-::backup\-World}}\label{class_b_g_e_1_1_transform_a9eb76804ec98e5f22a3512a7c0393a8e}
+
+
+Definition at line 31 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a00e3d00aedfea161e5c1354e5fe80a54}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!basis\-Look@{basis\-Look}}
+\index{basis\-Look@{basis\-Look}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{basis\-Look}]{\setlength{\rightskip}{0pt plus 5cm}const glm\-::vec3 Transform\-::basis\-Look = glm\-::vec3(0, 0, -\/1)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_b_g_e_1_1_transform_a00e3d00aedfea161e5c1354e5fe80a54}
+
+
+Definition at line 34 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_ab1f6463365cef7fdba189e99b519b7a5}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!basis\-Right@{basis\-Right}}
+\index{basis\-Right@{basis\-Right}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{basis\-Right}]{\setlength{\rightskip}{0pt plus 5cm}const glm\-::vec3 Transform\-::basis\-Right = glm\-::vec3(1, 0, 0)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_b_g_e_1_1_transform_ab1f6463365cef7fdba189e99b519b7a5}
+
+
+Definition at line 35 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a4138712e358f3407c2e581a577bba923}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!basis\-Up@{basis\-Up}}
+\index{basis\-Up@{basis\-Up}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{basis\-Up}]{\setlength{\rightskip}{0pt plus 5cm}const glm\-::vec3 Transform\-::basis\-Up = glm\-::vec3(0, 1, 0)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_b_g_e_1_1_transform_a4138712e358f3407c2e581a577bba923}
+
+
+Definition at line 33 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_ae7028b3d27235e33ae62f36256e0d8ff}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!diffuse@{diffuse}}
+\index{diffuse@{diffuse}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{diffuse}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::diffuse}}\label{class_b_g_e_1_1_transform_ae7028b3d27235e33ae62f36256e0d8ff}
+
+
+Definition at line 26 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a26a45bbb5d264d4a6c1dce74c25e4b01}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!look@{look}}
+\index{look@{look}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{look}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::look}}\label{class_b_g_e_1_1_transform_a26a45bbb5d264d4a6c1dce74c25e4b01}
+
+
+Definition at line 17 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a7898a1ec8e3133d07f8961cb117697d9}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!moved@{moved}}
+\index{moved@{moved}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{moved}]{\setlength{\rightskip}{0pt plus 5cm}bool B\-G\-E\-::\-Transform\-::moved}}\label{class_b_g_e_1_1_transform_a7898a1ec8e3133d07f8961cb117697d9}
+
+
+Definition at line 37 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a34cb89e882e27db3bc4b42364f9209d7}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!orientation@{orientation}}
+\index{orientation@{orientation}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{orientation}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::quat B\-G\-E\-::\-Transform\-::orientation}}\label{class_b_g_e_1_1_transform_a34cb89e882e27db3bc4b42364f9209d7}
+
+
+Definition at line 23 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a37c5a64f2875db65e0af83ee507f547a}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!parent@{parent}}
+\index{parent@{parent}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Transform}$\ast$ B\-G\-E\-::\-Transform\-::parent}}\label{class_b_g_e_1_1_transform_a37c5a64f2875db65e0af83ee507f547a}
+
+
+Definition at line 28 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a6ed8b5c863f8194874bb7f67050ad733}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!position@{position}}
+\index{position@{position}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{position}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::position}}\label{class_b_g_e_1_1_transform_a6ed8b5c863f8194874bb7f67050ad733}
+
+
+Definition at line 16 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a33fed54241b66010041f63193b920dd0}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!right@{right}}
+\index{right@{right}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{right}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::right}}\label{class_b_g_e_1_1_transform_a33fed54241b66010041f63193b920dd0}
+
+
+Definition at line 19 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_ad788c54156f11fcfcd00946b7617a4ae}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!scale@{scale}}
+\index{scale@{scale}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::scale}}\label{class_b_g_e_1_1_transform_ad788c54156f11fcfcd00946b7617a4ae}
+
+
+Definition at line 20 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a3b4fe0e657be15a4b9a4e768a5bd35d9}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!specular@{specular}}
+\index{specular@{specular}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{specular}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::specular}}\label{class_b_g_e_1_1_transform_a3b4fe0e657be15a4b9a4e768a5bd35d9}
+
+
+Definition at line 25 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_ad728f83369928a7409b3c889113651b4}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!up@{up}}
+\index{up@{up}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{up}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::up}}\label{class_b_g_e_1_1_transform_ad728f83369928a7409b3c889113651b4}
+
+
+Definition at line 18 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a202d73d14f1c9c756645cb75acfb72de}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!velocity@{velocity}}
+\index{velocity@{velocity}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{velocity}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 B\-G\-E\-::\-Transform\-::velocity}}\label{class_b_g_e_1_1_transform_a202d73d14f1c9c756645cb75acfb72de}
+
+
+Definition at line 21 of file Transform.\-h.
+
+\hypertarget{class_b_g_e_1_1_transform_a1111c3693593c94d9d559dab14070b8d}{\index{B\-G\-E\-::\-Transform@{B\-G\-E\-::\-Transform}!world@{world}}
+\index{world@{world}!BGE::Transform@{B\-G\-E\-::\-Transform}}
+\subsubsection[{world}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::mat4 B\-G\-E\-::\-Transform\-::world}}\label{class_b_g_e_1_1_transform_a1111c3693593c94d9d559dab14070b8d}
+
+
+Definition at line 22 of file Transform.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+B\-G\-E/\hyperlink{_transform_8h}{Transform.\-h}\item 
+B\-G\-E/\hyperlink{_transform_8cpp}{Transform.\-cpp}\end{DoxyCompactItemize}

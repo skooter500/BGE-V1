@@ -1,0 +1,5 @@
+<map id="BGE::SteeringController::OffsetPursuit" name="BGE::SteeringController::OffsetPursuit">
+<area shape="rect" id="node3" href="$namespace_b_g_e.html#a3e44220909ce0c540f52ec4eba240e10" title="BGE::CheckNaN" alt="" coords="427,13,549,43"/>
+<area shape="rect" id="node7" href="$class_b_g_e_1_1_steering_controller.html#ac58aacfac4e65a8fb7e9876100320663" title="BGE::SteeringController\l::Arrive" alt="" coords="216,34,379,81"/>
+<area shape="rect" id="node5" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="599,13,729,43"/>
+</map>

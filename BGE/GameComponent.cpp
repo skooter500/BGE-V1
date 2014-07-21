@@ -3,7 +3,7 @@
 #include "Game.h"
 #include <iostream>
 #include <cmath>
-#include <gtx\constants.hpp>
+//#include <glm/gtx/constants.hpp>
 #include <ctime>
 #include "VectorDrawer.h"
 
@@ -31,17 +31,22 @@ GameComponent::GameComponent(bool hasTransform)
 	transformOwner = hasTransform;
 	alive = true;
 	initialised = false;
+	isRelative = false; 
 }
 
 
 bool GameComponent::Initialise()
 {	
 	// Initialise all the children
+	
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	
 	while (it != children.end())
 	{
-		(*it ++)->initialised = (*it)->Initialise();	
+		(*it)->initialised = (*it)->Initialise();	
+		*it++; 
 	}
+	
 	return true;
 }
 
@@ -58,6 +63,7 @@ void GameComponent::Draw()
 		{
 			(*it)->transform = transform;
 		}
+		(*it)->parent = this;	
 		(*it ++)->Draw();		
 	}
 }
@@ -99,11 +105,9 @@ void GameComponent::Update(float timeDelta) {
 	}
 }
 
-
-
 void GameComponent::Attach(shared_ptr<GameComponent> child)
 {
-	child->parent = this;
+	child->parent = this; 
 	// All my children share the same transform if they dont already have one...
 	if (child->transform == nullptr)
 	{
@@ -114,7 +118,6 @@ void GameComponent::Attach(shared_ptr<GameComponent> child)
 	{
 		child->transform->parent = transform;
 	}
-
 	children.push_back(child);
 }
 

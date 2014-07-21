@@ -1,0 +1,6 @@
+<map id="BGE::SteeringController::FollowPath" name="BGE::SteeringController::FollowPath">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_steering_controller.html#ac58aacfac4e65a8fb7e9876100320663" title="BGE::SteeringController\l::Arrive" alt="" coords="216,5,379,51"/>
+<area shape="rect" id="node9" href="$class_b_g_e_1_1_steering_controller.html#af21ca382fa09f039518c0ed740e84a1b" title="BGE::SteeringController\l::Seek" alt="" coords="216,74,379,121"/>
+<area shape="rect" id="node5" href="$namespace_b_g_e.html#a3e44220909ce0c540f52ec4eba240e10" title="BGE::CheckNaN" alt="" coords="427,13,549,43"/>
+<area shape="rect" id="node7" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="599,13,729,43"/>
+</map>

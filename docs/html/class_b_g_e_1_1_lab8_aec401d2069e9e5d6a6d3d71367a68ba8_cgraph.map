@@ -1,0 +1,5 @@
+<map id="BGE::Lab8::Initialise" name="BGE::Lab8::Initialise">
+<area shape="rect" id="node3" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="205,5,365,51"/>
+<area shape="rect" id="node5" href="$class_b_g_e_1_1_content.html#a593266376a259eacb7ebddfc71ee082a" title="BGE::Content::LoadModel" alt="" coords="199,75,372,104"/>
+<area shape="rect" id="node7" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="423,75,553,104"/>
+</map>

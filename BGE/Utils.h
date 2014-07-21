@@ -5,14 +5,20 @@
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
 #include <btBulletDynamicsCommon.h>
-#include <OVR.h>
+
+#ifdef _WIN32
+ #include <OVR.h>
+#endif
+
 #include <algorithm> 
 #include <functional> 
 #include <cctype>
 #include <string>
 
 using namespace FMOD;
+#ifdef _WIN32
 using namespace OVR;
+#endif 
 using namespace std;
 
 namespace BGE
@@ -35,10 +41,12 @@ namespace BGE
 	};
 
 	FMOD_VECTOR GLToFMODVector(glm::vec3 v);
+#ifdef _WIN32
 	glm::quat OVRToGLQuat(Quatf q);
 	OVR::Vector3f GLToOVRVector(glm::vec3 v);
-	OVR::Matrix4f GLToOVRMat4(glm::mat4 m);
+	OVR::Matrix4f GLToOVRMat4(glm::mat4 m); 
 	glm::mat4 OVRToGLMat4(OVR::Matrix4f m);
+#endif
 	glm::vec3 BtToGLVector(const btVector3 & v);
 	glm::quat BtToGLQuat(const btQuaternion & q);
 	btVector3 GLToBtVector(const glm::vec3 & v);
