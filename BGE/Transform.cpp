@@ -14,7 +14,6 @@ Transform::Transform(void)
 	look = glm::vec3(0, 0, -1); 
 	right = glm::vec3(1, 0, 0); 
 	up = glm::vec3(0, 1, 0); 
-	velocity = glm::vec3(0, 0, 0); 
 	world = glm::mat4(1.0f); // Identity
 	orientation = glm::quat(); // Identity
 	diffuse = ambient = specular = glm::vec3(0.0f, 0.0f, 0.0f);

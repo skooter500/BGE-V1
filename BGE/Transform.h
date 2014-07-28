@@ -19,13 +19,12 @@ namespace BGE
 		glm::vec3 up;
 		glm::vec3 right;
 		glm::vec3 scale;
-		glm::vec3 velocity;
 		glm::mat4 world;
 		glm::quat orientation;
 		glm::vec3 ambient;
 		glm::vec3 specular;
 		glm::vec3 diffuse; // Will use either this of the array of colours depending on the drawMode setting
-				
+		glm::vec3 velocity;
 		static const glm::vec3 basisUp;
 		static const glm::vec3 basisLook;
 		static const glm::vec3 basisRight;

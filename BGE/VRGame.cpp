@@ -77,7 +77,7 @@ void VRGame::ResetScene()
 		shared_ptr<GameComponent> component = * it;
 		if ((component->tag == "Box") || (component->tag == "Model") || (component->tag == "Cylinder") || (component->tag == "Sphere"))
 		{
-			shared_ptr<PhysicsController> physics = dynamic_pointer_cast<PhysicsController> (component->FindComponent("PhysicsController"));
+			shared_ptr<PhysicsController> physics = dynamic_pointer_cast<PhysicsController> (component->FindComponentByTag("PhysicsController"));
 			dynamicsWorld->removeRigidBody(physics->rigidBody);
 			it = children.erase(it);
 		}

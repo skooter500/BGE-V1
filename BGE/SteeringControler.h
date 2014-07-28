@@ -69,6 +69,7 @@ namespace BGE
 		float mass;
 		glm::vec3 targetPos;
 		glm::vec3 wanderTarget;
+		glm::vec3 velocity;
 		glm::vec3 randomWalkTarget;
 		glm::vec3 offset;
 		float timeDelta;

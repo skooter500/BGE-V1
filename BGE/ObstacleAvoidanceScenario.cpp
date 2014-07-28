@@ -64,10 +64,11 @@ void ObstacleAvoidanceScenario::Initialise()
 	obsParams.push_back(ObstacleParam(glm::vec3(-25, 120, -250), 10));
 	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -250), 10));
 	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -280), 14));
+
 	for (int i = 0 ; i < obsParams.size() ; i ++)
 	{
 		shared_ptr<Sphere> obstacle = make_shared<Sphere>(obsParams[i].radius);
-		obstacle->tag = "Obstacle";
+		obstacle->tag = "obstacle";
 		obstacle->transform->position = obsParams[i].pos;
 		game->Attach(obstacle);
 
@@ -92,7 +93,7 @@ void ObstacleAvoidanceScenario::Initialise()
 			fleetController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
 			fleetController->TurnOn(SteeringController::behaviour_type::separation);
 			fleetController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
-			fleetController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);			
+			//fleetController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);			
 			fleet->transform->scale = glm::vec3(2,2,2);
 			fleet->Attach(Content::LoadModel("cobramk1", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 			game->Attach(fleet);

@@ -127,15 +127,31 @@ std::list<std::shared_ptr<GameComponent>> * GameComponent::GetChildren()
 	return & children;
 }
 
-shared_ptr<GameComponent> GameComponent::FindComponent(std::string tag)
+shared_ptr<GameComponent> GameComponent::FindComponentByTag(std::string tag)
 {
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
-	{	
+	{
 		if ((*it)->tag == tag)
 		{
-			return * it;
+			return *it;
 		}
+		it++;
 	}
 	return nullptr;
+}
+
+std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(std::string tag)
+{
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	std::vector<std::shared_ptr<GameComponent>> components;
+	while (it != children.end())
+	{
+		if ((*it)->tag == tag)
+		{
+			components.push_back(*it);
+		}
+		it++;
+	}
+	return components;
 }

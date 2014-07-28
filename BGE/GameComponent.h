@@ -12,6 +12,7 @@
 #include <GL/glu.h>
 #include<glm.hpp>
 #include<list>
+#include<vector>
 #include<string>
 #include <iostream>
 #include <gtc/matrix_transform.hpp>
@@ -58,8 +59,8 @@ namespace BGE
 		void Attach(std::shared_ptr<GameComponent> child);
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 
-		shared_ptr<GameComponent> GameComponent::FindComponent(string tag);
-
+		shared_ptr<GameComponent> GameComponent::FindComponentByTag(string tag);
+		std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(string tag);
 	};
 }
 
