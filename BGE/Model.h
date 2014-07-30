@@ -52,6 +52,7 @@ namespace BGE
 		BoundingBox boundingBox;
 		glm::mat4 localTransform;
 		string textureName;
+		string fileName;
 	};
 }
 
