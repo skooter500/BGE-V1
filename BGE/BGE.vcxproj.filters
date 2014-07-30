@@ -212,8 +212,8 @@
     <ClCompile Include="PhysicsDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyLittleScene.cpp">
-      <Filter>Labs</Filter>
+    <ClCompile Include="CapsuleShape.cpp">
+      <Filter>Prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -389,8 +389,9 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsDrawer.h" />
-    <ClInclude Include="MyLittleScene.h">
-      <Filter>Labs</Filter>
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="CapsuleShape.h">
+      <Filter>Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

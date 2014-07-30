@@ -210,6 +210,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 	}
 	shared_ptr<Model> model = make_shared<Model>();
 	model->localTransform = localTransform;
+	model->fileName = objFileName;
 	// For each vertex of each triangle
 	for( unsigned int i=0; i<vertexIndices.size(); i++ ){
 		// Get the indices of its attributes

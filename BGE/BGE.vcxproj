@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -20,12 +20,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -54,6 +56,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="Buddha.cpp" />
+    <ClCompile Include="CapsuleShape.cpp" />
     <ClCompile Include="FlockingScenario.cpp" />
     <ClCompile Include="FountainEffect.cpp" />
     <ClCompile Include="IdleState.cpp" />
@@ -92,7 +96,6 @@
     <ClCompile Include="Lab7.cpp" />
     <ClCompile Include="Lab8.cpp" />
     <ClCompile Include="LazerBeam.cpp" />
-    <ClCompile Include="MyLittleScene.cpp" />
     <ClCompile Include="ObstacleAvoidanceScenario.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
@@ -143,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="AttackingState.h" />
     <ClInclude Include="Buddha.h" />
+    <ClInclude Include="CapsuleShape.h" />
     <ClInclude Include="FlockingScenario.h" />
     <ClInclude Include="FountainEffect.h" />
     <ClInclude Include="IdleState.h" />
@@ -152,7 +156,6 @@
     <ClInclude Include="Lab7.h" />
     <ClInclude Include="Lab8.h" />
     <ClInclude Include="LazerBeam.h" />
-    <ClInclude Include="MyLittleScene.h" />
     <ClInclude Include="ObstacleAvoidanceScenario.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleEffect.h" />
@@ -165,6 +168,7 @@
     <ClInclude Include="SnowEffect.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="SteeringGame.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="Exception.h" />
@@ -227,7 +231,9 @@
     <None Include="Content\TextShader.vertexshader" />
     <None Include="Content\TriangleShader.fragmentshader" />
     <None Include="Content\TriangleShader.vertexshader" />
-    <None Include="Particles.cd" />
+    <None Include="Particles.cd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dependancies\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj">
