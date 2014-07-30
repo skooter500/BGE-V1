@@ -22,7 +22,6 @@ Transform::Transform(void)
 	parent = nullptr; 
 }
 
-
 Transform::~Transform(void)
 {
 	parent = nullptr;
@@ -37,11 +36,60 @@ void Transform::RecalculateVectors()
 
 void Transform::Calculate()
 {
-	world = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation) *  glm::scale(glm::mat4(1), scale);
+	worldNoScale = glm::translate(glm::mat4(1), position) * glm::mat4_cast(orientation);
+	world = worldNoScale * glm::scale(glm::mat4(1), scale);
 	RecalculateVectors();
 	if (parent != nullptr)
 	{
 		world = (glm::translate(glm::mat4(1), parent->position) * glm::mat4_cast(parent->orientation)) * world;
+	}
+}
+
+glm::vec3 Transform::TransformPosition(glm::vec3 in, bool scale)
+{
+	if (scale)
+	{
+		return glm::vec3(world * glm::vec4(in, 1.0f));
+	}
+	else
+	{
+		return glm::vec3(worldNoScale * glm::vec4(in, 1.0f));
+	}
+}
+
+glm::vec3 Transform::TransformNormal(glm::vec3 in, bool scale)
+{
+	if (scale)
+	{
+		return glm::vec3(world * glm::vec4(in, 0.0f));
+	}
+	else
+	{
+		return glm::vec3(worldNoScale * glm::vec4(in, 0.0f));
+	}
+}
+
+glm::vec3 Transform::InverseTransformNormal(glm::vec3 in, bool scale)
+{
+	if (scale)
+	{
+		return glm::vec3(glm::inverse(world) * glm::vec4(in, 0.0f));
+	}
+	else
+	{
+		return glm::vec3(glm::inverse(worldNoScale) * glm::vec4(in, 0.0f));
+	}
+}
+
+glm::vec3 Transform::InverseTransformPosition(glm::vec3 in, bool scale)
+{
+	if (scale)
+	{
+		return glm::vec3(glm::inverse(world) * glm::vec4(in, 1.0f));
+	}
+	else
+	{
+		return glm::vec3(glm::inverse(worldNoScale) * glm::vec4(in, 1.0f));
 	}
 }
 

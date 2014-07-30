@@ -45,25 +45,25 @@ void ObstacleAvoidanceScenario::Initialise()
 	leaderController->transform->position = glm::vec3(10, 120, 20);            
 	leaderController->TurnOn(SteeringController::behaviour_type::arrive);
 	leaderController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);
-	leaderController->TurnOn(SteeringController::behaviour_type::separation);
-	leaderController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
-	leaderController->targetPos = glm::vec3(0, 100, -550);
+	//leaderController->TurnOn(SteeringController::behaviour_type::separation);
+	//leaderController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
+	leaderController->targetPos = glm::vec3(10, 100, -550);
 	this->leaderController = leaderController;
 	
 	leader->Attach(Content::LoadModel("viper", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
-	leader->transform->scale = glm::vec3(2,2,2);
+	leader->transform->scale = glm::vec3(5,5,5);
 	game->Attach(leader);
 
 	// Add some Obstacles
 	vector<ObstacleParam> obsParams;
-	obsParams.push_back(ObstacleParam(glm::vec3(0, 110, -10), 20));
-	obsParams.push_back(ObstacleParam(glm::vec3(10, 136, -80), 17));
-	obsParams.push_back(ObstacleParam(glm::vec3(-10, 115, -120), 10));
-	obsParams.push_back(ObstacleParam(glm::vec3(5, 90, -150), 12));
-	obsParams.push_back(ObstacleParam(glm::vec3(-2, 105, -200), 20));
-	obsParams.push_back(ObstacleParam(glm::vec3(-25, 120, -250), 10));
+	obsParams.push_back(ObstacleParam(glm::vec3(5, 115, -30), 5));
+	obsParams.push_back(ObstacleParam(glm::vec3(-10, 126, -80), 17));
+	obsParams.push_back(ObstacleParam(glm::vec3(10, 115, -120), 10));
+	obsParams.push_back(ObstacleParam(glm::vec3(5, 120, -150), 12));
+	obsParams.push_back(ObstacleParam(glm::vec3(-2, 125, -200), 20));
 	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -250), 10));
-	obsParams.push_back(ObstacleParam(glm::vec3(-25, 80, -280), 14));
+	obsParams.push_back(ObstacleParam(glm::vec3(20, 80, -250), 10));
+	obsParams.push_back(ObstacleParam(glm::vec3(5, 130, -350), 35));
 
 	for (int i = 0 ; i < obsParams.size() ; i ++)
 	{
@@ -71,13 +71,12 @@ void ObstacleAvoidanceScenario::Initialise()
 		obstacle->tag = "obstacle";
 		obstacle->transform->position = obsParams[i].pos;
 		game->Attach(obstacle);
-
 	}
 
 	// Now make a fleet
-	int fleetSize = 5;
-	float xOff = 6;
-	float zOff = 6;
+	int fleetSize = 10;
+	float xOff = 12;
+	float zOff = 12;
 	for (int i = 2; i < fleetSize; i++)
 	{
 		for (int j = 0; j < i; j++)
@@ -91,10 +90,10 @@ void ObstacleAvoidanceScenario::Initialise()
 			fleetController->offset = glm::vec3((xOff * (-i / 2.0f)) + (j * xOff), 0, z);
 			fleetController->transform->position = leaderController->transform->position + fleetController->offset;
 			fleetController->TurnOn(SteeringController::behaviour_type::offset_pursuit);
-			fleetController->TurnOn(SteeringController::behaviour_type::separation);
-			fleetController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
-			//fleetController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);			
-			fleet->transform->scale = glm::vec3(2,2,2);
+			//fleetController->TurnOn(SteeringController::behaviour_type::separation);
+			//fleetController->TurnOn(SteeringController::behaviour_type::wall_avoidance);
+			fleetController->TurnOn(SteeringController::behaviour_type::obstacle_avoidance);			
+			fleet->transform->scale = glm::vec3(5,5,5);
 			fleet->Attach(Content::LoadModel("cobramk1", glm::rotate(glm::mat4(1), 180.0f, Transform::basisUp)));
 			game->Attach(fleet);
 		}

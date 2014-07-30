@@ -20,6 +20,7 @@ namespace BGE
 		glm::vec3 right;
 		glm::vec3 scale;
 		glm::mat4 world;
+		glm::mat4 worldNoScale;
 		glm::quat orientation;
 		glm::vec3 ambient;
 		glm::vec3 specular;
@@ -45,6 +46,10 @@ namespace BGE
 		void RotateVectors();
 		void Calculate();
 
+		glm::vec3 Transform::TransformPosition(glm::vec3 in, bool scale = false);
+		glm::vec3 Transform::TransformNormal(glm::vec3 in, bool scale = false);
+		glm::vec3 Transform::InverseTransformPosition(glm::vec3 in, bool scale = false);
+		glm::vec3 Transform::InverseTransformNormal(glm::vec3 in, bool scale = false);
 	};
 
 }

@@ -263,7 +263,7 @@ glm::vec3 SteeringController::ObstacleAvoidance()
 
 	vector<shared_ptr<GameComponent>> tagged;
 
-	float minBoxLength = 20.0f;
+	float minBoxLength = 50.0f;
 	float boxLength = minBoxLength + ((glm::length(transform->velocity) / maxSpeed) * minBoxLength * 2.0f);
 
 	if (glm::isnan(boxLength))
@@ -287,10 +287,9 @@ glm::vec3 SteeringController::ObstacleAvoidance()
 	glm::vec3 localPosOfClosestObstacle = glm::vec3(0);
 	glm::vec3 intersection = glm::vec3(0);
 
-	glm::mat4 localTransform = glm::inverse(transform->world);
 	for (int i = 0; i < tagged.size(); i++)
 	{
-		glm::vec3 localPos = glm::vec3(localTransform * glm::vec4(tagged[i]->transform->position, 1.0f));
+		glm::vec3 localPos = transform->InverseTransformPosition(tagged[i]->transform->position);
 
 		// If the local transform->position has a positive Z value then it must lay
 		// behind the agent. (in which case it can be ignored)
@@ -328,34 +327,36 @@ glm::vec3 SteeringController::ObstacleAvoidance()
 		}
 		if (closestIntersectingObstacle != nullptr)
 		{
-			// Now calculate the force
-			// Calculate Z Axis braking  force
-			float multiplier = 200 * (1.0f + (boxLength - localPosOfClosestObstacle.z) / boxLength);
+			float multiplier = 1.0f + (boxLength - localPosOfClosestObstacle.z) / boxLength;
 
 			//calculate the lateral force
-			float expandedRadius = transform->scale.x + closestIntersectingObstacle->transform->scale.x;
-			force.x = (expandedRadius - glm::abs(localPosOfClosestObstacle.x))  * multiplier;
-			force.y = (expandedRadius - -glm::abs(localPosOfClosestObstacle.y)) * multiplier;
+			float obstacleRadius = closestIntersectingObstacle->transform->scale.x; 
+			float expandedRadius = transform->scale.x + obstacleRadius;
+			force.x = (expandedRadius - glm::abs(localPosOfClosestObstacle.x)) * multiplier;
+			force.y = (expandedRadius - glm::abs(localPosOfClosestObstacle.y)) * multiplier;
 
+			// Generate positive or negative direction so we steer around!
+			// Not always in the same direction as in Matt Bucklands book
 			if (localPosOfClosestObstacle.x > 0)
 			{
 				force.x = -force.x;
 			}
 
+			// If the obstacle is above, steer down
 			if (localPosOfClosestObstacle.y > 0)
 			{
 				force.y = -force.y;
 			}
-			LineDrawer::DrawLine(transform->position, transform->position + transform->look * boxLength, glm::vec3(1, 0, 1));
 			//apply a braking force proportional to the obstacle's distance from
 			//the vehicle.
-			const float brakingWeight = 40.0f;
-			force.z = (closestIntersectingObstacle->transform->scale.x -
+			const float brakingWeight = 0.01f;
+			force.z = (expandedRadius -
 				localPosOfClosestObstacle.z) *
 				brakingWeight;
 
-			//finally, convert the steering vector from local to transform->world space
-			force = glm::vec3(transform->world * glm::vec4(force, 1.0f));
+			//finally, convert the steering vector from local to world space
+			// Dont include position!                    
+			force = transform->TransformNormal(force);
 		}
 	}
 	return force;
@@ -365,7 +366,7 @@ glm::vec3 SteeringController::OffsetPursuit(glm::vec3 offset)
 {
 	glm::vec3 target = glm::vec3(0);
 
-	target = glm::vec3(leader->transform->world * glm::vec4(offset, 1));
+	target = leader->transform->TransformPosition(offset);
 
 	float dist = glm::length(target - transform->position);
 
@@ -437,7 +438,7 @@ glm::vec3 SteeringController::Wander()
 	wanderTarget = glm::normalize(wanderTarget);
 	wanderTarget *= Params::GetFloat("wander_radius");
 
-	glm::vec3 worldTarget = glm::vec3(transform->world * glm::vec4(wanderTarget + (Transform::basisLook * Params::GetFloat("wander_distance")), 1.0f));
+	glm::vec3 worldTarget = transform->TransformPosition(wanderTarget + (Transform::basisLook * Params::GetFloat("wander_distance")), 1.0f);
 
 	return (worldTarget - transform->position);
 
@@ -482,29 +483,28 @@ void SteeringController::makeFeelers()
 	float feelerDistance = 20.0f;
 	// Make the forward feeler
 	glm::vec3 newFeeler = Transform::basisLook * feelerDistance;
-	newFeeler = glm::vec3(transform->world * glm::vec4(newFeeler, 1));
+	newFeeler = transform->TransformPosition(newFeeler);
 	feelers.push_back(newFeeler);
 
 	newFeeler = Transform::basisLook * feelerDistance;
 	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), 45.0f, Transform::basisUp) * glm::vec4(newFeeler, 1));
-	newFeeler = glm::vec3(transform->world * glm::vec4(newFeeler, 1));
+	newFeeler = transform->TransformPosition(newFeeler); 
 	feelers.push_back(newFeeler);
 
 	newFeeler = Transform::basisLook * feelerDistance;
 	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), -45.0f, Transform::basisUp) * glm::vec4(newFeeler, 1));
-	newFeeler = glm::vec3(transform->world * glm::vec4(newFeeler, 1));
+	newFeeler = transform->TransformPosition(newFeeler); 
 	feelers.push_back(newFeeler);
 
 	newFeeler = Transform::basisLook * feelerDistance;
 	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), 45.0f, Transform::basisRight) * glm::vec4(newFeeler, 1));
-	newFeeler = glm::vec3(transform->world * glm::vec4(newFeeler, 1));
+	newFeeler = transform->TransformPosition(newFeeler); 
 	feelers.push_back(newFeeler);
 
 	newFeeler = Transform::basisLook * feelerDistance;
 	newFeeler = glm::vec3(glm::rotate(glm::mat4(1), -45.0f, Transform::basisRight) * glm::vec4(newFeeler, 1));
-	newFeeler = glm::vec3(transform->world * glm::vec4(newFeeler, 1));
+	newFeeler = transform->TransformPosition(newFeeler); 
 	feelers.push_back(newFeeler);
-
 }
 
 
