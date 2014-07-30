@@ -37,7 +37,6 @@ SteeringController::SteeringController(void)
 
 bool SteeringController::Initialise()
 {
-
 	Attach(route);
 	return GameComponent::Initialise();
 }
@@ -54,8 +53,8 @@ void SteeringController::Update(float timeDelta)
 
 	if (!SteeringController::counted)
 	{
-		list<shared_ptr<GameComponent>>::iterator oit = Game::Instance()->children.begin();
 		SteeringController::obstacles = Game::Instance()->FindComponentsByTag("obstacle");
+		SteeringController::steerables = Game::Instance()->FindComponentsByTag("steerable");
 		SteeringController::counted = true;
 	}
 
@@ -433,15 +432,15 @@ glm::vec3 SteeringController::Wander()
 {
 	float jitterTimeSlice = Params::GetFloat("wander_jitter") * timeDelta;
 
-	glm::vec3 toAdd = glm::vec3(RandomClamped(), RandomClamped(), RandomClamped()) * jitterTimeSlice;
+	glm::vec3 toAdd = RandomInsideUnitSphere() * jitterTimeSlice;
 	wanderTarget += toAdd;
 	wanderTarget = glm::normalize(wanderTarget);
 	wanderTarget *= Params::GetFloat("wander_radius");
 
-	glm::vec3 worldTarget = transform->TransformPosition(wanderTarget + (Transform::basisLook * Params::GetFloat("wander_distance")), 1.0f);
-
+	glm::vec3 localTarget = wanderTarget + (Transform::basisLook * Params::GetFloat("wander_distance"));
+	glm::vec3 worldTarget = transform->TransformPosition(localTarget);
+	
 	return (worldTarget - transform->position);
-
 }
 
 glm::vec3 SteeringController::WallAvoidance()

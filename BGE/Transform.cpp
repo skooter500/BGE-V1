@@ -41,7 +41,8 @@ void Transform::Calculate()
 	RecalculateVectors();
 	if (parent != nullptr)
 	{
-		world = (glm::translate(glm::mat4(1), parent->position) * glm::mat4_cast(parent->orientation)) * world;
+		world = parent->worldNoScale * world;
+		worldNoScale = parent->worldNoScale * worldNoScale;
 	}
 }
 

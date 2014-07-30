@@ -262,6 +262,16 @@ bool BGE::ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sph
     return false;
 }
 
+glm::vec3 BGE::RandomInsideUnitSphere()
+{
+	glm::vec3 ret;
+	int halfRandMax = RAND_MAX / 2;
+	ret.x = rand() - halfRandMax;
+	ret.y = rand() - halfRandMax;
+	ret.z = rand() - halfRandMax;
+	return glm::normalize(ret);
+}
+
 glm::vec3 BGE::RotateVector(glm::vec3 v, glm::quat q)
 {
 	glm::quat qinv = glm::inverse(q);
