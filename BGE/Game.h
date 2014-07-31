@@ -22,10 +22,6 @@
 #include "LineDrawer.h"
 #include <iostream> 
 
-#ifdef _WIN32
-using namespace OVR;
-#endif 
-
 namespace BGE
 {
 	struct LightSource

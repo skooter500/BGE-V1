@@ -19,8 +19,6 @@ using namespace BGE;
 
 BGE::Game * Game::instance = NULL;
 
-
-
 Game::Game(void):GameComponent(true) {
 	running = false;
 	console = true;
@@ -293,63 +291,64 @@ void Game::Draw()
 	if (riftEnabled)
 	{
 #ifdef _WIN32
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 		//glDisable(GL_CULL_FACE);
 		
-		riftController->BindRenderBuffer();
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		const int fboWidth = riftController->GetRenderBufferWidth();
-		const int fboHeight = riftController->GetRenderBufferHeight();
-		const int halfWidth = fboWidth/2;
-		const OVR::HMDInfo& hmd = riftController->GetHMD();
-		// Compute Aspect Ratio. Stereo mode cuts width in half.
-		float aspectRatio = float(hmd.HResolution * 0.5f) / float(hmd.VResolution);
+		//riftController->BindRenderBuffer();
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//const int fboWidth = riftController->GetRenderBufferWidth();
+		//const int fboHeight = riftController->GetRenderBufferHeight();
+		//const int halfWidth = fboWidth/2;
+		//const OVR::HMDInfo& hmd = riftController->GetHMD();
+		//// Compute Aspect Ratio. Stereo mode cuts width in half.
+		//float aspectRatio = float(hmd.HResolution * 0.5f) / float(hmd.VResolution);
 
-		// Compute Vertical FOV based on distance.
-		float halfScreenDistance = (hmd.VScreenSize / 2);
-		float yfov = 2.0f * glm::atan<float>(halfScreenDistance/hmd.EyeToScreenDistance);
+		//// Compute Vertical FOV based on distance.
+		//float halfScreenDistance = (hmd.VScreenSize / 2);
+		//float yfov = 2.0f * glm::atan<float>(halfScreenDistance/hmd.EyeToScreenDistance);
 
-		// Post-projection viewport coordinates range from (-1.0, 1.0), with the
-		// center of the left viewport falling at (1/4) of horizontal screen size.
-		// We need to shift this projection center to match with the lens center.
-		// We compute this shift in physical units (meters) to correct
-		// for different screen sizes and then rescale to viewport coordinates.
-		float viewCenterValue = hmd.HScreenSize * 0.25f;
-		float eyeProjectionShift = viewCenterValue - hmd.LensSeparationDistance * 0.5f;
-		float projectionCenterOffset = 4.0f * eyeProjectionShift / hmd.HScreenSize;
+		//// Post-projection viewport coordinates range from (-1.0, 1.0), with the
+		//// center of the left viewport falling at (1/4) of horizontal screen size.
+		//// We need to shift this projection center to match with the lens center.
+		//// We compute this shift in physical units (meters) to correct
+		//// for different screen sizes and then rescale to viewport coordinates.
+		//float viewCenterValue = hmd.HScreenSize * 0.25f;
+		//float eyeProjectionShift = viewCenterValue - hmd.LensSeparationDistance * 0.5f;
+		//float projectionCenterOffset = 4.0f * eyeProjectionShift / hmd.HScreenSize;
 
-		// Projection matrix for the "center eye", which the left/right matrices are based on.
-		OVR::Matrix4f projCenter = OVR::Matrix4f::PerspectiveRH(yfov, aspectRatio, 0.3f, 1000.0f);
-		OVR::Matrix4f projLeft   = OVR::Matrix4f::Translation(projectionCenterOffset, 0, 0) * projCenter;
-		OVR::Matrix4f projRight  = OVR::Matrix4f::Translation(-projectionCenterOffset, 0, 0) * projCenter;
+		//// Projection matrix for the "center eye", which the left/right matrices are based on.
+		//OVR::Matrix4f projCenter = OVR::Matrix4f::PerspectiveRH(yfov, aspectRatio, 0.3f, 1000.0f);
+		//OVR::Matrix4f projLeft   = OVR::Matrix4f::Translation(projectionCenterOffset, 0, 0) * projCenter;
+		//OVR::Matrix4f projRight  = OVR::Matrix4f::Translation(-projectionCenterOffset, 0, 0) * projCenter;
 
-		glm::mat4 cameraCentreView = camera->view;
-		// View transformation translation in world units.
-		float halfIPD = hmd.InterpupillaryDistance * 0.5f;
-		OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * GLToOVRMat4(camera->view);
-		OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * GLToOVRMat4(camera->view);
+		//glm::mat4 cameraCentreView = camera->view;
+		//// View transformation translation in world units.
+		//float halfIPD = hmd.InterpupillaryDistance * 0.5f;
+		//OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * GLToOVRMat4(camera->view);
+		//OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * GLToOVRMat4(camera->view);
 
-		glViewport(0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		glScissor (0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		camera->view = OVRToGLMat4(viewLeft);
-		camera->projection = OVRToGLMat4(projLeft);
-		// Draw all my children
-		LineDrawer::Instance()->Draw();
-		GameComponent::Draw();
+		//glViewport(0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		//glScissor (0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		//camera->view = OVRToGLMat4(viewLeft);
+		//camera->projection = OVRToGLMat4(projLeft);
+		//// Draw all my children
+		//LineDrawer::Instance()->Draw();
+		//GameComponent::Draw();
 
-		glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		glScissor (halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		camera->view = OVRToGLMat4(viewRight);
-		camera->projection = OVRToGLMat4(projRight);
-		// Draw all my children
-		LineDrawer::Instance()->Draw();
-		GameComponent::Draw();
+		//glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		//glScissor (halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
+		//camera->view = OVRToGLMat4(viewRight);
+		//camera->projection = OVRToGLMat4(projRight);
+		//// Draw all my children
+		//LineDrawer::Instance()->Draw();
+		//GameComponent::Draw();
 
-		riftController->UnBindRenderBuffer();
-		glDisable(GL_LIGHTING);
-		glDisable(GL_DEPTH_TEST);
-		riftController->PresentFbo();
-		camera->view = cameraCentreView;
+		//riftController->UnBindRenderBuffer();
+		//glDisable(GL_LIGHTING);
+		//glDisable(GL_DEPTH_TEST);
+		//riftController->PresentFbo();
+		//camera->view = cameraCentreView;
+		riftController->Draw();
 #endif 
 	}
 	else

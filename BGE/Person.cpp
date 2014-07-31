@@ -1,17 +1,16 @@
 #include "Person.h"
-#include "Game.h"
 #include <sstream>
 #include "Box.h"
+#include "PhysicsGame1.h"
 #include "Cylinder.h"
 #include "PhysicsController.h"
 #include "KinematicMotionState.h"
-#include "PhysicsGame1.h"
 #include <btBulletDynamicsCommon.h>
 
 using namespace BGE;
 using namespace std;
 
-glm::vec3 NUIToGLVector( Vector4 v, bool flip)
+glm::vec3 NUIToGLVector(Vector4 v, bool flip)
 {
 	if (flip)
 	{

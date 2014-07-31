@@ -3,9 +3,6 @@
 #include "Utils.h"
 #include <gtx/norm.hpp>
 using namespace FMOD;
-#ifdef _WIN32
-using namespace OVR;
-#endif 
 using namespace std;
 
 float BGE::RandomClamped(float min, float max)
@@ -26,7 +23,7 @@ FMOD_VECTOR BGE::GLToFMODVector(glm::vec3 v)
 }
 
 #ifdef _WIN32
-glm::quat BGE::OVRToGLQuat(Quatf q)
+glm::quat BGE::OVRToGLQuat(OVR::Quatf q)
 {
 	return glm::quat(q.w, q.x, q.y, q.z);
 }

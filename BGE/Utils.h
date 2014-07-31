@@ -16,9 +16,6 @@
 #include <string>
 
 using namespace FMOD;
-#ifdef _WIN32
-using namespace OVR;
-#endif 
 using namespace std;
 
 namespace BGE
@@ -42,7 +39,7 @@ namespace BGE
 
 	FMOD_VECTOR GLToFMODVector(glm::vec3 v);
 #ifdef _WIN32
-	glm::quat OVRToGLQuat(Quatf q);
+	glm::quat OVRToGLQuat(OVR::Quatf q);
 	OVR::Vector3f GLToOVRVector(glm::vec3 v);
 	OVR::Matrix4f GLToOVRMat4(glm::mat4 m); 
 	glm::mat4 OVRToGLMat4(OVR::Matrix4f m);

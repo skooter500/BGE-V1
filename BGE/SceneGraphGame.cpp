@@ -10,8 +10,7 @@ SceneGraphGame::SceneGraphGame(void)
 	dynamicsWorld = NULL;
 	broadphase = NULL;
 	dispatcher = NULL;
-	solver = NULL;
-		
+	solver = NULL;		
 }
 
 SceneGraphGame::~SceneGraphGame(void)
@@ -35,6 +34,7 @@ glm::vec3 SceneGraphGame::NextPosition(float step, float steps)
 
 bool SceneGraphGame::Initialise()
 {
+	riftEnabled = true;
 	Params::Load("default");
 	float componentCount = 10.0f;
 	float current = 0.0f;
