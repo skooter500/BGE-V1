@@ -34,7 +34,6 @@ glm::vec3 SceneGraphGame::NextPosition(float step, float steps)
 
 bool SceneGraphGame::Initialise()
 {
-	riftEnabled = true;
 	Params::Load("default");
 	float componentCount = 10.0f;
 	float current = 0.0f;
@@ -59,7 +58,7 @@ bool SceneGraphGame::Initialise()
 	physicsFactory->CreateGroundPhysics();
 
 	fullscreen = false;
-	riftEnabled = false;
+	riftEnabled = true;
 	width = 1280;
 	height = 800;
 
@@ -179,9 +178,6 @@ bool SceneGraphGame::Initialise()
 	partFollower->Attach(fountain);
 	partFollower->transform->diffuse = glm::vec3(0,1,1);
 
-
-	
-	
 	return Game::Initialise();
 }
 

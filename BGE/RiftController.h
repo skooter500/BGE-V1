@@ -18,8 +18,9 @@ namespace BGE
 
 		void Update(float timeDelta);
 		bool Initialise();
-		void Draw();
+		void DrawToRift();
 		void Cleanup();
+		void Connect();
 
 		// Rift specific stuff!
 		ovrHmd hmd;

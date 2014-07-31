@@ -55,17 +55,24 @@ shared_ptr<Ground> Game::GetGround()
 }
 
 bool Game::Initialise() {
-	// Set up a console for debugging		
-	/*if (console) 
-	{
-		AllocConsole();
-		int fd = _open_osfhandle( (long)GetStdHandle( STD_OUTPUT_HANDLE ), 0); 
-		FILE * fp = _fdopen( fd, "w" ); 
-		*stdout = *fp; 
-		setvbuf( stdout, NULL, _IONBF, 0 );
-	}*/ 
 
-	if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+	if (riftEnabled)
+	{
+		shared_ptr<RiftController> riftController = make_shared<RiftController>();
+		this->riftController = riftController;
+		// This needs to be done first so we can get the screen resolution of the rift
+		riftController->Connect();
+		width = riftController->hmd->Resolution.w;
+		height = riftController->hmd->Resolution.h;
+		camera->Attach(riftController);
+	}
+	else
+	{
+		shared_ptr<GameComponent> controller = make_shared<FPSController>();
+		camera->Attach(controller);
+	}
+	
+	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
 		return false;
 	}
 
@@ -78,7 +85,7 @@ bool Game::Initialise() {
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  4);
  
 	Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
-    /* Create our window centered at 512x512 resolution */
+
     mainwindow = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         width, height, flags);
 	maincontext = SDL_GL_CreateContext(mainwindow);
@@ -87,6 +94,7 @@ bool Game::Initialise() {
     SDL_GL_SetSwapInterval(1);
 
 	keyState = SDL_GetKeyboardState(NULL);
+	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
@@ -120,20 +128,6 @@ bool Game::Initialise() {
 	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 	//camera->transform->position = glm::vec3(0, 10, -1000);
-
-	if (riftEnabled)
-	{
-#ifdef _WIN32
-		shared_ptr<RiftController> riftController = make_shared<RiftController>();
-		this->riftController = riftController;
-		camera->Attach(riftController);
-#endif 
-	}
-	else
-	{
-		shared_ptr<GameComponent> controller = make_shared<FPSController>();
-		camera->Attach(controller);
-	}
 	
 	LineDrawer::Instance()->Initialise();
 	running = true;
@@ -348,7 +342,7 @@ void Game::Draw()
 		//glDisable(GL_DEPTH_TEST);
 		//riftController->PresentFbo();
 		//camera->view = cameraCentreView;
-		riftController->Draw();
+		riftController->DrawToRift();
 #endif 
 	}
 	else

@@ -7,7 +7,7 @@ namespace BGE
 		public GameComponent
 	{
 	public:
-		XBoxController(void);
+		XBoxController(bool hasTransform = false);
 		~XBoxController(void);
 
 		void Update(float TimeDelta);

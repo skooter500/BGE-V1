@@ -33,7 +33,7 @@ void RiftController::AccumulateInputs()
 
 RiftController::RiftController()
 {
-	xboxController = make_shared<XBoxController>();
+	xboxController = make_shared<XBoxController>(true);
 	xboxController->disablePitch = true;
 	Attach(xboxController);
 }
@@ -44,14 +44,8 @@ RiftController::~RiftController(void)
 	
 }
 
-void RiftController::Draw()
+void RiftController::DrawToRift()
 {
-	OVR::Sizei recommendedTex0Size = ovrHmd_GetFovTextureSize(hmd, ovrEye_Left, hmd->DefaultEyeFov[0], 1.0f);
-	OVR::Sizei recommendedTex1Size = ovrHmd_GetFovTextureSize(hmd, ovrEye_Right, hmd->DefaultEyeFov[1], 1.0f);
-	renderTargetSize.w = recommendedTex0Size.w + recommendedTex1Size.w;
-	renderTargetSize.h = max(recommendedTex0Size.h, recommendedTex1Size.h);
-	eyeFov[0] = hmd->DefaultEyeFov[0];
-	eyeFov[1] = hmd->DefaultEyeFov[1];
 	ovrRecti eyeRenderViewport[2];
 	eyeRenderViewport[0].Pos = OVR::Vector2i(0, 0);
 	eyeRenderViewport[0].Size = OVR::Sizei(renderTargetSize.w / 2, renderTargetSize.h);
@@ -68,7 +62,7 @@ void RiftController::Draw()
 	eyeTexture[1].OGL.Header.RenderViewport = eyeRenderViewport[1];
 
 	ovrFrameTiming frameTiming = ovrHmd_BeginFrame(hmd, 0);
-
+	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	ovrPosef eyeRenderPose[2];
@@ -77,6 +71,10 @@ void RiftController::Draw()
 	{
 		ovrEyeType eye = hmd->EyeRenderOrder[eyeIndex];
 		eyeRenderPose[eye] = ovrHmd_GetEyePose(hmd, eye);
+
+		eyeRenderDesc[eye].ViewAdjust.x += transform->position.x;
+		eyeRenderDesc[eye].ViewAdjust.y += transform->position.y;
+		eyeRenderDesc[eye].ViewAdjust.z += transform->position.z;
 
 		OVR::Matrix4f ovrView = OVR::Matrix4f::Translation(eyeRenderDesc[eye].ViewAdjust) * OVR::Matrix4f(OVR::Quatf(eyeRenderPose[eye].Orientation).Inverted());
 		OVR::Matrix4f ovrProjection = ovrMatrix4f_Projection(eyeRenderDesc[eye].Fov, 0.01f, 10000.0f, true);
@@ -93,7 +91,6 @@ void RiftController::Draw()
 	glBindVertexArray(0);
 
 	ovrHmd_EndFrame(hmd, eyeRenderPose, &eyeTexture[0].Texture);
-
 }
 
 void RiftController::Cleanup()
@@ -108,15 +105,22 @@ void RiftController::Update(float timeDelta)
 	GameComponent::Update(timeDelta);
 }
 
-bool RiftController::Initialise()
+void RiftController::Connect()
 {
 	ovr_Initialize();
-	ovrHmd hmd = ovrHmd_Create(0);
+	hmd = ovrHmd_Create(0);
+	if (hmd == nullptr)
+	{
+		hmd = ovrHmd_CreateDebug(ovrHmd_DK1);
+	}
 	// Start the sensor which provides the Rift’s pose and motion.
 	ovrHmd_ConfigureTracking(hmd, ovrTrackingCap_Orientation |
 		ovrTrackingCap_MagYawCorrection |
 		ovrTrackingCap_Position, 0);
+}
 
+bool RiftController::Initialise()
+{	
 	// Configure OpenGL rendering
 	ovrGLConfig cfg;
 	cfg.OGL.Header.API = ovrRenderAPI_OpenGL;
@@ -134,7 +138,13 @@ bool RiftController::Initialise()
 	cfg.OGL.Window = info.info.win.window;
 	cfg.OGL.DC = NULL;
 #endif
-	ovrHmd_ConfigureRendering(hmd, &cfg.Config, ovrDistortionCap_Chromatic | ovrDistortionCap_Vignette | ovrDistortionCap_TimeWarp | ovrDistortionCap_Overdrive, eyeFov, eyeRenderDesc);
+
+	OVR::Sizei recommendedTex0Size = ovrHmd_GetFovTextureSize(hmd, ovrEye_Left, hmd->DefaultEyeFov[0], 1.0f);
+	OVR::Sizei recommendedTex1Size = ovrHmd_GetFovTextureSize(hmd, ovrEye_Right, hmd->DefaultEyeFov[1], 1.0f);
+	renderTargetSize.w = recommendedTex0Size.w + recommendedTex1Size.w;
+	renderTargetSize.h = max(recommendedTex0Size.h, recommendedTex1Size.h);
+
+	glGenFramebuffers(1, &frameBuffer);
 
 	glGenTextures(1, &texture);
 
@@ -145,7 +155,24 @@ bool RiftController::Initialise()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, texture, 0);
 
-	xboxController->transform->position = transform->position;
+	GLuint renderBuffer;
+	glGenRenderbuffers(1, &renderBuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, renderTargetSize.w, renderTargetSize.h);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		throw BGE::Exception("Framebuffer error");
+		return false;
+	}
+
+	eyeFov[0] = hmd->DefaultEyeFov[0];
+	eyeFov[1] = hmd->DefaultEyeFov[1];
+	ovrHmd_ConfigureRendering(hmd, &cfg.Config, ovrDistortionCap_Chromatic | ovrDistortionCap_Vignette | ovrDistortionCap_TimeWarp | ovrDistortionCap_Overdrive, eyeFov, eyeRenderDesc);
+	ovrHmd_SetEnabledCaps(hmd, ovrHmdCap_LowPersistence | ovrHmdCap_DynamicPrediction);
+	ovrHmd_ConfigureTracking(hmd, ovrTrackingCap_Orientation | ovrTrackingCap_MagYawCorrection | ovrTrackingCap_Position, 0);
+
 	return GameComponent::Initialise();
 }
 

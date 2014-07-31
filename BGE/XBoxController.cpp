@@ -4,7 +4,7 @@
 
 using namespace BGE;
 
-XBoxController::XBoxController(void)
+XBoxController::XBoxController(bool hasTransform) :GameComponent(hasTransform)
 {
 	disablePitch = false;
 }
