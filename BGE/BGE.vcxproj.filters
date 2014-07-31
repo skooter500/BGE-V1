@@ -388,7 +388,6 @@
     <ClInclude Include="VRGame.h">
       <Filter>Games</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsDrawer.h" />
     <ClInclude Include="Transform.h">
       <Filter>Source Files</Filter>
     </ClInclude>
