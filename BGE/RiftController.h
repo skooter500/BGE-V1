@@ -29,6 +29,8 @@ namespace BGE
 		GLuint frameBuffer;
 		ovrEyeRenderDesc eyeRenderDesc[2];
 		ovrFovPort eyeFov[2];
+		ovrRecti eyeRenderViewport[2];
+		ovrGLTexture eyeTexture[2];
 		void AccumulateInputs();
 
 	};

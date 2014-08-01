@@ -40,8 +40,8 @@ namespace BGE
 	FMOD_VECTOR GLToFMODVector(glm::vec3 v);
 #ifdef _WIN32
 	glm::quat OVRToGLQuat(OVR::Quatf q);
-	OVR::Vector3f GLToOVRVector(glm::vec3 v);
-	OVR::Matrix4f GLToOVRMat4(glm::mat4 m); 
+	ovrVector3f GLToOVRVector(glm::vec3 v);
+	ovrMatrix4f GLToOVRMat4(glm::mat4 m);
 	glm::mat4 OVRToGLMat4(OVR::Matrix4f m);
 #endif
 	glm::vec3 BtToGLVector(const btVector3 & v);

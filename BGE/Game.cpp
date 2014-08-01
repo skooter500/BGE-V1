@@ -254,7 +254,12 @@ void Game::PostDraw()
 	}
 	messages.clear();
 	lastPrintPosition.y = 0;
-	SDL_GL_SwapWindow(mainwindow);
+	// The rift sdk will do this for us
+	if (! riftEnabled)
+	{
+		SDL_GL_SwapWindow(mainwindow);
+	}
+	
 }
 
 void Game::Cleanup () {

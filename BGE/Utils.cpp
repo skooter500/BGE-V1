@@ -28,12 +28,12 @@ glm::quat BGE::OVRToGLQuat(OVR::Quatf q)
 	return glm::quat(q.w, q.x, q.y, q.z);
 }
 
-OVR::Vector3f BGE::GLToOVRVector(glm::vec3 v)
+ovrVector3f BGE::GLToOVRVector(glm::vec3 v)
 {
 	return OVR::Vector3f(v.x, v.y, v.z);
 }
 
-OVR::Matrix4f BGE::GLToOVRMat4(glm::mat4 m)
+ovrMatrix4f BGE::GLToOVRMat4(glm::mat4 m)
 {
 	m = glm::transpose(m);
 	OVR::Matrix4f ret;

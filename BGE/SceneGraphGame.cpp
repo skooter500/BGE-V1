@@ -49,7 +49,7 @@ bool SceneGraphGame::Initialise()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,0,0));
 	
-	//camera->transform->position = glm::vec3(0,10,-1000);
+	camera->transform->position = glm::vec3(0,10,10);
 	camera->transform->look = glm::vec3(0, 0, 1); 
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);

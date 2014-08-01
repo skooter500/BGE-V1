@@ -47,7 +47,6 @@ namespace BGE
 		public GameComponent
 	{
 	private:	
-		SDL_GLContext maincontext; /* Our opengl context handle */
 		bool running;
 		
 		static Game * instance;
@@ -90,6 +89,7 @@ namespace BGE
 		bool fullscreen;
 		bool console;
 		bool hud;
+		SDL_GLContext maincontext; /* Our opengl context handle */
 
 #ifdef _WIN32 
 		shared_ptr<RiftController> riftController;
