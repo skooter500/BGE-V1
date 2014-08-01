@@ -19,7 +19,7 @@ void RiftController::AccumulateInputs()
 		glm::quat headOrientation = OVRToGLQuat(pose.Rotation);
 		// Combine the orientation of the head with the yaw from the XBOX controller...
 		transform->orientation = xboxController->transform->orientation * headOrientation;
-		//transform->position = xboxController->transform->position;
+		transform->position = xboxController->transform->position;
 		// Now update the XBOX Controller Look vectors
 		glm::quat tempQ = xboxController->transform->orientation;
 		xboxController->transform->orientation = transform->orientation;
@@ -51,10 +51,6 @@ void RiftController::DrawToRift()
 	{
 		ovrEyeType eye = hmd->EyeRenderOrder[eyeIndex];
 		eyeRenderPose[eye] = ovrHmd_GetEyePose(hmd, eye);
-
-		eyeRenderDesc[eye].ViewAdjust.x += transform->position.x;
-		eyeRenderDesc[eye].ViewAdjust.y += transform->position.y;
-		eyeRenderDesc[eye].ViewAdjust.z += transform->position.z;
 
 		OVR::Matrix4f ovrView = OVR::Matrix4f::Translation(eyeRenderDesc[eye].ViewAdjust) * OVR::Matrix4f(OVR::Quatf(eyeRenderPose[eye].Orientation).Inverted());
 		OVR::Matrix4f ovrProjection = ovrMatrix4f_Projection(eyeRenderDesc[eye].Fov, 0.01f, 10000.0f, true);
