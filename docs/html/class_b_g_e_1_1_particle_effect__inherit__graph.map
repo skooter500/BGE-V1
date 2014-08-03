@@ -1,5 +1,0 @@
-<map id="BGE::ParticleEffect" name="BGE::ParticleEffect">
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_fountain_effect.html" title="BGE::FountainEffect" alt="" coords="5,160,147,189"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_snow_effect.html" title="BGE::SnowEffect" alt="" coords="171,160,296,189"/>
-<area shape="rect" id="node2" href="$class_b_g_e_1_1_game_component.html" title="BGE::GameComponent" alt="" coords="75,5,235,35"/>
-</map>

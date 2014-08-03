@@ -68,6 +68,24 @@ void GameComponent::Draw()
 	}
 }
 
+void GameComponent::PreDraw()
+{
+	// Draw all the children
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		// This is necessary for models etc that are instanced
+		// As they may be attached to several different parents
+		(*it)->parent = this;
+		if (!(*it)->transformOwner)
+		{
+			(*it)->transform = transform;
+		}
+		(*it)->parent = this;
+		(*it++)->PreDraw();
+	}
+}
+
 void GameComponent::PostDraw()
 {
 	// Draw all the children

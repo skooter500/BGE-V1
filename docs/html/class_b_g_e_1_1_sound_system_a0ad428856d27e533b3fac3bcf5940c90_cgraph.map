@@ -1,5 +1,0 @@
-<map id="BGE::SoundSystem::PlayHitSoundIfReady" name="BGE::SoundSystem::PlayHitSoundIfReady">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_content.html#ae02d851bd6f9015ac3af2aece2ab3ad9" title="BGE::Content::LoadSound" alt="" coords="247,5,423,35"/>
-<area shape="rect" id="node7" href="$namespace_b_g_e.html#a1176d21c3f2c245052b152aa77826f60" title="BGE::GLToFMODVector" alt="" coords="252,59,417,88"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="473,5,623,35"/>
-</map>

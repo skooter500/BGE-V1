@@ -1,6 +1,0 @@
-libconvexdecomposition_a-meshvolume.o: ConvexDecomposition/meshvolume.cpp \
- ConvexDecomposition/float_math.h ConvexDecomposition/meshvolume.h
-
-ConvexDecomposition/float_math.h:
-
-ConvexDecomposition/meshvolume.h:

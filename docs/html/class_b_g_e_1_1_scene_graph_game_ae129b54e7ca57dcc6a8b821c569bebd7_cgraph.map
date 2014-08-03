@@ -1,9 +1,0 @@
-<map id="BGE::SceneGraphGame::Initialise" name="BGE::SceneGraphGame::Initialise">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_params.html#a2d35020b3044c27ff1b92d4f9d400d2f" title="BGE::Params::Load" alt="" coords="237,32,376,61"/>
-<area shape="rect" id="node13" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="227,85,387,131"/>
-<area shape="rect" id="node15" href="$class_b_g_e_1_1_content.html#a593266376a259eacb7ebddfc71ee082a" title="BGE::Content::LoadModel" alt="" coords="220,155,393,184"/>
-<area shape="rect" id="node5" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="444,120,575,149"/>
-<area shape="rect" id="node7" href="$namespace_b_g_e.html#a65bfe22b3a4b03bf32837ac39a8a6aaf" title="BGE::trim" alt="" coords="469,32,549,61"/>
-<area shape="rect" id="node9" href="$namespace_b_g_e.html#ab0424dbb7fe523b80f6b0263b1d2fe5f" title="BGE::ltrim" alt="" coords="625,5,708,35"/>
-<area shape="rect" id="node11" href="$namespace_b_g_e.html#a2485e47315736fd27e76f03a0d3c66ec" title="BGE::rtrim" alt="" coords="625,59,708,88"/>
-</map>

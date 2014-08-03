@@ -1,6 +1,0 @@
-<map id="initShaderList" name="initShaderList">
-<area shape="rect" id="node3" href="$_shader_functions_8cpp.html#a3657efd237e522f3acca315d36de5701" title="GetShaderSourceFromTable" alt="" coords="155,5,341,35"/>
-<area shape="rect" id="node5" href="$_shader_functions_8h.html#a50c42913de68b96d58770a13f0189de1" title="GetShaderSource" alt="" coords="389,5,515,35"/>
-<area shape="rect" id="node7" href="$_shader_functions_8h.html#a253e1d3f8e0005ac7a2ca9f6b04f9dfc" title="loadShaderFile" alt="" coords="564,5,671,35"/>
-<area shape="rect" id="node9" href="$_shader_functions_8h.html#a6dca752382231451f80f0bca75dba32b" title="makeShaderByName" alt="" coords="720,5,867,35"/>
-</map>

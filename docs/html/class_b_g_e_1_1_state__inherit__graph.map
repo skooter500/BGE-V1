@@ -1,4 +1,0 @@
-<map id="BGE::State" name="BGE::State">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_attacking_state.html" title="BGE::AttackingState" alt="" coords="5,83,149,112"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_idle_state.html" title="BGE::IdleState" alt="" coords="173,83,283,112"/>
-</map>

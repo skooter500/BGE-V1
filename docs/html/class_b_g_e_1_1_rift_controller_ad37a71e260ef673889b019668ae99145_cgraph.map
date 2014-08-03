@@ -1,5 +1,0 @@
-<map id="BGE::RiftController::PresentFbo" name="BGE::RiftController::PresentFbo">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_rift_controller.html#ac99fd67e360b2f6c41726db899ee71d9" title="BGE::RiftController\l::PresentFbo_PostProcessDistortion" alt="" coords="189,5,424,51"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_rift_controller.html#a4942cb092ba4baef4aa6c17ed99d1a71" title="BGE::RiftController\l::PresentFbo_NoDistortion" alt="" coords="219,74,395,121"/>
-<area shape="rect" id="node5" href="$_shader_functions_8cpp.html#a221b87237ed5b81bc7ad5c0299684532" title="getUniLoc" alt="" coords="473,48,553,77"/>
-</map>

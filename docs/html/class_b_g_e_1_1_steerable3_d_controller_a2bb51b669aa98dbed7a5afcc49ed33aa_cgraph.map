@@ -1,7 +1,0 @@
-<map id="BGE::Steerable3DController::Update" name="BGE::Steerable3DController::Update">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="259,5,408,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#a4144146a4fd89b69d32b832cef707799" title="BGE::Game::GetKeyState" alt="" coords="245,59,421,88"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_steerable3_d_controller.html#ac97df5e7922ca4d2d086d8a04a68a53f" title="BGE::Steerable3DController\l::AddForce" alt="" coords="240,111,427,158"/>
-<area shape="rect" id="node9" href="$class_b_g_e_1_1_steerable3_d_controller.html#a4e61d1ab590e8306d4b3381072737982" title="BGE::Steerable3DController\l::AddTorque" alt="" coords="240,181,427,227"/>
-<area shape="rect" id="node11" href="$namespace_b_g_e.html#af45e6960a1d4f878560e974bc4890b68" title="BGE::RotateVector" alt="" coords="267,251,400,280"/>
-</map>

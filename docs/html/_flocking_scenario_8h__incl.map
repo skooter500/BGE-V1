@@ -1,8 +1,0 @@
-<map id="BGE/FlockingScenario.h" name="BGE/FlockingScenario.h">
-<area shape="rect" id="node3" href="$_scenario_8h.html" title="Scenario.h" alt="" coords="853,83,935,112"/>
-<area shape="rect" id="node7" href="$_steering_controler_8h.html" title="SteeringControler.h" alt="" coords="374,160,507,189"/>
-<area shape="rect" id="node9" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="439,315,573,344"/>
-<area shape="rect" id="node44" href="$_route_8h.html" title="Route.h" alt="" coords="407,237,474,267"/>
-<area shape="rect" id="node32" href="$_exception_8h.html" title="Exception.h" alt="" coords="565,392,655,421"/>
-<area shape="rect" id="node34" href="$_transform_8h.html" title="Transform.h" alt="" coords="730,392,821,421"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="BGE/PhysicsCamera.h" name="BGE/PhysicsCamera.h">
-<area shape="rect" id="node3" href="$_camera_8h.html" title="Camera.h" alt="" coords="381,160,459,189"/>
-<area shape="rect" id="node38" href="$_physics_controller_8h.html" title="PhysicsController.h" alt="" coords="483,160,619,189"/>
-<area shape="rect" id="node44" href="$_physics_factory_8h.html" title="PhysicsFactory.h" alt="" coords="289,83,412,112"/>
-<area shape="rect" id="node5" href="$_game_component_8h.html" title="GameComponent.h" alt="" coords="365,237,499,267"/>
-<area shape="rect" id="node29" href="$_exception_8h.html" title="Exception.h" alt="" coords="675,315,765,344"/>
-<area shape="rect" id="node31" href="$_transform_8h.html" title="Transform.h" alt="" coords="789,315,880,344"/>
-</map>

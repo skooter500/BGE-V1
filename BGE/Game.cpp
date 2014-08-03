@@ -186,8 +186,8 @@ bool Game::Run() {
 		float ellapsed = ((float)(now - last)) / 1000.0f;
 		Update(ellapsed);
 		PreDraw();
-		frame++;
 		Draw();
+		frame++;
 		PostDraw();
 		last = now;
 	}
@@ -261,10 +261,11 @@ void Game::PreDraw()
 	{
 		glCullFace(GL_BACK);
 	}
+	GameComponent::PreDraw();
 }
 
-void Game::PostDraw()
-{	
+void Game::PrintAll()
+{
 	// Printing has to be done last, so we batch up the print messages
 	if (hud)
 	{
@@ -272,14 +273,19 @@ void Game::PostDraw()
 		while (it != messages.end())
 		{
 			Print(it->message, it->position);
-			it ++;
+			it++;
 		}
 	}
 	messages.clear();
 	lastPrintPosition.y = 0;
-	// The rift sdk will do this for us
+}
+
+void Game::PostDraw()
+{		
 	if (! riftEnabled)
 	{
+		PrintAll();
+		// The rift sdk will do this for us
 		SDL_GL_SwapWindow(window);
 	}	
 	GameComponent::PostDraw();

@@ -1,4 +1,0 @@
-<map id="BGE::SteeringController::TurnOffAll" name="BGE::SteeringController::TurnOffAll">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_attacking_state.html#a644f616bb9949c869efc77ce18523449" title="BGE::AttackingState\l::Enter" alt="" coords="225,5,369,51"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_steering_controller.html#a7510d7b82370619001ee140f28578cb8" title="BGE::SteeringController\l::SteeringController" alt="" coords="216,74,379,121"/>
-</map>

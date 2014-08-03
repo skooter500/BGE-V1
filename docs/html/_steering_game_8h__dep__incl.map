@@ -1,8 +1,0 @@
-<map id="BGE/SteeringGame.h" name="BGE/SteeringGame.h">
-<area shape="rect" id="node3" href="$_flocking_scenario_8cpp.html" title="BGE/FlockingScenario.cpp" alt="" coords="5,83,184,112"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title="BGE/main.cpp" alt="" coords="208,83,315,112"/>
-<area shape="rect" id="node7" href="$_obstacle_avoidance_scenario_8cpp.html" title="BGE/ObstacleAvoidanceScenario.cpp" alt="" coords="339,83,581,112"/>
-<area shape="rect" id="node9" href="$_path_following_scenario_8cpp.html" title="BGE/PathFollowingScenario.cpp" alt="" coords="605,83,816,112"/>
-<area shape="rect" id="node11" href="$_scenario_8cpp.html" title="BGE/Scenario.cpp" alt="" coords="840,83,971,112"/>
-<area shape="rect" id="node13" href="$_steering_game_8cpp.html" title="BGE/SteeringGame.cpp" alt="" coords="995,83,1157,112"/>
-</map>

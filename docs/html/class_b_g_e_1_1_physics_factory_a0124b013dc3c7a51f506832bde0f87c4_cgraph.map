@@ -1,5 +1,0 @@
-<map id="BGE::PhysicsFactory::CreateGroundPhysics" name="BGE::PhysicsFactory::CreateGroundPhysics">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="220,5,369,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#a6ac69a3795fe38dd4eccf4aa177d81ff" title="BGE::Game::SetGround" alt="" coords="213,59,376,88"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="424,50,584,97"/>
-</map>

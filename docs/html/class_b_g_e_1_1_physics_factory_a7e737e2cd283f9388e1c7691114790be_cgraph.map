@@ -1,6 +1,0 @@
-<map id="BGE::PhysicsFactory::CreateBox" name="BGE::PhysicsFactory::CreateBox">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="208,5,357,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="203,58,363,105"/>
-<area shape="rect" id="node7" href="$namespace_b_g_e.html#a57f8f67a5520cfbe967e4f91f02138e9" title="BGE::GLToBtQuat" alt="" coords="217,128,348,157"/>
-<area shape="rect" id="node9" href="$namespace_b_g_e.html#a721a46c8618bcd3b8a72138f45211e10" title="BGE::GLToBtVector" alt="" coords="212,181,353,211"/>
-</map>

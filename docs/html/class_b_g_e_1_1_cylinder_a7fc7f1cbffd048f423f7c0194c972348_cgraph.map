@@ -1,6 +1,0 @@
-<map id="BGE::Cylinder::Cylinder" name="BGE::Cylinder::Cylinder">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_content.html#a593266376a259eacb7ebddfc71ee082a" title="BGE::Content::LoadModel" alt="" coords="217,5,391,35"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_game_component.html#ab857b613dca4b962205a399f8b3e3630" title="BGE::GameComponent\l::Attach" alt="" coords="224,58,384,105"/>
-<area shape="rect" id="node9" href="$namespace_b_g_e.html#adc7c9e5cd854fcfc95dc113829de71ec" title="BGE::RandomFloat" alt="" coords="236,128,372,157"/>
-<area shape="rect" id="node5" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="441,5,572,35"/>
-</map>

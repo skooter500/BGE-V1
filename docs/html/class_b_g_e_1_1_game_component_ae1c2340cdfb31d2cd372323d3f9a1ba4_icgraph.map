@@ -1,5 +1,0 @@
-<map id="BGE::GameComponent::Initialise" name="BGE::GameComponent::Initialise">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_ground.html#ad9ebaf73b2e0c1feb2f09bd7daa0cd9f" title="BGE::Ground::Initialise" alt="" coords="215,5,369,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_particle_effect.html#a5ffa1b90b928778feece079b8fb1c2f3" title="BGE::ParticleEffect\l::Initialise" alt="" coords="224,58,360,105"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_vector_drawer.html#aff3a17b54639d367ddc99b73e1b502ee" title="BGE::VectorDrawer:\l:Initialise" alt="" coords="221,127,363,174"/>
-</map>

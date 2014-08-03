@@ -1,6 +1,0 @@
-<map id="BGE::TexturedCube::Initialise" name="BGE::TexturedCube::Initialise">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#a2973b50f49c7906ec0e642a8753fd995" title="BGE::Game::Initialise" alt="" coords="225,29,375,59"/>
-<area shape="rect" id="node8" href="$class_b_g_e_1_1_content.html#a449789b41e8d4c4b20cf3d53c55c5420" title="BGE::Content::LoadShaderPair" alt="" coords="199,83,401,112"/>
-<area shape="rect" id="node10" href="$class_b_g_e_1_1_content.html#a05b995e5b7946e7d2b1bbd5da0b8a654" title="BGE::Content::LoadTexture" alt="" coords="208,136,392,165"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="452,29,601,59"/>
-</map>

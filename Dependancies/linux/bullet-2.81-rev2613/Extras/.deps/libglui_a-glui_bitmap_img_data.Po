@@ -1,1 +1,0 @@
-libglui_a-glui_bitmap_img_data.o: glui/glui_bitmap_img_data.cpp

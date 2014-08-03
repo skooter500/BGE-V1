@@ -1,8 +1,0 @@
-<map id="BGE/State.h" name="BGE/State.h">
-<area shape="rect" id="node3" href="$_attacking_state_8h.html" title="BGE/AttackingState.h" alt="" coords="68,83,217,112"/>
-<area shape="rect" id="node9" href="$_idle_state_8h.html" title="BGE/IdleState.h" alt="" coords="241,83,359,112"/>
-<area shape="rect" id="node13" href="$_path_following_scenario_8cpp.html" title="BGE/PathFollowingScenario.cpp" alt="" coords="349,160,560,189"/>
-<area shape="rect" id="node16" href="$_state_8cpp.html" title="BGE/State.cpp" alt="" coords="433,83,543,112"/>
-<area shape="rect" id="node5" href="$_attacking_state_8cpp.html" title="BGE/AttackingState.cpp" alt="" coords="160,160,325,189"/>
-<area shape="rect" id="node7" href="$_idle_state_8cpp.html" title="BGE/IdleState.cpp" alt="" coords="5,160,136,189"/>
-</map>

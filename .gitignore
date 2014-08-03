@@ -36,5 +36,6 @@ stdout.txt
 bin/
 Debug/
 ipch/
+Dependancies/
 
 

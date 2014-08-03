@@ -1,5 +1,0 @@
-<map id="BGE::GLToFMODVector" name="BGE::GLToFMODVector">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_sound_system.html#a0ad428856d27e533b3fac3bcf5940c90" title="BGE::SoundSystem::PlayHit\lSoundIfReady" alt="" coords="232,5,421,51"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_sound_system.html#adf5931283a70db00abdc1e7b9451432e" title="BGE::SoundSystem::Update" alt="" coords="232,75,421,104"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_sound_system.html#aa2824ec0ba2a4bfe8bb3b1a6734e05bd" title="BGE::SoundSystem::PlaySound" alt="" coords="221,128,432,157"/>
-</map>

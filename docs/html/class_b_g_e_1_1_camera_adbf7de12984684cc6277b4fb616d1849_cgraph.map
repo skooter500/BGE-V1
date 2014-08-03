@@ -1,5 +1,0 @@
-<map id="BGE::Camera::Update" name="BGE::Camera::Update">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="217,5,367,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#a76ccf13340bc05c787a32160eeed3a00" title="BGE::Game::PrintVector" alt="" coords="209,59,375,88"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_game.html#a68da8b79dc207e54433ae43512fbb26b" title="BGE::Game::PrintText" alt="" coords="424,59,579,88"/>
-</map>

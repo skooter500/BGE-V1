@@ -1,6 +1,0 @@
-<map id="BGE::SteeringController::RandomWalk" name="BGE::SteeringController::RandomWalk">
-<area shape="rect" id="node3" href="$namespace_b_g_e.html#a44c1252ce516a92fb54a7719a0167d67" title="BGE::RandomClamped" alt="" coords="219,5,376,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_params.html#a8d26bb42e272f4e46b77f01aa3d7096a" title="BGE::Params::GetFloat" alt="" coords="217,59,377,88"/>
-<area shape="rect" id="node9" href="$class_b_g_e_1_1_steering_controller.html#af21ca382fa09f039518c0ed740e84a1b" title="BGE::SteeringController\l::Seek" alt="" coords="216,111,379,158"/>
-<area shape="rect" id="node7" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="428,59,559,88"/>
-</map>

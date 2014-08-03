@@ -1,4 +1,0 @@
-<map id="BGE::FountainEffect::InitParticle" name="BGE::FountainEffect::InitParticle">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_fountain_effect.html#a151663e1f6db044102e997b67554dcde" title="BGE::FountainEffect\l::Initialise" alt="" coords="199,5,340,51"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_fountain_effect.html#a7ea7f3f94da9f08132ffbbaa562fd811" title="BGE::FountainEffect\l::UpdateParticle" alt="" coords="199,74,340,121"/>
-</map>

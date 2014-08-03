@@ -1,7 +1,0 @@
-<map id="BGE::LineDrawer::Instance" name="BGE::LineDrawer::Instance">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_line_drawer.html#a41ed949bc20803482a8d5c100f4994ef" title="BGE::LineDrawer::DrawArrowLine" alt="" coords="237,5,459,35"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_line_drawer.html#a5977d87252af515791f7da3e8ca9fed2" title="BGE::LineDrawer::DrawLine" alt="" coords="255,59,441,88"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_vector_drawer.html#a30395d40e2e3e9afab90abbb7949bcf7" title="BGE::VectorDrawer::Draw" alt="" coords="508,5,684,35"/>
-<area shape="rect" id="node9" href="$class_b_g_e_1_1_lazer_beam.html#a15d17a33090a828077d962c6262e5d84" title="BGE::LazerBeam::Draw" alt="" coords="515,59,677,88"/>
-<area shape="rect" id="node11" href="$class_b_g_e_1_1_route.html#ae23447492bfe2a4d7e30a029e9b7584d" title="BGE::Route::Draw" alt="" coords="531,112,661,141"/>
-</map>

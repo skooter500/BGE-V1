@@ -1,5 +1,0 @@
-<map id="BGE::SteeringController::Wander" name="BGE::SteeringController::Wander">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_params.html#a8d26bb42e272f4e46b77f01aa3d7096a" title="BGE::Params::GetFloat" alt="" coords="217,5,377,35"/>
-<area shape="rect" id="node7" href="$namespace_b_g_e.html#a44c1252ce516a92fb54a7719a0167d67" title="BGE::RandomClamped" alt="" coords="219,59,376,88"/>
-<area shape="rect" id="node5" href="$namespace_b_g_e.html#a04062588c9f02e8fda67f52bb349162d" title="BGE::LogMessage" alt="" coords="428,5,559,35"/>
-</map>

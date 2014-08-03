@@ -1,6 +1,0 @@
-<map id="BGE::FPSController::Update" name="BGE::FPSController::Update">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_game.html#aa5f23879cb825ddcfc1f5a3a64a9c70f" title="BGE::Game::Instance" alt="" coords="208,5,357,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_game.html#a4144146a4fd89b69d32b832cef707799" title="BGE::Game::GetKeyState" alt="" coords="195,59,371,88"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_game.html#a82cfe197dfaeeb2923f0705abf76eb5c" title="BGE::Game::GetWidth" alt="" coords="205,112,360,141"/>
-<area shape="rect" id="node9" href="$class_b_g_e_1_1_game.html#a0a4d07a64d1e1437b52575a6de41beda" title="BGE::Game::GetHeight" alt="" coords="203,165,363,195"/>
-</map>

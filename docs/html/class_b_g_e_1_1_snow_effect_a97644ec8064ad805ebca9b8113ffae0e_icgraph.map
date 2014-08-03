@@ -1,4 +1,0 @@
-<map id="BGE::SnowEffect::InitParticle" name="BGE::SnowEffect::InitParticle">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_snow_effect.html#addc1d31d52fca499e150e05ad9807a5a" title="BGE::SnowEffect::Initialise" alt="" coords="271,5,452,35"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_snow_effect.html#abf395919278b4ba292433205279194c7" title="BGE::SnowEffect::UpdateParticle" alt="" coords="252,59,471,88"/>
-</map>

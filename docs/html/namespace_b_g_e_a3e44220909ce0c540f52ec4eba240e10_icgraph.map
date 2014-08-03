@@ -1,9 +1,0 @@
-<map id="BGE::CheckNaN" name="BGE::CheckNaN">
-<area shape="rect" id="node3" href="$class_b_g_e_1_1_steering_controller.html#aa0a6fdb7b154d020255e689bae13e592" title="BGE::SteeringController\l::Update" alt="" coords="1056,11,1219,58"/>
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_steering_controller.html#ab9e88d733741f192af1ac5ed4a919fc1" title="BGE::SteeringController\l::Cohesion" alt="" coords="176,48,339,95"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_steering_controller.html#ada60d4814e517f41810dc6e904e8e667" title="BGE::SteeringController\l::CalculateWeightedPrioritised" alt="" coords="599,143,796,190"/>
-<area shape="rect" id="node12" href="$class_b_g_e_1_1_steering_controller.html#a4001a9088cbcb95669987f9c9224e68d" title="BGE::SteeringController\l::OffsetPursuit" alt="" coords="387,166,549,212"/>
-<area shape="rect" id="node15" href="$class_b_g_e_1_1_steering_controller.html#ac58aacfac4e65a8fb7e9876100320663" title="BGE::SteeringController\l::Arrive" alt="" coords="176,224,339,271"/>
-<area shape="rect" id="node9" href="$class_b_g_e_1_1_steering_controller.html#a83fd612fb65fe1ef6be18c4dfd09ceed" title="BGE::SteeringController\l::Calculate" alt="" coords="845,99,1008,146"/>
-<area shape="rect" id="node19" href="$class_b_g_e_1_1_steering_controller.html#a7c665ab03a5de88c8ed7d506a6353ede" title="BGE::SteeringController\l::FollowPath" alt="" coords="387,286,549,332"/>
-</map>

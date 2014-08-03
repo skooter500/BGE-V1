@@ -53,6 +53,7 @@ void RiftController::DrawToRift()
 		eyeRenderPose[eye] = ovrHmd_GetEyePose(hmd, eye);
 
 		// Get view and projection matrices
+		// Slightly modified from the SDK example for OpenGL
 		OVR::Matrix4f rollPitchYaw = OVR::Matrix4f::RotationY(BodyYaw);
 		OVR::Matrix4f finalRollPitchYaw = rollPitchYaw * OVR::Matrix4f(eyeRenderPose[eye].Orientation);
 		OVR::Vector3f finalUp = finalRollPitchYaw.Transform(OVR::Vector3f(0, 1, 0));
@@ -66,8 +67,8 @@ void RiftController::DrawToRift()
 		Game::Instance()->camera->projection = OVRToGLMat4(ovrProjection);
 		// Draw the scene		
 		Game::Instance()->GameComponent::Draw();
-		LineDrawer::Instance()->Draw();		
-	}
+		LineDrawer::Instance()->Draw();				
+	}	
 	Game::Instance()->camera->view = cameraView;
 	ovrHmd_EndFrame(hmd, eyeRenderPose, &eyeTexture[0].Texture);
 }

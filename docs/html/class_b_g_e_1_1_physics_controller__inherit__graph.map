@@ -1,4 +1,0 @@
-<map id="BGE::PhysicsController" name="BGE::PhysicsController">
-<area shape="rect" id="node5" href="$class_b_g_e_1_1_physics_camera.html" title="BGE::PhysicsCamera" alt="" coords="11,160,160,189"/>
-<area shape="rect" id="node2" href="$class_b_g_e_1_1_game_component.html" title="BGE::GameComponent" alt="" coords="5,5,165,35"/>
-</map>

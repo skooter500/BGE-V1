@@ -39,6 +39,7 @@ namespace BGE
 
 		virtual bool Initialise();
 		virtual void Update(float timeDelta);
+		virtual void PreDraw();
 		virtual void Draw();
 		virtual void PostDraw();
 		virtual void Cleanup();

@@ -1,5 +1,0 @@
-<map id="BGE::VRGame" name="BGE::VRGame">
-<area shape="rect" id="node2" href="$class_b_g_e_1_1_game.html" title="BGE::Game" alt="" coords="5,85,99,115"/>
-<area shape="rect" id="node4" href="$class_b_g_e_1_1_game_component.html" title="BGE::GameComponent" alt="" coords="61,5,221,35"/>
-<area shape="rect" id="node7" href="$class_b_g_e_1_1_physics_controller.html" title="BGE::PhysicsController" alt="" coords="123,85,283,115"/>
-</map>
