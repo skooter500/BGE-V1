@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{33720a02-d1b2-4718-aedc-a17fe65ecbf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games">
+      <UniqueIdentifier>{d1e0438f-dba3-40c0-9647-974459789cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Content">
+      <UniqueIdentifier>{e12f2193-834b-49fb-ade0-577ca65121c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Prefabs">
+      <UniqueIdentifier>{697651d2-0cd7-45c2-b4a6-56fe6f15526c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{b8283cc0-8725-4a13-a2c1-fc02e47c494e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenarios">
+      <UniqueIdentifier>{82919e9f-6727-4dac-9428-1308d1d5e346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{e477bb02-ac64-447a-a4c0-9a1da63c6cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{61bc13fa-b49b-4bf6-8dce-6afe521f52a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Labs">
+      <UniqueIdentifier>{f09f20fd-b65f-4670-9e98-ec489fae4c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Labs\OVRKill">
+      <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeTest.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleTest.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedCube.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelTest.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Content.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="MotionState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicMotionState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerable3DController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FBO.cpp">
+      <Filter>Labs\OVRKill</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFunctions.cpp">
+      <Filter>Labs\OVRKill</Filter>
+    </ClCompile>
+    <ClCompile Include="RiftController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="XBoxController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsGame1.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LineDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Params.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Route.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringControler.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringGame.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenario.cpp">
+      <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="FlockingScenario.cpp">
+      <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFollowingScenario.cpp">
+      <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleAvoidanceScenario.cpp">
+      <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackingState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="LazerBeam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraphGame.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="FountainEffect.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffect.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="SnowEffect.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab4.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab5.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
+    <ClCompile Include="Buddha.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab6.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab7.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab8.cpp">
+      <Filter>Labs</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VRGame.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeTest.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleTest.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedCube.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelTest.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsFactory.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerable3DController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicMotionState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OVR_Shaders.h">
+      <Filter>Labs\OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="FBO.h">
+      <Filter>Labs\OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFunctions.h">
+      <Filter>Labs\OVRKill</Filter>
+    </ClInclude>
+    <ClInclude Include="RiftController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="XBoxController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsGame1.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LineDrawer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Params.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorDrawer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Route.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringControler.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringGame.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenario.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
+    <ClInclude Include="FlockingScenario.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFollowingScenario.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleAvoidanceScenario.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackingState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="LazerBeam.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraphGame.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="FountainEffect.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffect.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SnowEffect.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab4.h">
+      <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab5.h">
+      <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Buddha.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab6.h">
+      <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab7.h">
+      <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab8.h">
+      <Filter>Labs</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VRGame.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\CubeShader.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\diffuse.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\SimpleShader.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\StandardShading.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TexturedCubeShader.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TriangleShader.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\CubeShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\diffuse.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\SimpleShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\StandardShading.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TexturedCubeShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TriangleShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_materials.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_materials.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_texture.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\standard_texture.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TextShader.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\TextShader.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Lines.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Lines.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\default.properties">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\flocking.properties">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Classes.cd" />
+    <None Include="Content\Particles.fragmentshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Content\Particles.vertexshader">
+      <Filter>Content</Filter>
+    </None>
+    <None Include="Particles.cd" />
+  </ItemGroup>
+</Project>

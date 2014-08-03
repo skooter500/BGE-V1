@@ -1,0 +1,41 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# All the rest
+*.obj
+*.pch
+*.exe
+*.user
+*.manifest
+*.res
+*.lastbuildstate
+*.log
+*.rc
+*.tlog
+*.pdb
+*.idb
+*.ipch
+*.ilk
+stdout.txt
+*.sdf
+*.suo
+*.opensdf
+*.cache
+*.obj
+bin/
+Debug/
+ipch/
+Dependancies/
+
+
