@@ -27,6 +27,7 @@ namespace BGE
 		OVR::Sizei renderTargetSize;
 		GLuint texture;
 		GLuint frameBuffer;
+		GLuint renderBuffer;
 		ovrEyeRenderDesc eyeRenderDesc[2];
 		ovrFovPort eyeFov[2];
 		ovrRecti eyeRenderViewport[2];

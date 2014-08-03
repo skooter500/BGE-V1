@@ -21,6 +21,7 @@ namespace BGE
 		bool Initialise();
 		void Update(float timeDelta);
 		void Draw();
+		void PostDraw();
 
 		virtual void InitParticle(Particle & particle) = 0;
 		virtual void UpdateParticle(float timeDelta, Particle & particle) = 0;

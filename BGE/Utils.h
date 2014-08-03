@@ -43,6 +43,7 @@ namespace BGE
 	ovrVector3f GLToOVRVector(glm::vec3 v);
 	ovrMatrix4f GLToOVRMat4(glm::mat4 m);
 	glm::mat4 OVRToGLMat4(OVR::Matrix4f m);
+	glm::vec3 OVRToGLVector(OVR::Vector3f v);
 #endif
 	glm::vec3 BtToGLVector(const btVector3 & v);
 	glm::quat BtToGLQuat(const btQuaternion & q);

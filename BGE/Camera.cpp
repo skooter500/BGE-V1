@@ -30,11 +30,11 @@ bool Camera::Initialise()
 
 void Camera::Draw()
 {
-	GameComponent::Draw();
+	//GameComponent::Draw();
 }
 
 void Camera::Update(float timeDelta) {
-	
+	// Update my children first
 	GameComponent::Update(timeDelta);
 	view = glm::lookAt(
 		transform->position

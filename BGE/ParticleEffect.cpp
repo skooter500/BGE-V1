@@ -44,7 +44,6 @@ bool BGE::ParticleEffect::Initialise()
 	textureSampler  = glGetUniformLocation(programID, "myTextureSampler");
 	textureID = Content::LoadTexture(textureName);
 
-
 	glUseProgram(0);
 	initialised = true;
 	return GameComponent::Initialise();
@@ -152,11 +151,13 @@ void ParticleEffect::Draw()
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 		glUseProgram(0);
-
-
-		colours.clear();
-		vertices.clear();
 	}
 
 	return GameComponent::Draw();
+}
+
+void ParticleEffect::PostDraw()
+{
+	colours.clear();
+	vertices.clear();
 }

@@ -61,6 +61,11 @@ glm::quat BGE::BtToGLQuat(const btQuaternion & q)
 	return glm::quat(q.getW(), q.getX(), q.getY(), q.getZ());
 }
 
+glm::vec3 BGE::OVRToGLVector(OVR::Vector3f v)
+{
+	return glm::vec3(v.x, v.y, v.z);
+}
+
 btVector3 BGE::GLToBtVector(const glm::vec3 & v)
 {
 	return btVector3(v.x, v.y, v.z);

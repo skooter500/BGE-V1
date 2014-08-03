@@ -131,10 +131,7 @@ void Model::CalculateBounds()
 
 void Model::Draw()
 {	
-	transform->world = parent->transform->world * localTransform;
 	glUseProgram(programID);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
 
 	// Models are singletons, so they share a world transform, so use my parent's world transform instead
 	glUniformMatrix4fv(mID, 1, GL_FALSE, &transform -> world[0][0]/*& transform->world[0][0]*/);
@@ -219,5 +216,5 @@ void Model::Draw()
 	glDisableVertexAttribArray(2);
 	glUseProgram(0);
 	// Draw my children
-	GameComponent::Draw();
+	//GameComponent::Draw();
 }

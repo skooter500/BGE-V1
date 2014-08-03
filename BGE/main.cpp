@@ -20,6 +20,26 @@
 #include "Lab7.h"
 #include "Lab8.h"
 #include "Buddha.h"
+#include "Game.h"
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <stdlib.h>
+#include <ctime>
+
+#include <OVR.h>
+#include <OVR_CAPI_GL.h>
+
+#include "Content.h"
+#include "FPSController.h"
+#include "XBoxController.h"
+#include "Steerable3DController.h"
+#include "Utils.h"
+#include "SDL_syswm.h"
 
 using namespace BGE;
 

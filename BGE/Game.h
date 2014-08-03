@@ -85,11 +85,11 @@ namespace BGE
 		shared_ptr<Camera> camera;
 		shared_ptr<Ground> ground;
 
-		SDL_Window * mainwindow; /* Our window handle */
+		SDL_Window * window; /* Our window handle */
 		bool fullscreen;
 		bool console;
 		bool hud;
-		SDL_GLContext maincontext; /* Our opengl context handle */
+		SDL_GLContext context; /* Our opengl context handle */
 
 #ifdef _WIN32 
 		shared_ptr<RiftController> riftController;

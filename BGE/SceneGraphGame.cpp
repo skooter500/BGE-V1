@@ -49,7 +49,7 @@ bool SceneGraphGame::Initialise()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,0,0));
 	
-	camera->transform->position = glm::vec3(0,10,10);
+	camera->transform->position = glm::vec3(-10,20,20);
 	camera->transform->look = glm::vec3(0, 0, 1); 
 
 	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
@@ -59,6 +59,7 @@ bool SceneGraphGame::Initialise()
 
 	fullscreen = false;
 	riftEnabled = true;
+	console = false;
 	width = 1280;
 	height = 800;
 
@@ -177,7 +178,7 @@ bool SceneGraphGame::Initialise()
 	shared_ptr<FountainEffect> fountain = make_shared<FountainEffect>(1000);
 	partFollower->Attach(fountain);
 	partFollower->transform->diffuse = glm::vec3(0,1,1);
-
+	
 	return Game::Initialise();
 }
 

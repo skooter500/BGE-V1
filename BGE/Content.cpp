@@ -133,6 +133,7 @@ shared_ptr<Model> Content::LoadModel(string name, glm::mat4 localTransform) {
 				stringstream ss(s);
 				glm::vec3 vertex;
 				ss >> junk >> vertex.x >> vertex.y >> vertex.z;
+				vertex = glm::vec3(localTransform * glm::vec4(vertex, 1));
 				temp_vertices.push_back(vertex);
 			}			
 			else if (s.find("vt ") == 0)

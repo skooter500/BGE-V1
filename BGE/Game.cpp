@@ -9,15 +9,21 @@
 #include <stdlib.h>
 #include <ctime>
 
+#include <OVR.h>
+#include <OVR_CAPI_GL.h>
+
 #include "Content.h"
 #include "FPSController.h"
 #include "XBoxController.h"
 #include "Steerable3DController.h"
 #include "Utils.h"
+#include "SDL_syswm.h"
 
 using namespace BGE;
 
 BGE::Game * Game::instance = NULL;
+
+int frame;
 
 Game::Game(void):GameComponent(true) {
 	running = false;
@@ -31,13 +37,14 @@ Game::Game(void):GameComponent(true) {
 	// Rift
 	width = 1280;
 	height = 800;
-	mainwindow = NULL;
+	window = nullptr;
 	instance = this;
 	srand(time(0));
 	elapsed = 10000.0f;
 
 	lastPrintPosition = glm::vec2(0,0);
 	fontSize = 14;	
+	frame = 0;
 
 	fps = 0;
 	camera = make_shared<Camera>(); 
@@ -56,6 +63,18 @@ shared_ptr<Ground> Game::GetGround()
 
 bool Game::Initialise() {
 
+	if (console)
+	{
+		AllocConsole();
+		int fd = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		FILE * fp = _fdopen(fd, "w");
+		*stdout = *fp;
+		setvbuf(stdout, NULL, _IONBF, 0);
+	}
+
+	int x = SDL_WINDOWPOS_CENTERED;
+	int y = SDL_WINDOWPOS_CENTERED;
+
 	if (riftEnabled)
 	{
 		shared_ptr<RiftController> riftController = make_shared<RiftController>();
@@ -64,6 +83,8 @@ bool Game::Initialise() {
 		riftController->Connect();
 		width = riftController->hmd->Resolution.w;
 		height = riftController->hmd->Resolution.h;
+		//x = riftController->hmd->WindowsPos.x;
+		//y = riftController->hmd->WindowsPos.y;
 		camera->Attach(riftController);
 	}
 	else
@@ -71,27 +92,18 @@ bool Game::Initialise() {
 		shared_ptr<GameComponent> controller = make_shared<FPSController>();
 		camera->Attach(controller);
 	}
-	
-	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		return false;
 	}
 
-    /* Turn on double buffering with a 24bit Z buffer.
-     * You may need to change this to 16 or 32 for your system */
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
-	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
-	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  4);
- 
 	Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
 
-    mainwindow = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        width, height, flags);
-	maincontext = SDL_GL_CreateContext(mainwindow);
-	
-    /* This makes our buffer swap syncronized with the monitor's vertical refresh */
-    SDL_GL_SetSwapInterval(1);
+	window = SDL_CreateWindow("", x, y,
+		width, height, flags);
+	context = SDL_GL_CreateContext(window);
+
+	/* This makes our buffer swap syncronized with the monitor's vertical refresh */
+	//SDL_GL_SetSwapInterval(1);
 
 	keyState = SDL_GetKeyboardState(NULL);
 	glewExperimental = GL_TRUE;
@@ -99,35 +111,35 @@ bool Game::Initialise() {
 	if (GLEW_OK != err)
 	{
 		char msg[2048];
-		sprintf(msg, "%s", glewGetErrorString(err));
-		std::cerr << "Error:" << glewGetErrorString(err);
-		return false;
+		sprintf(msg, "glewInit failed with error: %s", glewGetErrorString(err));
+		throw BGE::Exception(msg);
 	}
 
-	if (! GLEW_VERSION_2_0)
-	{
-		throw BGE::Exception("OpenGL Shaders not supported. Upgrade your graphics card drivers");
-	}
+	/* Turn on double buffering with a 24bit Z buffer.
+	*You may need to change this to 16 or 32 for your system */
+	
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 	
 	glViewport(0, 0, width, height);
 
-	// Enable depth test
+	//// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
 
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
-
-	SDL_GL_SetSwapInterval(1);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
+	
 
 	if (TTF_Init() < 0)
 	{
 		throw BGE::Exception("Could not init TTF");
 	}
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
-	//camera->transform->position = glm::vec3(0, 10, -1000);
 	
 	LineDrawer::Instance()->Initialise();
 	running = true;
@@ -162,24 +174,26 @@ void Game::PrintText(string message)
 	lastPrintPosition.y += 20;
 }
 
-bool Game::Run() {
-	
-	if(Initialise() == false) {
-        	return false;
-    	}
+bool Game::Run() {	
+	if (!Initialise())
+	{
+		return false;
+	}
+
 	long last = SDL_GetTicks();
-	while(running) {
+	while (running) {
 		long now = SDL_GetTicks();
-		float ellapsed = ((float) (now - last)) / 1000.0f;
+		float ellapsed = ((float)(now - last)) / 1000.0f;
 		Update(ellapsed);
 		PreDraw();
-        Draw();
+		frame++;
+		Draw();
 		PostDraw();
 		last = now;
-    } 
-    Cleanup();
- 
-    return 0;
+	}
+	Cleanup();
+
+	return 0;
 }
 
 void Game::SetGround(shared_ptr<Ground> ground)
@@ -210,16 +224,16 @@ void Game::Update(float timeDelta) {
 	}	
 
 	SDL_Event event;
-    	if (SDL_PollEvent(&event))
-    	{
-        	// Check for the quit message
-        	if (event.type == SDL_QUIT)
-        	{
-        	// Quit the program
-        		Cleanup();
-			exit(0);
-        	}
-    	}
+    if (SDL_PollEvent(&event))
+    {
+        // Check for the quit message
+        if (event.type == SDL_QUIT)
+        {
+        // Quit the program
+        	Cleanup();
+		exit(0);
+        }
+    }
 
 	if (keyState[SDL_SCANCODE_ESCAPE])
 	{
@@ -235,9 +249,18 @@ void Game::PreDraw()
 {
 	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
 
+	// Rift seems to require vertices in the opposite order!!
+	if (riftEnabled)
+	{
+		glCullFace(GL_FRONT);
+	}
+	else
+	{
+		glCullFace(GL_BACK);
+	}
 }
 
 void Game::PostDraw()
@@ -257,16 +280,16 @@ void Game::PostDraw()
 	// The rift sdk will do this for us
 	if (! riftEnabled)
 	{
-		SDL_GL_SwapWindow(mainwindow);
-	}
-	
+		SDL_GL_SwapWindow(window);
+	}	
+	GameComponent::PostDraw();
 }
 
 void Game::Cleanup () {
 	GameComponent::Cleanup();
 	
-	SDL_GL_DeleteContext(maincontext);
-    SDL_DestroyWindow(mainwindow);
+	SDL_GL_DeleteContext(context);
+    SDL_DestroyWindow(window);
     SDL_Quit();	
 }
 
@@ -281,74 +304,15 @@ const Uint8 * Game::GetKeyState()
 
 SDL_Window * Game::GetMainWindow()
 {
-	return mainwindow;
+	return window;
 }
 
 void Game::Draw()
-{	
+{		
 	PrintText("Press I to toggle info");
 	if (riftEnabled)
-	{
-#ifdef _WIN32
-		//glEnable(GL_DEPTH_TEST);
-		//glDisable(GL_CULL_FACE);
-		
-		//riftController->BindRenderBuffer();
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//const int fboWidth = riftController->GetRenderBufferWidth();
-		//const int fboHeight = riftController->GetRenderBufferHeight();
-		//const int halfWidth = fboWidth/2;
-		//const OVR::HMDInfo& hmd = riftController->GetHMD();
-		//// Compute Aspect Ratio. Stereo mode cuts width in half.
-		//float aspectRatio = float(hmd.HResolution * 0.5f) / float(hmd.VResolution);
-
-		//// Compute Vertical FOV based on distance.
-		//float halfScreenDistance = (hmd.VScreenSize / 2);
-		//float yfov = 2.0f * glm::atan<float>(halfScreenDistance/hmd.EyeToScreenDistance);
-
-		//// Post-projection viewport coordinates range from (-1.0, 1.0), with the
-		//// center of the left viewport falling at (1/4) of horizontal screen size.
-		//// We need to shift this projection center to match with the lens center.
-		//// We compute this shift in physical units (meters) to correct
-		//// for different screen sizes and then rescale to viewport coordinates.
-		//float viewCenterValue = hmd.HScreenSize * 0.25f;
-		//float eyeProjectionShift = viewCenterValue - hmd.LensSeparationDistance * 0.5f;
-		//float projectionCenterOffset = 4.0f * eyeProjectionShift / hmd.HScreenSize;
-
-		//// Projection matrix for the "center eye", which the left/right matrices are based on.
-		//OVR::Matrix4f projCenter = OVR::Matrix4f::PerspectiveRH(yfov, aspectRatio, 0.3f, 1000.0f);
-		//OVR::Matrix4f projLeft   = OVR::Matrix4f::Translation(projectionCenterOffset, 0, 0) * projCenter;
-		//OVR::Matrix4f projRight  = OVR::Matrix4f::Translation(-projectionCenterOffset, 0, 0) * projCenter;
-
-		//glm::mat4 cameraCentreView = camera->view;
-		//// View transformation translation in world units.
-		//float halfIPD = hmd.InterpupillaryDistance * 0.5f;
-		//OVR::Matrix4f viewLeft = OVR::Matrix4f::Translation(halfIPD, 0, 0) * GLToOVRMat4(camera->view);
-		//OVR::Matrix4f viewRight= OVR::Matrix4f::Translation(-halfIPD, 0, 0) * GLToOVRMat4(camera->view);
-
-		//glViewport(0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		//glScissor (0        ,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		//camera->view = OVRToGLMat4(viewLeft);
-		//camera->projection = OVRToGLMat4(projLeft);
-		//// Draw all my children
-		//LineDrawer::Instance()->Draw();
-		//GameComponent::Draw();
-
-		//glViewport(halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		//glScissor (halfWidth,0,(GLsizei)halfWidth, (GLsizei)fboHeight);
-		//camera->view = OVRToGLMat4(viewRight);
-		//camera->projection = OVRToGLMat4(projRight);
-		//// Draw all my children
-		//LineDrawer::Instance()->Draw();
-		//GameComponent::Draw();
-
-		//riftController->UnBindRenderBuffer();
-		//glDisable(GL_LIGHTING);
-		//glDisable(GL_DEPTH_TEST);
-		//riftController->PresentFbo();
-		//camera->view = cameraCentreView;
-		riftController->DrawToRift();
-#endif 
+	{		
+		riftController->DrawToRift();		
 	}
 	else
 	{
