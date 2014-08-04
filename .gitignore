@@ -16,7 +16,6 @@
 *.obj
 *.pch
 *.exe
-*.user
 *.manifest
 *.res
 *.lastbuildstate
