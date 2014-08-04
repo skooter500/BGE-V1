@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\Dependencies\FMOD\inc;..\Dependencies\LibOVR\Include;..\Dependencies\SDL2-2.0.3\include;..\Dependencies\glew-1.10.0\include;..\Dependencies\glm-0.9.4.3\glm;..\Dependencies\SDL_ttf;..\Dependencies\Kinect\v1.6\inc;..\Dependencies\bullet3\src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Dependencies\FMOD\lib;..\Dependencies\LibOVR\Lib\Win32\VS2013;..\Dependencies\SDL2-2.0.3\lib\x86;..\Dependencies\Kinect\v1.6\lib\x86;..\Dependencies\SDL_ttf\VisualC\Win32\Release;..\Dependencies\glew-1.10.0\lib\Release\Win32;..\Dependencies\bullet3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Dependencies\FMOD\inc;..\Dependencies\LibOVR\Include;..\Dependencies\SDL2-2.0.3\include;..\Dependencies\glew-1.10.0\include;..\Dependencies\glm-0.9.4.3\glm;..\Dependencies\SDL_ttf;..\Dependencies\Kinect\v1.6\inc;..\Dependencies\bullet3\src;..\Dependencies\Kinect\v2.0\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Dependencies\FMOD\lib;..\Dependencies\LibOVR\Lib\Win32\VS2013;..\Dependencies\SDL2-2.0.3\lib\x86;..\Dependencies\Kinect\v1.6\lib\x86;..\Dependencies\SDL_ttf\VisualC\Win32\Release;..\Dependencies\glew-1.10.0\lib\Release\Win32;..\Dependencies\bullet3\lib;..\Dependencies\Kinect\v2.0\Lib\x86;$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -62,7 +62,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Ws2_32.lib;BulletCollision_vs2010_debug.lib;BulletDynamics_vs2010_debug.lib;LinearMath_vs2010_debug.lib;Kinect10.lib;fmodex_vc.lib;winmm.lib;libovr.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Ws2_32.lib;BulletCollision_vs2010_debug.lib;BulletDynamics_vs2010_debug.lib;LinearMath_vs2010_debug.lib;Kinect10.lib;fmodex_vc.lib;winmm.lib;libovr.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect20.lib;Kinect20.Face.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -101,6 +101,7 @@
     <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="PathFollowingScenario.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Person2.cpp" />
     <ClCompile Include="PhysicsDrawer.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Scenario.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="VectorDrawer.cpp" />
     <ClCompile Include="VRGame.cpp" />
+    <ClCompile Include="VRGame2.cpp" />
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +163,7 @@
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="PathFollowingScenario.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="Person2.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="SceneGraphGame.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="VectorDrawer.h" />
     <ClInclude Include="VRGame.h" />
+    <ClInclude Include="VRGame2.h" />
     <ClInclude Include="XBoxController.h" />
   </ItemGroup>
   <ItemGroup>

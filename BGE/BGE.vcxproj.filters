@@ -18,9 +18,6 @@
     <Filter Include="Content">
       <UniqueIdentifier>{e12f2193-834b-49fb-ade0-577ca65121c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Prefabs">
-      <UniqueIdentifier>{697651d2-0cd7-45c2-b4a6-56fe6f15526c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Controllers">
       <UniqueIdentifier>{b8283cc0-8725-4a13-a2c1-fc02e47c494e}</UniqueIdentifier>
     </Filter>
@@ -38,6 +35,9 @@
     </Filter>
     <Filter Include="Labs\OVRKill">
       <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles\Prefabs">
+      <UniqueIdentifier>{697651d2-0cd7-45c2-b4a6-56fe6f15526c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,13 +75,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>Prefabs</Filter>
+      <Filter>Particles\Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
-      <Filter>Prefabs</Filter>
+      <Filter>Particles\Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="Cylinder.cpp">
-      <Filter>Prefabs</Filter>
+      <Filter>Particles\Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="MotionState.cpp">
       <Filter>Source Files</Filter>
@@ -215,6 +215,12 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VRGame2.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Person2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -236,7 +242,7 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>Prefabs</Filter>
+      <Filter>Particles\Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Content.h">
       <Filter>Source Files</Filter>
@@ -251,10 +257,10 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
-      <Filter>Prefabs</Filter>
+      <Filter>Particles\Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Cylinder.h">
-      <Filter>Prefabs</Filter>
+      <Filter>Particles\Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsCamera.h">
       <Filter>Camera</Filter>
@@ -389,6 +395,12 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VRGame2.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Person2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
