@@ -20,3 +20,9 @@ The engine supports:
 * Physically simulated rigid bodies and a factory for making them
 * Kinect Skeletal tracking
 * Output to the Oculus rift
+
+To build:
+
+* Download the dependencies from here: http://1drv.ms/1olPefQ
+* Unzip to the folder Dependencies in your project 
+* Use the included Visual Studio 2013 project files
