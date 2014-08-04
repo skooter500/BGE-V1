@@ -35,11 +35,11 @@ void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, co
 		person->connected = false;       
 	}
 }
-Person::Person(void):GameComponent()
+Person::Person(void):GameComponent(true)
 {
 	connected = false;
 	tracked = false;
-	headCamera = true;
+	headCamera = false;
 	m_pNuiSensor = NULL;
 	scale = 20.0f;
 	footHeight = 0.0f;

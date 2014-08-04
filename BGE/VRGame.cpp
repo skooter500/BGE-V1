@@ -36,7 +36,7 @@ bool collisionCallback(btManifoldPoint& cp,	const btCollisionObjectWrapper* colO
 	}
 
 	
-	game->soundSystem->PlayHitSoundIfReady(object0, 5000);
+	//game->soundSystem->PlayHitSoundIfReady(object0, 5000);
 
 	
 	return false;
@@ -58,8 +58,8 @@ VRGame::VRGame(void)
 	leftHandPickedUp= NULL;
 	rightHandPickedUp= NULL;
 
-	fullscreen = true;
-	riftEnabled = true;
+	fullscreen = false;
+	riftEnabled = false;
 
 	tag = "VR Game";
 }
@@ -119,6 +119,8 @@ bool VRGame::Initialise()
 	person->headCamera = true;
 
 	ResetScene();
+
+
 
 	if (!Game::Initialise()) {
 		return false;
