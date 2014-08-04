@@ -41,14 +41,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\Dependancies\FMOD\inc;..\Dependancies\LibOVR\Include;..\Dependancies\SDL2-2.0.3\include;..\Dependancies\glew-1.10.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet3\src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Dependancies\FMOD\lib;..\Dependancies\LibOVR\Lib\Win32\VS2013;..\Dependancies\SDL2-2.0.3\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.10.0\lib\Release\Win32;..\Dependancies\bullet3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Dependencies\FMOD\inc;..\Dependencies\LibOVR\Include;..\Dependencies\SDL2-2.0.3\include;..\Dependencies\glew-1.10.0\include;..\Dependencies\glm-0.9.4.3\glm;..\Dependencies\SDL_ttf;..\Dependencies\Kinect\v1.6\inc;..\Dependencies\bullet3\src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Dependencies\FMOD\lib;..\Dependencies\LibOVR\Lib\Win32\VS2013;..\Dependencies\SDL2-2.0.3\lib\x86;..\Dependencies\Kinect\v1.6\lib\x86;..\Dependencies\SDL_ttf\VisualC\Win32\Release;..\Dependencies\glew-1.10.0\lib\Release\Win32;..\Dependencies\bullet3\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\Dependancies\FMOD\inc;..\Dependancies\SDL2-2.0.3\include;..\Dependancies\glew-1.9.0\include;..\Dependancies\glm-0.9.4.3\glm;..\Dependancies\SDL_ttf;..\Dependancies\Kinect\v1.6\inc;..\Dependancies\bullet3\src;..\Dependancies\LibOVR\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Dependancies\FMOD\lib;..\Dependancies\LibOVR\Lib\Win32\VS2013;..\Dependancies\SDL2-2.0.3\lib\x86;..\Dependancies\Kinect\v1.6\lib\x86;..\Dependancies\SDL_ttf\VisualC\Win32\Release;..\Dependancies\glew-1.9.0\lib;..\Dependancies\bullet3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Dependencies\FMOD\inc;..\Dependencies\SDL2-2.0.3\include;..\Dependencies\glew-1.9.0\include;..\Dependencies\glm-0.9.4.3\glm;..\Dependencies\SDL_ttf;..\Dependencies\Kinect\v1.6\inc;..\Dependencies\bullet3\src;..\Dependencies\LibOVR\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Dependencies\FMOD\lib;..\Dependencies\LibOVR\Lib\Win32\VS2013;..\Dependencies\SDL2-2.0.3\lib\x86;..\Dependencies\Kinect\v1.6\lib\x86;..\Dependencies\SDL_ttf\VisualC\Win32\Release;..\Dependencies\glew-1.9.0\lib;..\Dependencies\bullet3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
