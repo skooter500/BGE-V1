@@ -62,7 +62,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Ws2_32.lib;BulletCollision_vs2010_debug.lib;BulletDynamics_vs2010_debug.lib;LinearMath_vs2010_debug.lib;Kinect10.lib;fmodex_vc.lib;winmm.lib;libovr.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Ws2_32.lib;BulletCollision_vs2010_debug.lib;BulletDynamics_vs2010_debug.lib;LinearMath_vs2010_debug.lib;fmodex_vc.lib;winmm.lib;libovr.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -100,7 +100,6 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="PathFollowingScenario.cpp" />
-    <ClCompile Include="Person.cpp" />
     <ClCompile Include="PhysicsDrawer.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Scenario.cpp" />
@@ -141,7 +140,6 @@
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="VectorDrawer.cpp" />
-    <ClCompile Include="VRGame.cpp" />
     <ClCompile Include="XBoxController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,7 +158,6 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="PathFollowingScenario.h" />
-    <ClInclude Include="Person.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="SceneGraphGame.h" />
@@ -201,7 +198,6 @@
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="VectorDrawer.h" />
-    <ClInclude Include="VRGame.h" />
     <ClInclude Include="XBoxController.h" />
   </ItemGroup>
   <ItemGroup>
