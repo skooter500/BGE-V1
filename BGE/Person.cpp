@@ -22,6 +22,7 @@ glm::vec3 NUIToGLVector(Vector4 v, bool flip)
 	}
 }
 
+
 void CALLBACK BGE::StatusProc( HRESULT hrStatus, const OLECHAR* instanceName, const OLECHAR* uniqueDeviceName, void * pUserData)
 {      
 	Person * person = (Person *) pUserData;
