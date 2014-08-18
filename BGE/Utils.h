@@ -5,7 +5,7 @@
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
 #include <btBulletDynamicsCommon.h>
-
+#include <Kinect.h>
 #ifdef _WIN32
  #include <OVR.h>
 #endif
@@ -49,6 +49,8 @@ namespace BGE
 	glm::quat BtToGLQuat(const btQuaternion & q);
 	btVector3 GLToBtVector(const glm::vec3 & v);
 	btQuaternion GLToBtQuat(const glm::quat & q);
+
+	glm::vec3 KinectToGLVector(CameraSpacePoint v);
 
 	string ltrim(string s);
 	string rtrim(string s);

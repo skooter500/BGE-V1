@@ -10,8 +10,12 @@ float BGE::RandomClamped(float min, float max)
 	float r = (float)rand()/(float)RAND_MAX;
 	float range = max - min;
 	return max - (r * range); 
-}   
+}
 
+glm::vec3 BGE::KinectToGLVector(CameraSpacePoint v)
+{
+	return glm::vec3(v.X, v.Y, v.Z);
+}
 
 FMOD_VECTOR BGE::GLToFMODVector(glm::vec3 v)
 {

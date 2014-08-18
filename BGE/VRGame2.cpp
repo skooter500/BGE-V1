@@ -45,18 +45,18 @@ bool collisionCallback2(btManifoldPoint& cp,	const btCollisionObjectWrapper* col
 
 VRGame2::VRGame2(void)
 {
-	physicsFactory = NULL;
-	dynamicsWorld = NULL;
-	broadphase = NULL;
-	dispatcher = NULL;
-	solver = NULL;
-	person = NULL;
+	physicsFactory = nullptr;
+	dynamicsWorld = nullptr;
+	broadphase = nullptr;
+	dispatcher = nullptr;
+	solver = nullptr;
+	person = nullptr;
 	
 	fireRate = 5.0f;
 	width = 1280;
 	height = 800;
-	leftHandPickedUp= NULL;
-	rightHandPickedUp= NULL;
+	leftHandPickedUp= nullptr;
+	rightHandPickedUp= nullptr;
 
 	fullscreen = false;
 	riftEnabled = false;
@@ -138,18 +138,16 @@ void VRGame2::FireProjectile(glm::vec3 pos, glm::vec3 look)
 	physicsComponent->rigidBody->applyCentralForce(GLToBtVector(transform->look) * force);
 }
 
-/*
 // Note that pickedUp is passed by reference and so can be changed!!
-void VRGame2::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pickedUp, Hand hand)
+void VRGame2::GravityGun(PhysicsController * & pickedUp, KinectHand * hand)
 {
-	int lhp = SDL_JoystickGetAxis(joy, axis);
-	if (lhp > 0)
+	if (hand->state == HandState::HandState_Closed)
 	{
 		float dist = 1000.0f;
-		if (pickedUp == NULL)
+		if (pickedUp == nullptr)
 		{		
-			btVector3 rayFrom = GLToBtVector(hand.pos); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
-			btVector3 rayTo = GLToBtVector(hand.pos + (hand.look * dist));
+			btVector3 rayFrom = GLToBtVector(hand->pos); // Has to be some distance in front of the camera otherwise it will collide with the camera all the time
+			btVector3 rayTo = GLToBtVector(hand->pos + (hand->look * dist));
 
 			btCollisionWorld::ClosestRayResultCallback rayCallback(rayFrom, rayTo);
 			dynamicsWorld->rayTest(rayFrom, rayTo, rayCallback);
@@ -159,26 +157,17 @@ void VRGame2::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pic
 				pickedUp = reinterpret_cast<PhysicsController*>(rayCallback.m_collisionObject->getUserPointer());
 				if (pickedUp->parent == ground.get())
 				{
-					pickedUp = NULL;
+					pickedUp = nullptr;
 				}
 			}
 		}
-		if (pickedUp != NULL)
-		{
-			// Press Y to throw the thing away
-			int yb = SDL_JoystickGetButton(joy, 13);
-			if (yb)
-			{
-				float force = 300.0f;
-				pickedUp->rigidBody->applyCentralForce(GLToBtVector(hand.look) * force);
-				pickedUp = NULL;
-				return;
-			}
+		if (pickedUp != nullptr)
+		{			
 			float powerfactor = 4.0f; // Higher values causes the targets moving faster to the holding point.
 			float maxVel = 3.0f;      // Lower values prevent objects flying through walls.
 			float holdDist = 5.0f;
 			// Calculate the hold point in front of the camera
-			glm::vec3 holdPos = hand.pos + (hand.look * holdDist);
+			glm::vec3 holdPos = hand->pos + (hand->look * holdDist);
 
 			glm::vec3 v = holdPos - pickedUp->transform->position; // direction to move the Target
 			v *= powerfactor; // powerfactor of the GravityGun
@@ -191,15 +180,15 @@ void VRGame2::GravityGun(SDL_Joystick * joy, int axis, PhysicsController * & pic
 			}
 			pickedUp->rigidBody->setLinearVelocity(GLToBtVector(v));    
 			pickedUp->rigidBody->activate();	
-
+			Game::PrintText("Picked up: " + pickedUp->tag);
 		}
 	}
 	else
 	{
-		pickedUp = NULL;
+		pickedUp = nullptr;
 	}
 }
-*/
+
 
 void VRGame2::Update(float timeDelta)
 {
@@ -230,6 +219,13 @@ void VRGame2::Update(float timeDelta)
 	{
 		lastPressed = false;
 	}	
+
+	if (person)
+	{
+		GravityGun(leftHandPickedUp, & person->hands[0]);
+		GravityGun(rightHandPickedUp, & person->hands[1]);
+	}
+
 	/*
 	SDL_Joystick * joy;
 	if (SDL_NumJoysticks() > 0) 

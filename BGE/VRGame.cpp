@@ -116,11 +116,9 @@ bool VRGame::Initialise()
 
 	person = make_shared<Person>();
 	Attach(person);
-	person->headCamera = true;
+	person->headCamera = false;
 
 	ResetScene();
-
-
 
 	if (!Game::Initialise()) {
 		return false;

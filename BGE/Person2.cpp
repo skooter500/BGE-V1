@@ -22,11 +22,6 @@ inline void SafeRelease(Interface *& pInterfaceToRelease)
 	}
 }
 
-glm::vec3 KinectToGLVector(CameraSpacePoint v, bool flip)
-{
-	return glm::vec3(v.X, v.Y, v.Z);
-}
-
 Person2::Person2(void):GameComponent(true)
 {
 	connected = false;
@@ -111,20 +106,16 @@ void Person2::UpdateBone(const Joint* pJoints, JointType joint0, JointType joint
 		return;
 	}
 
-	glm::vec3 start = KinectToGLVector(pJoints[joint0].Position, !headCamera);
-	glm::vec3 end = KinectToGLVector(pJoints[joint1].Position, !headCamera);
+	glm::vec3 start = Scale(KinectToGLVector(pJoints[joint0].Position));
+	glm::vec3 end = Scale(KinectToGLVector(pJoints[joint1].Position));
 	
-	start.y -= footHeight;
-	end.y -= footHeight;
-
-	start *= scale;
-	end *= scale;
 	
 	glm::vec3 boneVector = end - start;
 	float boneLength = glm::length(boneVector);
 	glm::vec3 centrePos = start + ((boneVector) / 2.0f);
 	
 	boneVector = glm::normalize(boneVector);
+	//glm::quat q = RotationBetweenVectors(Transform::basisUp, boneVector);
 	glm::vec3 axis = glm::cross(Transform::basisUp, boneVector);
 	axis = glm::normalize(axis);
 	float theta = (float) glm::acos<float>(glm::dot<float>(Transform::basisUp, boneVector));
@@ -164,12 +155,8 @@ void Person2::UpdateHead(const Joint* pJoints, JointType joint0)
 		return;
 	}
 
-	glm::vec3 start = KinectToGLVector(pJoints[joint0].Position, !headCamera);
+	glm::vec3 start = Scale(KinectToGLVector(pJoints[joint0].Position));
 
-	start.y -= footHeight;
-	
-	start *= scale;
-	
 	glm::quat q = glm::angleAxis(glm::degrees(glm::pi<float>()), glm::vec3(1,0,0));
 
 	stringstream ss;
@@ -204,8 +191,7 @@ void Person2::UpdateHead(const Joint* pJoints, JointType joint0)
 	{
 		boxController->transform->position = this->transform->position + start;
 	}
-	boxController->parent->transform->orientation = q;
-	
+	boxController->transform->orientation = q;	
 }
 
 void Person2::Update(float timeDelta)
@@ -231,6 +217,7 @@ void Person2::Update(float timeDelta)
 		{
 			hr = pBodyFrame->GetAndRefreshBodyData(_countof(ppBodies), ppBodies);
 		}
+
 
 		if (SUCCEEDED(hr))
 		{
@@ -262,18 +249,57 @@ void Person2::Update(float timeDelta)
 		SetStatusMessage("Kinect 2 is not connected");
 	}
 
+	const Uint8 * keyState = Game::Instance()->GetKeyState();
+	static bool lastPressed = false;
+	if (keyState[SDL_SCANCODE_C])
+	{
+		if (!lastPressed)
+		{
+			headCamera = !headCamera;
+		}
+		lastPressed = true;
+	}
+	else
+	{
+		lastPressed = false;
+	}
+
 	GameComponent::Update(timeDelta);
 }
 
-void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
+glm::vec3 Person2::Scale(glm::vec3 point)
 {
-	
-	Game::Instance()->PrintFloat("Body count: ", nBodyCount);
+	point.y -= footHeight;
+	point *= scale;
+	return point;
+}
+
+void Person2::UpdateHands(IBody * pBody, Joint * joints)
+{
+	HandState leftHandState = HandState_Unknown;
+	HandState rightHandState = HandState_Unknown;
+
+	pBody->get_HandLeftState(&leftHandState);
+	pBody->get_HandRightState(&rightHandState);
+
+	hands[0].pos = Scale(KinectToGLVector(joints[JointType_HandLeft].Position));
+	hands[0].state = leftHandState;
+	hands[0].look = glm::normalize(Scale(KinectToGLVector(joints[JointType_HandLeft].Position)) - Scale(KinectToGLVector(joints[JointType_WristLeft].Position)));
+
+	hands[1].pos = Scale(KinectToGLVector(joints[JointType_HandRight].Position));
+	hands[1].state = rightHandState;
+	hands[1].look = glm::normalize(Scale(KinectToGLVector(joints[JointType_HandRight].Position)) - Scale(KinectToGLVector(joints[JointType_WristRight].Position)));
+
+}
+
+void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
+{	
 	if (m_pCoordinateMapper && (nBodyCount > 0))
 	{
 		for (int i = 0; i < nBodyCount; ++i)
 		{
-			IBody* pBody = ppBodies[i];
+			IBody * pBody = ppBodies[i];
+
 			if (pBody)
 			{			
 				BOOLEAN bTracked = false;
@@ -282,20 +308,11 @@ void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
 				if (SUCCEEDED(hr) && bTracked)
 				{
 					Joint joints[JointType_Count];
-					HandState leftHandState = HandState_Unknown;
-					HandState rightHandState = HandState_Unknown;
-
-					pBody->get_HandLeftState(&leftHandState);
-					pBody->get_HandRightState(&rightHandState);
 
 					hr = pBody->GetJoints(_countof(joints), joints);
+					UpdateHands(pBody, joints);
 					if (SUCCEEDED(hr))
 					{
-						for (int j = 0; j < _countof(joints); ++j)
-						{
-							//joints[j].
-						}
-
 						if (footHeight == 0.0f)
 						{
 							footHeight = glm::min<float>(joints[JointType_FootLeft].Position.Y, joints[JointType_FootLeft].Position.Y);
@@ -335,13 +352,6 @@ void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
 						UpdateBone(joints, JointType_AnkleLeft, JointType_FootLeft);
 
 						UpdateHead(joints, JointType_Head);
-
-						//DrawBody(joints, jointPoints);
-
-
-
-						//DrawHand(leftHandState, jointPoints[JointType_HandLeft]);
-						//DrawHand(rightHandState, jointPoints[JointType_HandRight]);
 					}
 				}
 			}
