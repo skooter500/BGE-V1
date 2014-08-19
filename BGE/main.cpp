@@ -40,7 +40,6 @@
 #include "XBoxController.h"
 #include "Steerable3DController.h"
 #include "Utils.h"
-#include "VRGame.h"
 #include "SDL_syswm.h"
 
 using namespace BGE;

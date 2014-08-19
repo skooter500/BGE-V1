@@ -1,15 +1,18 @@
 #include "Person2.h"
 #include <sstream>
 #include "Box.h"
-#include "PhysicsGame1.h"
+#include "VRGame2.h"
 #include "Cylinder.h"
 #include "Utils.h"
+#include "Content.h"
 #include "PhysicsController.h"
 #include "KinematicMotionState.h"
 #include <btBulletDynamicsCommon.h>
 
 using namespace BGE;
 using namespace std;
+
+LPCWSTR GrammarFileName = L"Content/bge.grxml";
 
 // Safe release for interfaces
 template<class Interface>
@@ -29,6 +32,7 @@ Person2::Person2(void):GameComponent(true)
 	headCamera = false;
 	scale = 20.0f;
 	footHeight = 0.0f;
+	tag = "Person2";
 }
 
 
@@ -41,11 +45,24 @@ Person2::~Person2(void)
 	}
 
 	SafeRelease(m_pKinectSensor);
+
+	//16 bit Audio Stream
+	if (NULL != m_p16BitAudioStream)
+	{
+		delete m_p16BitAudioStream;
+		m_p16BitAudioStream = NULL;
+	}
+	SafeRelease(m_pAudioStream);
+	SafeRelease(m_pAudioBeam);
+	SafeRelease(m_pKinectSensor);
 }
 
 bool Person2::Initialise()
 {
 	HRESULT hr;
+
+	IAudioSource* pAudioSource = NULL;
+	IAudioBeamList* pAudioBeamList = NULL;
 
 	hr = GetDefaultKinectSensor(&m_pKinectSensor);
 	if (FAILED(hr))
@@ -75,6 +92,27 @@ bool Person2::Initialise()
 			hr = pBodyFrameSource->OpenReader(&m_pBodyFrameReader);
 		}
 
+		if (SUCCEEDED(hr))
+		{
+			hr = m_pKinectSensor->get_AudioSource(&pAudioSource);
+		}
+
+		if (SUCCEEDED(hr))
+		{
+			hr = pAudioSource->get_AudioBeams(&pAudioBeamList);
+		}
+
+		if (SUCCEEDED(hr))
+		{
+			hr = pAudioBeamList->OpenAudioBeam(0, &m_pAudioBeam);
+		}
+
+		if (SUCCEEDED(hr))
+		{
+			hr = m_pAudioBeam->OpenInputStream(&m_pAudioStream);
+			m_p16BitAudioStream = new KinectAudioStream(m_pAudioStream);
+		}
+
 		connected = true;
 
 		SafeRelease(pBodyFrameSource);
@@ -86,6 +124,64 @@ bool Person2::Initialise()
 		connected = false;
 		return false;
 	}
+
+	if (FAILED(hr))
+	{
+		SetStatusMessage("Failed opening an audio stream!");
+		return hr;
+	}
+
+	hr = CoCreateInstance(CLSID_SpStream, NULL, CLSCTX_INPROC_SERVER, __uuidof(ISpStream), (void**)&m_pSpeechStream);
+
+	// Audio Format for Speech Processing
+	WORD AudioFormat = WAVE_FORMAT_PCM;
+	WORD AudioChannels = 1;
+	DWORD AudioSamplesPerSecond = 16000;
+	DWORD AudioAverageBytesPerSecond = 32000;
+	WORD AudioBlockAlign = 2;
+	WORD AudioBitsPerSample = 16;
+
+	WAVEFORMATEX wfxOut = { AudioFormat, AudioChannels, AudioSamplesPerSecond, AudioAverageBytesPerSecond, AudioBlockAlign, AudioBitsPerSample, 0 };
+
+	if (SUCCEEDED(hr))
+	{
+
+		m_p16BitAudioStream->SetSpeechState(true);
+		hr = m_pSpeechStream->SetBaseStream(m_p16BitAudioStream, SPDFID_WaveFormatEx, &wfxOut);
+	}
+
+	if (SUCCEEDED(hr))
+	{
+		hr = CreateSpeechRecognizer();
+	}
+
+	if (FAILED(hr))
+	{
+		SetStatusMessage("Could not create speech recognizer. Please ensure that Microsoft Speech SDK and other sample requirements are installed.");
+		return hr;
+	}
+
+	hr = LoadSpeechGrammar();
+
+	if (FAILED(hr))
+	{
+		SetStatusMessage("Could not load speech grammar. Please ensure that grammar configuration file was properly deployed.");
+		return hr;
+	}
+
+	hr = StartSpeechRecognition();
+
+	if (FAILED(hr))
+	{
+		SetStatusMessage("Could not start recognizing speech.");
+		return hr;
+	}
+
+	m_bSpeechActive = true;
+
+	SafeRelease(pAudioBeamList);
+	SafeRelease(pAudioSource);
+
 	return GameComponent::Initialise();
 }
 
@@ -127,14 +223,15 @@ void Person2::UpdateBone(const Joint* pJoints, JointType joint0, JointType joint
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
 	shared_ptr<PhysicsController> cylController;
-	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
+	VRGame2 * game = (VRGame2 *)Game::Instance();
 	if (it == boneComponents.end())
 	{
+
 		cylController = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, transform->orientation);
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
-		cylController->tag = "Person2Bone";
+		cylController->tag = "Bone";
 		boneComponents[boneKey] = cylController;
 	}
 	else
@@ -157,41 +254,42 @@ void Person2::UpdateHead(const Joint* pJoints, JointType joint0)
 
 	glm::vec3 start = Scale(KinectToGLVector(pJoints[joint0].Position));
 
-	glm::quat q = glm::angleAxis(glm::degrees(glm::pi<float>()), glm::vec3(1,0,0));
-
 	stringstream ss;
 	ss << joint0;
 	string boneKey = ss.str();
 
-	PhysicsGame1 * game = (PhysicsGame1 *) Game::Instance();
+	VRGame2 * game = (VRGame2 *)Game::Instance();
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
-	shared_ptr<PhysicsController> boxController;
+	shared_ptr<PhysicsController> box;
+	glm::quat q = glm::angleAxis(glm::degrees(glm::half_pi<float>()), glm::vec3(1, 0, 0));
 	if (it == boneComponents.end())
 	{
-		boxController = game->physicsFactory->CreateBox(6.0f, 6.0f, 0.5f, start, transform->orientation);
-		boxController->rigidBody->setCollisionFlags(boxController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		boxController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
-		boxController->rigidBody->setMotionState(new KinematicMotionState(boxController->parent));
-		boxController->tag = "Person2Head";
+		
+		box = game->physicsFactory->CreateCylinder(2.0f, 0.5f, start, q);
+		box->rigidBody->setCollisionFlags(box->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		box->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		box->rigidBody->setMotionState(new KinematicMotionState(box->parent));
+		box->tag = "Head";
 
-		boneComponents[boneKey] = boxController;
+		boneComponents[boneKey] = box;
 	}
 	else
 	{
-		boxController = it->second;
+		box = it->second;
 	}
 
 	if (headCamera)
 	{
-		game->camera->transform->position = start + glm::vec3(0, scale * 0.2f, 0);
-		boxController->transform->position = glm::vec3(100, -100, 100);
+		game->camera->transform->position = start + glm::vec3(0, scale * 3.0f, 0);
+		box->transform->position = glm::vec3(100, -100, 100);
+		box->transform->orientation = q;
 	}
 	else
 	{
-		boxController->transform->position = this->transform->position + start;
+		box->transform->position = this->transform->position + start;
+		box->transform->orientation = q;
 	}
-	boxController->transform->orientation = q;	
 }
 
 void Person2::Update(float timeDelta)
@@ -264,6 +362,11 @@ void Person2::Update(float timeDelta)
 		lastPressed = false;
 	}
 
+	if (m_bSpeechActive)
+	{
+		ProcessSpeech();
+	}
+
 	GameComponent::Update(timeDelta);
 }
 
@@ -284,12 +387,13 @@ void Person2::UpdateHands(IBody * pBody, Joint * joints)
 
 	hands[0].pos = Scale(KinectToGLVector(joints[JointType_HandLeft].Position));
 	hands[0].state = leftHandState;
-	hands[0].look = glm::normalize(Scale(KinectToGLVector(joints[JointType_HandLeft].Position)) - Scale(KinectToGLVector(joints[JointType_WristLeft].Position)));
+	hands[0].look = glm::normalize(KinectToGLVector(joints[JointType_HandLeft].Position) - KinectToGLVector(joints[JointType_WristLeft].Position));
+	Game::Instance()->PrintVector("Left hand look: ", hands[0].look);
 
 	hands[1].pos = Scale(KinectToGLVector(joints[JointType_HandRight].Position));
 	hands[1].state = rightHandState;
-	hands[1].look = glm::normalize(Scale(KinectToGLVector(joints[JointType_HandRight].Position)) - Scale(KinectToGLVector(joints[JointType_WristRight].Position)));
-
+	hands[1].look = glm::normalize(KinectToGLVector(joints[JointType_HandRight].Position) - KinectToGLVector(joints[JointType_WristRight].Position));
+	Game::Instance()->PrintVector("Right hand look: ", hands[0].look);
 }
 
 void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
@@ -332,14 +436,14 @@ void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
 						UpdateBone(joints, JointType_ElbowRight, JointType_WristRight);
 						UpdateBone(joints, JointType_WristRight, JointType_HandRight);
 						UpdateBone(joints, JointType_HandRight, JointType_HandTipRight);
-						UpdateBone(joints, JointType_WristRight, JointType_ThumbRight);
+						//UpdateBone(joints, JointType_WristRight, JointType_ThumbRight);
 
 						// Left Arm
 						UpdateBone(joints, JointType_ShoulderLeft, JointType_ElbowLeft);
 						UpdateBone(joints, JointType_ElbowLeft, JointType_WristLeft);
 						UpdateBone(joints, JointType_WristLeft, JointType_HandLeft);
 						UpdateBone(joints, JointType_HandLeft, JointType_HandTipLeft);
-						UpdateBone(joints, JointType_WristLeft, JointType_ThumbLeft);
+						//UpdateBone(joints, JointType_WristLeft, JointType_ThumbLeft);
 
 						// Right Leg
 						UpdateBone(joints, JointType_HipRight, JointType_KneeRight);
@@ -362,4 +466,213 @@ void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
 void Person2::SetStatusMessage( std::string message )
 {
 	Game::Instance()->PrintText(message);
+}
+
+// Kinect Speech stuff
+// Straight from the SDK examples
+HRESULT Person2::CreateSpeechRecognizer()
+{
+	ISpObjectToken *pEngineToken = NULL;
+
+	HRESULT hr = CoCreateInstance(CLSID_SpInprocRecognizer, NULL, CLSCTX_INPROC_SERVER, __uuidof(ISpRecognizer), (void**)&m_pSpeechRecognizer);
+
+	if (SUCCEEDED(hr))
+	{
+		m_pSpeechRecognizer->SetInput(m_pSpeechStream, TRUE);
+
+		// If this fails here, you have not installed the acoustic models for Kinect
+		hr = SpFindBestToken(SPCAT_RECOGNIZERS, L"Language=409;Kinect=True", NULL, &pEngineToken);
+
+		if (SUCCEEDED(hr))
+		{
+			m_pSpeechRecognizer->SetRecognizer(pEngineToken);
+			hr = m_pSpeechRecognizer->CreateRecoContext(&m_pSpeechContext);
+
+			// For long recognition sessions (a few hours or more), it may be beneficial to turn off adaptation of the acoustic model. 
+			// This will prevent recognition accuracy from degrading over time.
+			if (SUCCEEDED(hr))
+			{
+				hr = m_pSpeechRecognizer->SetPropertyNum(L"AdaptationOff", 0);
+			}
+		}
+	}
+	SafeRelease(pEngineToken);
+	return hr;
+}
+
+HRESULT Person2::LoadSpeechGrammar()
+{
+	HRESULT hr = m_pSpeechContext->CreateGrammar(1, &m_pSpeechGrammar);
+
+	if (SUCCEEDED(hr))
+	{
+		// Populate recognition grammar from file
+		hr = m_pSpeechGrammar->LoadCmdFromFile(GrammarFileName, SPLO_STATIC);
+	}
+
+	return hr;
+}
+
+HRESULT Person2::StartSpeechRecognition()
+{
+	HRESULT hr = S_OK;
+
+	// Specify that all top level rules in grammar are now active
+	hr = m_pSpeechGrammar->SetRuleState(NULL, NULL, SPRS_ACTIVE);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	// Specify that engine should always be reading audio
+	hr = m_pSpeechRecognizer->SetRecoState(SPRST_ACTIVE_ALWAYS);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	// Specify that we're only interested in receiving recognition events
+	hr = m_pSpeechContext->SetInterest(SPFEI(SPEI_RECOGNITION), SPFEI(SPEI_RECOGNITION));
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	// Ensure that engine is recognizing speech and not in paused state
+	hr = m_pSpeechContext->Resume(0);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	m_hSpeechEvent = m_pSpeechContext->GetNotifyEventHandle();
+	return hr;
+}
+
+HRESULT Person2::ProcessSpeech()
+{
+	const float ConfidenceThreshold = 0.8f;
+
+	SPEVENT curEvent = { SPEI_UNDEFINED, SPET_LPARAM_IS_UNDEFINED, 0, 0, 0, 0 };
+	ULONG fetched = 0;
+	HRESULT hr = S_OK;
+
+	m_pSpeechContext->GetEvents(1, &curEvent, &fetched);
+	while (fetched > 0)
+	{
+		switch (curEvent.eEventId)
+		{
+		case SPEI_RECOGNITION:
+			if (SPET_LPARAM_IS_OBJECT == curEvent.elParamType)
+			{
+				// this is an ISpRecoResult
+				ISpRecoResult* result = reinterpret_cast<ISpRecoResult*>(curEvent.lParam);
+				SPPHRASE* pPhrase = NULL;
+
+				hr = result->GetPhrase(&pPhrase);				
+				if (SUCCEEDED(hr))
+				{					
+					if ((pPhrase->pProperties != NULL) && (pPhrase->pProperties->Confidence > ConfidenceThreshold))
+					{
+						PerformAction(pPhrase->pProperties->pszValue);
+					}
+					::CoTaskMemFree(pPhrase);
+				}
+			}
+			break;
+		}
+
+		m_pSpeechContext->GetEvents(1, &curEvent, &fetched);
+	}
+
+	return hr;
+}
+
+void Person2::PerformAction(LPCWSTR pszSpeechTag)
+{
+	wstring wtag = wstring(pszSpeechTag);
+	string tag = string(wtag.begin(), wtag.end());
+	fprintf(stdout, "%s\n", tag.c_str());
+	Game::Instance()->PrintText(tag);
+
+	if (tag == "left")
+	{
+		float dist = 3.0f;
+		glm::vec3 pos = hands[0].pos + (hands[0].look * dist);
+		FireProjectile(pos, hands[0].look);
+	}
+
+	if (tag == "right")
+	{
+		float dist = 3.0f;
+		glm::vec3 pos = hands[1].pos + (hands[1].look * dist);
+		FireProjectile(pos, hands[1].look);
+	}
+
+	if (tag == "car")
+	{
+		VRGame2 * game = (VRGame2 *)Game::Instance();
+		glm::vec3 point;
+		bool hit = game->ground->rayIntersectsWorldPlane(game->camera->transform->position, game->camera->transform->look, point);
+		if (hit)
+		{
+			point.y = 10;
+			game->physicsFactory->CreateVehicle(point);
+			game->soundSystem->PlaySound("spawn", point);
+		}
+	}
+	if (tag == "model")
+	{
+		VRGame2 * game = (VRGame2 *)Game::Instance();
+		glm::vec3 point;
+		bool hit = game->ground->rayIntersectsWorldPlane(game->camera->transform->position, game->camera->transform->look, point);
+		if (hit)
+		{
+			point.y = 5;
+			game->physicsFactory->CreateRandomObject(point, glm::quat());
+			game->soundSystem->PlaySound("spawn", point);
+		}
+	}
+
+	if (tag == "coriolis")
+	{
+		VRGame2 * game = (VRGame2 *)Game::Instance();
+		glm::vec3 point;
+		bool hit = game->ground->rayIntersectsWorldPlane(game->camera->transform->position, game->camera->transform->look, point);
+		if (hit)
+		{
+			point.y = 5;
+			game->physicsFactory->CreateFromModel("coriolis", point, glm::quat(), glm::vec3(3, 3, 3));
+			game->soundSystem->PlaySound("spawn", point);
+		}
+	}
+
+	if (tag == "head camera off")
+	{
+		headCamera = false;
+	}
+
+	if (tag == "head camera on")
+	{
+		headCamera = true;
+	}
+
+	if (tag == "reset scene")
+	{
+		VRGame2 * game = (VRGame2 *)Game::Instance();
+		game->ResetScene();
+	}
+}
+
+void Person2::FireProjectile(glm::vec3 pos, glm::vec3 look)
+{
+	VRGame2 * game = (VRGame2 *)Game::Instance();
+
+	glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
+	glm::normalize(q);
+	shared_ptr<PhysicsController> physicsComponent = game->physicsFactory->CreateSphere(1, pos, q);
+	game->soundSystem->PlaySound("Fire", pos);
+	//soundSystem->Vibrate(200, 1.0f);
+	float force = 3000.0f;
+	physicsComponent->rigidBody->applyCentralForce(GLToBtVector(look) * force);
 }

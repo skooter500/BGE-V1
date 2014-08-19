@@ -1,11 +1,13 @@
 #include "VRGame2.h"
-#include "Person.h"
 #include <fmod.hpp>
 #include <fmod_errors.h>
 #include <sstream>
 #include <string>
 #include "Content.h"
 #include "Utils.h"
+#include <sapi.h>
+#include <sphelper.h>
+
 using namespace BGE;
 using namespace std;
 
@@ -70,24 +72,27 @@ VRGame2::~VRGame2(void)
 
 void VRGame2::ResetScene()
 {
-
 	list<shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{
 		shared_ptr<GameComponent> component = * it;
-		if ((component->tag == "Box") || (component->tag == "Model") || (component->tag == "Cylinder") || (component->tag == "Sphere"))
+		if ((component->tag == "Box") || (component->tag == "Model") || (component->tag == "Cylinder") || (component->tag == "Sphere") )
 		{
 			shared_ptr<PhysicsController> physics = dynamic_pointer_cast<PhysicsController> (component->FindComponentByTag("PhysicsController"));
-			dynamicsWorld->removeRigidBody(physics->rigidBody);
-			it = children.erase(it);
+			if (physics != nullptr)
+			{
+				dynamicsWorld->removeRigidBody(physics->rigidBody);
+			}
+			component->alive = false;
 		}
-		else
-		{
-			it ++;
-		}
+		it ++;		
 	}
 	
 	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
+
+	glm::quat q = glm::angleAxis(glm::degrees(glm::half_pi<float>()), glm::vec3(1, 0, 0));
+
+	physicsFactory->CreateCylinder(10, 2, glm::vec3(-30, 5, 5), q);
 }
 
 bool VRGame2::Initialise() 
@@ -102,7 +107,7 @@ bool VRGame2::Initialise()
 	broadphase = new btAxisSweep3(worldMin,worldMax);
 	solver = new btSequentialImpulseConstraintSolver();
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0,-9,0));
+	dynamicsWorld->setGravity(btVector3(0,0,0));
 
 	camera->transform->position = glm::vec3(-1,20,46);
 	camera->transform->look = glm::vec3(0, 0, 1);
@@ -116,7 +121,7 @@ bool VRGame2::Initialise()
 
 	person = make_shared<Person2>();
 	Attach(person);
-	person->headCamera = false;
+	person->headCamera = true;
 
 	ResetScene();
 
@@ -127,16 +132,7 @@ bool VRGame2::Initialise()
 	return true;
 }
 
-void VRGame2::FireProjectile(glm::vec3 pos, glm::vec3 look)
-{
-	glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
-	glm::normalize(q);
-	shared_ptr<PhysicsController> physicsComponent = physicsFactory->CreateSphere(1, pos, q);
-	soundSystem->PlaySound("Fire", pos);
-	//soundSystem->Vibrate(200, 1.0f);
-	float force = 3000.0f;
-	physicsComponent->rigidBody->applyCentralForce(GLToBtVector(transform->look) * force);
-}
+
 
 // Note that pickedUp is passed by reference and so can be changed!!
 void VRGame2::GravityGun(PhysicsController * & pickedUp, KinectHand * hand)

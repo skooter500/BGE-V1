@@ -203,12 +203,6 @@
     <ClCompile Include="Lab8.cpp">
       <Filter>Labs</Filter>
     </ClCompile>
-    <ClCompile Include="Person.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VRGame.cpp">
-      <Filter>Games</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -219,6 +213,9 @@
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="Person2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KinectAudioStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -388,12 +385,6 @@
     <ClInclude Include="Lab8.h">
       <Filter>Labs</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VRGame.h">
-      <Filter>Games</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -401,6 +392,9 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="Person2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KinectAudioStream.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -479,5 +473,8 @@
       <Filter>Content</Filter>
     </None>
     <None Include="Particles.cd" />
+    <None Include="Content\bge.grxml">
+      <Filter>Content</Filter>
+    </None>
   </ItemGroup>
 </Project>

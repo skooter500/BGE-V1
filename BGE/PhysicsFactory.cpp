@@ -73,8 +73,6 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	shared_ptr<PhysicsController> controller =make_shared<PhysicsController>(tetraShape, body, motionState);	
 	body->setUserPointer(controller.get());
 	component->Attach(controller);
-	
-	controller->tag = "Model";	
 	return controller;
 }
 
@@ -129,7 +127,6 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 
 	// Create the physics component and add it to the box
 	shared_ptr<PhysicsController> boxController = make_shared<PhysicsController>(PhysicsController(boxShape, body, boxMotionState));
-	boxController->tag = "Box";
 	body->setUserPointer(boxController.get());
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	box->Attach(boxController);
@@ -146,22 +143,20 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	shape->calculateLocalInertia(mass,inertia);
 
 	// This is a container for the box model
-	shared_ptr<GameComponent> cyl = make_shared<GameComponent>(Cylinder(radius, height));
+	shared_ptr<GameComponent> cyl = make_shared<Cylinder>(radius, height);
 	cyl->transform->position = pos;
 	Game::Instance()->Attach(cyl);
 
 	// Create the rigid body
-	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
-		,GLToBtVector(pos)));			
+	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat), GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass,  motionState, shape, inertia);
 	btRigidBody * body = new btRigidBody(rigidBodyCI);
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	dynamicsWorld->addRigidBody(body);
 
 	// Create the physics component and add it to the box
-	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(PhysicsController(shape, body, motionState));
+	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(shape, body, motionState);
 	body->setUserPointer(component.get());
-	component->tag = "Cylinder";
 	cyl->Attach(component);
 
 	return component;

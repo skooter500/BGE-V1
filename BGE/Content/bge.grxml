@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<grammar version="1.0" xml:lang="en-IE" root="bge_grammar" tag-format="semantics/1.0-literals" xmlns="http://www.w3.org/2001/06/grammar">
+  
+  <rule id='bge_grammar' scope='public'>
+    
+      <item>
+        <one-of>
+          <item>
+            <ruleref uri="#fire"/>
+          </item>
+          <item>
+            <ruleref uri="#spawn"/>
+          </item>
+          <item>
+            <ruleref uri="#headcamera"/>
+          </item>
+          <item>
+            <ruleref uri="#resetscene"/>
+          </item>
+        </one-of>
+      </item>    
+  </rule>
+
+  <rule id='fire'>
+    shoot
+   <one-of>
+        <item>          
+          <tag>left</tag>          
+          left
+        </item>
+        <item>
+          <tag>right</tag>
+          right
+        </item>
+      </one-of>
+  </rule>
+
+  <rule id='spawn'>
+    spawn
+    <one-of>
+      <item>
+        <tag>coriolis</tag>
+        coriolis
+      </item>
+      <item>
+        <tag>model</tag>
+        model
+      </item>
+      <item>
+        <tag>car</tag>
+        car
+      </item>
+    </one-of>
+  </rule>
+  
+  <rule id='headcamera'>
+    head camera
+    <one-of>
+      <item>
+        <tag>head camera off</tag>
+        off
+      </item>
+      <item>
+        <tag>head camera on</tag>
+        on
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id='resetscene'>
+    <item>
+      <tag>reset scene</tag>
+      reset scene
+    </item>
+  </rule>
+
+</grammar>
