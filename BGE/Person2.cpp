@@ -69,19 +69,17 @@ bool Person2::Initialise()
 	{
 		return hr;
 	}
-
 	if (m_pKinectSensor)
 	{
 		// Initialize the Kinect and get coordinate mapper and the body reader
 		IBodyFrameSource* pBodyFrameSource = NULL;
 
 		hr = m_pKinectSensor->Open();
-
 		if (SUCCEEDED(hr))
 		{
 			hr = m_pKinectSensor->get_CoordinateMapper(&m_pCoordinateMapper);
 		}
-
+		fprintf(stdout, "Got here4");
 		if (SUCCEEDED(hr))
 		{
 			hr = m_pKinectSensor->get_BodyFrameSource(&pBodyFrameSource);
@@ -114,21 +112,17 @@ bool Person2::Initialise()
 		}
 
 		connected = true;
-
 		SafeRelease(pBodyFrameSource);
 	}
 
 	if (!m_pKinectSensor || FAILED(hr))
 	{
-		SetStatusMessage("No ready Kinect found!");
-		connected = false;
-		return false;
+		throw BGE::Exception("No ready Kinect found!");
 	}
 
 	if (FAILED(hr))
 	{
-		SetStatusMessage("Failed opening an audio stream!");
-		return hr;
+		throw BGE::Exception("Failed opening an audio stream!");
 	}
 
 	hr = CoCreateInstance(CLSID_SpStream, NULL, CLSCTX_INPROC_SERVER, __uuidof(ISpStream), (void**)&m_pSpeechStream);
@@ -157,31 +151,27 @@ bool Person2::Initialise()
 
 	if (FAILED(hr))
 	{
-		SetStatusMessage("Could not create speech recognizer. Please ensure that Microsoft Speech SDK and other sample requirements are installed.");
-		return hr;
+		throw BGE::Exception("Could not create speech recognizer. Please ensure that Microsoft Speech SDK and other sample requirements are installed.");
 	}
 
 	hr = LoadSpeechGrammar();
 
 	if (FAILED(hr))
 	{
-		SetStatusMessage("Could not load speech grammar. Please ensure that grammar configuration file was properly deployed.");
-		return hr;
+		throw BGE::Exception("Could not load speech grammar. Please ensure that grammar configuration file was properly deployed.");
 	}
 
 	hr = StartSpeechRecognition();
 
 	if (FAILED(hr))
 	{
-		SetStatusMessage("Could not start recognizing speech.");
-		return hr;
+		throw BGE::Exception("Could not start recognizing speech.");
 	}
 
 	m_bSpeechActive = true;
 
 	SafeRelease(pAudioBeamList);
 	SafeRelease(pAudioSource);
-
 	return GameComponent::Initialise();
 }
 
@@ -281,7 +271,7 @@ void Person2::UpdateHead(const Joint* pJoints, JointType joint0)
 
 	if (headCamera)
 	{
-		game->camera->transform->position = start + glm::vec3(0, scale * 3.0f, 0);
+		game->camera->transform->position = start + glm::vec3(0, scale * 0.2f, 0);
 		box->transform->position = glm::vec3(100, -100, 100);
 		box->transform->orientation = q;
 	}
@@ -388,12 +378,29 @@ void Person2::UpdateHands(IBody * pBody, Joint * joints)
 	hands[0].pos = Scale(KinectToGLVector(joints[JointType_HandLeft].Position));
 	hands[0].state = leftHandState;
 	hands[0].look = glm::normalize(KinectToGLVector(joints[JointType_HandLeft].Position) - KinectToGLVector(joints[JointType_WristLeft].Position));
-	Game::Instance()->PrintVector("Left hand look: ", hands[0].look);
+
+	if (hands[0].state == HandState::HandState_Closed)
+	{
+		Game::Instance()->PrintText("Left hand closed");
+	}
+	else
+	{
+		Game::Instance()->PrintText("Left hand open");
+	}
 
 	hands[1].pos = Scale(KinectToGLVector(joints[JointType_HandRight].Position));
 	hands[1].state = rightHandState;
 	hands[1].look = glm::normalize(KinectToGLVector(joints[JointType_HandRight].Position) - KinectToGLVector(joints[JointType_WristRight].Position));
-	Game::Instance()->PrintVector("Right hand look: ", hands[0].look);
+
+	if (hands[1].state == HandState::HandState_Closed)
+	{
+		Game::Instance()->PrintText("Right hand closed");
+	}
+	else
+	{
+		Game::Instance()->PrintText("Right hand open");
+	}
+
 }
 
 void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
@@ -494,7 +501,16 @@ HRESULT Person2::CreateSpeechRecognizer()
 			{
 				hr = m_pSpeechRecognizer->SetPropertyNum(L"AdaptationOff", 0);
 			}
+			else
+			{
+				throw BGE::Exception("Could not create speech context");
+			}
 		}
+		else
+		{
+			throw BGE::Exception("Acoustic models not installed");
+		}
+
 	}
 	SafeRelease(pEngineToken);
 	return hr;

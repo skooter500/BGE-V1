@@ -51,6 +51,15 @@ Game::Game(void):GameComponent(true) {
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
 	Attach(camera);
+
+	if (console)
+	{
+		AllocConsole();
+		int fd = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		FILE * fp = _fdopen(fd, "w");
+		*stdout = *fp;
+		setvbuf(stdout, NULL, _IONBF, 0);
+	}
 }
 
 Game::~Game(void) {
@@ -62,15 +71,6 @@ shared_ptr<Ground> Game::GetGround()
 }
 
 bool Game::Initialise() {
-
-	if (console)
-	{
-		AllocConsole();
-		int fd = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), 0);
-		FILE * fp = _fdopen(fd, "w");
-		*stdout = *fp;
-		setvbuf(stdout, NULL, _IONBF, 0);
-	}
 
 	int x = SDL_WINDOWPOS_CENTERED;
 	int y = SDL_WINDOWPOS_CENTERED;

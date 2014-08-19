@@ -61,7 +61,7 @@ VRGame2::VRGame2(void)
 	rightHandPickedUp= nullptr;
 
 	fullscreen = false;
-	riftEnabled = false;
+	riftEnabled = true;
 
 	tag = "VR Game";
 }
@@ -107,7 +107,7 @@ bool VRGame2::Initialise()
 	broadphase = new btAxisSweep3(worldMin,worldMax);
 	solver = new btSequentialImpulseConstraintSolver();
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0,0,0));
+	dynamicsWorld->setGravity(btVector3(0,-9,0));
 
 	camera->transform->position = glm::vec3(-1,20,46);
 	camera->transform->look = glm::vec3(0, 0, 1);

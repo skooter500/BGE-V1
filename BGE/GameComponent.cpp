@@ -41,11 +41,18 @@ bool GameComponent::Initialise()
 	
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	
-	while (it != children.end())
+	try
 	{
-		(*it)->initialised = (*it)->Initialise();	
-		*it++; 
+		while (it != children.end())
+		{
+			(*it)->initialised = (*it)->Initialise();
+			*it++;
+		}
 	}
+	catch (BGE::Exception e)
+	{
+		fprintf(stdout, e.What());
+	}	
 	
 	return true;
 }
