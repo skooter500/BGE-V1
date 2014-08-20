@@ -18,6 +18,8 @@
 using namespace FMOD;
 using namespace std;
 
+#define SAFE_DELETE(a) if( (a) != NULL ) delete (a); (a) = NULL;
+
 namespace BGE
 {
 	struct Material
@@ -75,4 +77,5 @@ namespace BGE
 
 	glm::vec3 RotateVector(glm::vec3, glm::quat);
 
+	void SafeDelete(void ** p);
 }

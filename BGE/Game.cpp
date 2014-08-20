@@ -50,6 +50,7 @@ Game::Game(void):GameComponent(true) {
 	camera = make_shared<Camera>(); 
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
+	soundSystem->enabled = true;
 	Attach(camera);
 
 	if (console)
@@ -178,8 +179,11 @@ void Game::PrintFloat(string message, float f)
 
 void Game::PrintText(string message)
 {
-	messages.push_back(PrintMessage(message, lastPrintPosition));
-	lastPrintPosition.y += 20;
+	if (!riftEnabled)
+	{
+		messages.push_back(PrintMessage(message, lastPrintPosition));
+		lastPrintPosition.y += 20;
+	}
 }
 
 bool Game::Run() {	

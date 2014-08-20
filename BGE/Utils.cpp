@@ -286,3 +286,13 @@ glm::vec3 BGE::RotateVector(glm::vec3 v, glm::quat q)
 
 	return glm::vec3(w.x, w.y, w.z);
 }
+
+void BGE::SafeDelete(void ** p)
+{
+	void * pp = *p;
+	if (pp != nullptr)
+	{
+		delete pp;
+		*p = nullptr;
+	}
+}

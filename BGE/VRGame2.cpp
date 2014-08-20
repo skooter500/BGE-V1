@@ -13,34 +13,34 @@ using namespace std;
 
 bool collisionCallback2(btManifoldPoint& cp,	const btCollisionObjectWrapper* colObj0Wrap,int partId0,int index0,const btCollisionObjectWrapper* colObj1Wrap,int partId1,int index1)
 {
-	VRGame2 * game = (VRGame2 *) Game::Instance();
-	PhysicsController * object0 = reinterpret_cast<PhysicsController*> (colObj0Wrap->getCollisionObject()->getUserPointer());
-	PhysicsController * object1 = reinterpret_cast<PhysicsController*> (colObj1Wrap->getCollisionObject()->getUserPointer());
+	//VRGame2 * game = (VRGame2 *) Game::Instance();
+	//PhysicsController * object0 = reinterpret_cast<PhysicsController*> (colObj0Wrap->getCollisionObject()->getUserPointer());
+	//PhysicsController * object1 = reinterpret_cast<PhysicsController*> (colObj1Wrap->getCollisionObject()->getUserPointer());
 
-	// Swap if the ground is the first object
-	if (object0->parent == game->ground.get())
-	{
-		PhysicsController * temp = object0;
-		object0 = object1;
-		object1 = object0;
-	}
+	//// Swap if the ground is the first object
+	//if (object0->parent == game->ground.get())
+	//{
+	//	PhysicsController * temp = object0;
+	//	object0 = object1;
+	//	object1 = object0;
+	//}
 
-	// Is it just two pieces of the person? Then dont play a sound
-	if ((object0->tag.find("Person") == 0) && (object1->tag.find("Person") == 0))
-	{
-		return false;
-	}
+	//// Is it just two pieces of the person? Then dont play a sound
+	//if ((object0->tag.find("Person") == 0) && (object1->tag.find("Person") == 0))
+	//{
+	//	return false;
+	//}
 
-	// Also if its a piece of the person touching the ground
-	if ((object0->tag.find("Person") == 0) && (object1->parent == game->ground.get()))
-	{
-		return false;
-	}
+	//// Also if its a piece of the person touching the ground
+	//if ((object0->tag.find("Person") == 0) && (object1->parent == game->ground.get()))
+	//{
+	//	return false;
+	//}
 
-	
-	//game->soundSystem->PlayHitSoundIfReady(object0, 5000);
+	//
+	////game->soundSystem->PlayHitSoundIfReady(object0, 5000);
 
-	
+	//
 	return false;
 }
 
@@ -60,7 +60,7 @@ VRGame2::VRGame2(void)
 	leftHandPickedUp= nullptr;
 	rightHandPickedUp= nullptr;
 
-	fullscreen = false;
+	fullscreen = true;
 	riftEnabled = true;
 
 	tag = "VR Game";
@@ -82,17 +82,21 @@ void VRGame2::ResetScene()
 			if (physics != nullptr)
 			{
 				dynamicsWorld->removeRigidBody(physics->rigidBody);
+				SAFE_DELETE(physics->rigidBody);
 			}
 			component->alive = false;
 		}
 		it ++;		
 	}
+
+	while (dynamicsWorld->getNumConstraints() > 0 )
+	{
+		btTypedConstraint* constraint = dynamicsWorld->getConstraint(0);
+		dynamicsWorld->removeConstraint(constraint);
+		SAFE_DELETE(constraint);
+	}
 	
 	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
-
-	glm::quat q = glm::angleAxis(glm::degrees(glm::half_pi<float>()), glm::vec3(1, 0, 0));
-
-	physicsFactory->CreateCylinder(10, 2, glm::vec3(-30, 5, 5), q);
 }
 
 bool VRGame2::Initialise() 
@@ -222,90 +226,6 @@ void VRGame2::Update(float timeDelta)
 		GravityGun(rightHandPickedUp, & person->hands[1]);
 	}
 
-	/*
-	SDL_Joystick * joy;
-	if (SDL_NumJoysticks() > 0) 
-	{
-		// Open joystick
-		joy = SDL_JoystickOpen(0);
-		if (joy) 
-		{
-			// Check left button
-			int lb = SDL_JoystickGetButton(joy, 8);
-			if (lb && (elapsed > timeToPass))
-			{
-				float dist = 3.0f;
-				glm::vec3 pos = person->hands[0].pos + (person->hands[0].look * dist);
-				FireProjectile(pos, person->hands[0].look);
-				elapsed = 0.0f;
-			}
-
-			// Check right button
-			int rb = SDL_JoystickGetButton(joy, 9);
-			if (rb && (elapsed > timeToPass))
-			{
-				float dist = 3.0f;
-				glm::vec3 pos = person->hands[1].pos + (person->hands[1].look * dist);
-				FireProjectile(pos, person->hands[1].look);
-				elapsed = 0.0f;
-			}
-
-			// Check the A key and spawn a car
-			int ab = SDL_JoystickGetButton(joy, 10);
-			if (ab && (elapsed > timeToPass))
-			{
-				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->transform->position, camera->transform->look, point);
-				if (hit)
-				{
-					point.y = 5;
-					physicsFactory->CreateVehicle(point);
-					soundSystem->PlaySound("spawn", point);
-				}
-				elapsed = 0.0f;
-			}
-
-			// Check the B key and spawn a ball
-			int bb = SDL_JoystickGetButton(joy, 11);
-			if (bb && (elapsed > timeToPass))
-			{
-				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->transform->position, camera->transform->look, point);
-				if (hit)
-				{
-					point.y = 5;
-					physicsFactory->CreateSphere(3, point, glm::quat());
-					soundSystem->PlaySound("spawn", point);
-				}
-				elapsed = 0.0f;
-			}
-			// Check the X key to spawn a random object
-			int xb = SDL_JoystickGetButton(joy, 12);
-			if (xb && (elapsed > timeToPass))
-			{
-				glm::vec3 point;
-				bool hit = ground->rayIntersectsWorldPlane(camera->transform->position, camera->transform->look, point);
-				if (hit)
-				{
-					point.y = 5;
-					physicsFactory->CreateRandomObject(point, glm::quat());
-					soundSystem->PlaySound("spawn", point);
-				}
-				elapsed = 0.0f;
-			}
-
-			if (person)
-			{
-				GravityGun(joy, 4, leftHandPickedUp, person->hands[0]);
-				GravityGun(joy, 5, rightHandPickedUp, person->hands[1]);
-			}
-		}
-		
-		if (SDL_JoystickGetAttached(joy)) {
-			SDL_JoystickClose(joy);
-		}
-	}
-	*/
 	Game::Update(timeDelta);
 }
 

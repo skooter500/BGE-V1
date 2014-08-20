@@ -17,7 +17,7 @@ void RiftController::AccumulateInputs()
 	{
 		OVR::Posef pose = ts.HeadPose.ThePose;
 		glm::quat headOrientation = OVRToGLQuat(pose.Rotation);
-		transform->position = xboxController->transform->position;
+		//transform->position = xboxController->transform->position;
 		transform->orientation = headOrientation;
 		// Now update the XBOX Controller Look vectors
 		xboxController->transform->orientation = headOrientation;
@@ -27,7 +27,7 @@ void RiftController::AccumulateInputs()
 
 RiftController::RiftController()
 {
-	
+	tag = "RiftController";
 }
 
 

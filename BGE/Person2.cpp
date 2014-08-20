@@ -183,7 +183,7 @@ void Person2::UpdateBone(const Joint* pJoints, JointType joint0, JointType joint
 	// If we can't find either of these joints, exit
 	if ((joint0State == TrackingState_NotTracked) || (joint1State == TrackingState_NotTracked))
 	{
-		return;
+	return;
 	}
 
 	// Don't draw if both points are inferred
@@ -221,7 +221,8 @@ void Person2::UpdateBone(const Joint* pJoints, JointType joint0, JointType joint
 		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
 		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
-		cylController->tag = "Bone";
+		cylController->tag = "PersonBoneController";
+		cylController->parent->tag = "PersonBone";
 		boneComponents[boneKey] = cylController;
 	}
 	else
@@ -251,34 +252,35 @@ void Person2::UpdateHead(const Joint* pJoints, JointType joint0)
 	VRGame2 * game = (VRGame2 *)Game::Instance();
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
-	shared_ptr<PhysicsController> box;
+	shared_ptr<PhysicsController> boxController;
 	glm::quat q = glm::angleAxis(glm::degrees(glm::half_pi<float>()), glm::vec3(1, 0, 0));
 	if (it == boneComponents.end())
 	{
 		
-		box = game->physicsFactory->CreateCylinder(2.0f, 0.5f, start, q);
-		box->rigidBody->setCollisionFlags(box->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		box->rigidBody->setActivationState(DISABLE_DEACTIVATION);
-		box->rigidBody->setMotionState(new KinematicMotionState(box->parent));
-		box->tag = "Head";
+		boxController = game->physicsFactory->CreateCylinder(2.0f, 0.5f, start, q);
+		boxController->rigidBody->setCollisionFlags(boxController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		boxController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		boxController->rigidBody->setMotionState(new KinematicMotionState(boxController->parent));
+		boxController->tag = "PersonHeadController";
+		boxController->parent->tag = "PersonHead";
 
-		boneComponents[boneKey] = box;
+		boneComponents[boneKey] = boxController;
 	}
 	else
 	{
-		box = it->second;
+		boxController = it->second;
 	}
 
 	if (headCamera)
 	{
-		game->camera->transform->position = start + glm::vec3(0, scale * 0.2f, 0);
-		box->transform->position = glm::vec3(100, -100, 100);
-		box->transform->orientation = q;
+		game->camera->transform->position = start + glm::vec3(0, scale * 0.1f, 0);
+		boxController->transform->position = glm::vec3(100, -100, 100);
+		boxController->transform->orientation = q;
 	}
 	else
 	{
-		box->transform->position = this->transform->position + start;
-		box->transform->orientation = q;
+		boxController->transform->position = this->transform->position + start;
+		boxController->transform->orientation = q;
 	}
 }
 
