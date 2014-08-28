@@ -175,7 +175,7 @@ bool Person2::Initialise()
 	return GameComponent::Initialise();
 }
 
-void Person2::UpdateBone(const Joint* pJoints, JointType joint0, JointType joint1)
+void BGE::Person2::UpdateBone(int body, const Joint* pJoints, JointType joint0, JointType joint1)
 {
 	TrackingState joint0State = pJoints[joint0].TrackingState;
 	TrackingState joint1State = pJoints[joint1].TrackingState;
@@ -208,7 +208,7 @@ void Person2::UpdateBone(const Joint* pJoints, JointType joint0, JointType joint
 	glm::quat q = glm::angleAxis(glm::degrees(theta), axis);
 
 	stringstream ss;
-	ss << joint0 << "," << joint1;
+	ss << body << joint0 << "," << joint1;
 	string boneKey = ss.str();
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
@@ -233,7 +233,7 @@ void Person2::UpdateBone(const Joint* pJoints, JointType joint0, JointType joint
 	cylController->parent->transform->orientation = q;
 }
 
-void Person2::UpdateHead(const Joint* pJoints, JointType joint0)
+void BGE::Person2::UpdateHead(int body, const Joint* pJoints, JointType joint0)
 {
 	TrackingState joint0State = pJoints[joint0].TrackingState;
 
@@ -246,7 +246,7 @@ void Person2::UpdateHead(const Joint* pJoints, JointType joint0)
 	glm::vec3 start = Scale(KinectToGLVector(pJoints[joint0].Position));
 
 	stringstream ss;
-	ss << joint0;
+	ss << body << joint0;
 	string boneKey = ss.str();
 
 	VRGame2 * game = (VRGame2 *)Game::Instance();
@@ -431,40 +431,40 @@ void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
 							footHeight = glm::min<float>(joints[JointType_FootLeft].Position.Y, joints[JointType_FootLeft].Position.Y);
 						}
 
-						UpdateBone(joints, JointType_Head, JointType_Neck);
-						UpdateBone(joints, JointType_Neck, JointType_SpineShoulder);
-						UpdateBone(joints, JointType_SpineShoulder, JointType_SpineMid);
-						UpdateBone(joints, JointType_SpineMid, JointType_SpineBase);
-						UpdateBone(joints, JointType_SpineShoulder, JointType_ShoulderRight);
-						UpdateBone(joints, JointType_SpineShoulder, JointType_ShoulderLeft);
-						UpdateBone(joints, JointType_SpineBase, JointType_HipRight);
-						UpdateBone(joints, JointType_SpineBase, JointType_HipLeft);
+						UpdateBone(i, joints, JointType_Head, JointType_Neck);
+						UpdateBone(i, joints, JointType_Neck, JointType_SpineShoulder);
+						UpdateBone(i, joints, JointType_SpineShoulder, JointType_SpineMid);
+						UpdateBone(i, joints, JointType_SpineMid, JointType_SpineBase);
+						UpdateBone(i, joints, JointType_SpineShoulder, JointType_ShoulderRight);
+						UpdateBone(i, joints, JointType_SpineShoulder, JointType_ShoulderLeft);
+						UpdateBone(i, joints, JointType_SpineBase, JointType_HipRight);
+						UpdateBone(i, joints, JointType_SpineBase, JointType_HipLeft);
 
 						// Right Arm    
-						UpdateBone(joints, JointType_ShoulderRight, JointType_ElbowRight);
-						UpdateBone(joints, JointType_ElbowRight, JointType_WristRight);
-						UpdateBone(joints, JointType_WristRight, JointType_HandRight);
-						UpdateBone(joints, JointType_HandRight, JointType_HandTipRight);
+						UpdateBone(i, joints, JointType_ShoulderRight, JointType_ElbowRight);
+						UpdateBone(i, joints, JointType_ElbowRight, JointType_WristRight);
+						UpdateBone(i, joints, JointType_WristRight, JointType_HandRight);
+						UpdateBone(i, joints, JointType_HandRight, JointType_HandTipRight);
 						//UpdateBone(joints, JointType_WristRight, JointType_ThumbRight);
 
 						// Left Arm
-						UpdateBone(joints, JointType_ShoulderLeft, JointType_ElbowLeft);
-						UpdateBone(joints, JointType_ElbowLeft, JointType_WristLeft);
-						UpdateBone(joints, JointType_WristLeft, JointType_HandLeft);
-						UpdateBone(joints, JointType_HandLeft, JointType_HandTipLeft);
+						UpdateBone(i, joints, JointType_ShoulderLeft, JointType_ElbowLeft);
+						UpdateBone(i, joints, JointType_ElbowLeft, JointType_WristLeft);
+						UpdateBone(i, joints, JointType_WristLeft, JointType_HandLeft);
+						UpdateBone(i, joints, JointType_HandLeft, JointType_HandTipLeft);
 						//UpdateBone(joints, JointType_WristLeft, JointType_ThumbLeft);
 
 						// Right Leg
-						UpdateBone(joints, JointType_HipRight, JointType_KneeRight);
-						UpdateBone(joints, JointType_KneeRight, JointType_AnkleRight);
-						UpdateBone(joints, JointType_AnkleRight, JointType_FootRight);
+						UpdateBone(i, joints, JointType_HipRight, JointType_KneeRight);
+						UpdateBone(i, joints, JointType_KneeRight, JointType_AnkleRight);
+						UpdateBone(i, joints, JointType_AnkleRight, JointType_FootRight);
 
 						// Left Leg
-						UpdateBone(joints, JointType_HipLeft, JointType_KneeLeft);
-						UpdateBone(joints, JointType_KneeLeft, JointType_AnkleLeft);
-						UpdateBone(joints, JointType_AnkleLeft, JointType_FootLeft);
+						UpdateBone(i, joints, JointType_HipLeft, JointType_KneeLeft);
+						UpdateBone(i, joints, JointType_KneeLeft, JointType_AnkleLeft);
+						UpdateBone(i, joints, JointType_AnkleLeft, JointType_FootLeft);
 
-						UpdateHead(joints, JointType_Head);
+						UpdateHead(i, joints, JointType_Head);
 					}
 				}
 			}

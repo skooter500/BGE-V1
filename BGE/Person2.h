@@ -74,8 +74,8 @@ namespace BGE
 		KinectHand hands[2];
 
 		void SetStatusMessage(std::string message);
-		void UpdateBone(const Joint* pJoints, JointType joint0, JointType joint1);
-		void UpdateHead(const Joint* pJoints, JointType joint0);
+		void UpdateBone(int body, const Joint* pJoints, JointType joint0, JointType joint1);
+		void UpdateHead(int body, const Joint* pJoints, JointType joint0);
 
 	};
 }
