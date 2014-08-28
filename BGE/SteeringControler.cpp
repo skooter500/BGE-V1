@@ -122,6 +122,12 @@ void SteeringController::Update(float timeDelta)
 		glm::mat4 rotationMatrix = glm::lookAt(glm::vec3(0), transform->look, transform->up);
 		rotationMatrix = glm::transpose(rotationMatrix);
 		transform->orientation = glm::quat(rotationMatrix);
+
+		// Alternatively
+		glm::vec3 axis = glm::cross(Transform::basisLook, transform->look);
+		float angle = glm::acos(glm::dot(Transform::basisLook, transform->look));
+		transform->orientation = glm::angleAxis(angle, axis);
+
 	}
 
 	GameComponent::Update(timeDelta);

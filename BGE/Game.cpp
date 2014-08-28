@@ -97,6 +97,8 @@ bool Game::Initialise() {
 		return false;
 	}
 
+
+
 	/* Turn on double buffering with a 24bit Z buffer.
 	* You may need to change this to 16 or 32 for your system */
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -107,8 +109,24 @@ bool Game::Initialise() {
 
 	Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
 
-	window = SDL_CreateWindow("", x, y,
-		width, height, flags);
+
+	if (riftEnabled)
+	{
+		int display = 1;
+		SDL_Rect bounds;
+		SDL_GetDisplayBounds(display, &bounds);
+		window = SDL_CreateWindow("",
+			SDL_WINDOWPOS_UNDEFINED_DISPLAY(display),
+			SDL_WINDOWPOS_UNDEFINED_DISPLAY(display),
+			bounds.w,
+			bounds.h,
+			flags);
+	}
+	else
+	{
+		window = SDL_CreateWindow("", x, y, width, height, flags);
+	}
+	
 	context = SDL_GL_CreateContext(window);
 
 	/* This makes our buffer swap syncronized with the monitor's vertical refresh */
@@ -265,11 +283,11 @@ void Game::PreDraw()
 	glEnable(GL_CULL_FACE);
 
 	// Rift seems to require vertices in the opposite order!!
-	if (riftEnabled)
+	/*if (riftEnabled)
 	{
-		glCullFace(GL_FRONT);
+	glCullFace(GL_FRONT);
 	}
-	else
+	else*/
 	{
 		glCullFace(GL_BACK);
 	}

@@ -409,6 +409,7 @@ void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
 {	
 	if (m_pCoordinateMapper && (nBodyCount > 0))
 	{
+		// Only track the first skeleton
 		for (int i = 0; i < nBodyCount; ++i)
 		{
 			IBody * pBody = ppBodies[i];
@@ -465,6 +466,7 @@ void Person2::ProcessBody(INT64 nTime, int nBodyCount, IBody** ppBodies)
 						UpdateBone(i, joints, JointType_AnkleLeft, JointType_FootLeft);
 
 						UpdateHead(i, joints, JointType_Head);
+						//break;
 					}
 				}
 			}
