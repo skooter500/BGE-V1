@@ -20,6 +20,7 @@
 #include "Ground.h"
 #include "SoundSystem.h"
 #include "LineDrawer.h"
+#include "PhysicsFactory.h"
 #include <iostream> 
 
 namespace BGE
@@ -57,6 +58,16 @@ namespace BGE
 		glm::vec2 lastPrintPosition;
 		float fontSize;
 		void Print(string message, glm::vec2);
+
+		btBroadphaseInterface* broadphase;
+
+		// Set up the collision configuration and dispatcher
+		btDefaultCollisionConfiguration * collisionConfiguration;
+		btCollisionDispatcher * dispatcher;
+
+		// The actual physics solver
+		btSequentialImpulseConstraintSolver * solver;
+
 	public:
 
 		Game(void);
@@ -91,6 +102,11 @@ namespace BGE
 		bool console;
 		bool hud;
 		SDL_GLContext context; /* Our opengl context handle */
+
+		// Physics stuff
+		std::shared_ptr<PhysicsFactory> physicsFactory;
+		btDiscreteDynamicsWorld * dynamicsWorld;
+
 
 #ifdef _WIN32 
 		shared_ptr<RiftController> riftController;
