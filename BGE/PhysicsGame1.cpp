@@ -21,9 +21,6 @@ PhysicsGame1::PhysicsGame1(void)
 {
 	physicsFactory = NULL;
 	dynamicsWorld = NULL;
-	broadphase = NULL;
-	dispatcher = NULL;
-	solver = NULL;
 	fullscreen = false;
 
 }
@@ -38,21 +35,7 @@ std::shared_ptr<GameComponent> station;
 bool PhysicsGame1::Initialise() 
 {
 	riftEnabled = false;
-	// Set up the collision configuration and dispatcher
-    collisionConfiguration = new btDefaultCollisionConfiguration();
-    dispatcher = new btCollisionDispatcher(collisionConfiguration);
- 
-    // The world.
-	btVector3 worldMin(-1000,-1000,-1000);
-	btVector3 worldMax(1000,1000,1000);
-	broadphase = new btAxisSweep3(worldMin,worldMax);
-	solver = new btSequentialImpulseConstraintSolver();
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-    dynamicsWorld->setGravity(btVector3(0,0,0));
-
-
-	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
-
+	
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();
 	
