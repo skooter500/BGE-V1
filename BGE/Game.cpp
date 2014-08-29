@@ -47,6 +47,12 @@ Game::Game(void):GameComponent(true) {
 	frame = 0;
 
 	fps = 0;
+
+	broadphase = nullptr;
+	dispatcher = nullptr;
+	solver = nullptr;
+
+
 	camera = make_shared<Camera>(); 
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
@@ -169,6 +175,26 @@ bool Game::Initialise() {
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 	
 	LineDrawer::Instance()->Initialise();
+
+
+	// Setup the Physics stuff
+	// Set up the collision configuration and dispatcher
+	collisionConfiguration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+	// The world.
+	btVector3 worldMin(-1000, -1000, -1000);
+	btVector3 worldMax(1000, 1000, 1000);
+	broadphase = new btAxisSweep3(worldMin, worldMax);
+	solver = new btSequentialImpulseConstraintSolver();
+	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+	dynamicsWorld->setGravity(btVector3(0, 0, 0));
+
+
+	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
+
+
+
 	running = true;
 	initialised = true;
 	

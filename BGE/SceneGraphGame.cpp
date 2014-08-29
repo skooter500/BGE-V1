@@ -6,11 +6,6 @@ shared_ptr<GameComponent> ship4;
 
 SceneGraphGame::SceneGraphGame(void)
 {
-	physicsFactory = NULL;
-	dynamicsWorld = NULL;
-	broadphase = NULL;
-	dispatcher = NULL;
-	solver = NULL;		
 }
 
 SceneGraphGame::~SceneGraphGame(void)
@@ -37,16 +32,7 @@ bool SceneGraphGame::Initialise()
 	Params::Load("default");
 	float componentCount = 10.0f;
 	float current = 0.0f;
-	// Set up the collision configuration and dispatcher
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-
-	// The world.
-	btVector3 worldMin(-1000,-1000,-1000);
-	btVector3 worldMax(1000,1000,1000);
-	broadphase = new btAxisSweep3(worldMin,worldMax);
-	solver = new btSequentialImpulseConstraintSolver();
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
+	
 	dynamicsWorld->setGravity(btVector3(0,0,0));
 	
 	camera->transform->position = glm::vec3(-10,20,20);
@@ -58,7 +44,7 @@ bool SceneGraphGame::Initialise()
 	physicsFactory->CreateGroundPhysics();
 
 	fullscreen = false;
-	riftEnabled = true;
+	riftEnabled = false;
 	console = false;
 	width = 1280;
 	height = 800;

@@ -46,9 +46,13 @@ using namespace BGE;
 
 int main(int argc, char *argv[])
 {
-	// Uncomment this line to run the Rift/Connect/Physics demo as per 
+	// Check out the Kinect1/Kinect2 branches to get this demo:	
 	// http://www.youtube.com/watch?v=EEbVHxOkTxw
+<<<<<<< HEAD
 	VRGame2  game;
+=======
+	SceneGraphGame  game;
+>>>>>>> master
 	game.Run();
 
 	return 0;
