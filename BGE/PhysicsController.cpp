@@ -1,5 +1,6 @@
 #include "PhysicsController.h"
 #include "Utils.h"
+#include "Game.h"
 using namespace BGE;
 
 PhysicsController::PhysicsController()
@@ -30,6 +31,8 @@ void PhysicsController::SetPhysicsStuff(btCollisionShape * shape, btRigidBody * 
 }
 PhysicsController::~PhysicsController(void)
 {
+	Game::Instance()->dynamicsWorld->removeRigidBody(rigidBody);
+	SAFE_DELETE(rigidBody);
 }
 
 void PhysicsController::Update(float timeDelta)

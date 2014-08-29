@@ -19,10 +19,7 @@ using namespace BGE;
 
 PhysicsGame1::PhysicsGame1(void)
 {
-	physicsFactory = NULL;
-	dynamicsWorld = NULL;
 	fullscreen = false;
-
 }
 
 PhysicsGame1::~PhysicsGame1(void)
@@ -37,18 +34,7 @@ bool PhysicsGame1::Initialise()
 	riftEnabled = false;
 	
 	physicsFactory->CreateGroundPhysics();
-	physicsFactory->CreateCameraPhysics();
-	
-	//physicsFactory->CreateWall(glm::vec3(-20,0,20), 10, 10);
-	//// Now some constraints
-	//
-
-
-	//
-	//physicsFactory->CreateVehicle(glm::vec3(0,10,-30));
-	
-
-	
+	physicsFactory->CreateCameraPhysics();	
 
 	shared_ptr<PhysicsController> box1 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 0), glm::quat()); 
 	shared_ptr<PhysicsController> box2 = physicsFactory->CreateBox(1,1,4, glm::vec3(5, 5, 5), glm::quat()); 

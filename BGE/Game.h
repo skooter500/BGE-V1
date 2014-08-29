@@ -107,6 +107,7 @@ namespace BGE
 		std::shared_ptr<PhysicsFactory> physicsFactory;
 		btDiscreteDynamicsWorld * dynamicsWorld;
 
+		void DeletePhysicsConstraints();
 
 #ifdef _WIN32 
 		shared_ptr<RiftController> riftController;

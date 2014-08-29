@@ -21,15 +21,7 @@ namespace BGE
 	class SceneGraphGame :
 		public Game
 	{
-	private:
-		btBroadphaseInterface* broadphase;
-
-		// Set up the collision configuration and dispatcher
-		btDefaultCollisionConfiguration * collisionConfiguration;
-		btCollisionDispatcher * dispatcher;
-
-		// The actual physics solver
-		btSequentialImpulseConstraintSolver * solver;
+	private:		
 		glm::vec3 NextPosition(float step, float steps);
 		vector<glm::vec3> waypoints;
 		shared_ptr<GameComponent> selfExample;
@@ -40,11 +32,8 @@ namespace BGE
 		~SceneGraphGame(void);
 		bool Initialise();
 		void Update(float timeDelta);
-		void Cleanup();
-		
-		std::shared_ptr<PhysicsFactory> physicsFactory;
-		btDiscreteDynamicsWorld * dynamicsWorld;
-		
+		void Cleanup();			
+		void CreateScene();
 	};
 }
 

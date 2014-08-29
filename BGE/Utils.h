@@ -18,6 +18,8 @@
 using namespace FMOD;
 using namespace std;
 
+#define SAFE_DELETE(a) if( (a) != nullptr ) delete (a); (a) = nullptr;
+
 namespace BGE
 {
 	struct Material
