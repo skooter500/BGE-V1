@@ -34,6 +34,37 @@ GameComponent::GameComponent(bool hasTransform)
 	isRelative = false; 
 }
 
+int GameComponent::ClearChildrenWithTag(string tag)
+{
+	int count = 0;
+	list<shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		shared_ptr<GameComponent> child = * it;
+		if (child->tag == tag)
+		{
+			shared_ptr<GameComponent> component = * it;
+			component->alive = false;
+			count++;
+		}
+		it++;
+	}
+	return count;
+}
+
+int GameComponent::ClearAllChildren()
+{
+	int count = 0;
+	list<shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		shared_ptr<GameComponent> component = *it;		
+		component->alive = false;
+		it++;
+		count++;
+	}
+	return count;
+}
 
 bool GameComponent::Initialise()
 {	
@@ -191,3 +222,5 @@ std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(s
 	}
 	return components;
 }
+
+

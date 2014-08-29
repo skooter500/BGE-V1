@@ -52,14 +52,34 @@ Game::Game(void):GameComponent(true) {
 	dispatcher = nullptr;
 	solver = nullptr;
 
-
 	camera = make_shared<Camera>(); 
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
 	Attach(camera);
+
+	// Setup the Physics stuff
+	// Set up the collision configuration and dispatcher
+	collisionConfiguration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+	// The world.
+	btVector3 worldMin(-1000, -1000, -1000);
+	btVector3 worldMax(1000, 1000, 1000);
+	broadphase = new btAxisSweep3(worldMin, worldMax);
+	solver = new btSequentialImpulseConstraintSolver();
+	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+	dynamicsWorld->setGravity(btVector3(0, 0, 0));
+
+	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 }
 
-Game::~Game(void) {
+Game::~Game(void) 
+{
+	/*SAFE_DELETE(collisionConfiguration);
+	SAFE_DELETE(dispatcher);
+	SAFE_DELETE(broadphase);
+	SAFE_DELETE(solver);
+	SAFE_DELETE(dynamicsWorld);*/
 }
 
 shared_ptr<Ground> Game::GetGround()
@@ -156,24 +176,6 @@ bool Game::Initialise() {
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 	
 	LineDrawer::Instance()->Initialise();
-
-
-	// Setup the Physics stuff
-	// Set up the collision configuration and dispatcher
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-
-	// The world.
-	btVector3 worldMin(-1000, -1000, -1000);
-	btVector3 worldMax(1000, 1000, 1000);
-	broadphase = new btAxisSweep3(worldMin, worldMax);
-	solver = new btSequentialImpulseConstraintSolver();
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, 0, 0));
-
-
-	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
-
 
 
 	running = true;
@@ -501,4 +503,14 @@ void Game::Print(string message, glm::vec2 position)
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &uvbuffer);
 	SDL_FreeSurface(surface);
+}
+
+void Game::DeletePhysicsConstraints()
+{
+	while (dynamicsWorld->getNumConstraints() > 0)
+	{
+		btTypedConstraint* constraint = dynamicsWorld->getConstraint(0);
+		dynamicsWorld->removeConstraint(constraint);
+		SAFE_DELETE(constraint);
+	}
 }

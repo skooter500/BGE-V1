@@ -61,6 +61,8 @@ namespace BGE
 		void Attach(std::shared_ptr<GameComponent> child);
 		std::list<std::shared_ptr<GameComponent>> * GetChildren();
 
+		int ClearAllChildren();
+		int ClearChildrenWithTag(string tag);
 		shared_ptr<GameComponent> GameComponent::FindComponentByTag(string tag);
 		std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(string tag);
 	};
