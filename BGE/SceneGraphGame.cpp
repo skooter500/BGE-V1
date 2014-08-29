@@ -30,10 +30,7 @@ glm::vec3 SceneGraphGame::NextPosition(float step, float steps)
 bool SceneGraphGame::Initialise()
 {
 	Params::Load("default");
-	float componentCount = 10.0f;
-	float current = 0.0f;
 	
-
 	dynamicsWorld->setGravity(btVector3(0,0,0));
 	
 	camera->transform->position = glm::vec3(-10,20,20);
@@ -66,6 +63,8 @@ void SceneGraphGame::Update(float timeDelta)
 
 void SceneGraphGame::CreateScene()
 {
+	float componentCount = 10.0f;
+	float current = 0.0f;
 	shared_ptr<GameComponent> partFollower = make_shared<GameComponent>(true);
 	Attach(partFollower);
 
