@@ -11,5 +11,7 @@ namespace BGE
 	public:
 		Cylinder(float radius, float height);
 		~Cylinder(void);
+
+		bool Initialise();
 	};
 }

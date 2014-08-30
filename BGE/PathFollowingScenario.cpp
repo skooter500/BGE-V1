@@ -24,7 +24,7 @@ string PathFollowingScenario::Description()
 
 void PathFollowingScenario::Initialise()
 {
-	SteeringGame * game = (SteeringGame *) Game::Instance();
+	shared_ptr<SteeringGame> game = dynamic_pointer_cast<SteeringGame>(Game::Instance());
 	Params::Load("default");
 
 	shared_ptr<Ground> ground = make_shared<Ground>();

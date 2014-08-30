@@ -4,7 +4,7 @@
 
 using namespace BGE;
 
-KinematicMotionState::KinematicMotionState(GameComponent * owner)
+KinematicMotionState::KinematicMotionState(shared_ptr<GameComponent> owner)
 {
 	this->owner = owner;
 }

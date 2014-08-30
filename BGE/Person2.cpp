@@ -279,7 +279,7 @@ void BGE::Person2::UpdateHead(int body, const Joint* pJoints, JointType joint0)
 	ss << body << "Head" << joint0;
 	string boneKey = ss.str();
 
-	VRGame2 * game = (VRGame2 *)Game::Instance();
+	shared_ptr<Game> game = Game::Instance();
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
 	shared_ptr<PhysicsController> boxController;
@@ -661,7 +661,7 @@ void Person2::PerformAction(LPCWSTR pszSpeechTag)
 
 	if (tag == "car")
 	{
-		VRGame2 * game = (VRGame2 *)Game::Instance();
+		shared_ptr<Game> game = Game::Instance();
 		glm::vec3 point;
 		bool hit = game->ground->rayIntersectsWorldPlane(game->camera->transform->position, game->camera->transform->look, point);
 		if (hit)
@@ -673,7 +673,7 @@ void Person2::PerformAction(LPCWSTR pszSpeechTag)
 	}
 	if (tag == "model")
 	{
-		VRGame2 * game = (VRGame2 *)Game::Instance();
+		shared_ptr<Game> game = Game::Instance();
 		glm::vec3 point;
 		bool hit = game->ground->rayIntersectsWorldPlane(game->camera->transform->position, game->camera->transform->look, point);
 		if (hit)
@@ -686,7 +686,7 @@ void Person2::PerformAction(LPCWSTR pszSpeechTag)
 
 	if (tag == "coriolis")
 	{
-		VRGame2 * game = (VRGame2 *)Game::Instance();
+		shared_ptr<Game> game = Game::Instance();
 		glm::vec3 point;
 		bool hit = game->ground->rayIntersectsWorldPlane(game->camera->transform->position, game->camera->transform->look, point);
 		if (hit)
@@ -709,14 +709,14 @@ void Person2::PerformAction(LPCWSTR pszSpeechTag)
 
 	if (tag == "reset scene")
 	{
-		VRGame2 * game = (VRGame2 *)Game::Instance();
+		shared_ptr<VRGame2> game = dynamic_pointer_cast<VRGame2>(Game::Instance());
 		game->ResetScene();
 	}
 }
 
 void Person2::FireProjectile(glm::vec3 pos, glm::vec3 look)
 {
-	VRGame2 * game = (VRGame2 *)Game::Instance();
+	shared_ptr<Game> game = Game::Instance();
 
 	glm::quat q(RandomFloat(), RandomFloat(), RandomFloat(), RandomFloat());
 	glm::normalize(q);

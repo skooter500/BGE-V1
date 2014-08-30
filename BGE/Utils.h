@@ -14,6 +14,7 @@
 #include <functional> 
 #include <cctype>
 #include <string>
+#include <Leap.h>
 
 using namespace FMOD;
 using namespace std;
@@ -53,6 +54,11 @@ namespace BGE
 	btQuaternion GLToBtQuat(const glm::quat & q);
 
 	glm::vec3 KinectToGLVector(CameraSpacePoint v);
+
+	// Leap Stuff
+	glm::vec3 LeapToGlVec3(Leap::Vector v);
+
+
 
 	string ltrim(string s);
 	string rtrim(string s);

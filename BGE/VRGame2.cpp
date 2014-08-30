@@ -55,8 +55,8 @@ VRGame2::VRGame2(void)
 	leftHandPickedUp= nullptr;
 	rightHandPickedUp= nullptr;
 
-	fullscreen = true;
-	riftEnabled = true;
+	fullscreen = false;
+	riftEnabled = false;
 
 	tag = "VR Game";
 }
@@ -92,9 +92,14 @@ bool VRGame2::Initialise()
 
 	//gContactAddedCallback = collisionCallback2;
 
-	person = make_shared<Person2>();
+	/*person = make_shared<Person2>();
 	Attach(person);
 	person->headCamera = true;
+	*/
+
+	leapHands = make_shared<LeapHands>();
+
+	Attach(leapHands);
 
 	ResetScene();
 
@@ -124,7 +129,7 @@ void VRGame2::GravityGun(PhysicsController * & pickedUp, KinectHand * hand)
 			if (rayCallback.hasHit())
 			{
 				pickedUp = reinterpret_cast<PhysicsController*>(rayCallback.m_collisionObject->getUserPointer());
-				if (pickedUp->parent == ground.get())
+				if (pickedUp->parent == ground)
 				{
 					pickedUp = nullptr;
 				}

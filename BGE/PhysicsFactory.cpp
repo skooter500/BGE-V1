@@ -135,7 +135,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	return boxController;
 }
 
-shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float height, glm::vec3 pos, glm::quat quat)
+shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float height, glm::vec3 pos, glm::quat quat, bool attachToGame)
 {
 	// Create the shape
 	btCollisionShape * shape = new btCylinderShape(btVector3(radius, height * 0.5f, radius));
@@ -146,8 +146,10 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	// This is a container for the box model
 	shared_ptr<GameComponent> cyl = make_shared<Cylinder>(radius, height);
 	cyl->transform->position = pos;
-	Game::Instance()->Attach(cyl);
-
+	if (attachToGame)
+	{
+		Game::Instance()->Attach(cyl);
+	}
 	// Create the rigid body
 	btDefaultMotionState * motionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat), GLToBtVector(pos)));			
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass,  motionState, shape, inertia);

@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -36,19 +32,29 @@
     <Filter Include="Labs\OVRKill">
       <UniqueIdentifier>{d4fdf9a6-dec9-41c6-a284-39e14bda0d61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Particles\Prefabs">
+    <Filter Include="Kinect2">
+      <UniqueIdentifier>{be702c50-cf5b-403e-bbc9-c798d56d7530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Leap">
+      <UniqueIdentifier>{46d611a0-6b45-40d8-a7de-7391c26a9a50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Prefabs">
       <UniqueIdentifier>{697651d2-0cd7-45c2-b4a6-56fe6f15526c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
@@ -63,40 +69,40 @@
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="ModelTest.cpp">
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="Content.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>Particles\Prefabs</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
-      <Filter>Particles\Prefabs</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="Cylinder.cpp">
-      <Filter>Particles\Prefabs</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="MotionState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Exception.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="KinematicMotionState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Steerable3DController.cpp">
       <Filter>Controllers</Filter>
@@ -123,22 +129,22 @@
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="LineDrawer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="VectorDrawer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Params.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Route.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="SteeringControler.cpp">
       <Filter>Controllers</Filter>
@@ -168,7 +174,7 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="LazerBeam.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="SceneGraphGame.cpp">
       <Filter>Games</Filter>
@@ -204,19 +210,22 @@
       <Filter>Labs</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsDrawer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="VRGame2.cpp">
       <Filter>Games</Filter>
     </ClCompile>
-    <ClCompile Include="Person2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="KinectAudioStream.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Person2.cpp">
+      <Filter>Kinect2</Filter>
+    </ClCompile>
+    <ClCompile Include="LeapHands.cpp">
+      <Filter>Leap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,40 +245,40 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>Particles\Prefabs</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Content.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameComponent.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
-      <Filter>Particles\Prefabs</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Cylinder.h">
-      <Filter>Particles\Prefabs</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsFactory.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="MotionState.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Exception.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Steerable3DController.h">
       <Filter>Controllers</Filter>
@@ -281,7 +290,7 @@
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="KinematicMotionState.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="OVR_Shaders.h">
       <Filter>Labs\OVRKill</Filter>
@@ -302,25 +311,25 @@
       <Filter>Games</Filter>
     </ClInclude>
     <ClInclude Include="dirent.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="LineDrawer.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="SoundSystem.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Params.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="VectorDrawer.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Route.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="SteeringControler.h">
       <Filter>Controllers</Filter>
@@ -350,7 +359,7 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="LazerBeam.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="SceneGraphGame.h">
       <Filter>Games</Filter>
@@ -386,16 +395,19 @@
       <Filter>Labs</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="VRGame2.h">
       <Filter>Games</Filter>
     </ClInclude>
-    <ClInclude Include="Person2.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="KinectAudioStream.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Person2.h">
+      <Filter>Kinect2</Filter>
+    </ClInclude>
+    <ClInclude Include="LeapHands.h">
+      <Filter>Leap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "Person2.h"
 #include <btBulletDynamicsCommon.h>
 #include <fmod.hpp>
+#include "LeapHands.h"
 
 namespace BGE
 {
@@ -40,6 +41,9 @@ namespace BGE
 		shared_ptr<Person2> person;
 		PhysicsController * leftHandPickedUp;
 		PhysicsController * rightHandPickedUp;
+
+		shared_ptr<LeapHands> leapHands;
+
 		float fireRate;
 	};
 }

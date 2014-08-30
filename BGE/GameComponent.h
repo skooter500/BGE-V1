@@ -21,6 +21,7 @@
 #include <memory>
 #include "Exception.h"
 #include "Transform.h"
+#include <map>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ namespace BGE
 {
 	float RandomFloat();
 
-	class GameComponent
+	class GameComponent:public std::enable_shared_from_this<GameComponent>
 	{
 	private:		
 		void RotateVectors();
@@ -44,12 +45,13 @@ namespace BGE
 		virtual void PostDraw();
 		virtual void Cleanup();
 
-		GameComponent * parent;
+		shared_ptr<GameComponent> parent;
 		std::string tag;
 		bool transformOwner;
 
 		std::list<std::shared_ptr<GameComponent>> children;
-		
+		std::multimap<std::string, std::shared_ptr<GameComponent>> childrenMap;
+
 		float speed;
 		bool alive;
 		bool initialised;	
@@ -65,6 +67,8 @@ namespace BGE
 		int ClearChildrenWithTag(string tag);
 		shared_ptr<GameComponent> GameComponent::FindComponentByTag(string tag);
 		std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(string tag);
+
+		std::shared_ptr<GameComponent> getptr();
 	};
 }
 

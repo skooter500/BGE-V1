@@ -10,7 +10,7 @@ namespace BGE
 		Box(float width, float height, float depth);
 		Box();
 		~Box(void);
-		bool Initialize();
+		bool Initialise();
 		void Update(float timeDelta);
 
 		

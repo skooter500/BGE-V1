@@ -48,8 +48,8 @@ int main(int argc, char *argv[])
 {
 	// Check out the Kinect1/Kinect2 branches to get this demo:	
 	// http://www.youtube.com/watch?v=EEbVHxOkTxw
-	SceneGraphGame  game;
-	game.Run();
+	shared_ptr<Game> game = make_shared<SteeringGame>();
+	game->Run();
 
 	return 0;
 }

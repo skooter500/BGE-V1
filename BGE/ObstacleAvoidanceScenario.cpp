@@ -36,7 +36,7 @@ string ObstacleAvoidanceScenario::Description()
 void ObstacleAvoidanceScenario::Initialise()
 {
 	Params::Load("default");
-	SteeringGame * game = (SteeringGame *) Game::Instance();
+	shared_ptr<SteeringGame> game = dynamic_pointer_cast<SteeringGame>(Game::Instance());
 
 	shared_ptr<GameComponent> leader = make_shared<GameComponent>(true);
 	leader->tag = "Steerable";

@@ -96,12 +96,12 @@ void GameComponent::Draw()
 	{
 		// This is necessary for models etc that are instanced
 		// As they may be attached to several different parents
-		(*it)->parent = this;
+		(*it)->parent = getptr();
 		if (!(*it)->transformOwner)
 		{
 			(*it)->transform = transform;
 		}
-		(*it)->parent = this;	
+		(*it)->parent = getptr();
 		(*it ++)->Draw();		
 	}
 }
@@ -114,12 +114,12 @@ void GameComponent::PreDraw()
 	{
 		// This is necessary for models etc that are instanced
 		// As they may be attached to several different parents
-		(*it)->parent = this;
+		(*it)->parent = getptr();
 		if (!(*it)->transformOwner)
 		{
 			(*it)->transform = transform;
 		}
-		(*it)->parent = this;
+		(*it)->parent = getptr();
 		(*it++)->PreDraw();
 	}
 }
@@ -132,12 +132,12 @@ void GameComponent::PostDraw()
 	{
 		// This is necessary for models etc that are instanced
 		// As they may be attached to several different parents
-		(*it)->parent = this;
+		(*it)->parent = getptr();
 		if (!(*it)->transformOwner)
 		{
 			(*it)->transform = transform;
 		}
-		(*it)->parent = this;
+		(*it)->parent = getptr();
 		(*it++)->PostDraw();
 	}
 }
@@ -166,8 +166,17 @@ void GameComponent::Update(float timeDelta) {
 		}
 		else
 		{
-			(*it)->parent = this;
+			(*it)->parent = getptr();
 			(*it ++)->Update(timeDelta);
+		}
+	}
+
+	multimap<string, shared_ptr<GameComponent>>::iterator mit = childrenMap.begin();
+	while (it != children.end())
+	{
+		if (!(*it)->alive)
+		{
+			it = children.erase(it);
 		}
 	}
 
@@ -181,7 +190,7 @@ void GameComponent::Update(float timeDelta) {
 
 void GameComponent::Attach(shared_ptr<GameComponent> child)
 {
-	child->parent = this; 
+	child->parent = getptr();
 	// All my children share the same transform if they dont already have one...
 	if (child->transform == nullptr)
 	{
@@ -193,6 +202,7 @@ void GameComponent::Attach(shared_ptr<GameComponent> child)
 		child->transform->parent = transform;
 	}
 	children.push_back(child);
+	childrenMap.insert(std::pair<std::string, shared_ptr<GameComponent>>(child->tag, child));
 }
 
 
@@ -203,7 +213,16 @@ std::list<std::shared_ptr<GameComponent>> * GameComponent::GetChildren()
 
 shared_ptr<GameComponent> GameComponent::FindComponentByTag(std::string tag)
 {
-	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	std::map<std::string, std::shared_ptr<GameComponent>>::iterator it = childrenMap.find(tag);
+	if (it != childrenMap.end())
+	{
+		return (*it).second;
+	}
+	else
+	{
+		return nullptr;
+	}
+	/*std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{
 		if ((*it)->tag == tag)
@@ -212,22 +231,24 @@ shared_ptr<GameComponent> GameComponent::FindComponentByTag(std::string tag)
 		}
 		it++;
 	}
-	return nullptr;
+	return nullptr;*/
 }
 
 std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(std::string tag)
 {
-	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	std::map<std::string, std::shared_ptr<GameComponent>>::iterator it = childrenMap.find(tag);	
 	std::vector<std::shared_ptr<GameComponent>> components;
-	while (it != children.end())
+	while (it != childrenMap.end())
 	{
-		if ((*it)->tag == tag)
-		{
-			components.push_back(*it);
-		}
+		components.push_back((*it).second);		
 		it++;
 	}
 	return components;
+}
+
+std::shared_ptr<GameComponent> GameComponent::getptr()
+{
+	return shared_from_this();
 }
 
 

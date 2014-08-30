@@ -139,7 +139,7 @@ int SteeringController::TagNeighboursSimple(float inRange)
 	static float inRange2 = inRange * inRange;
 	for (int i = 0; i < SteeringController::steerables.size(); i++)
 	{
-		if (SteeringController::steerables[i].get() != parent)
+		if (SteeringController::steerables[i] != parent)
 		{
 			shared_ptr<GameComponent> neighbour = steerables[i];
 			float distance = glm::length2(transform->position - neighbour->transform->position);
@@ -176,7 +176,7 @@ glm::vec3 SteeringController::Cohesion()
 	for (int i = 0; i < tagged.size(); i++)
 	{
 		shared_ptr<GameComponent> entity = tagged[i];
-		if (entity.get() != parent)
+		if (entity != parent)
 		{
 			centreOfMass += entity->transform->position;
 			taggedCount++;
@@ -206,7 +206,7 @@ glm::vec3 SteeringController::Alignment()
 	for (int i = 0; i < tagged.size(); i++)
 	{
 		shared_ptr<GameComponent> entity = tagged[i];
-		if (entity.get() != parent)
+		if (entity != parent)
 		{
 			steeringForce += entity->transform->look;
 			taggedCount++;
@@ -241,7 +241,7 @@ glm::vec3 SteeringController::Separation()
 	for (int i = 0; i < tagged.size(); i++)
 	{
 		shared_ptr<GameComponent> entity = tagged[i];
-		if (entity.get() != parent)
+		if (entity != parent)
 		{
 			glm::vec3 toEntity = transform->position - entity->transform->position;
 			steeringForce += (glm::normalize(toEntity) / glm::length(toEntity));

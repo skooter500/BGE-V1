@@ -24,7 +24,7 @@ string FlockingScenario::Description()
 
 void FlockingScenario::Initialise()
 {
-	SteeringGame * game = (SteeringGame *) Game::Instance();
+	shared_ptr<SteeringGame> game = dynamic_pointer_cast<SteeringGame>(Game::Instance()); 
 	Params::Load("flocking");
 	float range = Params::GetFloat("world_range");
 

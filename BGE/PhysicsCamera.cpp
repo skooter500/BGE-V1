@@ -38,7 +38,7 @@ void PhysicsCamera::Update(float timeDelta)
 	// WHich is what the one in the base class does...
 
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
-	Game * game = Game::Instance();
+	shared_ptr<Game> game = Game::Instance();
 
 	float moveSpeed = speed;
 	float timeToPass = 1.0f / fireRate;
@@ -73,7 +73,7 @@ void PhysicsCamera::Update(float timeDelta)
 			if (rayCallback.hasHit())
 			{
 				pickedUp = reinterpret_cast<PhysicsController*>(rayCallback.m_collisionObject->getUserPointer());
-				if (pickedUp->parent == game->GetGround().get())
+				if (pickedUp->parent == game->GetGround())
 				{
 					pickedUp = NULL;
 				}

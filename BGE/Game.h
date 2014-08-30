@@ -50,7 +50,7 @@ namespace BGE
 	private:	
 		bool running;
 		
-		static Game * instance;
+		static shared_ptr<Game> instance;
 		
 		TTF_Font *font; // Declare a SDL_ttf font 
 
@@ -73,13 +73,15 @@ namespace BGE
 		Game(void);
 		~Game(void);
 
+		
+		bool PreInitialise();
 		bool Initialise();
 		void Update(float timeDelta);
 		void PreDraw();
 		void Draw();
 		void PostDraw();
 		void Cleanup();
-		static Game * Instance();
+		
 		shared_ptr<Ground> GetGround();
 		void SetGround(shared_ptr<Ground> ground);
 		const Uint8 * GetKeyState();
@@ -94,6 +96,7 @@ namespace BGE
 		void PrintFloat(string message, float f);
 		void PrintAll();
 
+		static shared_ptr<Game> Instance();
 		shared_ptr<Camera> camera;
 		shared_ptr<Ground> ground;
 

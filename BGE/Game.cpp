@@ -21,7 +21,7 @@
 
 using namespace BGE;
 
-BGE::Game * Game::instance = NULL;
+shared_ptr<Game> Game::instance = nullptr;
 
 int frame;
 
@@ -37,8 +37,7 @@ Game::Game(void):GameComponent(true) {
 	// Rift
 	width = 1280;
 	height = 800;
-	window = nullptr;
-	instance = this;
+	window = nullptr;	
 	srand(time(0));
 	elapsed = 10000.0f;
 
@@ -52,35 +51,7 @@ Game::Game(void):GameComponent(true) {
 	dispatcher = nullptr;
 	solver = nullptr;
 
-	camera = make_shared<Camera>(); 
-	soundSystem = make_shared<SoundSystem>();
-	soundSystem->Initialise();
-	soundSystem->enabled = true;
-	Attach(camera);
-
-	if (console)
-	{
-		AllocConsole();
-		int fd = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), 0);
-		FILE * fp = _fdopen(fd, "w");
-		*stdout = *fp;
-		setvbuf(stdout, NULL, _IONBF, 0);
-	}
-
-	// Setup the Physics stuff
-	// Set up the collision configuration and dispatcher
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-
-	// The world.
-	btVector3 worldMin(-1000, -1000, -1000);
-	btVector3 worldMax(1000, 1000, 1000);
-	broadphase = new btAxisSweep3(worldMin, worldMax);
-	solver = new btSequentialImpulseConstraintSolver();
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, 0, 0));
-
-	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
+	tag = "Game";	
 }
 
 Game::~Game(void) 
@@ -230,7 +201,12 @@ void Game::PrintText(string message)
 	}
 }
 
-bool Game::Run() {	
+bool Game::Run() 
+{	
+	if (!PreInitialise())
+	{
+		return false;
+	}
 	if (!Initialise())
 	{
 		return false;
@@ -357,7 +333,7 @@ void Game::Cleanup () {
     SDL_Quit();	
 }
 
-Game * Game::Instance() {
+shared_ptr<Game> Game::Instance() {
 	return instance;
 }
 
@@ -535,4 +511,40 @@ void Game::DeletePhysicsConstraints()
 		dynamicsWorld->removeConstraint(constraint);
 		SAFE_DELETE(constraint);
 	}
+}
+
+bool BGE::Game::PreInitialise()
+{
+	instance = dynamic_pointer_cast<Game>(getptr());
+	camera = make_shared<Camera>();
+	soundSystem = make_shared<SoundSystem>();
+	soundSystem->Initialise();
+	soundSystem->enabled = true;
+	Attach(camera);
+
+	if (console)
+	{
+		AllocConsole();
+		int fd = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		FILE * fp = _fdopen(fd, "w");
+		*stdout = *fp;
+		setvbuf(stdout, NULL, _IONBF, 0);
+	}
+
+	// Setup the Physics stuff
+	// Set up the collision configuration and dispatcher
+	collisionConfiguration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+	// The world.
+	btVector3 worldMin(-1000, -1000, -1000);
+	btVector3 worldMax(1000, 1000, 1000);
+	broadphase = new btAxisSweep3(worldMin, worldMax);
+	solver = new btSequentialImpulseConstraintSolver();
+	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+	dynamicsWorld->setGravity(btVector3(0, 0, 0));
+
+	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
+
+	return true;
 }
