@@ -39,8 +39,8 @@ bool SceneGraphGame::Initialise()
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
 
-	fullscreen = false;
-	riftEnabled = false;
+	fullscreen = true;
+	riftEnabled = true;
 	console = false;
 	width = 1280;
 	height = 800;

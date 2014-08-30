@@ -70,7 +70,7 @@ void VRGame2::ResetScene()
 
 	Game::Instance()->ClearChildrenWithTag("Box");
 	Game::Instance()->ClearChildrenWithTag("Model");
-	//Game::Instance()->ClearChildrenWithTag("Cylinder");
+	Game::Instance()->ClearChildrenWithTag("Cylinder");
 	Game::Instance()->ClearChildrenWithTag("Sphere");
 	Game:Instance()->DeletePhysicsConstraints();
 	
