@@ -52,7 +52,6 @@ Game::Game(void):GameComponent(true) {
 	dispatcher = nullptr;
 	solver = nullptr;
 
-
 	camera = make_shared<Camera>(); 
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();
@@ -67,9 +66,30 @@ Game::Game(void):GameComponent(true) {
 		*stdout = *fp;
 		setvbuf(stdout, NULL, _IONBF, 0);
 	}
+
+	// Setup the Physics stuff
+	// Set up the collision configuration and dispatcher
+	collisionConfiguration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+	// The world.
+	btVector3 worldMin(-1000, -1000, -1000);
+	btVector3 worldMax(1000, 1000, 1000);
+	broadphase = new btAxisSweep3(worldMin, worldMax);
+	solver = new btSequentialImpulseConstraintSolver();
+	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+	dynamicsWorld->setGravity(btVector3(0, 0, 0));
+
+	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 }
 
-Game::~Game(void) {
+Game::~Game(void) 
+{
+	SAFE_DELETE(collisionConfiguration);
+	SAFE_DELETE(dispatcher);
+	SAFE_DELETE(broadphase);
+	SAFE_DELETE(solver);
+	SAFE_DELETE(dynamicsWorld);
 }
 
 shared_ptr<Ground> Game::GetGround()
@@ -102,8 +122,6 @@ bool Game::Initialise() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		return false;
 	}
-
-
 
 	/* Turn on double buffering with a 24bit Z buffer.
 	* You may need to change this to 16 or 32 for your system */
@@ -175,24 +193,6 @@ bool Game::Initialise() {
 	font = TTF_OpenFont("Content/arial.ttf",fontSize); // Open a font & set the font size
 	
 	LineDrawer::Instance()->Initialise();
-
-
-	// Setup the Physics stuff
-	// Set up the collision configuration and dispatcher
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-
-	// The world.
-	btVector3 worldMin(-1000, -1000, -1000);
-	btVector3 worldMax(1000, 1000, 1000);
-	broadphase = new btAxisSweep3(worldMin, worldMax);
-	solver = new btSequentialImpulseConstraintSolver();
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, 0, 0));
-
-
-	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
-
 
 
 	running = true;
@@ -306,15 +306,18 @@ void Game::PreDraw()
 	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	
 
 	// Rift seems to require vertices in the opposite order!!
-	/*if (riftEnabled)
+	// DK1 seems to like front face culling, dk2 seems to like back face culling, so best to turn culling off
+	if (riftEnabled)
 	{
-	glCullFace(GL_FRONT);
+		glDisable(GL_CULL_FACE);
+		//glCullFace(GL_FRONT);
 	}
-	else*/
+	else
 	{
+		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 	}
 	GameComponent::PreDraw();
@@ -523,4 +526,14 @@ void Game::Print(string message, glm::vec2 position)
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &uvbuffer);
 	SDL_FreeSurface(surface);
+}
+
+void Game::DeletePhysicsConstraints()
+{
+	while (dynamicsWorld->getNumConstraints() > 0)
+	{
+		btTypedConstraint* constraint = dynamicsWorld->getConstraint(0);
+		dynamicsWorld->removeConstraint(constraint);
+		SAFE_DELETE(constraint);
+	}
 }

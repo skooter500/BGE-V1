@@ -126,7 +126,8 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 	dynamicsWorld->addRigidBody(body);
 
 	// Create the physics component and add it to the box
-	shared_ptr<PhysicsController> boxController = make_shared<PhysicsController>(PhysicsController(boxShape, body, boxMotionState));
+	shared_ptr<PhysicsController> boxController = make_shared<PhysicsController>(boxShape, body, boxMotionState);
+	boxController->tag = "Box";
 	body->setUserPointer(boxController.get());
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	box->Attach(boxController);
