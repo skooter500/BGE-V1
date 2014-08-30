@@ -70,7 +70,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	dynamicsWorld->addRigidBody(body);
 
-	shared_ptr<PhysicsController> controller =make_shared<PhysicsController>(tetraShape, body, motionState);	
+	shared_ptr<PhysicsController> controller = make_shared<PhysicsController>(tetraShape, body, motionState);	
 	body->setUserPointer(controller.get());
 	component->Attach(controller);
 	return controller;
@@ -158,8 +158,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	// Create the physics component and add it to the box
 	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(shape, body, motionState);
 	body->setUserPointer(component.get());
-	cyl->Attach(component);
-	delete motionState;
+	cyl->Attach(component);	
 	return component;
 }
 

@@ -214,7 +214,6 @@ void BGE::Person2::UpdateBone(int body, const Joint* pJoints, JointType joint0, 
 	glm::vec3 centrePos = jointPos[0] + ((boneVector) / 2.0f);
 	
 	boneVector = glm::normalize(boneVector);
-	//glm::quat q = RotationBetweenVectors(Transform::basisUp, boneVector);
 	glm::vec3 axis = glm::cross(Transform::basisUp, boneVector);
 	axis = glm::normalize(axis);
 	float theta = (float) glm::acos<float>(glm::dot<float>(Transform::basisUp, boneVector));

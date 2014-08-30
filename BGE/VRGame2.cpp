@@ -55,8 +55,8 @@ VRGame2::VRGame2(void)
 	leftHandPickedUp= nullptr;
 	rightHandPickedUp= nullptr;
 
-	fullscreen = false;
-	riftEnabled = false;
+	fullscreen = true;
+	riftEnabled = true;
 
 	tag = "VR Game";
 }
@@ -70,31 +70,22 @@ void VRGame2::ResetScene()
 
 	Game::Instance()->ClearChildrenWithTag("Box");
 	Game::Instance()->ClearChildrenWithTag("Model");
-	Game::Instance()->ClearChildrenWithTag("Cylinder");
+	//Game::Instance()->ClearChildrenWithTag("Cylinder");
 	Game::Instance()->ClearChildrenWithTag("Sphere");
 	Game:Instance()->DeletePhysicsConstraints();
 	
 	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
+
+	physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 20, 0), glm::quat());
+	physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 30, 0), glm::quat());
 }
 
 bool VRGame2::Initialise() 
 {
-	// Set up the collision configuration and dispatcher
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-
-	// The world.
-	btVector3 worldMin(-1000,-1000,-1000);
-	btVector3 worldMax(1000,1000,1000);
-	broadphase = new btAxisSweep3(worldMin,worldMax);
-	solver = new btSequentialImpulseConstraintSolver();
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,-9,0));
 
 	camera->transform->position = glm::vec3(-1,20,46);
 	camera->transform->look = glm::vec3(0, 0, 1);
-
-	physicsFactory = make_shared<PhysicsFactory>(dynamicsWorld);
 
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
@@ -103,7 +94,7 @@ bool VRGame2::Initialise()
 
 	person = make_shared<Person2>();
 	Attach(person);
-	person->headCamera = false;
+	person->headCamera = true;
 
 	ResetScene();
 

@@ -38,7 +38,8 @@ PhysicsController::~PhysicsController(void)
 void PhysicsController::Update(float timeDelta)
 {
 	btTransform trans;
-    rigidBody->getMotionState()->getWorldTransform(trans);
+	btMotionState * ms = rigidBody->getMotionState();
+    ms->getWorldTransform(trans);
 	transform->position = BtToGLVector(trans.getOrigin());
 	transform->orientation = BtToGLQuat(trans.getRotation());
 	

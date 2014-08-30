@@ -34,8 +34,6 @@ namespace BGE
 		void ResetScene();
 		
 		// The world.
-		std::shared_ptr<PhysicsFactory> physicsFactory;
-		btDiscreteDynamicsWorld * dynamicsWorld;
 		void VRGame2::GravityGun(PhysicsController * & pickedUp, KinectHand * hand);
 		
 		// Now stuff we need to track
