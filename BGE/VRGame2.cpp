@@ -47,11 +47,6 @@ bool collisionCallback2(btManifoldPoint& cp,	const btCollisionObjectWrapper* col
 
 VRGame2::VRGame2(void)
 {
-	physicsFactory = nullptr;
-	dynamicsWorld = nullptr;
-	broadphase = nullptr;
-	dispatcher = nullptr;
-	solver = nullptr;
 	person = nullptr;
 	
 	fireRate = 5.0f;
@@ -60,8 +55,8 @@ VRGame2::VRGame2(void)
 	leftHandPickedUp= nullptr;
 	rightHandPickedUp= nullptr;
 
-	fullscreen = true;
-	riftEnabled = true;
+	fullscreen = false;
+	riftEnabled = false;
 
 	tag = "VR Game";
 }
@@ -72,29 +67,12 @@ VRGame2::~VRGame2(void)
 
 void VRGame2::ResetScene()
 {
-	list<shared_ptr<GameComponent>>::iterator it = children.begin();
-	while (it != children.end())
-	{
-		shared_ptr<GameComponent> component = * it;
-		if ((component->tag == "Box") || (component->tag == "Model") || (component->tag == "Cylinder") || (component->tag == "Sphere") )
-		{
-			shared_ptr<PhysicsController> physics = dynamic_pointer_cast<PhysicsController> (component->FindComponentByTag("PhysicsController"));
-			if (physics != nullptr)
-			{
-				dynamicsWorld->removeRigidBody(physics->rigidBody);
-				SAFE_DELETE(physics->rigidBody);
-			}
-			component->alive = false;
-		}
-		it ++;		
-	}
 
-	while (dynamicsWorld->getNumConstraints() > 0 )
-	{
-		btTypedConstraint* constraint = dynamicsWorld->getConstraint(0);
-		dynamicsWorld->removeConstraint(constraint);
-		SAFE_DELETE(constraint);
-	}
+	Game::Instance()->ClearChildrenWithTag("Box");
+	Game::Instance()->ClearChildrenWithTag("Model");
+	Game::Instance()->ClearChildrenWithTag("Cylinder");
+	Game::Instance()->ClearChildrenWithTag("Sphere");
+	Game:Instance()->DeletePhysicsConstraints();
 	
 	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 }
@@ -121,11 +99,11 @@ bool VRGame2::Initialise()
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
 
-	gContactAddedCallback = collisionCallback2;
+	//gContactAddedCallback = collisionCallback2;
 
 	person = make_shared<Person2>();
 	Attach(person);
-	person->headCamera = true;
+	person->headCamera = false;
 
 	ResetScene();
 
@@ -222,8 +200,8 @@ void VRGame2::Update(float timeDelta)
 
 	if (person)
 	{
-		GravityGun(leftHandPickedUp, & person->hands[0]);
-		GravityGun(rightHandPickedUp, & person->hands[1]);
+		//GravityGun(leftHandPickedUp, & person->hands[0]);
+		//GravityGun(rightHandPickedUp, & person->hands[1]);
 	}
 
 	Game::Update(timeDelta);

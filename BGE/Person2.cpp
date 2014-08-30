@@ -67,7 +67,7 @@ bool Person2::Initialise()
 	hr = GetDefaultKinectSensor(&m_pKinectSensor);
 	if (FAILED(hr))
 	{
-		return hr;
+		return false;
 	}
 	if (m_pKinectSensor)
 	{
@@ -177,13 +177,25 @@ bool Person2::Initialise()
 
 void BGE::Person2::UpdateBone(int body, const Joint* pJoints, JointType joint0, JointType joint1)
 {
+	string jointKey[2];
+	stringstream ss;
+	ss << "Body: " << body << " Joint: " << joint0;
+	jointKey[0] = ss.str();
+	ss.str("");
+
+	ss << "Body: " << body << " Joint: " << joint1;
+	jointKey[1] = ss.str();
+	ss.str("");
+
+	string boneKey = jointKey[0] + "," + jointKey[1];
+
 	TrackingState joint0State = pJoints[joint0].TrackingState;
 	TrackingState joint1State = pJoints[joint1].TrackingState;
 
 	// If we can't find either of these joints, exit
 	if ((joint0State == TrackingState_NotTracked) || (joint1State == TrackingState_NotTracked))
 	{
-	return;
+		return;
 	}
 
 	// Don't draw if both points are inferred
@@ -192,13 +204,14 @@ void BGE::Person2::UpdateBone(int body, const Joint* pJoints, JointType joint0, 
 		return;
 	}
 
-	glm::vec3 start = Scale(KinectToGLVector(pJoints[joint0].Position));
-	glm::vec3 end = Scale(KinectToGLVector(pJoints[joint1].Position));
+	glm::vec3 jointPos[2];
+	jointPos[0] = Scale(KinectToGLVector(pJoints[joint0].Position));
+	jointPos[1] = Scale(KinectToGLVector(pJoints[joint1].Position));
 	
 	
-	glm::vec3 boneVector = end - start;
-	float boneLength = glm::length(boneVector);
-	glm::vec3 centrePos = start + ((boneVector) / 2.0f);
+	glm::vec3 boneVector = jointPos[1] - jointPos[0];
+	float boneLength = glm::length(boneVector) * 0.8f;
+	glm::vec3 centrePos = jointPos[0] + ((boneVector) / 2.0f);
 	
 	boneVector = glm::normalize(boneVector);
 	//glm::quat q = RotationBetweenVectors(Transform::basisUp, boneVector);
@@ -207,30 +220,48 @@ void BGE::Person2::UpdateBone(int body, const Joint* pJoints, JointType joint0, 
 	float theta = (float) glm::acos<float>(glm::dot<float>(Transform::basisUp, boneVector));
 	glm::quat q = glm::angleAxis(glm::degrees(theta), axis);
 
-	stringstream ss;
-	ss << body << joint0 << "," << joint1;
-	string boneKey = ss.str();
+	shared_ptr<PhysicsController> boneController;
+	shared_ptr<PhysicsController> jointController[2];
 
 	map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(boneKey);
-	shared_ptr<PhysicsController> cylController;
-	VRGame2 * game = (VRGame2 *)Game::Instance();
 	if (it == boneComponents.end())
 	{
-
-		cylController = game->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, transform->orientation);
-		cylController->rigidBody->setCollisionFlags(cylController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		cylController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
-		cylController->rigidBody->setMotionState(new KinematicMotionState(cylController->parent));
-		cylController->tag = "PersonBoneController";
-		cylController->parent->tag = "PersonBone";
-		boneComponents[boneKey] = cylController;
+		boneController = Game::Instance()->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, transform->orientation);
+		boneController->rigidBody->setCollisionFlags(boneController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		boneController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		boneController->rigidBody->setMotionState(new KinematicMotionState(boneController->parent));
+		boneController->tag = "PersonBoneController";
+		boneController->parent->tag = "PersonBone";
+		boneController->transform->diffuse = glm::vec3(0, 0, 1);
+		boneComponents[boneKey] = boneController;
 	}
 	else
 	{
-		cylController = it->second;
+		boneController = it->second;
+		boneController->transform->orientation = q;
+		boneController->transform->position = centrePos;
 	}
-	cylController->transform->position = this->transform->position + centrePos;
-	cylController->parent->transform->orientation = q;
+
+	for (int i = 0; i < 2; i++)
+	{
+		map<string, shared_ptr<PhysicsController>>::iterator it = boneComponents.find(jointKey[i]);
+		if (it == boneComponents.end())
+		{
+			jointController[i] = Game::Instance()->physicsFactory->CreateSphere(1.0f, jointPos[0], transform->orientation);
+			jointController[i]->rigidBody->setCollisionFlags(jointController[i]->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+			jointController[i]->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+			jointController[i]->rigidBody->setMotionState(new KinematicMotionState(jointController[i]->parent));
+			jointController[i]->tag = "PersonJointController";
+			jointController[i]->parent->tag = "Personjoint";
+			jointController[i]->transform->diffuse = glm::vec3(1, 0, 1);
+			boneComponents[jointKey[i]] = jointController[i];
+		}
+		else
+		{
+			jointController[i] = it->second;
+			jointController[i]->transform->position = jointPos[i];
+		}
+	}
 }
 
 void BGE::Person2::UpdateHead(int body, const Joint* pJoints, JointType joint0)
@@ -246,7 +277,7 @@ void BGE::Person2::UpdateHead(int body, const Joint* pJoints, JointType joint0)
 	glm::vec3 start = Scale(KinectToGLVector(pJoints[joint0].Position));
 
 	stringstream ss;
-	ss << body << joint0;
+	ss << body << "Head" << joint0;
 	string boneKey = ss.str();
 
 	VRGame2 * game = (VRGame2 *)Game::Instance();
@@ -263,7 +294,7 @@ void BGE::Person2::UpdateHead(int body, const Joint* pJoints, JointType joint0)
 		boxController->rigidBody->setMotionState(new KinematicMotionState(boxController->parent));
 		boxController->tag = "PersonHeadController";
 		boxController->parent->tag = "PersonHead";
-
+		boxController->transform->diffuse = glm::vec3(0, 0, 1);
 		boneComponents[boneKey] = boxController;
 	}
 	else

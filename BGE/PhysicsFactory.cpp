@@ -159,7 +159,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	shared_ptr<PhysicsController> component = make_shared<PhysicsController>(shape, body, motionState);
 	body->setUserPointer(component.get());
 	cyl->Attach(component);
-
+	delete motionState;
 	return component;
 }
 
