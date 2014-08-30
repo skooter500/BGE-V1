@@ -41,7 +41,7 @@ bool SceneGraphGame::Initialise()
 
 	fullscreen = true;
 	riftEnabled = true;
-	console = false;
+	console = true;
 	width = 1280;
 	height = 800;
 

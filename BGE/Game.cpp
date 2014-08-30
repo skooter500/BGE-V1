@@ -309,11 +309,10 @@ void Game::PreDraw()
 	
 
 	// Rift seems to require vertices in the opposite order!!
-	// DK1 seems to like front face culling, dk2 seems to like back face culling, so best to turn culling off
 	if (riftEnabled)
 	{
-		glDisable(GL_CULL_FACE);
-		//glCullFace(GL_FRONT);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 	}
 	else
 	{
