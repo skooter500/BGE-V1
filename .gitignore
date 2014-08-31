@@ -13,6 +13,7 @@
 *.a
 
 # All the rest
+*.psess
 *.obj
 *.pch
 *.exe

@@ -2,7 +2,8 @@
 #include "GameComponent.h"
 #include <Leap.h>
 #include "SkeletonMapper.h"
-#include "LeapSampleListener.h"
+
+using namespace Leap;
 
 namespace BGE
 {
@@ -21,11 +22,24 @@ namespace BGE
 		Leap::Controller controller;
 
 		shared_ptr<SkeletonMapper> mapper;
-		shared_ptr<LeapSampleListener> leapSampleListener;
 
 		int trackedHands;
 		bool headMode;
 
+		bool dataReady;
+
 		void UpdateBone(string tag, glm::vec3 start, glm::vec3);
+
+		virtual void onInit(const Controller&);
+		virtual void onConnect(const Controller&);
+		virtual void onDisconnect(const Controller&);
+		virtual void onExit(const Controller&);
+		virtual void onFrame(const Controller&);
+		virtual void onFocusGained(const Controller&);
+		virtual void onFocusLost(const Controller&);
+		virtual void onDeviceChange(const Controller&);
+		virtual void onServiceConnect(const Controller&);
+		virtual void onServiceDisconnect(const Controller&);
+
 	};
 }

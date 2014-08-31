@@ -230,9 +230,6 @@
     <ClCompile Include="KinectAudioStream.cpp">
       <Filter>Kinect2</Filter>
     </ClCompile>
-    <ClCompile Include="LeapSampleListener.cpp">
-      <Filter>Leap</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -417,9 +414,6 @@
     </ClInclude>
     <ClInclude Include="KinectAudioStream.h">
       <Filter>Kinect2</Filter>
-    </ClInclude>
-    <ClInclude Include="LeapSampleListener.h">
-      <Filter>Leap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
