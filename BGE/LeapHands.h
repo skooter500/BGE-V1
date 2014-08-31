@@ -2,7 +2,6 @@
 #include "GameComponent.h"
 #include <Leap.h>
 #include "SkeletonMapper.h"
-#include "LeapSampleListener.h"
 
 namespace BGE
 {
@@ -21,7 +20,6 @@ namespace BGE
 		Leap::Controller controller;
 
 		shared_ptr<SkeletonMapper> mapper;
-		shared_ptr<LeapSampleListener> leapSampleListener;
 
 		int trackedHands;
 		bool headMode;
