@@ -96,12 +96,11 @@ void GameComponent::Draw()
 	{
 		// This is necessary for models etc that are instanced
 		// As they may be attached to several different parents
-		(*it)->parent = getptr();
+		(*it)->parent = This();
 		if (!(*it)->transformOwner)
 		{
 			(*it)->transform = transform;
 		}
-		(*it)->parent = getptr();
 		(*it ++)->Draw();		
 	}
 }
@@ -114,12 +113,11 @@ void GameComponent::PreDraw()
 	{
 		// This is necessary for models etc that are instanced
 		// As they may be attached to several different parents
-		(*it)->parent = getptr();
+		(*it)->parent = This();
 		if (!(*it)->transformOwner)
 		{
 			(*it)->transform = transform;
 		}
-		(*it)->parent = getptr();
 		(*it++)->PreDraw();
 	}
 }
@@ -132,12 +130,11 @@ void GameComponent::PostDraw()
 	{
 		// This is necessary for models etc that are instanced
 		// As they may be attached to several different parents
-		(*it)->parent = getptr();
+		(*it)->parent = This();
 		if (!(*it)->transformOwner)
 		{
 			(*it)->transform = transform;
 		}
-		(*it)->parent = getptr();
 		(*it++)->PostDraw();
 	}
 }
@@ -166,17 +163,21 @@ void GameComponent::Update(float timeDelta) {
 		}
 		else
 		{
-			(*it)->parent = getptr();
+			(*it)->parent = This();
 			(*it ++)->Update(timeDelta);
 		}
 	}
 
 	multimap<string, shared_ptr<GameComponent>>::iterator mit = childrenMap.begin();
-	while (it != children.end())
+	while (mit != childrenMap.end())
 	{
-		if (!(*it)->alive)
+		if (!(*mit).second->alive)
 		{
-			it = children.erase(it);
+			mit = childrenMap.erase(mit);
+		}
+		else
+		{
+			++mit;
 		}
 	}
 
@@ -190,7 +191,7 @@ void GameComponent::Update(float timeDelta) {
 
 void GameComponent::Attach(shared_ptr<GameComponent> child)
 {
-	child->parent = getptr();
+	child->parent = This();
 	// All my children share the same transform if they dont already have one...
 	if (child->transform == nullptr)
 	{
@@ -246,7 +247,7 @@ std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(s
 	return components;
 }
 
-std::shared_ptr<GameComponent> GameComponent::getptr()
+std::shared_ptr<GameComponent> GameComponent::This()
 {
 	return shared_from_this();
 }

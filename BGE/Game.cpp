@@ -515,7 +515,7 @@ void Game::DeletePhysicsConstraints()
 
 bool BGE::Game::PreInitialise()
 {
-	instance = dynamic_pointer_cast<Game>(getptr());
+	instance = dynamic_pointer_cast<Game>(This());
 	camera = make_shared<Camera>();
 	soundSystem = make_shared<SoundSystem>();
 	soundSystem->Initialise();

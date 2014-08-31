@@ -68,7 +68,7 @@ namespace BGE
 		shared_ptr<GameComponent> GameComponent::FindComponentByTag(string tag);
 		std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(string tag);
 
-		std::shared_ptr<GameComponent> getptr();
+		std::shared_ptr<GameComponent> This();
 	};
 }
 

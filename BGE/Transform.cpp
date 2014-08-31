@@ -48,6 +48,7 @@ void Transform::Calculate()
 
 glm::vec3 Transform::TransformPosition(glm::vec3 in, bool scale)
 {
+	Transform::Calculate();
 	if (scale)
 	{
 		return glm::vec3(world * glm::vec4(in, 1.0f));

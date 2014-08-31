@@ -107,6 +107,7 @@
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="SceneGraphGame.cpp" />
+    <ClCompile Include="SkeletonMapper.cpp" />
     <ClCompile Include="SnowEffect.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="SteeringGame.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Route.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="SceneGraphGame.h" />
+    <ClInclude Include="SkeletonMapper.h" />
     <ClInclude Include="SnowEffect.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="SteeringGame.h" />

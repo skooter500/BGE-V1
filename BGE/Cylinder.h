@@ -13,5 +13,6 @@ namespace BGE
 		~Cylinder(void);
 
 		bool Initialise();
+		void Draw();
 	};
 }

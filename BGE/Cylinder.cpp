@@ -23,6 +23,11 @@ bool Cylinder::Initialise()
 	return model->Initialise();
 }
 
+void Cylinder::Draw()
+{
+	//Game::Instance()->PrintVector("Cyl: ", transform->position);
+	GameComponent::Draw();
+}
 
 Cylinder::~Cylinder(void)
 {

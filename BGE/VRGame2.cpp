@@ -57,6 +57,7 @@ VRGame2::VRGame2(void)
 
 	fullscreen = false;
 	riftEnabled = false;
+	console = true;
 
 	tag = "VR Game";
 }
@@ -76,8 +77,8 @@ void VRGame2::ResetScene()
 	
 	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 
-	physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 20, 0), glm::quat());
-	physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 30, 0), glm::quat());
+	/*physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 20, 0), glm::quat());
+	physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 30, 0), glm::quat());*/
 }
 
 bool VRGame2::Initialise() 

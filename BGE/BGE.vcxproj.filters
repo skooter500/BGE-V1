@@ -68,16 +68,10 @@
     <ClCompile Include="TexturedCube.cpp">
       <Filter>Games</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="ModelTest.cpp">
       <Filter>Games</Filter>
     </ClCompile>
     <ClCompile Include="Content.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
@@ -173,9 +167,6 @@
     <ClCompile Include="AttackingState.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="LazerBeam.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGraphGame.cpp">
       <Filter>Games</Filter>
     </ClCompile>
@@ -227,6 +218,18 @@
     <ClCompile Include="LeapHands.cpp">
       <Filter>Leap</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonMapper.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LazerBeam.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -244,9 +247,6 @@
     <ClInclude Include="ModelTest.h">
       <Filter>Games</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
@@ -257,9 +257,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameComponent.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
@@ -358,9 +355,6 @@
     <ClInclude Include="AttackingState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="LazerBeam.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraphGame.h">
       <Filter>Games</Filter>
     </ClInclude>
@@ -408,6 +402,18 @@
     </ClInclude>
     <ClInclude Include="LeapHands.h">
       <Filter>Leap</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="LazerBeam.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonMapper.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

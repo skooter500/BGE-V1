@@ -4,8 +4,6 @@
 using namespace BGE;
 using namespace std;
 
-
-
 VectorDrawer::VectorDrawer(glm::vec3 scale)
 {
 	float back = 0.2f;

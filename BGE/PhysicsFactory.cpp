@@ -76,11 +76,15 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 	return controller;
 }
 
-shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat)
+shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::vec3 pos, glm::quat quat, bool attachToGame)
 {
 	shared_ptr<GameComponent> sphere = make_shared<Sphere>(radius);
-	Game::Instance()->Attach(sphere);
+	sphere->Initialise();
 
+	if (attachToGame)
+	{
+		Game::Instance()->Attach(sphere);
+	}
 	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
 		,GLToBtVector(pos)));	
 
@@ -102,7 +106,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::ve
 }
 
 
-shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float height, float depth, glm::vec3 pos, glm::quat quat)
+shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float height, float depth, glm::vec3 pos, glm::quat quat, bool attachToGame)
 {
 	// Create the shape
 	btCollisionShape * boxShape = new btBoxShape(btVector3(width, height, depth) * 0.50);
@@ -112,11 +116,15 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 
 	// This is a container for the box model
 	shared_ptr<Box> box = make_shared<Box>(width, height, depth);
+	box->Initialise();
 	box->transform->position = pos;
 	cout << "CreateBox(): " << box -> transform -> position.x << ", " << box -> transform -> position.y << ", " << box -> transform -> position.z << endl; 
 	box -> transform -> Calculate(); 
-	Game::Instance()->Attach(box);
 
+	if (attachToGame)
+	{
+		Game::Instance()->Attach(box);
+	}
 	// Create the rigid body
 	btDefaultMotionState * boxMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
 		,GLToBtVector(pos)));			
@@ -145,6 +153,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 
 	// This is a container for the box model
 	shared_ptr<GameComponent> cyl = make_shared<Cylinder>(radius, height);
+	cyl->Initialise();
 	cyl->transform->position = pos;
 	if (attachToGame)
 	{

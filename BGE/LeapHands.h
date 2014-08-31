@@ -1,6 +1,7 @@
 #pragma once
 #include "GameComponent.h"
 #include <Leap.h>
+#include "SkeletonMapper.h"
 
 namespace BGE
 {
@@ -17,6 +18,8 @@ namespace BGE
 		virtual void Cleanup();
 
 		Leap::Controller controller;
+
+		shared_ptr<SkeletonMapper> mapper;
 
 		void UpdateBone(string tag, glm::vec3 start, glm::vec3);
 	};
