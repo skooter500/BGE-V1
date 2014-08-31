@@ -100,6 +100,8 @@ bool VRGame2::Initialise()
 
 	leapHands = make_shared<LeapHands>();
 
+	leapHands->headMode = true;
+
 	Attach(leapHands);
 
 	ResetScene();

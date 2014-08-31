@@ -9,6 +9,7 @@ using namespace Leap;
 
 BGE::LeapHands::LeapHands() :GameComponent(true)
 {
+	trackedHands = 0;
 }
 
 
@@ -18,6 +19,10 @@ BGE::LeapHands::~LeapHands()
 
 bool BGE::LeapHands::Initialise()
 {
+	if (headMode)
+	{
+		controller.config().setBool("head_mounted_display_mode", true);
+	}
 	mapper = make_shared<SkeletonMapper>(This(), glm::vec3(0.2f, 0.2f, 0.2f));
 	
 	return GameComponent::Initialise();
@@ -26,6 +31,13 @@ bool BGE::LeapHands::Initialise()
 void BGE::LeapHands::Update(float timeDelta)
 {
 	HandList hands = controller.frame().hands();
+
+	int handCount = hands.count();
+
+	if (handCount < trackedHands)
+	{
+		ClearAllChildren();
+	}
 
 	int handId = 0;
 	for (HandList::const_iterator hl = hands.begin(); hl != hands.end(); ++hl) {
@@ -75,11 +87,7 @@ void BGE::LeapHands::Update(float timeDelta)
 		}
 		++handId;
 	}
-	// There are no tracked hands, so remove them
-	if (handId == 0)
-	{
-		ClearAllChildren();
-	}
+	trackedHands = handId;
 
 	GameComponent::Update(timeDelta);
 }

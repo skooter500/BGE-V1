@@ -21,6 +21,9 @@ namespace BGE
 
 		shared_ptr<SkeletonMapper> mapper;
 
+		int trackedHands;
+		bool headMode;
+
 		void UpdateBone(string tag, glm::vec3 start, glm::vec3);
 	};
 }
