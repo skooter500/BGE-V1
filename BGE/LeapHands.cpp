@@ -28,14 +28,18 @@ struct BoneData
 
 std::map<string, BoneData> boneData;
 
+const int boneDataPerHand = 28;
+
 BGE::LeapHands::LeapHands() :GameComponent(true)
 {
 	trackedHands = 0;
+	InitializeCriticalSection(& criticalSection);
 }
 
 
 BGE::LeapHands::~LeapHands()
 {
+	DeleteCriticalSection(& criticalSection);
 }
 
 bool BGE::LeapHands::Initialise()
@@ -54,14 +58,31 @@ bool BGE::LeapHands::Initialise()
 
 void BGE::LeapHands::Update(float timeDelta)
 {	
-	map<string, BoneData>::iterator it = boneData.begin();
-
-	while (it != boneData.end())
+	list<shared_ptr<GameComponent>>::iterator cit = children.begin();
+	while (cit != children.end())
 	{
-		BoneData bone = it->second;
-		mapper->UpdateBone(bone.key, bone.pos[0], bone.pos[1], bone.knobs);
-		++it;
+		(*cit ++)->transform->position = glm::vec3(0, -10, 0);
 	}
+
+	EnterCriticalSection(&criticalSection);
+	map<string, BoneData>::iterator it = boneData.begin();
+	int currentBone = 0;
+	if (trackedHands > 0)
+	{
+		while (it != boneData.end())
+		{
+			BoneData bone = it->second;
+			mapper->UpdateBone(bone.key, bone.pos[0], bone.pos[1], bone.knobs);
+			++it;
+			++currentBone;
+			if ((trackedHands == 1) && (currentBone == boneDataPerHand))
+			{
+				break;
+			}
+		}
+	}
+	LeaveCriticalSection(&criticalSection);
+
 	GameComponent::Update(timeDelta);
 }
 
@@ -128,67 +149,62 @@ void LeapHands::onServiceDisconnect(const Controller& controller) {
 
 void LeapHands::onFrame(const Controller& controller) 
 {
-	//Game::Instance()->PrintFloat("Hand children: ", childrenMap.size());
+	//Game::Instance()->PrintFloat("Hand children: ", childrenMap.size());	
+	std::map<string, BoneData> tempBoneData;
 	HandList hands = controller.frame().hands();
-
-	int handCount = hands.count();
 	int handId = 0;
+	for (HandList::const_iterator hl = hands.begin(); hl != hands.end(); ++hl) {
+		// Get the first hand
+		const Hand hand = *hl;
 
-	if (handCount != trackedHands)
-	{
-		ClearAllChildren();
-		boneData.clear();
-		trackedHands = handCount;
-	}
-	else
-	{
-		for (HandList::const_iterator hl = hands.begin(); hl != hands.end(); ++hl) {
-			// Get the first hand
-			const Hand hand = *hl;
+		// Get fingers
+		const FingerList fingers = hand.fingers();
+		int fingerId = 0;
+		bool firstFinger = true;
+		Finger previousFinger;
+		for (FingerList::const_iterator fl = fingers.begin(); fl != fingers.end(); ++fl) {
+			const Finger finger = *fl;
 
-			// Get fingers
-			const FingerList fingers = hand.fingers();
-			int fingerId = 0;
-			bool firstFinger = true;
-			Finger previousFinger;
-			for (FingerList::const_iterator fl = fingers.begin(); fl != fingers.end(); ++fl) {
-				const Finger finger = *fl;
-
-				// Get finger bones
-				for (int b = 0; b < 4; ++b) {
-					Bone::Type boneType = static_cast<Bone::Type>(b);
-					Bone bone = finger.bone(boneType);
-					stringstream ss;
-					ss << "Hand: " << handId << " Finger: " << fingerId << " Bone: " << b;
-					//Game::Instance()->PrintText(ss.str());
-					boneData[ss.str()] = BoneData(ss.str(), LeapToGlVec3(bone.prevJoint()), LeapToGlVec3(bone.nextJoint()), true);
-					//mapper->UpdateBone(ss.str(), LeapToGlVec3(bone.prevJoint()), LeapToGlVec3(bone.nextJoint()), true);
-				}
-				// Draw some other bits of the hand
-				if (!firstFinger)
+			// Get finger bones
+			for (int b = 0; b < 4; ++b) {
+				Bone::Type boneType = static_cast<Bone::Type>(b);
+				Bone bone = finger.bone(boneType);
+				stringstream ss;
+				ss << "Hand: " << handId << " Finger: " << fingerId << " Bone: " << b;
+				//Game::Instance()->PrintText(ss.str());
+				tempBoneData[ss.str()] = BoneData(ss.str(), LeapToGlVec3(bone.prevJoint()), LeapToGlVec3(bone.nextJoint()), true);
+				//mapper->UpdateBone(ss.str(), LeapToGlVec3(bone.prevJoint()), LeapToGlVec3(bone.nextJoint()), true);
+			}
+			// Draw some other bits of the hand
+			if (!firstFinger)
+			{
+				for (int b = 0; b < 2; ++b)
 				{
-					for (int b = 0; b < 2; ++b)
+					stringstream ss;
+					ss << "Hand: " << handId << "Finger: " << (fingerId - 1) << "Finger: " << (fingerId) << " Bone: " << b;
+					//Game::Instance()->PrintText(ss.str());
+					Bone startBone = previousFinger.bone(static_cast<Bone::Type>(b));
+					Bone endBone = finger.bone(static_cast<Bone::Type>(b));
+					if ((b == 1) && (fingerId == 1))
 					{
-						stringstream ss;
-						ss << "Hand: " << handId << "Finger: " << (fingerId - 1) << "Finger: " << (fingerId) << " Bone: " << b;
-						//Game::Instance()->PrintText(ss.str());
-						Bone startBone = previousFinger.bone(static_cast<Bone::Type>(b));
-						Bone endBone = finger.bone(static_cast<Bone::Type>(b));
-						if ((b == 1) && (fingerId == 1))
-						{
-							//mapper->UpdateBone(ss.str(), LeapToGlVec3(startBone.nextJoint()), LeapToGlVec3(endBone.prevJoint()), false);
-						}
-						else
-						{
-							//mapper->UpdateBone(ss.str(), LeapToGlVec3(startBone.prevJoint()), LeapToGlVec3(endBone.prevJoint()), false);
-						}
+						tempBoneData[ss.str()] = BoneData(ss.str(), LeapToGlVec3(startBone.nextJoint()), LeapToGlVec3(endBone.prevJoint()), false);
+					}
+					else
+					{
+						tempBoneData[ss.str()] = BoneData(ss.str(), LeapToGlVec3(startBone.prevJoint()), LeapToGlVec3(endBone.prevJoint()), false);
 					}
 				}
-				previousFinger = finger;
-				firstFinger = false;
-				++fingerId;
 			}
-			++handId;
+			previousFinger = finger;
+			firstFinger = false;
+			++fingerId;
 		}
+		++handId;
 	}
+	trackedHands = handId;
+
+	EnterCriticalSection(&criticalSection);
+	map<string, BoneData>::iterator it = tempBoneData.begin();
+	boneData = tempBoneData;
+	LeaveCriticalSection(&criticalSection);
 }

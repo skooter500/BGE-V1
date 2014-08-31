@@ -22,9 +22,7 @@ void BGE::SkeletonMapper::UpdateKnob(string tag, glm::vec3 pos)
 	shared_ptr<GameComponent> knob = owner->FindComponentByTag(tag);
 	if (knob == nullptr)
 	{		
-		knobController = Game::Instance()->physicsFactory->CreateSphere(1.0f, transformedPos, glm::quat(), false);
-		knobController->rigidBody->setCollisionFlags(knobController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		knobController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		knobController = Game::Instance()->physicsFactory->CreateSphere(1.0f, transformedPos, glm::quat(), true, false);
 		knobController->rigidBody->setMotionState(new KinematicMotionState(knobController->parent));
 		knobController->tag = "HandJointController";
 		knobController->parent->tag = tag;
@@ -60,9 +58,7 @@ void BGE::SkeletonMapper::UpdateBone(string tag, glm::vec3 start, glm::vec3 end,
 	shared_ptr<PhysicsController> boneController;
 	if (bone == nullptr)
 	{
-		boneController = Game::Instance()->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, q, false);
-		boneController->rigidBody->setCollisionFlags(boneController->rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		boneController->rigidBody->setActivationState(DISABLE_DEACTIVATION);
+		boneController = Game::Instance()->physicsFactory->CreateCylinder(0.5f, boneLength, centrePos, q, true, false);
 		boneController->rigidBody->setMotionState(new KinematicMotionState(boneController));
 		boneController->tag = "HandBoneController";
 		boneController->parent->tag = tag;

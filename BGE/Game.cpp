@@ -271,7 +271,7 @@ void Game::Update(float timeDelta) {
 		exit(0);
 	}
 	
-	//dynamicsWorld->stepSimulation(timeDelta, 100);
+	dynamicsWorld->stepSimulation(timeDelta, 100);
 
 	GameComponent::Update(timeDelta);
 }

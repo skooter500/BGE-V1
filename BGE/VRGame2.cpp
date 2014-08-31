@@ -78,10 +78,9 @@ void VRGame2::ResetScene()
 	Game::Instance()->ClearChildrenWithTag("Sphere");
 	Game:Instance()->DeletePhysicsConstraints();
 	
-	//physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
+	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 
-	/*physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 20, 0), glm::quat());
-	physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 30, 0), glm::quat());*/
+	physicsFactory->CreateVehicle(glm::vec3(0, 30, 0));
 }
 
 bool VRGame2::Initialise() 
@@ -93,8 +92,6 @@ bool VRGame2::Initialise()
 
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
-
-	//gContactAddedCallback = collisionCallback2;
 
 	/*person = make_shared<Person2>();
 	Attach(person);

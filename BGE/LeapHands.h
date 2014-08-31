@@ -10,6 +10,8 @@ namespace BGE
 
 	class LeapHands:public GameComponent, public Leap::Listener
 	{
+	private:
+		CRITICAL_SECTION criticalSection;
 	public:
 		LeapHands();
 		~LeapHands();
@@ -27,7 +29,6 @@ namespace BGE
 		bool headMode;
 
 		bool dataReady;
-
 		void UpdateBone(string tag, glm::vec3 start, glm::vec3);
 
 		virtual void onInit(const Controller&);
