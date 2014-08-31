@@ -14,10 +14,6 @@ Buddha::Buddha(void)
 }
 
 
-Buddha::~Buddha(void)
-{
-}
-
 bool Buddha::Initialise()
 {	
 	

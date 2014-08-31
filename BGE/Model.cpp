@@ -18,6 +18,7 @@ Model::Model():GameComponent(false)
 
 Model::~Model()
 {
+	cout << "Model destructor! Should not be here" << endl;
 }
 
 GLuint * Model::dumpPrivateContents(void) { 
@@ -127,7 +128,11 @@ void Model::CalculateBounds()
 	}
 }
 
-
+void Model::Update(float timeDelta)
+{
+	// Models should never be disabled, just returned to the model cache
+	alive = true;
+}
 
 void Model::Draw()
 {	
@@ -216,5 +221,6 @@ void Model::Draw()
 	glDisableVertexAttribArray(2);
 	glUseProgram(0);
 	// Draw my children
-	//GameComponent::Draw();
+	// Even though I shouldnt ever have any!
+	GameComponent::Draw();
 }

@@ -10,7 +10,6 @@ namespace BGE
 	{
 	public:
 		Scenario(void);
-		~Scenario(void);
 
 		virtual string Description() = 0;
 		virtual void Initialise() = 0;

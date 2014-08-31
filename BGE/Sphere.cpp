@@ -24,4 +24,5 @@ bool Sphere::Initialise()
 
 Sphere::~Sphere(void)
 {
+	cout << "Sphere destructor" << "endl";
 }

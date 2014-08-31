@@ -12,11 +12,6 @@ PathFollowingScenario::PathFollowingScenario()
 {
 }
 
-
-PathFollowingScenario::~PathFollowingScenario()
-{
-}
-
 string PathFollowingScenario::Description()
 {
 	return string("Path Following Scenario");

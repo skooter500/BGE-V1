@@ -23,8 +23,6 @@ using namespace BGE;
 
 shared_ptr<Game> Game::instance = nullptr;
 
-int frame;
-
 Game::Game(void):GameComponent(true) {
 	running = false;
 	console = true;
@@ -272,7 +270,8 @@ void Game::Update(float timeDelta) {
 		Cleanup();
 		exit(0);
 	}
-	//PrintText(riftMessage);
+	
+	//dynamicsWorld->stepSimulation(timeDelta, 100);
 
 	GameComponent::Update(timeDelta);
 }

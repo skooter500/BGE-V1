@@ -5,9 +5,9 @@ using namespace BGE;
 
 PhysicsController::PhysicsController()
 {
-	shape = NULL;
-	rigidBody = NULL;
-	motionState = NULL;
+	shape = nullptr;
+	rigidBody = nullptr;
+	motionState = nullptr;
 }
 
 PhysicsController::PhysicsController(btCollisionShape * shape, btRigidBody * rigidBody, btMotionState * motionState)
@@ -33,6 +33,7 @@ PhysicsController::~PhysicsController(void)
 {
 	Game::Instance()->dynamicsWorld->removeRigidBody(rigidBody);
 	SAFE_DELETE(rigidBody);
+	SAFE_DELETE(motionState);
 }
 
 void PhysicsController::Update(float timeDelta)

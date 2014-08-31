@@ -6,7 +6,6 @@ namespace BGE
 	{
 	public:
 		PathFollowingScenario(void);
-		~PathFollowingScenario(void);
 
 		string Description();
 		void Initialise();

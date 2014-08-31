@@ -37,13 +37,15 @@ namespace BGE
 		
 	public:
 		GameComponent(bool hasTransform = false);
-
+		virtual ~GameComponent();
 		virtual bool Initialise();
 		virtual void Update(float timeDelta);
 		virtual void PreDraw();
 		virtual void Draw();
 		virtual void PostDraw();
 		virtual void Cleanup();
+
+		void SetAlive(bool alive);
 
 		shared_ptr<GameComponent> parent;
 		std::string tag;

@@ -84,7 +84,6 @@ void BGE::PhysicsGame1::Update(float timeDelta)
 {
 	cyl->rigidBody->applyTorque(GLToBtVector(glm::vec3(0.0f,0.0f,1.0f)));
 
-	dynamicsWorld->stepSimulation(timeDelta,100);
 	Game::Update(timeDelta);
 }
 

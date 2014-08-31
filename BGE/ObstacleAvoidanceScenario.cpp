@@ -23,11 +23,6 @@ ObstacleAvoidanceScenario::ObstacleAvoidanceScenario(void)
 {
 }
 
-
-ObstacleAvoidanceScenario::~ObstacleAvoidanceScenario(void)
-{
-}
-
 string ObstacleAvoidanceScenario::Description()
 {
 	return "Obstacle Avoidance Scenario";

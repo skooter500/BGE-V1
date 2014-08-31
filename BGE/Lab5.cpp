@@ -11,11 +11,6 @@ Lab5::Lab5(void)
 	elapsed = 10000;
 }
 
-
-Lab5::~Lab5(void)
-{
-}
-
 bool Lab5::Initialise()
 {
 	std::shared_ptr<GameComponent> ground = make_shared<Ground>();

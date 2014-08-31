@@ -7,9 +7,12 @@
 #include "Utils.h"
 #include <sapi.h>
 #include <sphelper.h>
+#include "Sphere.h"
 
 using namespace BGE;
 using namespace std;
+
+shared_ptr<Sphere> theSphere;
 
 bool collisionCallback2(btManifoldPoint& cp,	const btCollisionObjectWrapper* colObj0Wrap,int partId0,int index0,const btCollisionObjectWrapper* colObj1Wrap,int partId1,int index1)
 {
@@ -75,7 +78,7 @@ void VRGame2::ResetScene()
 	Game::Instance()->ClearChildrenWithTag("Sphere");
 	Game:Instance()->DeletePhysicsConstraints();
 	
-	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
+	//physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
 
 	/*physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 20, 0), glm::quat());
 	physicsFactory->CreateCylinder(1, 1, glm::vec3(0, 30, 0), glm::quat());*/
@@ -99,9 +102,7 @@ bool VRGame2::Initialise()
 	*/
 
 	leapHands = make_shared<LeapHands>();
-
-	leapHands->headMode = true;
-
+	leapHands->headMode = false;
 	Attach(leapHands);
 
 	ResetScene();
@@ -169,11 +170,25 @@ void VRGame2::GravityGun(PhysicsController * & pickedUp, KinectHand * hand)
 
 void VRGame2::Update(float timeDelta)
 {
+	//if (Game::Instance()->frame == 100)
+	//{
+	//	theSphere->FindComponentByTag("");
+	//	if (theSphere != nullptr)
+	//	{
+	//		theSphere->alive = false;
+	//		//theSphere = nullptr;
+	//	}
+	//}
+
+	//if (Game::Instance()->frame == 105)
+	//{
+	//	theSphere = nullptr;
+	//}
 
 	string leftHandWhat = "Nothing";
 	string rightHandWhat = "Nothing";
 
-	dynamicsWorld->stepSimulation(timeDelta,100);
+
 
 	const Uint8 * keyState = Game::Instance()->GetKeyState();
 

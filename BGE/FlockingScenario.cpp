@@ -12,11 +12,6 @@ FlockingScenario::FlockingScenario(void)
 {
 }
 
-
-FlockingScenario::~FlockingScenario(void)
-{
-}
-
 string FlockingScenario::Description()
 {
 	return string("Flocking Scenario");

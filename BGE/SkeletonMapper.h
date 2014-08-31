@@ -1,5 +1,6 @@
 #pragma once
 #include "GameComponent.h"
+#include "PhysicsController.h"
 
 using namespace std;
 
@@ -12,6 +13,8 @@ namespace BGE
 		~SkeletonMapper();
 
 		shared_ptr<GameComponent> owner;
+
+		std::map<std::string, std::shared_ptr<PhysicsController>> mapStuff;
 
 		Transform transform;
 

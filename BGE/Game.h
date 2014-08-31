@@ -121,6 +121,7 @@ namespace BGE
 		bool riftEnabled;
 		int width, height;
 		float fps;
+		float frame;
 		const Uint8 * keyState;
 		float elapsed;
 

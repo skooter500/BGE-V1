@@ -11,7 +11,6 @@ namespace BGE
 	{
 	public:
 		FlockingScenario(void);
-		~FlockingScenario(void);
 
 		string Description();
 		void Initialise();

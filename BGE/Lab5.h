@@ -16,7 +16,6 @@ namespace BGE
 	{
 	public:
 		Lab5(void);
-		~Lab5(void);
 
 		shared_ptr<GameComponent> ship1;
 		shared_ptr<GameComponent> ship2;

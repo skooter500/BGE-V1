@@ -34,6 +34,10 @@ GameComponent::GameComponent(bool hasTransform)
 	isRelative = false; 
 }
 
+GameComponent::~GameComponent()
+{
+}
+
 int GameComponent::ClearChildrenWithTag(string tag)
 {
 	int count = 0;
@@ -45,6 +49,7 @@ int GameComponent::ClearChildrenWithTag(string tag)
 		{
 			shared_ptr<GameComponent> component = * it;
 			component->alive = false;
+			component->ClearAllChildren();
 			count++;
 		}
 		it++;
@@ -60,7 +65,8 @@ int GameComponent::ClearAllChildren()
 	{
 		shared_ptr<GameComponent> component = *it;		
 		component->alive = false;
-		it++;
+		component->ClearAllChildren();
+		++it;
 		count++;
 	}
 	return count;
@@ -150,21 +156,36 @@ void GameComponent::Cleanup()
 	}
 }
 
-
+void GameComponent::SetAlive(bool alive)
+{
+	this->alive = alive;
+	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		(*it)->alive = alive;
+	}
+}
 
 void GameComponent::Update(float timeDelta) {	
 	// Update all the children
 	std::list<std::shared_ptr<GameComponent>>::iterator it = children.begin();
 	while (it != children.end())
 	{	
-		if (!(*it)->alive)
+		shared_ptr<GameComponent> current = *it;
+		if (!alive)
 		{
+			current->alive = false;
+		}
+		current->parent = This();
+		current->Update(timeDelta);
+		if (!current->alive)
+		{
+			current->parent = nullptr;
 			it = children.erase(it);
 		}
 		else
 		{
-			(*it)->parent = This();
-			(*it ++)->Update(timeDelta);
+			++it;
 		}
 	}
 
@@ -173,7 +194,9 @@ void GameComponent::Update(float timeDelta) {
 	{
 		if (!(*mit).second->alive)
 		{
+			shared_ptr<GameComponent> g = mit->second;
 			mit = childrenMap.erase(mit);
+
 		}
 		else
 		{
@@ -214,10 +237,10 @@ std::list<std::shared_ptr<GameComponent>> * GameComponent::GetChildren()
 
 shared_ptr<GameComponent> GameComponent::FindComponentByTag(std::string tag)
 {
-	std::map<std::string, std::shared_ptr<GameComponent>>::iterator it = childrenMap.find(tag);
+	std::multimap<std::string, std::shared_ptr<GameComponent>>::iterator it = childrenMap.find(tag);
 	if (it != childrenMap.end())
 	{
-		return (*it).second;
+		return it->second;
 	}
 	else
 	{

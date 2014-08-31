@@ -54,8 +54,6 @@ bool SceneGraphGame::Initialise()
 
 void SceneGraphGame::Update(float timeDelta)
 {
-	dynamicsWorld->stepSimulation(timeDelta,100);
-
 	selfExample->transform->Yaw(timeDelta * speed * speed);	
 	station->transform->Yaw(timeDelta * speed * speed);
 	Game::Update(timeDelta);

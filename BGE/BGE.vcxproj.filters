@@ -209,9 +209,6 @@
     <ClCompile Include="VRGame2.cpp">
       <Filter>Games</Filter>
     </ClCompile>
-    <ClCompile Include="KinectAudioStream.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Person2.cpp">
       <Filter>Kinect2</Filter>
     </ClCompile>
@@ -229,6 +226,12 @@
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="KinectAudioStream.cpp">
+      <Filter>Kinect2</Filter>
+    </ClCompile>
+    <ClCompile Include="LeapSampleListener.cpp">
+      <Filter>Leap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,9 +397,6 @@
     <ClInclude Include="VRGame2.h">
       <Filter>Games</Filter>
     </ClInclude>
-    <ClInclude Include="KinectAudioStream.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Person2.h">
       <Filter>Kinect2</Filter>
     </ClInclude>
@@ -414,6 +414,12 @@
     </ClInclude>
     <ClInclude Include="SkeletonMapper.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="KinectAudioStream.h">
+      <Filter>Kinect2</Filter>
+    </ClInclude>
+    <ClInclude Include="LeapSampleListener.h">
+      <Filter>Leap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

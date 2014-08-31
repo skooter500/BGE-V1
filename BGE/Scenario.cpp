@@ -12,10 +12,6 @@ Scenario::Scenario(void)
 	leaderController = nullptr;
 }
 
-Scenario::~Scenario(void)
-{
-
-}
 
 void Scenario::Update(float timeDelta)
 {

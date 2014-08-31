@@ -8,7 +8,6 @@ namespace BGE
 	{
 	public:
 		ObstacleAvoidanceScenario(void);
-		~ObstacleAvoidanceScenario(void);
 
 		string Description();
 		void Initialise();

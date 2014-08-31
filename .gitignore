@@ -32,6 +32,8 @@ stdout.txt
 *.opensdf
 *.cache
 *.obj
+*.vsp
+*.vspx
 bin/
 Debug/
 ipch/

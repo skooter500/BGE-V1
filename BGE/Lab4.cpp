@@ -11,10 +11,6 @@ Lab4::Lab4(void)
 }
 
 
-Lab4::~Lab4(void)
-{
-}
-
 bool Lab4::Initialise()
 {
 	std::shared_ptr<GameComponent> ground = make_shared<Ground>();

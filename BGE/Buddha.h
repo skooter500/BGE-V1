@@ -16,8 +16,6 @@ namespace BGE
 	{
 	public:
 		Buddha(void);
-		~Buddha(void);
-
 		shared_ptr<GameComponent> buddha;
 		shared_ptr<FountainEffect> buddhaFountain0;
 		shared_ptr<FountainEffect> buddhaFountain1;
