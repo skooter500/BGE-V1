@@ -59,7 +59,7 @@ VRGame2::VRGame2(void)
 	rightHandPickedUp= nullptr;
 
 	fullscreen = false;
-	riftEnabled = false;
+	riftEnabled = true;
 	console = true;
 
 	tag = "VR Game";

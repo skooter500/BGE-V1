@@ -51,7 +51,7 @@ bool BGE::LeapHands::Initialise()
 
 	controller.addListener(* this);
 
-	mapper = make_shared<SkeletonMapper>(This(), glm::vec3(0.2f, 0.2f, 0.2f));
+	mapper = make_shared<SkeletonMapper>(This(), glm::vec3(0.1f, 0.1f, 0.1f));
 	
 	return GameComponent::Initialise();
 }

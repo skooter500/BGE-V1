@@ -111,8 +111,8 @@ bool Game::Initialise() {
 		window = SDL_CreateWindow("",
 			SDL_WINDOWPOS_UNDEFINED_DISPLAY(display),
 			SDL_WINDOWPOS_UNDEFINED_DISPLAY(display),
-			bounds.w,
-			bounds.h,
+			width,
+			height,
 			flags);
 	}
 	else
