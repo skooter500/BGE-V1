@@ -27,13 +27,6 @@ bool Lab4::Initialise()
 	ship2->Attach(make_shared<VectorDrawer>(glm::vec3(5,5,5)));
 	ship2->transform->position = glm::vec3(10, 2, -10);
 	Attach(ship2);
-
-
-	riftEnabled = false;
-	fullscreen = false;
-	width = 800;
-	height = 600;
-
 	Game::Initialise();
 
 	camera->transform->position = glm::vec3(0, 4, 20);

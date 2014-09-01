@@ -27,11 +27,6 @@ bool Lab8::Initialise()
 	ship1->Attach(make_shared<VectorDrawer>());
 	Attach(ship1);
 
-	riftEnabled = false;
-	fullscreen = false;
-	width = 800;
-	height = 600;
-
 	mass = 1.0f;
 	ship1->transform->velocity = glm::vec3(0,0,0);
 

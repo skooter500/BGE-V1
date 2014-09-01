@@ -19,7 +19,6 @@ using namespace BGE;
 
 PhysicsGame1::PhysicsGame1(void)
 {
-	fullscreen = false;
 }
 
 PhysicsGame1::~PhysicsGame1(void)
@@ -30,9 +29,7 @@ shared_ptr<PhysicsController> cyl;
 std::shared_ptr<GameComponent> station;
 
 bool PhysicsGame1::Initialise() 
-{
-	riftEnabled = false;
-	
+{	
 	physicsFactory->CreateGroundPhysics();
 	physicsFactory->CreateCameraPhysics();	
 

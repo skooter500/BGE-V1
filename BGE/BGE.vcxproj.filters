@@ -494,5 +494,8 @@
     <None Include="Content\bge.grxml">
       <Filter>Content</Filter>
     </None>
+    <None Include="Content\vrgame.properties">
+      <Filter>Content</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -9,8 +9,6 @@ using namespace BGE;
 Buddha::Buddha(void)
 {
 	elapsed = 10000;
-	riftEnabled = false;
-	fullscreen = false;
 }
 
 
@@ -18,11 +16,7 @@ bool Buddha::Initialise()
 {	
 	
 	soundSystem->PlaySound("Buddha", glm::vec3(0,0,0));
-	riftEnabled = false;
-	fullscreen = true;
-	/*width = 800;
-	height = 600;
-*/
+	
 	// 500 in the constructor indicates the number of particles in the effect. 
 	// You may need to compile in release mode or reduce the number of particles to get an acceptable framerate
 	//shared_ptr<FountainEffect> centFountain = make_shared<FountainEffect>(500);
@@ -72,10 +66,7 @@ bool Buddha::Initialise()
 		fountains.push_back(fountain);
 		Attach(fountain);
 	}
-	fountainTheta = 0.0f;
-
-	hud = false;
-	
+	fountainTheta = 0.0f;	
 
 	Game::Initialise();
 

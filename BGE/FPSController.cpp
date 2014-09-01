@@ -1,5 +1,6 @@
 #include "FPSController.h"
 #include "Game.h"
+#include "Params.h"
 
 using namespace BGE;
 
@@ -51,8 +52,8 @@ void FPSController::Update(float timeDelta)
 	int x, y;
 	int midX, midY;
 	SDL_GetMouseState(&x,&y);
-	midX = Game::Instance()->GetWidth() / 2;
-	midY = Game::Instance()->GetHeight() / 2;
+	midX = Params::GetFloat("width") / 2;
+	midY = Params::GetFloat("height") / 2;
 	float yaw, pitch;
 	yaw = midX - x;
 	pitch = midY - y;

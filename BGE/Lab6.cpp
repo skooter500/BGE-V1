@@ -19,10 +19,7 @@ Lab6::~Lab6(void)
 
 bool Lab6::Initialise()
 {	
-	
-	riftEnabled = false;
-	fullscreen = false;
-	
+		
 	// 500 in the constructor indicates the number of particles in the effect. 
 	// You may need to compile in release mode or reduce the number of particles to get an acceptable framerate
 	//shared_ptr<FountainEffect> centFountain = make_shared<FountainEffect>(500);
@@ -74,9 +71,6 @@ bool Lab6::Initialise()
 		Attach(fountain);
 	}
 	fountainTheta = 0.0f;
-
-	hud = false;
-	
 
 	Game::Initialise();
 

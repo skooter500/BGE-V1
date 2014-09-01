@@ -26,12 +26,6 @@ bool Lab5::Initialise()
 	//ship2->drawMode = GameComponent::single_material;
 
 
-
-	riftEnabled = false;
-	fullscreen = false;
-	width = 800;
-	height = 600;
-
 	// 500 in the constructor indicates the number of particles in the effect. 
 	// You may need to compile in release mode or reduce the number of particles to get an acceptable framerate
 	shared_ptr<FountainEffect> centFountain = make_shared<FountainEffect>(500);

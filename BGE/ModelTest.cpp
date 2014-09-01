@@ -11,9 +11,6 @@ using namespace BGE;
 
 ModelTest::ModelTest(void) 
 {
-	width = 800;
-	height = 600;
-	riftEnabled = false;
 }
 
 ModelTest::~ModelTest(void) {
@@ -55,9 +52,6 @@ bool ModelTest::Initialise()
 	ship->Attach(steerable);
 	ship->Attach(model);
 	Attach(ship);
-
-	fullscreen = false;
-	riftEnabled = false;
 
 	//Initialise OpenGL, GLEW and SDL and then initialize all my children!
 	if (!Game::Initialise()) {

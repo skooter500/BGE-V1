@@ -86,8 +86,6 @@ namespace BGE
 		void SetGround(shared_ptr<Ground> ground);
 		const Uint8 * GetKeyState();
 		SDL_Window * GetMainWindow();
-		int GetWidth();
-		int GetHeight();		
 		bool Run();
 		
 		void PrintText(string message, glm::vec2 position);
@@ -101,9 +99,6 @@ namespace BGE
 		shared_ptr<Ground> ground;
 
 		SDL_Window * window; /* Our window handle */
-		bool fullscreen;
-		bool console;
-		bool hud;
 		SDL_GLContext context; /* Our opengl context handle */
 
 		// Physics stuff
@@ -118,8 +113,6 @@ namespace BGE
 		shared_ptr<SoundSystem> soundSystem;
 
 		string riftMessage;
-		bool riftEnabled;
-		int width, height;
 		float fps;
 		float frame;
 		const Uint8 * keyState;

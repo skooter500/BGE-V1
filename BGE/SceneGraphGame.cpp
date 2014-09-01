@@ -28,9 +28,7 @@ glm::vec3 SceneGraphGame::NextPosition(float step, float steps)
 }
 
 bool SceneGraphGame::Initialise()
-{
-	Params::Load("default");
-	
+{	
 	dynamicsWorld->setGravity(btVector3(0,0,0));
 	
 	camera->transform->position = glm::vec3(-10,20,20);
@@ -39,16 +37,8 @@ bool SceneGraphGame::Initialise()
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
 
-	fullscreen = false;
-	riftEnabled = false;
-	console = true;
-	width = 1280;
-	height = 800;
-
 	CreateScene();
 
-	
-	
 	return Game::Initialise();
 }
 

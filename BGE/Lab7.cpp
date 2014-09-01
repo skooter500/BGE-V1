@@ -36,11 +36,6 @@ bool Lab7::Initialise()
 	ship2->transform->position = glm::vec3(10, 2, -10);
 	Attach(ship2);
 
-	riftEnabled = false;
-	fullscreen = false;
-	width = 800;
-	height = 600;
-
 	slerping = false;
 	t = 0.0f;
 

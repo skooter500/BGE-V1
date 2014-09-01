@@ -58,11 +58,21 @@ void XBoxController::Update(float timeDelta)
 				
 				transform->Walk(-walk);
 			}
-			
+
 			range = 3; 
 			int x = SDL_JoystickGetAxis(joy, 2);	
 			float yaw = ((float) x / (float) numeric_limits<short int>::max()) * range;
 			transform->Yaw((int) -yaw);
+
+
+			int flyAxis = SDL_JoystickGetAxis(joy, 3);
+			CheckOverflow(flyAxis);
+			if (glm::abs<int>(flyAxis) > 8000)
+			{
+				float fly = ((float)flyAxis / (float)numeric_limits<short int>::max()) * (range / 2.0f);
+
+				transform->Fly(fly);
+			}
 
 			if (!disablePitch)
 			{

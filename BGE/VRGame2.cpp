@@ -8,6 +8,7 @@
 #include <sapi.h>
 #include <sphelper.h>
 #include "Sphere.h"
+#include "Params.h"
 
 using namespace BGE;
 using namespace std;
@@ -50,18 +51,14 @@ bool collisionCallback2(btManifoldPoint& cp,	const btCollisionObjectWrapper* col
 
 VRGame2::VRGame2(void)
 {
+
 	person = nullptr;
 	
 	fireRate = 5.0f;
-	width = 1280;
-	height = 800;
 	leftHandPickedUp= nullptr;
 	rightHandPickedUp= nullptr;
 
-	fullscreen = false;
-	riftEnabled = true;
-	console = true;
-
+	
 	tag = "VR Game";
 }
 

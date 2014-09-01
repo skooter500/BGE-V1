@@ -48,12 +48,36 @@ float Params::GetWeight(string key)
 	}
 }
 
-string Params::Get(string key)
+bool Params::GetBool(string key)
 {
-	return dictionary[key];
+	string value = Get(key);
+	std::transform(value.begin(), value.end(), value.begin(), ::toupper);
+	return (value == "TRUE");
 }
 
 
+
+string Params::Get(string key)
+{
+	return dictionary.at(key);
+}
+
+void Params::SetFloat(string key, float value)
+{
+	stringstream valueS;
+	valueS << value;
+	dictionary[key] = "" + valueS.str();
+}
+
+void Params::SetBool(string key, bool value)
+{
+	dictionary[key] = "" + (value) ? true : false;
+}
+
+bool Params::ExistsKey(string key)
+{
+	return (dictionary.find(key) != dictionary.end());
+}
 
 void Params::Load(string name)
 {
@@ -70,6 +94,10 @@ void Params::Load(string name)
 		while(!is.eof())
 		{
 			getline(is,s);
+			if ((s == "") || (s[0] == '#') || (s.find("=") == string::npos))
+			{
+				continue;
+			}
 			string key, val;
 			stringstream ss(s);
 			getline(ss, key, '=');
@@ -81,4 +109,6 @@ void Params::Load(string name)
 	{
 		throw BGE::Exception(("Could not load params file: " + filename).c_str());
 	}
+
+	// set special properties
 }

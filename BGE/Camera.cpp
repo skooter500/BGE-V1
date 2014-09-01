@@ -8,6 +8,7 @@
 using namespace BGE;
 using namespace std;
 #include <SDL.h>
+#include "Params.h"
 
 Camera::Camera(void):GameComponent(true)
 {
@@ -22,8 +23,8 @@ bool Camera::Initialise()
 {
 	SDL_WarpMouseInWindow(
 		Game::Instance()->GetMainWindow()
-		,Game::Instance()->GetWidth() / 2
-		,Game::Instance()->GetHeight() / 2);
+		,Params::GetFloat("width") / 2
+		, Params::GetFloat("height") / 2);
 	SDL_ShowCursor(SDL_DISABLE); 
 	return GameComponent::Initialise();
 }
