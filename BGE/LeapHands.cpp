@@ -88,13 +88,30 @@ void BGE::LeapHands::Update(float timeDelta)
 	}	
 	LeaveCriticalSection(&criticalSection);
 
-	if (spawn && (lastSpawned > 1.0f))
+	if (lastSpawned > 1.0f)
 	{
-		spawnPoint.y = 5;
-		Game::Instance()->physicsFactory->CreateVehicle(spawnPoint);		
+		switch (spawn)
+		{
+			case none:
+			{
+				break;
+			}
+			case model:
+			{
+				glm::vec3 point;
+				bool hit = Game::Instance()->ground->rayIntersectsWorldPlane(
+					Game::Instance()->camera->transform->position,
+					Game::Instance()->camera->transform->look, point);
+				if (hit)
+				{
+					Game::Instance()->physicsFactory->CreateRandomObject(point, glm::quat(), glm::vec3(7, 7, 7));
+					Game::Instance()->soundSystem->PlaySound("spawn", point);
+				}
+			}
+		}
 		lastSpawned = 0.0f;
 	}
-	spawn = false;
+	spawn = none;
 	lastSpawned += timeDelta;
 	
 	GameComponent::Update(timeDelta);
@@ -107,100 +124,100 @@ void BGE::LeapHands::Draw()
 
 void BGE::LeapHands::TransformHand(float timeDelta)
 {
-	SDL_Joystick *joy;
-	if (SDL_NumJoysticks() > 0) {
-		// Open joystick
-		joy = SDL_JoystickOpen(0);
-		if (joy) {
-			stringstream ss;
+	if (!Params::GetBool("leapHeadMode"))
+	{
+		SDL_Joystick *joy;
+		if (SDL_NumJoysticks() > 0) {
+			// Open joystick
+			joy = SDL_JoystickOpen(0);
+			if (joy) {
+				stringstream ss;
 
-			float range = 1;
+				float range = 1;
 
-			int useHandsAxis = SDL_JoystickGetAxis(joy, 4);
-			Game::Instance()->PrintFloat("Axis:", useHandsAxis);
-			handTransform->look = Game::Instance()->camera->transform->look;
-			handTransform->right = Game::Instance()->camera->transform->right;
-			if (useHandsAxis > 0)
-			{
-				int strafeAxis = SDL_JoystickGetAxis(joy, 0);
-
-				if (glm::abs<int>(strafeAxis) > 8000)
+				int useHandsAxis = SDL_JoystickGetAxis(joy, 4);
+				Game::Instance()->PrintFloat("Axis:", useHandsAxis);
+				handTransform->look = Game::Instance()->camera->transform->look;
+				handTransform->right = Game::Instance()->camera->transform->right;
+				if (useHandsAxis > 0)
 				{
-					float strafe = ((float)strafeAxis / (float)numeric_limits<short int>::max()) * range;
-					handTransform->Strafe(strafe);
-				}
+					int strafeAxis = SDL_JoystickGetAxis(joy, 0);
 
-				int walkAxis = SDL_JoystickGetAxis(joy, 1);
-				CheckOverflow(walkAxis);
-				if (glm::abs<int>(walkAxis) > 8000)
-				{
-					float walk = ((float)walkAxis / (float)numeric_limits<short int>::max()) * range;
+					if (glm::abs<int>(strafeAxis) > 8000)
+					{
+						float strafe = ((float)strafeAxis / (float)numeric_limits<short int>::max()) * range;
+						handTransform->Strafe(strafe);
+					}
 
-					handTransform->Walk(-walk);
-				}
+					int walkAxis = SDL_JoystickGetAxis(joy, 1);
+					CheckOverflow(walkAxis);
+					if (glm::abs<int>(walkAxis) > 8000)
+					{
+						float walk = ((float)walkAxis / (float)numeric_limits<short int>::max()) * range;
 
-				int flyAxis = SDL_JoystickGetAxis(joy, 3);
-				CheckOverflow(flyAxis);
-				if (glm::abs<int>(flyAxis) > 8000)
-				{
-					float fly = ((float)flyAxis / (float)numeric_limits<short int>::max()) * (range / 4.0f);
+						handTransform->Walk(-walk);
+					}
 
-					handTransform->Fly(-fly);
+					int flyAxis = SDL_JoystickGetAxis(joy, 3);
+					CheckOverflow(flyAxis);
+					if (glm::abs<int>(flyAxis) > 8000)
+					{
+						float fly = ((float)flyAxis / (float)numeric_limits<short int>::max()) * (range / 4.0f);
+
+						handTransform->Fly(-fly);
+					}
 				}
 			}
+			else {
+				Game::Instance()->PrintText("Could not get controller!!");
+			}
+
+			// Close if opened
+			if (SDL_JoystickGetAttached(joy)) {
+				SDL_JoystickClose(joy);
+			}
 		}
-		else {
-			Game::Instance()->PrintText("Could not get controller!!");
+		else
+		{
+			Game::Instance()->PrintText("No game controller detected");
 		}
 
-		// Close if opened
-		if (SDL_JoystickGetAttached(joy)) {
-			SDL_JoystickClose(joy);
-		}
+		TransformChildren(handTransform);
 	}
 	else
 	{
-		Game::Instance()->PrintText("No game controller detected");
-	}
-	
-	TransformChildren(handTransform);	
-	if ((Params::GetBool("leapHeadMode")))
-	{
-		shared_ptr<Transform> cameraTransform = Game::Instance()->camera->transform;
-		list<shared_ptr<GameComponent>>::iterator it = children.begin();
-		while (it != children.end())
+		if ((Params::GetBool("leapHeadMode")))
 		{
-			shared_ptr<GameComponent> child = *it;
-			glm::vec3 pos = child->transform->position;
-			pos = TransformPointRelativeToCamera(pos);			
-			// Rotate the bodies by the camera rotation
-			child->transform->orientation = cameraTransform->orientation * child->transform->orientation;
-			child->transform->position = pos;
-			it++;
+			shared_ptr<Transform> cameraTransform = Game::Instance()->camera->transform;
+			list<shared_ptr<GameComponent>>::iterator it = children.begin();
+			while (it != children.end())
+			{
+				shared_ptr<GameComponent> child = *it;
+				glm::vec3 pos = child->transform->position;
+				pos = TransformPointRelativeToCamera(pos);
+				// Rotate the bodies by the camera rotation
+				child->transform->orientation = cameraTransform->orientation * child->transform->orientation;
+				child->transform->position = pos;
+				it++;
+			}
 		}
 	}
 }
 
 glm::vec3 BGE::LeapHands::TransformPointRelativeToCamera(glm::vec3 pos)
 {
-	shared_ptr<Transform> cameraTransform = Game::Instance()->camera->transform;
-	glm::vec3 cameraStart = Game::Instance()->camera->startPos;
+	float distance = 20.0f;
+	Transform temp = *Game::Instance()->camera->transform;
+	temp.position += temp.look * distance;
 
-	pos += (cameraTransform->position - cameraStart);
-	// Do the rotation
-	// Translate pos relative to the camera so we can rotate around the camera
-	pos -= cameraTransform->position;
-	// Now Rotate
-	glm::mat4 rotMatrix = glm::mat4_cast(cameraTransform->orientation);
-	pos = glm::vec3(rotMatrix * glm::vec4(pos, 1.0f));
-	// Now bring it back into position
-	pos += cameraTransform->position;
+	pos = temp.TransformPosition(pos);
 
 	return pos;
 }
 
 void LeapHands::Cleanup()
 {
+	controller.removeListener(*this);
 	GameComponent::Cleanup();
 }
 
@@ -266,6 +283,13 @@ void LeapHands::onFrame(const Controller& controller)
 		int fingerId = 0;
 		bool firstFinger = true;
 		Finger previousFinger;
+
+		stringstream ass;
+		ass << "Arm: 0 Hand: " << handId;
+		tempBoneData[ass.str()] = BoneData(ass.str(), LeapToGlVec3(hand.arm().wristPosition()), LeapToGlVec3(hand.arm().elbowPosition()), true);
+		ass.clear();
+
+
 		for (FingerList::const_iterator fl = fingers.begin(); fl != fingers.end(); ++fl) {
 			const Finger finger = *fl;
 
@@ -309,9 +333,12 @@ void LeapHands::onFrame(const Controller& controller)
 						CircleGesture circle = gesture;
 						if (gesture.durationSeconds() > 1)
 						{
-							spawnPoint = TransformPointRelativeToCamera(handTransform->TransformPosition(
-								mapper->transform.TransformPosition(LeapToGlVec3(circle.center()), true), true));
-							spawn = true;
+							if (circle.pointable().direction().angleTo(circle.normal()) <= PI / 2) {
+								spawn = vehicle;
+							}
+							else {
+								spawn = model;
+							}
 						}
 					}
 				}

@@ -25,10 +25,10 @@ namespace BGE
 
 		shared_ptr<SkeletonMapper> mapper;
 
+		enum spawn_type {none, vehicle, model};
 		int trackedHands;
-		bool spawn = false;
-		glm::vec3 spawnPoint;
-
+		spawn_type spawn = none;
+		
 		shared_ptr<Transform> handTransform;
 
 		bool dataReady;

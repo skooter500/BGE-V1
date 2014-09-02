@@ -270,7 +270,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateGroundPhysics()
 	return groundComponent;
 }
 
-shared_ptr<PhysicsController> PhysicsFactory::CreateRandomObject(glm::vec3 point, glm::quat q)
+shared_ptr<PhysicsController> PhysicsFactory::CreateRandomObject(glm::vec3 point, glm::quat q, glm::vec3 scale)
 {
 	vector<string> names;
 	DIR * dir;
@@ -300,5 +300,5 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateRandomObject(glm::vec3 point
 
 	int which = rand() % names.size();
 	string name = names[which];
-	return CreateFromModel(name, point, q, glm::vec3(3,3,3));
+	return CreateFromModel(name, point, q, scale);
 }
