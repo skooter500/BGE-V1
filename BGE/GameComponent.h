@@ -67,6 +67,7 @@ namespace BGE
 
 		int ClearAllChildren();
 		int ClearChildrenWithTag(string tag);
+		void TransformChildren(shared_ptr<Transform> transform);
 		shared_ptr<GameComponent> GameComponent::FindComponentByTag(string tag);
 		std::vector<std::shared_ptr<GameComponent>> GameComponent::FindComponentsByTag(string tag);
 

@@ -18,7 +18,7 @@ Transform::Transform(void)
 	orientation = glm::quat(); // Identity
 	diffuse = ambient = specular = glm::vec3(0.0f, 0.0f, 0.0f);
 	moved = true;
-	scale = glm::vec3(1.0, 1.0, 1.0);
+	scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	parent = nullptr; 
 }
 
@@ -179,4 +179,12 @@ void Transform::Roll(float angle)
 
 	orientation = rot * orientation;
 	moved = true;
+}
+
+glm::quat BGE::Transform::TransformOrientation(glm::quat in)
+{
+	Transform::Calculate();
+	glm::quat rot = glm::quat_cast(world);
+	glm::quat q = rot * q;
+	return q;
 }

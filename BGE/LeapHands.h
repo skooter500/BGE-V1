@@ -27,6 +27,10 @@ namespace BGE
 
 		int trackedHands;
 		bool headMode;
+		bool spawn = false;
+		glm::vec3 spawnPoint;
+
+		shared_ptr<Transform> handTransform;
 
 		bool dataReady;
 		void UpdateBone(string tag, glm::vec3 start, glm::vec3);
@@ -41,6 +45,6 @@ namespace BGE
 		virtual void onDeviceChange(const Controller&);
 		virtual void onServiceConnect(const Controller&);
 		virtual void onServiceDisconnect(const Controller&);
-
+		void TransformHand(float timeDelta);
 	};
 }

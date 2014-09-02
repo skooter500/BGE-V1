@@ -46,10 +46,11 @@ namespace BGE
 		void RotateVectors();
 		void Calculate();
 
-		glm::vec3 Transform::TransformPosition(glm::vec3 in, bool scale = false);
-		glm::vec3 Transform::TransformNormal(glm::vec3 in, bool scale = false);
-		glm::vec3 Transform::InverseTransformPosition(glm::vec3 in, bool scale = false);
-		glm::vec3 Transform::InverseTransformNormal(glm::vec3 in, bool scale = false);
+		glm::quat TransformOrientation(glm::quat in);
+		glm::vec3 TransformPosition(glm::vec3 in, bool scale = false);
+		glm::vec3 TransformNormal(glm::vec3 in, bool scale = false);
+		glm::vec3 InverseTransformPosition(glm::vec3 in, bool scale = false);
+		glm::vec3 InverseTransformNormal(glm::vec3 in, bool scale = false);
 	};
 
 }

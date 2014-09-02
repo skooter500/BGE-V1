@@ -51,7 +51,7 @@ void BGE::SkeletonMapper::UpdateBone(string tag, glm::vec3 start, glm::vec3 end,
 	float theta = (float)glm::acos<float>(glm::dot<float>(Transform::basisUp, boneVector));
 	glm::quat q = glm::angleAxis(glm::degrees(theta), axis);
 
-	LineDrawer::DrawLine(jointPos[0], jointPos[1], glm::vec3(0, 0, 1));
+	//LineDrawer::DrawLine(jointPos[0], jointPos[1], glm::vec3(0, 0, 1));
 	
 	//std::map<std::string, std::shared_ptr<PhysicsController>>::iterator it = mapStuff.find(tag);
 	shared_ptr<GameComponent> bone = owner->FindComponentByTag(tag);

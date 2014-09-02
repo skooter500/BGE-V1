@@ -82,6 +82,6 @@ namespace BGE
 	bool ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sphere, const glm::vec3 & point, glm::vec3 & intersection);
 
 	glm::vec3 RotateVector(glm::vec3, glm::quat);
-
+	void CheckOverflow(int & x);
 	void SafeDelete(void ** p);
 }

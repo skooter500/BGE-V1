@@ -275,4 +275,17 @@ std::shared_ptr<GameComponent> GameComponent::This()
 	return shared_from_this();
 }
 
+void BGE::GameComponent::TransformChildren(shared_ptr<Transform> childTransform)
+{
+	// Transform all the bones by the handTransform
+	list<shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		shared_ptr<GameComponent> child = *it;
+		child->transform->position = childTransform->TransformPosition(child->transform->position, false);
+		//child->transform->orientation = childTransform->TransformOrientation(child->transform->orientation);
+		it++;
+	}
+}
+
 

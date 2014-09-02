@@ -58,7 +58,6 @@ VRGame2::VRGame2(void)
 	leftHandPickedUp= nullptr;
 	rightHandPickedUp= nullptr;
 
-	
 	tag = "VR Game";
 }
 
@@ -68,21 +67,24 @@ VRGame2::~VRGame2(void)
 
 void VRGame2::ResetScene()
 {
-
 	Game::Instance()->ClearChildrenWithTag("Box");
 	Game::Instance()->ClearChildrenWithTag("Model");
 	Game::Instance()->ClearChildrenWithTag("Cylinder");
 	Game::Instance()->ClearChildrenWithTag("Sphere");
 	Game:Instance()->DeletePhysicsConstraints();
 	
-	physicsFactory->CreateWall(glm::vec3(-20, 0, 20), 5, 5);
+	physicsFactory->CreateWall(glm::vec3(-20, 0, 10), 5, 5);
+	physicsFactory->CreateVehicle(glm::vec3(0, 5, -0));
+	physicsFactory->CreateVehicle(glm::vec3(-10, 5, -30));
+	physicsFactory->CreateVehicle(glm::vec3(10, 5, -40));
 
-	physicsFactory->CreateVehicle(glm::vec3(0, 30, 0));
+	physicsFactory->CreateVehicle(glm::vec3(-20, 5, -50));
+	physicsFactory->CreateVehicle(glm::vec3(0, 5, -60));
 }
 
 bool VRGame2::Initialise() 
 {
-	dynamicsWorld->setGravity(btVector3(0,-9,0));
+	dynamicsWorld->setGravity(btVector3(0,-20,0));
 
 	camera->transform->position = glm::vec3(-1,20,46);
 	camera->transform->look = glm::vec3(0, 0, 1);

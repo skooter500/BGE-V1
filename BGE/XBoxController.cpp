@@ -1,5 +1,6 @@
 #include "XBoxController.h"
 #include "Game.h"
+#include "Utils.h"
 #include <limits>
 
 using namespace BGE;
@@ -15,19 +16,9 @@ XBoxController::~XBoxController(void)
 
 bool XBoxController::Initialise()
 {
-	// Initialize the joystick subsystem
-	SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	return GameComponent::Initialise();
 }
 
-
-void CheckOverflow( int & x )
-{
-	if (x == -32768)
-	{
-		x = - x;
-	}
-}
 
 void XBoxController::Update(float timeDelta)
 {
@@ -65,16 +56,18 @@ void XBoxController::Update(float timeDelta)
 			transform->Yaw((int) -yaw);
 
 
-			int flyAxis = SDL_JoystickGetAxis(joy, 3);
-			CheckOverflow(flyAxis);
-			if (glm::abs<int>(flyAxis) > 8000)
+			if (disablePitch)
 			{
-				float fly = ((float)flyAxis / (float)numeric_limits<short int>::max()) * (range / 2.0f);
+				int flyAxis = SDL_JoystickGetAxis(joy, 3);
+				CheckOverflow(flyAxis);
+				if (glm::abs<int>(flyAxis) > 8000)
+				{
+					float fly = ((float)flyAxis / (float)numeric_limits<short int>::max()) * (range / 4.0f);
 
-				transform->Fly(fly);
+					transform->Fly(-fly);
+				}
 			}
-
-			if (!disablePitch)
+			else
 			{
 				int y = SDL_JoystickGetAxis(joy, 3);	
 				CheckOverflow(y);

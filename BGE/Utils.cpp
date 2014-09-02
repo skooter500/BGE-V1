@@ -301,3 +301,11 @@ glm::vec3 BGE::LeapToGlVec3(Leap::Vector v)
 {
 	return glm::vec3(v.x, v.y, v.z);
 }
+
+void BGE::CheckOverflow(int & x)
+{
+	if (x == -32768)
+	{
+		x = -x;
+	}
+}
