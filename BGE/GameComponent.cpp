@@ -283,7 +283,32 @@ void BGE::GameComponent::TransformChildren(shared_ptr<Transform> childTransform)
 	{
 		shared_ptr<GameComponent> child = *it;
 		child->transform->position = childTransform->TransformPosition(child->transform->position, false);
-		//child->transform->orientation = childTransform->TransformOrientation(child->transform->orientation);
+		it++;
+	}
+}
+
+void BGE::GameComponent::TransformChildren(glm::mat4 mat)
+{
+	// Transform all the bones by the handTransform
+	list<shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		shared_ptr<GameComponent> child = *it;
+		child->transform->position = glm::vec3(mat * glm::vec4(child->transform->position, 1.0f));
+		it++;
+	}
+}
+
+
+void BGE::GameComponent::InverseTransformChildren(shared_ptr<Transform> childTransform)
+{
+	// Transform all the bones by the handTransform
+	list<shared_ptr<GameComponent>>::iterator it = children.begin();
+	while (it != children.end())
+	{
+		shared_ptr<GameComponent> child = *it;
+		child->transform->position = childTransform->InverseTransformPosition(child->transform->position, false);
+		child->transform->orientation = childTransform->InverseTransformOrientation(child->transform->orientation);
 		it++;
 	}
 }

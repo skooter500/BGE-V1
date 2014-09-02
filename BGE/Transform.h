@@ -47,6 +47,7 @@ namespace BGE
 		void Calculate();
 
 		glm::quat TransformOrientation(glm::quat in);
+		glm::quat InverseTransformOrientation(glm::quat in);
 		glm::vec3 TransformPosition(glm::vec3 in, bool scale = false);
 		glm::vec3 TransformNormal(glm::vec3 in, bool scale = false);
 		glm::vec3 InverseTransformPosition(glm::vec3 in, bool scale = false);

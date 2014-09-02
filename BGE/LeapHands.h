@@ -26,7 +26,6 @@ namespace BGE
 		shared_ptr<SkeletonMapper> mapper;
 
 		int trackedHands;
-		bool headMode;
 		bool spawn = false;
 		glm::vec3 spawnPoint;
 
@@ -46,5 +45,6 @@ namespace BGE
 		virtual void onServiceConnect(const Controller&);
 		virtual void onServiceDisconnect(const Controller&);
 		void TransformHand(float timeDelta);
+		glm::vec3 TransformPointRelativeToCamera(glm::vec3 pos);
 	};
 }

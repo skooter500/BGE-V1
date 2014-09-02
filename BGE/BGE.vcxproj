@@ -49,6 +49,8 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\Users\Bryan\Documents\Projects\BGE\Dependencies\LeapSDK\include;..\Dependencies\FMOD\inc;..\Dependencies\SDL2-2.0.3\include;..\Dependencies\glew-1.10.0\include;..\Dependencies\glm-0.9.4.3\glm;..\Dependencies\SDL_ttf;..\Dependencies\bullet3\src;..\Dependencies\LibOVR\Include;..\Dependencies\Kinect\v2.0\inc;..\Dependencies\Speech\v11.0\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Bryan\Documents\Projects\BGE\Dependencies\LeapSDK\lib\x86;..\Dependencies\Speech\v11.0\Include;..\Dependencies\FMOD\lib;..\Dependencies\LibOVR\Lib\Win32\VS2013;..\Dependencies\SDL2-2.0.3\lib\x86;..\Dependencies\SDL_ttf\VisualC\Win32\Release;..\Dependencies\glew-1.10.0\lib\Release\Win32;..\Dependencies\bullet3\lib;..\Dependencies\Kinect\v2.0\Lib\x86;$(LibraryPath)</LibraryPath>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -85,6 +87,16 @@
       <AdditionalDependencies>Leap.lib;Ws2_32.lib;BulletCollision_vs2010.lib;BulletDynamics_vs2010.lib;LinearMath_vs2010.lib;fmodex_vc.lib;winmm.lib;libovr.lib;glew32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;Kinect20.lib;Kinect20.Face.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttackingState.cpp" />

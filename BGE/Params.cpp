@@ -112,3 +112,19 @@ void Params::Load(string name)
 
 	// set special properties
 }
+
+glm::vec3 BGE::Params::GetVector3(string key)
+{
+	glm::vec3 ret;
+	string value = Get(key);
+	stringstream ss(value);
+	string temp;
+	std::getline(ss, temp, ',');
+	ret.x = stof(temp);
+	std::getline(ss, temp, ',');
+	ret.y = stof(temp);
+	std::getline(ss, temp, ',');
+	ret.z = stof(temp);
+
+	return ret;
+}

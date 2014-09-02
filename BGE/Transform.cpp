@@ -188,3 +188,11 @@ glm::quat BGE::Transform::TransformOrientation(glm::quat in)
 	glm::quat q = rot * q;
 	return q;
 }
+
+glm::quat BGE::Transform::InverseTransformOrientation(glm::quat in)
+{
+	Transform::Calculate();
+	glm::quat rot = glm::quat_cast(glm::inverse(world));
+	glm::quat q = rot * q;
+	return q;
+}

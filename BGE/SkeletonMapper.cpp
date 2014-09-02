@@ -2,11 +2,17 @@
 #include "PhysicsController.h"
 #include "Game.h"
 #include "KinematicMotionState.h"
+#include "Params.h"
 
 BGE::SkeletonMapper::SkeletonMapper(shared_ptr<GameComponent> owner, glm::vec3 scale)
 {
 	this->owner = owner;
 	transform.scale = scale;
+
+	if (Params::GetBool("leapHeadMode"))
+	{
+		transform.orientation = glm::angleAxis(90.0f, glm::vec3(1, 0, 0));
+	}
 }
 
 
@@ -38,9 +44,20 @@ void BGE::SkeletonMapper::UpdateKnob(string tag, glm::vec3 pos)
 void BGE::SkeletonMapper::UpdateBone(string tag, glm::vec3 start, glm::vec3 end, bool withKnobs)
 {
 	glm::vec3 jointPos[2];
+
+	if (Params::GetBool("leapHeadMode"))
+	{
+		start.x = -start.x;
+		end.x = -end.x;
+
+		start.y = -start.y;
+		end.y = -end.y;
+	}
+
 	jointPos[0] = transform.TransformPosition(start, true);
 	jointPos[1] = transform.TransformPosition(end, true);
 
+	
 	glm::vec3 boneVector = jointPos[1] - jointPos[0];
 	float boneLength = glm::length(boneVector);
 	glm::vec3 centrePos = jointPos[0] + ((boneVector) / 2.0f);

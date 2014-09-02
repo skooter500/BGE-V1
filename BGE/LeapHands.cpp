@@ -45,6 +45,7 @@ BGE::LeapHands::~LeapHands()
 
 bool BGE::LeapHands::Initialise()
 {
+	mapper = make_shared<SkeletonMapper>(This(), glm::vec3(0.1f, 0.1f, 0.1f));
 	handTransform = make_shared<Transform>();
 	if (Params::GetBool("leapHeadMode"))
 	{
@@ -53,7 +54,6 @@ bool BGE::LeapHands::Initialise()
 
 	controller.addListener(* this);
 
-	mapper = make_shared<SkeletonMapper>(This(), glm::vec3(0.1f, 0.1f, 0.1f));
 	
 	return GameComponent::Initialise();
 }
@@ -164,6 +164,39 @@ void BGE::LeapHands::TransformHand(float timeDelta)
 	}
 	
 	TransformChildren(handTransform);	
+	if ((Params::GetBool("leapHeadMode")))
+	{
+		shared_ptr<Transform> cameraTransform = Game::Instance()->camera->transform;
+		list<shared_ptr<GameComponent>>::iterator it = children.begin();
+		while (it != children.end())
+		{
+			shared_ptr<GameComponent> child = *it;
+			glm::vec3 pos = child->transform->position;
+			pos = TransformPointRelativeToCamera(pos);			
+			// Rotate the bodies by the camera rotation
+			child->transform->orientation = cameraTransform->orientation * child->transform->orientation;
+			child->transform->position = pos;
+			it++;
+		}
+	}
+}
+
+glm::vec3 BGE::LeapHands::TransformPointRelativeToCamera(glm::vec3 pos)
+{
+	shared_ptr<Transform> cameraTransform = Game::Instance()->camera->transform;
+	glm::vec3 cameraStart = Game::Instance()->camera->startPos;
+
+	pos += (cameraTransform->position - cameraStart);
+	// Do the rotation
+	// Translate pos relative to the camera so we can rotate around the camera
+	pos -= cameraTransform->position;
+	// Now Rotate
+	glm::mat4 rotMatrix = glm::mat4_cast(cameraTransform->orientation);
+	pos = glm::vec3(rotMatrix * glm::vec4(pos, 1.0f));
+	// Now bring it back into position
+	pos += cameraTransform->position;
+
+	return pos;
 }
 
 void LeapHands::Cleanup()
@@ -276,8 +309,8 @@ void LeapHands::onFrame(const Controller& controller)
 						CircleGesture circle = gesture;
 						if (gesture.durationSeconds() > 1)
 						{
-							spawnPoint = handTransform->TransformPosition(
-								mapper->transform.TransformPosition(LeapToGlVec3(circle.center()), true), true);
+							spawnPoint = TransformPointRelativeToCamera(handTransform->TransformPosition(
+								mapper->transform.TransformPosition(LeapToGlVec3(circle.center()), true), true));
 							spawn = true;
 						}
 					}

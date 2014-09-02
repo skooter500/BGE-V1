@@ -21,6 +21,8 @@ Camera::~Camera(void)
 
 bool Camera::Initialise()
 {
+	startPos = Params::GetVector3("camPos");
+	transform->position  = startPos;
 	SDL_WarpMouseInWindow(
 		Game::Instance()->GetMainWindow()
 		,Params::GetFloat("width") / 2

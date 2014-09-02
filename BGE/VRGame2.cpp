@@ -86,9 +86,6 @@ bool VRGame2::Initialise()
 {
 	dynamicsWorld->setGravity(btVector3(0,-20,0));
 
-	camera->transform->position = glm::vec3(-1,20,46);
-	camera->transform->look = glm::vec3(0, 0, 1);
-
 	physicsFactory->CreateCameraPhysics();
 	physicsFactory->CreateGroundPhysics();
 
@@ -98,7 +95,7 @@ bool VRGame2::Initialise()
 	*/
 
 	leapHands = make_shared<LeapHands>();
-	leapHands->headMode = false;
+
 	Attach(leapHands);
 
 	ResetScene();
@@ -109,7 +106,6 @@ bool VRGame2::Initialise()
 
 	return true;
 }
-
 
 
 // Note that pickedUp is passed by reference and so can be changed!!
