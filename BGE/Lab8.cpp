@@ -16,6 +16,8 @@ Lab8::~Lab8(void)
 {
 }
 
+const float standardMass = 10.0f;
+
 bool Lab8::Initialise()
 {
 	std::shared_ptr<GameComponent> ground = make_shared<Ground>();
@@ -27,7 +29,7 @@ bool Lab8::Initialise()
 	ship1->Attach(make_shared<VectorDrawer>());
 	Attach(ship1);
 
-	mass = 1.0f;
+	mass = standardMass;
 	ship1->transform->velocity = glm::vec3(0,0,0);
 
 	Game::Initialise();

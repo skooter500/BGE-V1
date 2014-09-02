@@ -107,7 +107,22 @@ void BGE::LeapHands::Update(float timeDelta)
 					Game::Instance()->physicsFactory->CreateRandomObject(point, glm::quat(), glm::vec3(7, 7, 7));
 					Game::Instance()->soundSystem->PlaySound("spawn", point);
 				}
+				break;
 			}
+			case vehicle:
+			{
+				glm::vec3 point;
+				bool hit = Game::Instance()->ground->rayIntersectsWorldPlane(
+					Game::Instance()->camera->transform->position,
+					Game::Instance()->camera->transform->look, point);
+				if (hit)
+				{
+					Game::Instance()->physicsFactory->CreateVehicle(point);
+					Game::Instance()->soundSystem->PlaySound("spawn", point);
+				}
+				break;
+			}
+				
 		}
 		lastSpawned = 0.0f;
 	}
@@ -334,6 +349,7 @@ void LeapHands::onFrame(const Controller& controller)
 						if (gesture.durationSeconds() > 1)
 						{
 							if (circle.pointable().direction().angleTo(circle.normal()) <= PI / 2) {
+								
 								spawn = vehicle;
 							}
 							else {

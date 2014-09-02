@@ -11,6 +11,8 @@
 #include "Utils.h"
 using namespace BGE;
 
+const float standardMass = 10.0f;
+
 PhysicsFactory::PhysicsFactory(btDiscreteDynamicsWorld * dynamicsWorld)
 {
 	this->dynamicsWorld = dynamicsWorld;
@@ -58,7 +60,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateFromModel(string name, glm::
 		it ++;
 	}
 	
-	btScalar mass = 1;
+	btScalar mass = standardMass;
 	btVector3 inertia(0,0,0);
 	
 	tetraShape->calculateLocalInertia(mass,inertia);
@@ -88,7 +90,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateSphere(float radius, glm::ve
 	btDefaultMotionState * sphereMotionState = new btDefaultMotionState(btTransform(GLToBtQuat(quat)
 		,GLToBtVector(pos)));	
 
-	btScalar mass = (kinematic) ? 0 : 1;
+	btScalar mass = (kinematic) ? 0 : standardMass;
 	btVector3 sphereInertia(0,0,0);
 	btCollisionShape * sphereShape = new btSphereShape(radius);
 
@@ -115,7 +117,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateBox(float width, float heigh
 {
 	// Create the shape
 	btCollisionShape * boxShape = new btBoxShape(btVector3(width, height, depth) * 0.50);
-	btScalar mass = (kinematic) ? 0 : 1;
+	btScalar mass = (kinematic) ? 0 : standardMass;
 	btVector3 boxInertia(0,0,0);
 	boxShape->calculateLocalInertia(mass,boxInertia);
 
@@ -158,7 +160,7 @@ shared_ptr<PhysicsController> PhysicsFactory::CreateCylinder(float radius, float
 	// Create the shape
 	btCollisionShape * shape = new btCylinderShape(btVector3(radius, height * 0.5f, radius));
 
-	btScalar mass = (kinematic) ? 0 : 1;
+	btScalar mass = (kinematic) ? 0 : standardMass;
 	
 	btVector3 inertia(0,0,0);
 	shape->calculateLocalInertia(mass,inertia);
